@@ -1,0 +1,162 @@
+/* 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 110px 50px 1fr; /* header, sub-header, main */
+    grid-template-columns: 220px 1fr; /* nav, main */
+    grid-template-areas:
+        "header header"
+        "sub-header sub-header"
+        "nav main";
+}
+
+/* Header 영역 */
+header {
+    grid-area: header;
+    background-color: #ffffff; /* 파란색 */
+    display: grid;
+    grid-template-columns: 220px 16fr 1fr 1fr 1fr;
+    color: white;
+}
+
+.logo_top{
+  background-image: url(/img/logo\ top.svg);
+}
+.logo_bottom{
+  background-image: url(/img/logo\ bottom.svg);
+}
+
+.notice {
+    display: flex;
+    justify-content: center;  /* 가로 방향 가운데 정렬 */
+    align-items: center;      /* 세로 방향 가운데 정렬 */
+    height: 100%;             /* 부모 요소의 높이를 채우도록 설정 */
+}
+
+.profile_img{
+    display: flex;
+    justify-content: center;  /* 가로 방향 가운데 정렬 */
+    align-items: center;      /* 세로 방향 가운데 정렬 */
+    height: 100%;             /* 부모 요소의 높이를 채우도록 설정 */
+}
+
+.name_box{
+    display: flex;
+    justify-content: left;  /* 가로 방향 가운데 정렬 */
+    align-items: center;      /* 세로 방향 가운데 정렬 */
+    height: 100%;             /* 부모 요소의 높이를 채우도록 설정 */
+    color: black;
+}
+
+/* Sub-header 영역 */
+.sub-header {
+    grid-area: sub-header;
+    background-color: #d1dce8; /* 빨간색 */
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    padding: 0px;
+    color: white;
+    position: relative; /* 자식 요소가 fixed일 때 그 위치 기준으로 할 수 있도록 설정 */
+}
+
+.sub-header #blue-area {
+    background-color: #333;
+    padding-left: 20px;
+    width: 220px;
+    height: 50px;
+}
+
+.sub-header #white-area {
+    background-color: #174880;
+    color: black;
+    width: 1fr;
+    height: 50px;
+}
+
+/* 모달 배경 */
+.modal {
+    display: none;
+    position: fixed;
+    top: -270px;
+    left: 790px;
+    width: 100%;
+    height: 100%;
+    /* background: rgba(0, 0, 0, 0.5); */
+    z-index: 1000;
+}
+
+/* 모달 창 */
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #d1e2f3;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 사용자 이미지 */
+.user-image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+/* 버튼 섹션 */
+.user-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.action-btn {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.abc:hover {
+    background-color: lightgray;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+/* 아이콘 스타일 (로그아웃) */
+.logout-btn::before {
+    content: "↻"; /* Unicode 화살표 아이콘 */
+    font-size: 16px;
+}
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    z-index: 10;
+}

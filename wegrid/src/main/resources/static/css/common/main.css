@@ -1,0 +1,19 @@
+/* Main 영역 */
+main {
+    grid-area: main;
+    background-color: #d1dce8; /* 연한 회색 */
+    padding: 0px;
+}
+
+.main-content {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 1500px;
+    height: 740px;
+    margin-top: 0px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 50px;
+    box-shadow: 0px 0px 10px rgba(0.3, 0.3, 0.3, 0.3); /* 오른쪽 아래로 그림자 */
+}
