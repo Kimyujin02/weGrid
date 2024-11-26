@@ -1,0 +1,42 @@
+.main-content {
+    display: flex;
+    align-items: center;
+}
+
+#calendar{
+
+    height: 95%;
+    width: 100%;
+    
+}
+
+
+/* .fc-header-toolbar {
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+} */
+
+/* 일요일 컬러 */
+.fc-day-sun a {
+    color: var(--bs-red);
+}
+
+.fc-toolbar-title {
+    display: inline;
+    color: #174880;
+    font-weight: bolder;
+    
+}
+
+.fc-direction-ltr .fc-toolbar > * > * {
+    margin-top: 0.5em;
+    margin-left: 0.75em;
+    margin-right: 0.75em;
+}
+
+.fc-toolbar-chunk {
+    display: flex;  
+    align-items: center;
+}
+
