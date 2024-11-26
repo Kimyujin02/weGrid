@@ -10,6 +10,6 @@ public class CrmController {
 
     @GetMapping("list")
     private String list(){
-        return "crm/list";
+        return "crm/clientList";
     }
 }

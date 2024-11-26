@@ -19,7 +19,7 @@
     <div class="login-menu">
         <div class="blank1"></div>
         <div class="logo-area">
-            <img src="/src/main/resources/static/img/login_logo.svg" alt="">
+            <img src="/img/login_logo.svg" alt="">
         </div>
         <div class="blank2"></div>
         <div class="input-area">
