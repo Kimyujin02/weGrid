@@ -1,0 +1,166 @@
+/* Main 영역 */
+main {
+    grid-area: main;
+    background-color: #d1dce8; 
+    padding: 0px;
+}
+
+#main-content {
+    border-radius: 5px;
+    width: 1500px;
+    height: 740px;
+    margin-top: 0px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 50px;
+}
+
+/* /////////////////////////////////////////////////////////////////////////////////////// */
+
+
+.header-menu {
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center; 
+    padding-right: 20px; 
+}
+
+.filter-controls {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+    position: relative; 
+    right: 20px; /* 우측에서의 간격 */
+}
+
+.fas.fa-list {
+    font-size: 20px;
+    margin-right: 13px;
+}
+
+
+.square-icon {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    /* margin-right: 5px; */
+}
+
+
+.search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    padding: 2px;
+}
+
+.search-box input[type="text"] {
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 12px;
+    flex-grow: 1;
+}
+
+.search-box i {
+    font-size: 16px;
+    color: #666;
+    margin-left: 5px;
+}
+
+.card-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding-top: 60px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px
+}
+
+#card{
+    width: 300px; 
+    margin: 20px;
+    background-color: #fff; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 13px solid #0053a6;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+
+#card-content{
+    text-align: right;
+    /* line-height: 2; */
+    padding-right: 20px;
+    margin-top: 20px;
+}
+
+.card-content > h3{
+    font-size: 18px;
+}
+
+.card-content > p{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.status1 {
+    background-color: #4E83EB; 
+    color: white;
+    font-size: 12px;
+    padding: 4px 15px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+.status2 {
+    background-color: #EB4E4E; 
+    color: white;
+    font-size: 12px;
+    padding: 4px 15px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+.status3 {
+    background-color: #12C557; 
+    color: white;
+    font-size: 12px;
+    padding: 4px 15px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+.status4 {
+    background-color: #a625e2; 
+    color: white;
+    font-size: 12px;
+    padding: 4px 15px;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+.project-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.team-count {
+    font-size: 14px;
+    font-weight: bold;
+}

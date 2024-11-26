@@ -1,0 +1,158 @@
+   /* 리셋 */
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+.title{
+    margin-top: 20px;
+    margin-left: 40px;
+    font-size: 1.8rem;
+    font-weight: 450;
+    color: #174880;
+    margin-bottom: 10px;
+}
+
+.line-box{
+    margin: auto;
+    margin-top: 10px;
+    width: 95%;
+    border: 0.5px solid #C0C0C0;
+}
+
+.form-container{
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr; /* 좌측, 얇은 선, 우측 */
+    column-gap: 20px;
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+
+}
+
+
+
+.sub-title{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: #174880;
+    text-align: center;
+}
+
+/* 왼쪽 영역 */
+.left-panel {
+    padding: 20px;
+    margin-left: 60px;
+}
+
+/* 오른쪽 영역 */
+.right-panel {
+    padding: 20px;
+    margin-left: 60px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+form input,
+form select {
+    width: 80%;
+    height: 35px;
+    margin-bottom: 15px;
+    padding: 5px;
+    border: 1px solid #C0C0C0;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+form input{
+    background-color: #F4F4F4;
+    box-shadow:inset 3px 3px 5px 1px rgba(98, 97, 97, 0.3);
+}
+
+
+.filter-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative; 
+    width: 30%;
+    /* right: 10px; 우측에서의 간격 */
+}
+
+.address-fields {
+    display: flex;
+    gap: 20px;
+}
+
+.address-fields input {
+    flex: 3;
+}
+
+
+/* 부서명 행 스타일 */
+.department-row {
+    display: flex;
+    gap: 10px; 
+}
+
+.department-row input {
+     width: 55%; /*input 태그의 너비를 더 넓게 설정 */
+}
+
+
+
+/* 가운데 선 */
+.divider{
+    background-color: #C0C0C0; 
+    width: 1.5px;
+    height: auto;
+}
+
+
+.button-group {
+    margin-top: 20px;
+    text-align: center;
+    align-items: center;
+}
+
+/* 우편번호 찾기 버튼 스타일 */
+.search-button {
+    padding: 7px 12px; /* 버튼 패딩 축소 */
+    border: none;
+    background-color: #2661A5;
+    color: white;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#edit-btn{
+    background-color: #2661A5; 
+    border: transparent;
+}
+
+#delete-btn{
+    background-color: gray; 
+    border: transparent;
+}
+
+#pwd-reset{
+    background-color: #2661A5; 
+    border: transparent;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+
