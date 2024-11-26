@@ -1,0 +1,246 @@
+.container {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr 4fr 4fr 1fr;
+    grid-template-rows: 1fr 0fr 1fr 4.5fr 1fr;
+}
+
+.title {
+    grid-column: span 4;
+    
+    padding-left: 2.5%;
+    justify-self: start;
+    align-self: center;
+
+    font-size: 32px;
+    color: #174880;
+}
+
+hr {
+    height: 0;
+    grid-column: span 4;
+    width: 95%;
+
+    place-self: center center;
+}
+
+.enroll-btn {
+    display: grid;
+}
+
+.enroll-btn button {
+    display: grid;
+    width: 100px;
+    height: 35px;
+
+    justify-self: start;
+    align-self: flex-end;
+
+    align-items: center;
+
+    background-color: #2661A5;
+    color: white;
+    border: none;
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+.search {
+
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr 0.5fr 2fr;
+
+    justify-self: end;
+    align-self: flex-end;
+
+    align-items: center;
+
+}
+
+select {
+    
+    height: 30px;
+    width: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    
+    margin: 5px;   
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.search-box {
+    margin-left: 10px;
+
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    padding: 5px;
+
+    margin-bottom: 10px;
+}
+
+.search-box input[type="text"] {
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 12px;
+    flex-grow: 1;
+}
+
+.search-box i {
+    font-size: 16px;
+    color: #666;
+    margin-left: 5px;
+}
+
+table {
+    grid-column: span 2;
+}
+
+.table{
+    margin: auto;
+    height: auto;
+    width: 1200px;
+    border-radius: 5px;
+    border-collapse: collapse;
+    border-top : none;
+    text-align: center;
+    
+    grid-template-columns: 1fr 10fr 1fr 1fr;
+}
+
+.header{
+    background-color: rgb(218, 231, 255);
+    text-align: center;
+}
+
+.list-top{
+    border-bottom: 1px solid rgb(211, 211, 211) ;
+    height: 30px;
+    font-size: 14px;
+    background-color: rgba(23, 72, 128, 1);
+    color: white;
+}
+
+th {
+    font-size: 16px;
+}
+
+.num{
+    width: 75px;
+}
+
+.client-name {
+    width: 850px;
+}
+
+.client-grade {
+    width: 75px;
+}
+
+.enroll-date {
+    width: 200px;
+}
+
+.body{
+    text-align: center;
+}
+
+
+.list-middle{
+    border-bottom: 1px solid gray;
+    height: 26px;
+}
+
+.list-end {
+    background-color: rgba(23, 72, 128, 1);
+    height: 10px;
+}
+
+.page {
+    grid-column: span 4;
+    
+    place-self: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+
+/* 드롭 다운 관련 기능 추가 */
+/* 드롭다운 기본 스타일 */
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-toggle {
+    padding: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    border-radius: 5px;
+    white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 설정 */
+    display: inline-flex; /* 플렉스 레이아웃으로 버튼 내용 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    justify-content: center;
+    
+    margin: 5px;
+    margin-bottom: 15px;
+
+    height: 30px;
+    width: 100px;
+  }
+  
+  .dropdown-menu {
+    display: none; /* 기본적으로 숨김 */
+    position: absolute;
+    top: 75%;
+    left: 5px;
+    width: 100px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+    white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 설정 */
+  }
+  
+  /* 옵션 리스트 */
+  .option-list {
+    display: flex;
+    flex-direction: column; /* 항목을 세로로 배치 */
+    gap: 10px; /* 항목 간 간격 */
+  }
+  
+  .option-list label {
+    display: flex; /* 체크박스와 텍스트를 한 줄로 정렬 */
+    align-items: center; /* 세로 정렬 */
+    cursor: pointer;
+  }
+  
+  .option-list input[type="checkbox"] {
+    margin-right: 8px; /* 체크박스와 텍스트 간 간격 */
+  }
+  
+  /* 드롭다운 활성화 시 표시 */
+  .dropdown.active .dropdown-menu {
+    display: block;
+  }
+  
