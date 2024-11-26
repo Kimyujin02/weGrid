@@ -2,6 +2,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="custom.css">
+
 <link rel="stylesheet" href="/css/common/header.css">
 
 <script defer src="/js/common/header.js"></script>
@@ -32,13 +36,30 @@
             </defs>
           </svg>
           </div>
-        <div class="profile_img"><svg width="58" height="58" viewBox="0 0 58 58" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M28.5548 54.6096C42.9445 54.6096 54.6096 42.9445 54.6096 28.5548C54.6096 14.1651 42.9445 2.5 28.5548 2.5C14.1651 2.5 2.5 14.1651 2.5 28.5548C2.5 42.9445 14.1651 54.6096 28.5548 54.6096Z" fill="white" stroke="#174880" stroke-width="5"/>
-          <path d="M21.0901 35.5486L22.7132 42.1717H16.608C16.7971 39.2461 18.5774 36.7507 21.0901 35.5486ZM28.9079 42.1717H28.2017L28.5548 40.8578L28.9079 42.1717ZM40.5016 42.1717H34.3963L36.0194 35.5486C38.5322 36.7507 40.3124 39.2461 40.5016 42.1717ZM24.4784 23.9535C23.3973 22.8724 22.7899 21.4061 22.7899 19.8771C22.7899 18.3482 23.3973 16.8819 24.4784 15.8008C25.5595 14.7197 27.0258 14.1123 28.5548 14.1123C30.0837 14.1123 31.55 14.7197 32.6311 15.8008C33.7123 16.8819 34.3196 18.3482 34.3196 19.8771C34.3196 21.4061 33.7123 22.8724 32.6311 23.9535C31.55 25.0346 30.0837 25.642 28.5548 25.642C27.0258 25.642 25.5595 25.0346 24.4784 23.9535Z" fill="#174880" stroke="#174880" stroke-width="5"/>
-          <rect x="14.0913" y="43.0186" width="28.9269" height="9.09132" fill="#174880"/>
-          </svg>
+          <div id="profile-area"><img src="/css/common/user-solid.svg"
+            class="abc" 
+            onclick="openModal()">
           </div>
         <div class="name_box">홍길동</div>
+        <!-- 모달 -->
+   <div id="userModal" class="modal">
+    <div class="modal-content">
+        <!-- 닫기 버튼 -->
+        <button class="close-btn" onclick="closeModal()">×</button>
+        
+        <div class="modal-body">
+            <!-- 이미지 섹션 -->
+            <div class="user-image">
+                <img src="/css/common/user-solid.svg" alt="사용자 이미지">
+            </div>
+            <!-- 버튼 섹션 -->
+            <div class="user-actions">
+                <button class="action-btn">마이페이지</button>
+                <button class="action-btn logout-btn">로그아웃</button>
+            </div>
+        </div>
+    </div>
+</div>
     </header>
 
     <!-- Sub-header -->
