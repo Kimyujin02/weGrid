@@ -1,0 +1,203 @@
+#content {
+    width: 92%;
+    margin: auto;
+    padding: 0px 10px 0px 0px;
+}
+
+.sub-title{
+    height: 75px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #174880;
+    color: rgba(23, 72, 128, 1);
+    display: grid;
+    align-content: center;
+}
+
+.table-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+#approvalBtn{
+    background-color: #174880;
+}
+
+.date-area{
+    display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        align-items: center;
+        gap: 60px;
+        margin-left: 130px;
+}
+
+.arrow-btn {
+    background: rgba(23, 72, 128, 1);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.arrow-btn:hover {
+    background: rgba(23, 72, 128, 1);
+}
+
+.date {
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.filter-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-controls select,
+.filter-controls input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.project-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+.project-table thead {
+    background: rgba(23, 72, 128, 1);
+    color: white;
+}
+
+
+.project-table td {
+    padding: 3.5px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.project-table th{
+    padding: 5px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+
+.project-table tbody tr:hover {
+    background: #f9f9f9;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    color: white;
+}
+
+.status1 {
+    background-color: #4E83EB; 
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    color: white;
+}
+
+.status.ongoing {
+    background: #EB4E4E;
+}
+
+.status.completed {
+    background: #12C557;
+}
+
+.status4 {
+    background-color: #a625e2; 
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    color: white;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pagination button,
+.pagination span {
+    background: #fff;
+    border: 1px solid rgba(23, 72, 128, 1);
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pagination span {
+    background: #007bff;
+    color: white;
+}
+
+.pagination button:hover {
+    background: #0056b3;
+    color: white;
+}
+
+.page {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.page a {
+    display: inline-block; 
+    text-decoration: none;
+    color: rgba(23, 72, 128, 1);
+    margin: 0 10px; /* 링크 간 간격 조정 */
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.bottom-line{
+    width: 1380px;
+    height: 8px;
+    background-color: rgba(23, 72, 128, 1);
+   margin: auto;
+   margin-bottom: 10px;
+   margin-top: -15px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    padding: 2px;
+}
+
+.search-box input[type="text"] {
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 12px;
+    flex-grow: 1;
+}
+
+.search-box i {
+    font-size: 16px;
+    color: #666;
+    margin-right: 5px;
+}

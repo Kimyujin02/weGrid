@@ -10,13 +10,19 @@ public class ProjectController {
 
     //프로젝트 메인 화면(카드형식)
     @GetMapping("card")
-    public String prjcardList(){
+    public String cardList(){
         return "project/card";
     }
 
     //프로젝트 화면 (리스트 형식)
-    @GetMapping("prjlist")
-    public String prjList(){
+    @GetMapping("list")
+    public String List(){
         return "project/list";
+    }
+
+    // 프로젝트 생성 화면
+    @GetMapping("create")
+    public String create(){
+        return "project/create";
     }
 }

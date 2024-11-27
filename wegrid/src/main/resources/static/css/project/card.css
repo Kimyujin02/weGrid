@@ -23,30 +23,21 @@ main {
     justify-content: flex-end; 
     align-items: center; 
     padding-right: 20px; 
+    gap: 8px;
 }
 
 .filter-controls {
     display: flex;
     align-items: center;
-
     gap: 10px;
-    position: relative; 
-    right: 20px; /* 우측에서의 간격 */
 }
 
-.fas.fa-list {
-    font-size: 20px;
-    margin-right: 13px;
+.filter-controls select,
+.filter-controls input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
-
-
-.square-icon {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    justify-content: center;
-    /* margin-right: 5px; */
-}
-
 
 .search-box {
     display: flex;
@@ -68,7 +59,7 @@ main {
 .search-box i {
     font-size: 16px;
     color: #666;
-    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .card-container{
