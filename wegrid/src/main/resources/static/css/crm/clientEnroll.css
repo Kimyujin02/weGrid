@@ -1,0 +1,189 @@
+/* ----------------------
+----------layout---------
+------------------------- */
+
+.content-area {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr 0fr 1fr;
+    grid-template-rows: 80px 0fr 1fr 80px;
+    
+}
+
+.title-area {
+    grid-column: span 3;
+    
+    padding-left: 50px;
+    justify-self: start;
+    align-self: center;
+    color: #174880;
+}
+
+.title-text {
+    margin-bottom: 0;
+}
+
+.line_1 {
+
+    display: grid;
+    grid-column: span 3;
+    height: 2px;
+    background-color: #C0C0C0;
+    color: #C0C0C0;
+    width: 1400px;
+    place-self: center center;
+}
+
+.line_2 {
+
+    display: grid;
+    width: 2px;
+    height: 350px;
+
+    background-color: #C0C0C0;
+    color: #C0C0C0;
+    place-self: center center;
+}
+
+.cinfo-area {
+    display: grid;
+    grid-template-rows: 2fr 1fr 0fr 2fr 0fr 2fr;
+
+    justify-items: center;
+}
+
+.cminfo-area {
+    display: grid;
+    grid-template-rows: 2fr 1fr 1fr 1fr 2fr;
+}
+
+.btn-area {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+    grid-column: span 3;
+
+
+    
+}
+
+.enroll-btn {
+    justify-self: right; /* 전체 버튼을 중앙 정렬 */
+    align-self: center;
+
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+.cancel-btn {
+    justify-self: left; /* 전체 버튼을 중앙 정렬 */
+    align-self: center;
+
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+
+.cancel-btn > .btn.btn-primary {
+    background-color: #8C8A8A;
+    border-color: #8C8A8A;
+}
+
+
+/* ----------------------
+----- client info -------
+------------------------- */
+
+.c-info {
+    justify-self: center;
+    align-self: center;
+    color: #174880;
+}
+
+.cm-info {
+    justify-self: center;
+    align-self: center;
+    color: #174880;
+}
+
+.client-name {
+    justify-self: center;
+    align-self: center;
+    font-weight: bold;
+}
+
+.client-address {
+    display: grid;
+    grid-template-columns: 1fr 3fr 3fr 3fr;
+    grid-template-rows: 1.2fr 1fr 1fr;
+}
+
+.client-address > .btn.btn-primary {
+    display: grid;
+    width: 100px;
+    height: 30px;
+    align-content: center;
+    align-self: center;
+}
+
+.text-address {
+    display: grid;
+    align-self: center;
+    font-weight: bold;
+}
+
+.adress-input_1 {
+    align-self: center;
+}
+.adress-input_2 {
+    align-self: center;
+}
+.adress-input_3 {
+    grid-column: span 3;
+    align-self: center;
+}
+
+.adress-input_4 {
+    grid-column: span 3;
+    align-self: start;
+}
+
+.adress-input_1 > input {
+    width: 120px;
+    height: 30px;
+    margin-right: 20px;
+}
+
+.adress-input_2 > input {
+    width: 120px;
+    height: 30px;
+    margin-right: 20px;
+}
+
+.adress-input_3 > input {
+    width: 400px;
+    height: 30px;
+    margin-right: 20px;
+}
+
+.adress-input_4 > input {
+    width: 400px;
+    height: 30px;
+    margin-right: 20px;
+}
+
+.cinfo_line_1 {
+    height: 2px;
+    background-color: #C0C0C0;
+    color: #C0C0C0;
+    width: 600px;
+    place-self: center center;
+}
+
+.cinfo_line_2 {
+    height: 2px;
+    background-color: #C0C0C0;
+    color: #C0C0C0;
+    width: 600px;
+    place-self: center center;
+}
