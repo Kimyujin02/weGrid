@@ -12,5 +12,10 @@ public class ApprovalController {
     public void write(){
 
     }
+    @GetMapping("submitList")
+    public void submitList(){}
+
+    @GetMapping("receiveList")
+    public void receiveList(){}
 
 }

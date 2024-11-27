@@ -14,13 +14,13 @@
 }
 #menu-box{
     display: grid;
-    grid-template: 1fr / 100px 117px 570px 119px 119px 384px 91px;
+    grid-template: 1fr / 1311px 189px;
 }
 #table-area{
     justify-items: center;
 }
 
-#bootbtn{
+#approvalBtn{
     color: white;
     background-color: #174880;
     width: 117px;
@@ -64,7 +64,6 @@
     background-color: rgba(23, 72, 128, 1);
     color: white;
 }
-
 .body{
     text-align: center;
 }
@@ -100,18 +99,16 @@ td{
 }
 .search-box {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    
-}
-
-.search-box input[type="text"] {
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: white;
     padding: 5px;
-    /* border: none;
-    outline: none; */
+}
+
+.search-box input[type="text"] {
+    border: none;
+    outline: none;
     padding: 5px;
     font-size: 12px;
     flex-grow: 1;
@@ -123,129 +120,21 @@ td{
     margin-left: 5px;
 }
 #title-area{
+    display: grid;
+    grid-template: 1fr / 29px 1442px 29px;
+}
+#title-area > div:nth-child(2){
     display: flex;
     align-items: center;
+    border-bottom: 2px solid #174880;
 }
-#title-area > h2 {
+#title-area > div:nth-child(2) > h1 {
     color:  rgba(23, 72, 128, 1);
-    margin-left: 29px;
     margin-bottom: 0px;
 }
 #btn-area{
     display: flex;
     align-items: center;
-}
-
-/* 모달 전체 배경 */
-.tripModal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* background: rgba(0, 0, 0, 0.5); */
-    z-index: 1000;
-}
-
-/* 모달 창 */
-.tripModal-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: lightgray;
-    padding: 20px;
-    border-radius: 10px;
-    width: 1000px;
-    height: 600px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* 헤더 */
-.tripModal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-}
-
-.tripModal-header h2 {
-    margin: 0;
-    font-size: 18px;
-}
-
-.close-tripModal {
-    background: none;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-/* 모달 내용 */
-.tripModal-body {
-    display: flex;
-    justify-content: space-between;
-}
-
-/* 왼쪽 영역 */
-.tripModal-left {
-    width: 48%;
-}
-
-.tripModal-left .form-tripModal {
-    margin-bottom: 15px;
-}
-
-.tripModal-left label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 5px;
-    color: #555;
-}
-
-.tripModal-left input,
-.tripModal-left textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-}
-
-.tripModal-left input[type="checkbox"] {
-    width: auto;
-    margin-right: 5px;
-}
-
-.tripModal-left .checkbox-group {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-/* 오른쪽 영역 */
-.tripModal-right {
-    width: 48%;
-}
-
-.tripModal-right textarea {
-    width: 100%;
-    height: 362px;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-    resize: none;
-}
-
-/* 등록 버튼 */
-.tripModal-footer {
-    text-align: center;
-    margin-top: 10px;
 }
 
 .submit-btn {
@@ -261,3 +150,19 @@ td{
 .submit-btn:hover {
     background: #0056b3;
 }
+#filterDiv{
+    display: flex;
+    align-items: center;
+}
+#filterDiv > select {
+    width: 108px;
+    height: 34px;
+    border: 1px solid black;
+    text-align: center; 
+    text-align-last: center; 
+    
+}
+#approval-status > option > {
+    text-align: center; 
+}
+

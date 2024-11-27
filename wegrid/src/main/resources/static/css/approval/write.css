@@ -1,0 +1,123 @@
+#main-area{
+    display: grid;
+    grid-template: 1fr / 152px 1196px 152px;
+    background-color: #D1DCE8;
+    width: 1500px;
+    height: 740px;
+    margin-top: 0px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 50px;
+}
+#use-area{
+    display: grid;
+    grid-template: 80px 10px 40px 16px 369px 16px 209px/ 1fr;
+}
+#use-area > div:nth-child(1){
+    display: flex;
+    align-items: center;
+}
+#use-area > div:nth-child(1) > h2{
+    color: #174880;
+    margin-bottom: 0px;
+}
+#title-boc{
+    display: grid;
+    grid-template: 1fr / 105px 1091px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px rgba(0.3, 0.3, 0.3, 0.3);
+}
+#title-boc > div:nth-child(1){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#title-a{ 
+    border: none;
+    height: 100%;
+    width: 100%;
+}
+input:focus{
+    border: none;
+} 
+#content-boc{
+    display: grid;
+    grid-template: 59px 310px / 32px 1132px 32px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px rgba(0.3, 0.3, 0.3, 0.3);
+}
+#content-boc > div:nth-child(2){
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #174880;
+}
+#content-a{
+    border: none;
+    height: 100%;
+    width: 100%;
+}
+textarea:focus{
+    border: none;
+}
+#menu-boc{
+    display: grid;
+    grid-template: 128px 81px / 585px 26px 585px;
+}
+.subtitle-color{
+    color: #174880;
+    margin: 0px;
+}
+#attach-area{
+    display: grid;
+    grid-template: 42px 86px / 1fr;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px rgba(0.3, 0.3, 0.3, 0.3);
+}
+#attach-area > div:nth-child(1){
+    display: grid;
+    grid-template: 1fr / 12px 561px 12px;
+}
+#attach-area > div:nth-child(1) > div:nth-child(2){
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #174880;
+}
+#line-area{
+    display: grid;
+    grid-template: 42px 86px / 1fr;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px rgba(0.3, 0.3, 0.3, 0.3);
+}
+#line-area > div:nth-child(1){
+    display: grid;
+    grid-template: 1fr / 12px 561px 12px;
+}
+#line-area > div:nth-child(1) > div:nth-child(2){
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #174880;
+}
+#submitBtnDiv{
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+#submit-btn{
+    background-color: #2661A5;
+    height: 44px;
+    width: 159px;
+}
+#cancleBtnDiv{
+    display: flex;
+    align-items: end;
+    justify-content: start;
+}
+#cancle-btn{
+    background-color: #8C8A8A;
+    height: 44px;
+    width: 159px;
+}
