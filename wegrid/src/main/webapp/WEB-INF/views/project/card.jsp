@@ -30,15 +30,17 @@
                     <option>부서명</option>
                 </select>
             </div>
-            <span style="color:#565C67"><i class="fas fa-list fa-lg"></i></span>
+
+            <a href="/project/list"><span style="color:#565C67; gap: 5px;" ><i class="fas fa-list fa-lg"></i></span></a>
   
             <div class="square-icon">
-                <span style="color:#565C67"><i class="fas fa-th-large fa-lg "></i></span>
+                <a href="/project/card"><span style="color:#565C67"><i class="fas fa-th-large fa-lg "></i></span></a>
             </div>
-            <form class="search-box" method="get">
-                <input type="text" name="" placeholder="검색">
-                <i class="fas fa-search"></i>
-            </form>
+
+                <div class="search-box">
+                    <input type="text" placeholder="검색" />
+                    <i class="fas fa-search"></i>
+                </div>
         </div>
         <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
         <div class="card-container">

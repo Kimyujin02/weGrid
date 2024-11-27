@@ -10,25 +10,25 @@ public class SystemManagerController {
 
     // 시스템 관리자 계정 생성 화면
     @GetMapping("create")
-    public String createAccount(){
+    public String create(){
         return "system/create";
     }
     
     // 시스템 관리자 계정 수정 화면
     @GetMapping("edit")
-    public String editAccount(){
+    public String edit(){
         return "system/edit";
     }
 
     // 시스템 관리자 상세 조회 화면
     @GetMapping("detail")
-    public String detailAccount(){
+    public String detail(){
         return "system/detail";
     }
 
     // 시스템 관리자 목록 조회 화면
     @GetMapping("list")
-    public String boardlist(){
+    public String list(){
         return "system/list";
     }
 }
