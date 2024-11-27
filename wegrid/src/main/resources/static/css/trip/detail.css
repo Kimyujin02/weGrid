@@ -1,0 +1,142 @@
+#main-area{
+    display: grid;
+    grid-template: 80px 41px 501px 118px / 1fr;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 1500px;
+    height: 740px;
+    margin-top: 0px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 50px;
+    box-shadow: 0px 0px 10px rgba(0.3, 0.3, 0.3, 0.3); /* 오른쪽 아래로 그림자 */
+}
+#detail-area{
+    display: grid;
+    grid-template: 1fr / 101px 693px 35px 599px 72px;
+}
+#detail-area > div:nth-child(2){
+    display: grid;
+    grid-template: 35px 454px 12px / 1fr;
+}
+#detail-area > div:nth-child(4){
+    display: grid;
+    grid-template: 75px 36px 75px 45px 234px 36px / 1fr;
+}
+#f-area{
+    display: grid;
+    grid-template: 35px 28px 12px / 1fr;
+}
+#f-area > div:nth-child(1){
+    display: grid;
+    grid-template: 1fr / 101px 306px 92px 100px;
+}
+#f-area > div:nth-child(2){
+    display: grid;
+    grid-template: 1fr / 101px 306px 92px 100px;
+}
+#s-area{
+    display: grid;
+    grid-template: 35px 28px 12px / 1fr;
+}
+#s-area > div:nth-child(1){
+    display: grid;
+    grid-template: 1fr / 2fr 1fr 1fr ;
+}
+#s-area > div:nth-child(2){
+    display: grid;
+    grid-template: 1fr / 2fr 1fr 1fr ;
+}
+#t-area{
+    display: grid;
+    grid-template: 1fr / 1fr 1fr;
+}
+#q-area{
+    display: grid;
+    grid-template: 1fr / 166px 267px 166px;
+}
+#title-area{
+    display: flex;
+    align-items: center;
+}
+#title-area > h2{
+    color:  rgba(23, 72, 128, 1);
+    margin-left: 29px;
+}
+#detail-area > div:nth-child(2) > div:nth-child(1){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: white;
+    background-color:#174880;
+}
+
+#detail-area > div:nth-child(2) > div:nth-child(3){
+    background-color:#174880;
+}
+
+#s-area > div:nth-child(3){
+    background-color:#174880;
+}
+#f-area > div:nth-child(3){
+    background-color:#174880;
+}
+#updateBtn{
+    background-color: #2661A5;
+    color: white;
+    width: 157px;
+    height: 36px;
+}
+#deleteBtn{
+    background-color: #8C8A8A;
+    color: white;
+    width: 157px;
+    height: 36px;
+}
+#preBtn{
+    background-color: #2661A5;
+    color: white;
+    width: 157px;
+    height: 36px;
+}
+#listBtn{
+    background-color: #2661A5;
+    color: white;
+    width: 267px;
+    height: 36px;
+}
+#nextBtn{
+    background-color: #2661A5;
+    color: white;
+    width: 157px;
+    height: 36px;
+}
+.centerplease > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: white;
+    background-color:#174880;
+}
+.centerplease-second > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+#updateBtnDiv{
+    display: flex;
+    align-items: end;
+}
+#deleteBtnDiv{
+    display: flex;
+    align-items: end;
+    justify-content: end;
+}
+#nextBtnDiv{
+    display: flex;
+    justify-content: end;
+}

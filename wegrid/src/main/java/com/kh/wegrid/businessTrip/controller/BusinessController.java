@@ -16,4 +16,6 @@ public class BusinessController {
     public void list(){
 
     }
+    @GetMapping("detail")
+    public void detail(){}
 }
