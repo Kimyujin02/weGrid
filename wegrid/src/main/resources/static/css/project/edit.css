@@ -1,6 +1,6 @@
 #main-con{
     display: grid;
-    grid-template-rows: 452px 193px 1fr;
+    grid-template-rows: 580px 150px;
     background-color: #d1dce8;
     box-shadow: 0px 0px 0px rgb(255, 255, 255);
 }
@@ -39,11 +39,11 @@
 
 .create-prj{
     display: grid;
-    grid-template-rows: 75px 15px 220px 15px 122px 15px;
+    grid-template-rows: 75px 15px 350px 15px 122px 15px;
     background-color: white;
     border: 1px solid #ddd;
     border-radius: 5px;
-    height: 450px;
+    height: 740px;
     box-shadow: 0px 0px 10px rgba(0.3, 0.3, 0.3, 0.3); /* 오른쪽 아래로 그림자 */
 }
 
@@ -68,12 +68,12 @@
 }
 
 .left-panel{
+    display: grid;
+    grid-template-rows: 27px;
     text-align: center;
-    /* gap: 20px; */
-    display: flex;
     align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-items: stretch;
+    align-content: space-between;
 }
 
 .right-panel{
@@ -93,13 +93,42 @@ label{
 .req-content input{
     width: 293px;
     height: 30px;
-    background-color: #EBEBEB;
-    border: 1px solid #EBEBEB;
+    background-color: #F4F4F4;
+    border: 1px solid #C0C0C0;
     border-radius: 5px;
+    padding: 5px;
     margin: 3px;
     justify-content: end;
+    box-shadow:inset 3px 3px 5px 1px rgba(98, 97, 97, 0.3);
+    box-sizing: border-box;
 }
 
+
+
+/* .filter-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 150px;
+} */
+
+.filter-controls select,
+.filter-controls input {
+    padding: 7px 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.status{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+    align-items: center;
+    gap: 100px;
+    margin-left: -90px;
+    margin-bottom: 25px;
+}
 
 /* 인원 추가 영역 */
 .add-personnel {
@@ -108,7 +137,7 @@ label{
     border: 1px solid #ddd;
     border-radius: 5px;
     width: 320px;
-    height: 400;
+    height: 450px;
     padding: 20px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
 }
@@ -225,8 +254,8 @@ label{
 
 #section-button {
     display: flex;
-    margin-top: 20px;
-    margin-right: 20px;
+    margin-top: 10px;
+    margin-right: 300px;
     text-align: center;
     align-items: center;
     justify-content: center;
