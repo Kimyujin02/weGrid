@@ -25,4 +25,9 @@ public class BoardController {
         return "board/detail";
     }
 
+    @GetMapping("edit")
+    public String edit(){
+        return "board/edit";
+    }
+
 }
