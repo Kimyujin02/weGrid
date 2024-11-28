@@ -8,8 +8,8 @@
 <meta charset="UTF-8">
 <title>LOGIN</title>
 
-<link rel="stylesheet" href="/css/login/login.css">
-<script defer src="/js/login/adminLogin.js"></script>
+<link rel="stylesheet" href="/css/member/adminLogin.css">
+<script defer src="/js/member/adminLogin.js"></script>
 
 </head>
 <body>
@@ -17,9 +17,9 @@
     <div class="top1"></div>
 
     <div class="login-menu">
-        <div class="blank1"></div>
+        <div class="mode-text">관리자 모드</div>
         <div class="logo-area">
-            <img src="/img/login_logo.svg" alt="">
+            <img src="/img/admin_login_logo.svg" alt="">
         </div>
         <div class="blank2"></div>
         <div class="input-area">
@@ -30,8 +30,9 @@
             </div>
             <div class="pwd-text">PW&nbsp; :&nbsp;</div>
             <input class="pwd-input" type="text">
+            <div class="blank1"></div>
         </div>
-        <a class="password-find" href="/pass">비밀번호 찾기</a>
+        
     </div>
 
     <div class="top2"></div>
@@ -40,4 +41,3 @@
 
 </body>
 </html>
-

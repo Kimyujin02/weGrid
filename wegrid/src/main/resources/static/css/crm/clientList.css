@@ -90,6 +90,11 @@
     box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1); /* 요소 내부로 그림자 */
 }
 
+.form-submit {
+    background-color: white;
+    border: none;
+}
+
 .client-table{
     margin: auto;
     height: auto;

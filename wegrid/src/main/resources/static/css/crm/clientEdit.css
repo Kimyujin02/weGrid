@@ -62,6 +62,11 @@
     justify-items: center;
 }
 
+.select-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
 .btn-area {
     display: grid;
 
@@ -168,12 +173,29 @@
     place-self: center center;
 }
 
+.business-status {
+    justify-self: end;
+    font-weight: bold;
+
+    padding-top: 30px;
+    padding-left: 175px;
+}
+
 .client-grade {
     justify-self: end;
     font-weight: bold;
 
     padding-top: 30px;
-    padding-right: 175px;
+    padding-right: 135px;
+}
+
+
+.business-status > select {
+    border: 1px solid #C0C0C0;
+    border-radius: 5px;
+
+    width: 75px;
+    height: 30px;
 }
 
 .client-grade > select {
