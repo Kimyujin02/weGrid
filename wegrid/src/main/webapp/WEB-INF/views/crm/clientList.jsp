@@ -37,7 +37,9 @@
                 <!-- row2 -->
                 <div></div>
                 <div class="btn-area">
-                    <button type="button" class="btn btn-primary">&nbsp;등록&nbsp;</button>
+                    <form action="http://127.0.0.1/crm/enroll" method="get">
+                        <button type="submit" class="btn btn-primary">&nbsp;등록&nbsp;</button>
+                    </form>
                 </div>
 
                 <div class="search-area">
@@ -45,8 +47,11 @@
                         <button class="dropdown-toggle">진행 여부 &nbsp;</button>
                         <div class="dropdown-menu">
                           <div class="option-list">
-                            <label><input type="checkbox" value="진행중" />진행중</label>
-                            <label><input type="checkbox" value="미진행" />미진행</label>
+
+                            <c:forEach items="${clientStatusVoList}" var="clientStatusVo">
+                                <label><input type="checkbox" value="${clientStatusVo.no}" />${clientStatusVo.name}</label>
+                            </c:forEach>
+
                           </div>
                         </div>
                     </div>
@@ -55,11 +60,11 @@
                         <button class="dropdown-toggle">등급 필터 &nbsp;</button>
                         <div class="dropdown-menu">
                           <div class="option-list">
-                            <label><input type="checkbox" value="S" />S</label>
-                            <label><input type="checkbox" value="A" />A</label>
-                            <label><input type="checkbox" value="B" />B</label>
-                            <label><input type="checkbox" value="C" />C</label>
-                            <label><input type="checkbox" value="D" />D</label>
+                            
+                            <c:forEach items="${clientRankVoList}" var="clientRankVo">
+                                <label><input type="checkbox" value="${clientRankVo.no}" />${clientRankVo.name}</label>
+                            </c:forEach>
+
                           </div>
                         </div>
                     </div>
@@ -74,7 +79,9 @@
                         </select>
 
                         <input id="searchInput" type="text" name="" placeholder="검색">
-                        <i type="submit" class="fas fa-search"></i>
+                        <button class="form-submit" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
                     
                     </form>
 
