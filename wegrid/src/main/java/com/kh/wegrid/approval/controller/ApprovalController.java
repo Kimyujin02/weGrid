@@ -18,4 +18,7 @@ public class ApprovalController {
     @GetMapping("receiveList")
     public void receiveList(){}
 
+    @GetMapping("detail")
+    public void detail(){}
+
 }
