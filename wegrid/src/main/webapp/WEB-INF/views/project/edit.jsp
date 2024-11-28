@@ -8,7 +8,7 @@
 <title>WEGRID</title>
 
 <link rel="stylesheet" href="/css/common/main.css">
-<link rel="stylesheet" href="/css/project/create.css">
+<link rel="stylesheet" href="/css/project/edit.css">
 
 <script defer src="/js/common/main.js"></script>
 
@@ -26,7 +26,7 @@
                 <div class="create-prj">
                     <!-- 상단 제목 / 날짜입력란 -->
                     <div class="head-nav">
-                        <h2 class="sub-title">프로젝트 생성</h2>
+                        <h2 class="sub-title">프로젝트 수정</h2>
                         <div class="date-range">
                             <input type="date" name="startDate" style="height: 40px; border-radius: 5px;">
                             ~ <input type="date" name="endDate" style="height: 40px; border-radius: 5px;">
@@ -52,10 +52,15 @@
                                 <input type="text" id="pm-name" >
                             </div>
                             <br>
-                            <br>
-                            <div>
-                                <label for="budget">예산</label>
-                                <input type="text" id="budget" >
+                            <div class="status">
+                                <label for="pm-name">진행도 </label>
+                                <div class="filter-controls">
+                                    <select>
+                                        <option value="진행">진행</option>
+                                        <option value="완료">완료</option>
+                                        <option value="철회">철회</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         
@@ -88,7 +93,7 @@
                     <!-- 프로젝트 내용 입력란 -->
                     <div class="content">
                         <label for="description" style="margin-right: 15px;">내용</label>
-                        <textarea id="description" rows="4" placeholder="프로젝트 내용을 입력하세요" ></textarea>
+                        <textarea id="description" rows="4" ></textarea>
                     </div>
 
                      <!-- 여백 -->
@@ -109,21 +114,10 @@
                 </div>
             </div>
 
-            <!-- 첨부파일 섹션 -->
-            <div class="attachments-container">
-                <div class="line-title">첨부파일</div>
-                <div class="line-divider"></div>
-                <div class="inner">
-                    <button class="file-button" onclick="document.getElementById('input').click()">파일 선택</button>
-                    <input type="file" id="input" style="display: none;">
-                    <div class="info-text">또는 파일을 여기로 드래그 하세요.</div>
-                </div>
-            </div>
-
             <!-- 버튼 섹션 -->
             <div id="section-button">
-                <button type="button" class="btn btn-primary" id="create-btn">등록</button>
-                <button type="button" class="btn btn-primary" id="delete-btn">삭제</button>
+                <button type="button" class="btn btn-primary" id="create-btn">수정</button>
+                <button type="button" class="btn btn-primary" id="delete-btn">취소</button>
             </div>
            
     </div>

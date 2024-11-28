@@ -37,7 +37,7 @@
                     <div class="filter-controls">
                         <select>
                             <option value="전체">전체</option>
-                            <option value="진행중">진행중</option>
+                            <option value="진행중">진행</option>
                             <option value="완료">완료</option>
                             <option value="철회">철회</option>
                             <option value="준비">준비</option>

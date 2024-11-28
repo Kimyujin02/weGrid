@@ -20,9 +20,27 @@ public class ProjectController {
         return "project/list";
     }
 
-    // 프로젝트 생성 화면
+    // 신규 프로젝트 생성 화면
     @GetMapping("create")
     public String create(){
         return "project/create";
+    }
+
+    //프로젝트 정보 수정 화면
+    @GetMapping("edit")
+    public String edit(){
+        return "project/edit";
+    }
+    
+    // 프로젝트 상세조회 화면 1 (참여인력 조회)
+    @GetMapping("people")
+    public String peopleList(){
+        return "project/people";
+    }
+
+    // 프로젝트 상세 조회 화면 2 (첨부파일 조회)
+    @GetMapping("attach")
+    public String attachList(){
+        return "project/attach";
     }
 }
