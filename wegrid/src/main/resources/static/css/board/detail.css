@@ -29,7 +29,6 @@ main {
 }
 
 .btn-edit, .btn-delete {
-    background-color: #2661A5;
     width: 100px;
     height: 30px;
     color: white;
@@ -40,6 +39,10 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.btn-edit {
+    background-color: #2661A5;
 }
 
 .btn-delete {
@@ -55,31 +58,39 @@ main {
 }
 
 .content {
-    display: block;
+    overflow: auto; /* 스크롤 가능 상태 유지 */
     width: 1080px;
     height: 660px;
     padding: 20px;
     border: 2px solid gray;
     resize: none;
-    overflow-y: auto;
     font-family: Arial, sans-serif;
     font-size: 14px;
     flex-shrink: 0;
     margin-left: 100px;
 }
 
+/* Webkit 브라우저에서 스크롤바 숨기기 */
+.content::-webkit-scrollbar {
+    display: none;
+}
+
+/* Firefox에서 스크롤바 숨기기 */
+.content {
+    scrollbar-width: none;
+}
+
 .content-shortcut {
     display: flex;
     flex-direction: column; /* 자식 요소를 세로로 배치 */
     margin-bottom: 20px; /* content-detail과 간격 */
-    border-bottom: 1px solid gray; /* 구분선 추가 */
+    border-bottom: 1px solid #e5e5e5; /* 구분선 추가 */
 }
 
 .shortcut-title {
     height: 20px;
     text-align: center;
     font-size: 20px;
-
 }
 
 .shortcut-user {
@@ -88,21 +99,21 @@ main {
     gap: 10px; /* 요소 간 간격 */
     align-items: center; /* 세로 중앙 정렬 */
     margin-top: 10px; /* 제목과 간격 */
+    margin-left: 20px;
 }
 
 .user-propic {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background-color: gray;
     border-radius: 50%; /* 원형 프로필 */
     flex-shrink: 0; /* 크기 고정 */
 }
 
 .user-detail {
-    background-color: yellow;
     display: flex;
-    flex-direction: column; /* 내부 정보는 세로로 배치 */
-    justify-content: center; /* 세로 정렬 */
+    flex-direction: column;
+    justify-content: center;
     padding: 5px 10px;
 }
 
@@ -116,9 +127,9 @@ main {
 
 .user-info > div, .board-info > div {
     height: 20px;
-    background-color: blue;
     display: flex;
     flex-direction: row;
+    margin-left: 10px;
 }
 
 .board-btns {
@@ -129,24 +140,175 @@ main {
     padding: 0;
 }
 
+.attach-icon{
+    position: absolute;
+    top: 49px;
+    right: 19px;
+    width: 80px;
+    height: 25px;
+    text-align: end;
+}
+
 .attach {
-    background-color: green;
     display: flex;
     width: 260px;
-    height: 660px;
+    height: 300px;
     margin-left: 20px;
     flex-shrink: 0;
+    border: 1px solid black; /* 구분선 추가 */
 }
+
+.list-middle td{
+    display: flex;
+    border-bottom: 1px solid gray;
+    overflow: hidden;
+    width: 234px;
+    margin-left: 10px;
+    overflow-x: scroll;  /* 횡방향 스크롤 허용 */
+    white-space: nowrap;  /* 내용이 줄바꿈되지 않도록 */
+}
+
+/* 스크롤바 숨기기 */
+.list-middle td::-webkit-scrollbar {
+    display: none;
+}
+
 
 .content-detail {
     display: flex;
     width: 100%;
     height: 340px;
+    border-bottom: 1px solid #e5e5e5;
 }
 
-.content-reply {
+
+/* 댓글 사용자 영역 */
+.reply-user {
     display: flex;
+    align-items: center;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/* 댓글 아이콘 */
+.reply-icon {
+    width: 40px; /* 아이콘 크기 */
+    height: 40px;
+    background-color: gray; /* 아이콘 배경 */
+    border-radius: 50%; /* 원형 아이콘 */
+    margin-right: 15px; /* 아이콘과 텍스트 간의 간격 */
+}
+
+/* 댓글 사용자 정보 */
+.reply-info {
+    display: flex; /* 세로 정렬 */
+    flex-direction: column; /* 이름과 부서를 세로로 정렬 */
+    margin-right: 15px; /* 간격 조정 */
+}
+
+/* 댓글 텍스트 */
+.reply-text {
+    flex-grow: 1; /* 나머지 공간을 차지 */
+    font-size: 14px; /* 텍스트 크기 */
+    color: #333; /* 텍스트 색 */
+    line-height: 1.6; /* 줄 간격 */
+    word-wrap: break-word; /* 긴 단어 줄바꿈 */
+}
+
+/* 댓글 추가 정보 (날짜, 수정/삭제 버튼) */
+.reply-subinfo {
+    display: flex; /* 가로 정렬 */
+    justify-content: space-between; /* 왼쪽과 오른쪽에 요소 배치 */
+    margin-top: 5px; /* 상단 여백 */
+}
+
+/* 댓글 날짜 */
+.reply-subinfo .reply-date {
+    font-size: 12px;
+    color: #999;
+}
+.reply-subinfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+
+/* 댓글 수정/삭제 버튼 */
+.reply-adjust {
+    display: flex;
+    gap: 10px; /* 수정, 삭제 버튼 간격 */
+}
+
+.reply-edit, .reply-delete {
+    font-size: 12px;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.reply-edit:hover, .reply-delete:hover {
+    text-decoration: underline;
+}
+
+/* 댓글 입력 영역 */
+.reply-input-area {
+    display: flex; /* 가로 정렬 */
+    flex-direction: column; /* 입력 영역 세로로 정렬 */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.reply-input-area textarea {
+    width: 100%; /* 가로로 꽉 채움 */
+    height: 100px; /* 높이 */
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: none;
+    margin-bottom: 10px;
+}
+
+.reply-input-area button {
+    align-self: flex-end; /* 버튼을 오른쪽 정렬 */
+    padding: 8px 15px;
+    font-size: 14px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reply-input-area button:hover {
+    background-color: #0056b3;
+}
+
+.filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    height: 186px;
-    background-color: gray;
+    padding: 8px 20px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid black;
+}
+
+.filter-left, .filter-right {
+    display: flex; /* 자식 요소들이 가로로 배치되도록 설정 */
+    align-items: center; /* 세로 중앙 정렬 */
+}
+
+.filter-left > div, .filter-right > div {
+    margin-left: 10px; /* 항목들 사이의 간격 */
+    margin-right: 10px;
+}
+
+/* 추가로 필요하다면 필터 항목 크기나 스타일 조정 */
+.filter-left select, .filter-right select {
+    padding: 5px;
+    font-size: 14px;
 }
