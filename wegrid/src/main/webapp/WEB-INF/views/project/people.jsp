@@ -27,22 +27,24 @@
             <!-- 프로젝트 정보 -->
             <div class="project-info">
                  <!-- 공백 -->
-                <div class="place"></div>
+                 <div class="edit-icon">
+                    <a href="/project/edit"><i class="fas fa-edit" style="color:#666;"></i></a>
+                </div>
                 <table class="project-table">
                     <thead>
                         <tr style="border-top: 1px solid #797979ab;">
                             <th>프로젝트 명</th>
-                            <td>새미 프로젝트</td>
+                            <td>${projectName}</td>
                             <th>담당 PM</th>
-                            <td>누구누구</td>
+                            <td>${pmName}</td>
                             <th>고객사 담당자</th>
-                            <td>누구누구</td>
+                            <td></td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <th>고객사</th>
-                            <td>KH 정보교육원</td>
+                            <td>${clientName}</td>
                             <th>고객 등급</th>
                             <td>A</td>
                             <th>고객사 연락처</th>
@@ -58,7 +60,7 @@
                         </tr>
                         <tr>
                             <th>내용</th>
-                            <td colspan="5"></td>
+                            <td colspan="5">${description}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -110,16 +112,18 @@
                         </thead>
                   
                         <tbody >
-                            <tr class="list-middle">
-                                <!-- tbody안쪽은 js사용해서 동적으로 채워줌   -->
-                                <td>홍길동</td>
-                                <td>kh123456</td>
-                                <td>영업 1팀</td>
-                                <td>몰루?</td>
-                                <td>kh1234@gmail.com</td>
-                                <td>2024.11.22</td>
-                                <td>2024.12.10</td>
-                            </tr>
+                            <c:forEach items="${voList}" var="vo">
+                                <tr class="list-middle">
+                                    <td>${vo.employeeName}</td>
+                                    <td>${vo.empNo}</td>
+                                    <td>${vo.jobName}</td>
+                                    <td>몰루?</td>
+                                    <td>${vo.email}</td>
+                                    <td>${vo.startDate}</td>
+                                    <td>${vo.endDate}</td>
+                                </tr>
+                            </c:forEach>
+                            
                             <tr class="list-middle">
                                 <td>홍길동</td>
                                 <td>kh123456</td>
@@ -196,7 +200,7 @@
             <!-- 현재 참여인원 -->
             <div class="profile-card">
                 <div class="profile">
-                    <img src="profile1.jpg" alt="김태훈" class="profile-img">
+                    <img src="profile1.jpg" alt="사원" class="profile-img">
                     <div class="profile-info">
                         <span class="name">김태훈</span>
                         <span class="role">조장</span>

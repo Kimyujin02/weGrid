@@ -11,7 +11,7 @@
 <nav>
     <div>
         <div>
-            <i class="far fa-file fa-2x"></i>
+          <i class="far fa-file fa-2x"></i>
         </div>
         <div>프로젝트</div>
     </div>
