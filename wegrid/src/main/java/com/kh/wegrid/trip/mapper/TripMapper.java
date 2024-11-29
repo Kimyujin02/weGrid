@@ -39,14 +39,21 @@ public interface TripMapper {
             """)
     int write(TripVo vo);
 
+
+    List<TripVo> getTripVoList(PageVo pvo, String searchType, String searchValue);
+
+
+
+    int getTripCnt(String searchType, String searchValue);
+
     @Select("""
             SELECT
                 B.NO
-                , B.EMP_NO
-                , B.TYPE_NO                          
-                , T.NAME           AS TYPE_NAME                
-                , E.NAME           AS WRITER_NAME 
-                , B.DESTINATION
+                , B.EMP_NO          AS WRITER_NO
+                , E.NAME            AS WRITER_NAME
+                , B.TYPE_NO
+                , T.NAME            AS TYPE_NAME
+                , SUBSTR(B.DESTINATION, 1, 2) AS DESTINATION
                 , B.TITLE
                 , B.CONTENT
                 , TO_CHAR(B.START_DATE, 'YYYY-MM-DD') AS START_DATE
@@ -54,18 +61,9 @@ public interface TripMapper {
                 , B.CLIENT
             FROM BUSINESS_TRIP B
             JOIN EMPLOYEE E ON ( E.NO = B.EMP_NO )
-            JOIN TRIP_TYPE T ON ( B.TYPE_NO = T.NO )
-            WHERE B.DEL_YN = 'N'
-            ORDER BY B.START_DATE
-            OFFSET #{offset} ROWS FETCH NEXT #{boardLimit} ROWS ONLY
+            JOIN TRIP_TYPE T ON ( T.NO = B.TYPE_NO)
+            WHERE B.NO = #{tno}
+            AND B.DEL_YN = 'N'
             """)
-    List<TripVo> getTripVoList(PageVo pvo);
-
-
-    @Select("""
-            SELECT COUNT(NO)
-            FROM BUSINESS_TRIP
-            WHERE DEL_YN = 'N'
-            """)
-    int getTripCnt();
+    TripVo detail(String tno);
 }

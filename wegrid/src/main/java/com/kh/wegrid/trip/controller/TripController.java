@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -36,24 +37,33 @@ public class TripController {
 
     @GetMapping("list/data")
     @ResponseBody
-    public HashMap getTripVoList(int pno){
+    public HashMap getTripVoList(@RequestParam(name = "pno"
+            , defaultValue = "1"
+            , required = false) int currentPage
+            , String searchType
+            , String searchValue ){
 
-        int currentPage = pno;
-        int listCount = service.getTripCnt();
+        int listCount = service.getTripCnt(searchType , searchValue);
         int pageLimit = 5;
         int boardLimit = 15;
         System.out.println(currentPage);
         PageVo pvo = new PageVo(listCount , currentPage , pageLimit , boardLimit);
-        List<TripVo> tripVoList = service.getTripVoList(pvo);
+        List<TripVo> tripVoList = service.getTripVoList(pvo , searchType , searchValue);
         HashMap map = new HashMap();
         map.put("a" , tripVoList);
         map.put("b" , pvo);
-
+        System.out.println("searchType = " + searchType);
+        System.out.println("searchValue = " + searchValue);
+        System.out.println("tripVoList = " + tripVoList);
 
         return map;
     }
     @GetMapping("detail")
-    public void detail(){}
+    public String detail(String tno , Model model){
+        TripVo vo = service.detail(tno);
+        model.addAttribute("tripVo" , vo);
+        return "trip/detail";
+    }
 }
 
 
