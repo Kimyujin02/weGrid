@@ -23,19 +23,29 @@
         </div>
         <div class="blank2"></div>
 
-        <div class="input-area">
-            
-            <div class="id-text">ID&nbsp;&nbsp;&nbsp; :&nbsp;</div>
-            <input class="id-input" type="text">
-            <div class="button">
-                <button type="submit">SIGN IN</button>
+        <form class="login-area" method="post">
+            <div></div>
+            <div class="input-area">
+                <div class="id-text">
+                    ID&nbsp;&nbsp;&nbsp; :&nbsp;
+                    <input class="id-input" type="text" name="id">
+                </div>
+                
+                <div class="pwd-text">
+                    PW&nbsp; :&nbsp;
+                    <input class="pwd-input" type="password" name="pwd">
+                </div>
             </div>
 
-            <div class="pwd-text">PW&nbsp; :&nbsp;</div>
-            <input class="pwd-input" type="text">
-        </div>
+            <div class="login-button">
+                <button type="submit" value="로그인">SIGN IN</button>
+            </div>
+            <div></div>
+        </form>
 
-        <a class="password-find" href="/pass">비밀번호 찾기</a>
+
+
+        <a class="password-find" href="/member/find.jsp">비밀번호 찾기</a>
     </div>
 
     <div class="top2"></div>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.wegrid.crm.mapper.CrmMapper">
+
+    <select id="getClientVoList">
+        SELECT
+        C.NO
+        , C.RANK_CODE
+        , CR.NAME AS RANK_NAME
+        , C.STATUS_NO
+        , CS.NAME AS STATUS_NAME
+        , C.NAME
+        , C.ADDRESS
+        , C.PRESIDENT_NAME
+        , C.PRESIDENT_PHONE
+        , C.PRESIDENT_EMAIL
+        , C.START_DATE
+        , P.MANAGER_NAME
+        , P.MANAGER_PHONE
+        FROM
+        CLIENT C
+        LEFT JOIN CLIENT_RANK CR ON ( C.RANK_CODE = CR.NO )
+        LEFT JOIN CLIENT_STATUS CS ON ( C.STATUS_NO = CS.NO )
+        LEFT JOIN PROJECT P ON ( C.NO = P.CLIENT_NO )
+        WHERE C.DEL_YN = 'N'
+        <if test="searchType == 'integration'">
+            AND (
+            C.NAME LIKE '%${searchValue}%'
+            OR P.MANAGER_NAME LIKE '%${searchValue}%'
+            OR P.MANAGER_PHONE LIKE '%${searchValue}%'
+            )
+        </if>
+        <if test="searchType == 'client'">
+            AND C.NAME LIKE '%${searchValue}%'
+        </if>
+        <if test="searchType == 'managerName'">
+            AND P.MANAGER_NAME LIKE '%${searchValue}%'
+        </if>
+        <if test="searchType == 'managerPhone'">
+            AND P.MANAGER_PHONE LIKE '%${searchValue}%'
+        </if>
+        ORDER BY C.NO DESC
+    </select>
+
+
+</mapper>

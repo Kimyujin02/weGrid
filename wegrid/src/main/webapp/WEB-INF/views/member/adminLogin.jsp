@@ -22,17 +22,30 @@
             <img src="/img/admin_login_logo.svg" alt="">
         </div>
         <div class="blank2"></div>
-        <div class="input-area">
-            <div class="id-text">ID&nbsp;&nbsp;&nbsp; :&nbsp;</div>
-            <input class="id-input" type="text">
-            <div class="button">
-                <button>SIGN IN</button>
+
+        <form class="login-area" method="post">
+            <div></div>
+            <div class="input-area">
+                <div class="id-text">
+                    ID&nbsp;&nbsp;&nbsp; :&nbsp;
+                    <input class="id-input" type="text" name="id">
+                </div>
+                
+                <div class="pwd-text">
+                    PW&nbsp; :&nbsp;
+                    <input class="pwd-input" type="text" name="pwd">
+                </div>
             </div>
-            <div class="pwd-text">PW&nbsp; :&nbsp;</div>
-            <input class="pwd-input" type="text">
-            <div class="blank1"></div>
-        </div>
-        
+
+            <div class="login-button">
+                <button type="submit">SIGN IN</button>
+            </div>
+            <div></div>
+        </form>
+
+
+
+        <div></div>
     </div>
 
     <div class="top2"></div>

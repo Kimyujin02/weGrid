@@ -25,22 +25,30 @@ body {
     background-color: #D1DCE8;
 }
 
-.input-area {
+.login-area {
     display: grid;
-    grid-template-columns: 1.5fr 2.5fr 1.5fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 80px 320px 100px 80px;
 }
 
-.button {
+.input-area {
     display: grid;
-    grid-row: span 2;
+    grid-template-rows: 1fr 1fr;
+
+    margin-right: 50px;
+}
+
+.login-button {
+    display: grid;
 
     justify-content: center;
     justify-items: center;
 
+    width: 100px;
+    height: 100px;
+
 }
 
-.button button {
+.login-button button {
     display: flex;
 
     place-content: center;
@@ -56,7 +64,7 @@ body {
     font-weight: bold;
     border: none;
 
-    margin-right: 40px;
+    margin-left: 10px;
 }
 
 .top2 {
@@ -81,6 +89,9 @@ img {
 
 input {
     margin: 5px;
+
+    width: 250px;
+    height: 40px;
     
     border: none;
 }
@@ -96,6 +107,7 @@ a {
 }
 
 .id-text {
+    white-space: nowrap;
     font-size: 1.1rem;
     font-weight: bold;
     color: #174880;
@@ -105,10 +117,15 @@ a {
 }
 
 .pwd-text {
+    white-space: nowrap;
     font-size: 1.1rem;
     font-weight: bold;
     color: #174880;
 
     place-content: center;
     justify-self: right;
+}
+
+button[type=submit]:hover {
+    cursor: pointer;
 }

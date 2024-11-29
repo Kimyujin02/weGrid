@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -21,23 +23,33 @@ public class CrmController {
 
     private final CrmService service;
 
+    // 목록 조회 (화면)
     @GetMapping("list")
-    private String list(Model model){
-        List<ClientVo> clientVoList = service.getClientVoList();
+    public String list(Model model){
+//        List<ClientVo> clientVoList = service.getClientVoList();
         List<ClientRankVo> clientRankVoList = service.getClientRankVoList();
         List<ClientStatusVo> clientStatusVoList = service.getClientStatusVoList();
-        model.addAttribute("clientVoList", clientVoList);
+//        model.addAttribute("clientVoList", clientVoList);
         model.addAttribute("clientRankVoList", clientRankVoList);
         model.addAttribute("clientStatusVoList", clientStatusVoList);
         return "crm/clientList";
     }
 
+    // 목록 조회 (데이터)
+    @GetMapping("list/data")
+    @ResponseBody
+    public List<ClientVo> getClientVoList(String searchType, String searchValue){
+        List<ClientVo> ClientVoList = service.getClientVoList(searchType, searchValue);
+
+        return service.getClientVoList(searchType, searchValue);
+    }
+
     @GetMapping("enroll")
-    private String enroll() { return "crm/clientEnroll"; }
+    public String enroll() { return "crm/clientEnroll"; }
 //  나중에 postmapping 으로
 
     @GetMapping("edit")
-    private String edit() { return "crm/clientEdit"; }
+    public String edit() { return "crm/clientEdit"; }
 //  나중에 postmapping 으로
 
     @GetMapping("detail")

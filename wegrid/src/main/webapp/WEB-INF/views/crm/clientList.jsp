@@ -62,23 +62,23 @@
                           <div class="option-list">
                             
                             <c:forEach items="${clientRankVoList}" var="clientRankVo">
-                                <label><input type="checkbox" value="${clientRankVo.no}" />${clientRankVo.name}</label>
+                                <label><input type="checkbox" value="${clientRankVo.name}" />${clientRankVo.name}</label>
                             </c:forEach>
 
                           </div>
                         </div>
                     </div>
                     
-                    <form class="search-box" method="get">
+                    <form class="search-box" action="/crm/list">
 
-                        <select id="searchType">
-                            <option value="통합">통합</option>
-                            <option value="고객사">고객사</option>
-                            <option value="고객사 담당자명">고객사 담당자명</option>
-                            <option value="담당자 연락처">담당자 연락처</option>
+                        <select id="searchType" name="searchType">
+                            <option value="integration">통합</option>
+                            <option value="client">고객사</option>
+                            <option value="managerName">고객사 담당자명</option>
+                            <option value="managerPhone">담당자 연락처</option>
                         </select>
 
-                        <input id="searchInput" type="text" name="" placeholder="검색">
+                        <input id="searchInput" type="text" name="searchValue" placeholder="검색">
                         <button class="form-submit" type="submit">
                             <i class="fas fa-search"></i>
                         </button>
@@ -102,97 +102,13 @@
                         </thead>
                   
                         <tbody>
-                            <tr class="list-middle">
-                                <!-- tbody안쪽은 js사용해서 동적으로 채워줌   -->
+                            <!-- <tr class="list-middle">
                                 <td>1</td>
                                 <td>KH 정보교육원</td>
                                 <td>S</td>
                                 <td>2024-11-26</td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td>2</td>
-                                <td>KA 정보교육원</td>
-                                <td>A</td>
-                                <td>2024-11-26</td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td>3</td>
-                                <td>KB 정보교육원</td>
-                                <td>B</td>
-                                <td>2024-11-26</td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td>4</td>
-                                <td>KC 정보교육원</td>
-                                <td>C</td>
-                                <td>2024-11-26</td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td>5</td>
-                                <td>KD 정보교육원</td>
-                                <td>D</td>
-                                <td>2024-11-26</td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            </tr> -->
+                            <td>로딩중</td>
                         </tbody>
                         <tfoot>
                             <tr class="list-end">
