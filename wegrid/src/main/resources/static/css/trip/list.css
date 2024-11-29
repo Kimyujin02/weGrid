@@ -99,29 +99,49 @@ td{
    margin: auto;
    margin-bottom: 10px;
 }
-.search-box {
+#iwannagohome{
     display: flex;
-    flex-direction: row;
     align-items: center;
-    
 }
-
-.search-box input[type="text"] {
+#type-boc{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#type-boc > select{ 
+    height: 34px;
+    width: 80px;
+}
+#search-boc{
+    width: 370px;
+    height: 40px;
+    display: flex;
+    align-items: center;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: white;
-    padding: 5px;
-    /* border: none;
-    outline: none; */
-    padding: 5px;
-    font-size: 12px;
-    flex-grow: 1;
 }
-
-.search-box i {
+#searchTag{
+    width: 310px;
+    height: 38px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    flex-grow: 1;
+    margin-left: 5px;
+}
+#searchBtn{
+    width: 38px;
+    height: 38px;
     font-size: 16px;
     color: #666;
-    margin-left: 5px;
+    margin-left: 0px;
+    border: none;
+    background-color: white;
+}
+#searchBtn > i {
+    color: rgba(23, 72, 128, 1);;
 }
 #title-area{
     display: flex;
@@ -314,4 +334,7 @@ form {
 }
 #rightPageBtn{
     color: #174880
+}
+#gita{
+    visibility: hidden;
 }

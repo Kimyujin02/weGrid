@@ -46,7 +46,6 @@ public class TripController {
         int listCount = service.getTripCnt(searchType , searchValue);
         int pageLimit = 5;
         int boardLimit = 15;
-        System.out.println(currentPage);
         PageVo pvo = new PageVo(listCount , currentPage , pageLimit , boardLimit);
         List<TripVo> tripVoList = service.getTripVoList(pvo , searchType , searchValue);
         HashMap map = new HashMap();
@@ -61,9 +60,19 @@ public class TripController {
     @GetMapping("detail")
     public String detail(String tno , Model model){
         TripVo vo = service.detail(tno);
+        System.out.println("vo.getDestination() = " + vo.getDestination());
+        String[] splitAddress = vo.getDestination().split(",");
+        
+        System.out.println("splitAddress = " + splitAddress.length);
+        vo.setFirstAddress(splitAddress[2]);
+        vo.setSecondAddress(splitAddress[0]);
+        vo.setThirdAddress(splitAddress[1]);
         model.addAttribute("tripVo" , vo);
         return "trip/detail";
     }
+
+    @GetMapping("edit")
+    public void edit(){}
 }
 
 

@@ -21,23 +21,26 @@
         FROM BUSINESS_TRIP B
         JOIN EMPLOYEE E ON ( E.NO = B.EMP_NO )
         JOIN TRIP_TYPE T ON ( B.TYPE_NO = T.NO )
-        WHERE
-        <if test="searchType == 'title">
-            B.TITLE LIKE '%${searchValue}%'
+
+        <where>
+        B.DEL_YN = 'N'
+        <if test="searchType == 'title'">
+            AND B.TITLE LIKE '%${searchValue}%'
         </if>
-        <if test="searchType == 'content">
-            B.CONTENT LIKE '%${searchValue}%'
+        <if test="searchType == 'content'">
+            AND B.CONTENT LIKE '%${searchValue}%'
         </if>
-        <if test="searchType == 'no">
-            B.NO LIKE '%${searchValue}%'
+        <if test="searchType == 'no'">
+            AND B.NO LIKE '%${searchValue}%'
         </if>
-        <if test="searchType == 'client">
-            B.CLIENT LIKE '%${searchValue}%'
+        <if test="searchType == 'client'">
+            AND B.CLIENT LIKE '%${searchValue}%'
         </if>
-        <if test="searchType == 'writerName">
-            E.NAME LIKE '%${searchValue}%'
+        <if test="searchType == 'writerName'">
+            AND E.NAME LIKE '%${searchValue}%'
         </if>
-        <if test="searchType == 'all">
+        <if test="searchType == 'all'">
+            AND
             (
             B.TITLE LIKE '%${searchValue}%'
             OR B.CONTENT LIKE '%${searchValue}%'
@@ -47,42 +50,50 @@
             )
         </if>
 
-        AND B.DEL_YN = 'N'
+        </where>
+
 
         ORDER BY B.START_DATE
-        OFFSET #{offset} ROWS FETCH NEXT #{boardLimit} ROWS ONLY
+        OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
     </select>
+
 
     <select id="getTripCnt">
         SELECT
-            COUNT(NO)
-        FROM BUSINESS_TRIP
-        WHERE
-        <if test="searchType == 'title">
-            B.TITLE LIKE '%${searchValue}%'
+            COUNT(B.NO)
+        FROM BUSINESS_TRIP B
+        JOIN EMPLOYEE E ON ( E.NO = B.EMP_NO )
+
+
+        <where>
+            B.DEL_YN = 'N'
+        <if test="searchType == 'title'">
+            AND B.TITLE LIKE '%${searchValue}%'
         </if>
-        <if test="searchType == 'content">
-            B.CONTENT LIKE '%${searchValue}%'
+        <if test="searchType == 'content'">
+            AND B.CONTENT LIKE '%${searchValue}%'
         </if>
-        <if test="searchType == 'no">
-            B.NO LIKE '%${searchValue}%'
+        <if test="searchType == 'no'">
+            AND B.NO = #{searchValue}
         </if>
-        <if test="searchType == 'client">
-            B.CLIENT LIKE '%${searchValue}%'
+        <if test="searchType == 'client'">
+            AND B.CLIENT LIKE '%${searchValue}%'
         </if>
-        <if test="searchType == 'writerName">
-            E.NAME LIKE '%${searchValue}%'
+        <if test="searchType == 'writerName'">
+            AND E.NAME LIKE '%${searchValue}%'
         </if>
-        <if test="searchType == 'all">
+        <if test="searchType == 'all'">
+            AND
             (
-            B.TITLE LIKE '%${searchValue}%'
+            TITLE LIKE '%${searchValue}%'
             OR B.CONTENT LIKE '%${searchValue}%'
             OR B.NO LIKE '%${searchValue}%'
             OR B.CLIENT LIKE '%${searchValue}%'
             OR E.NAME LIKE '%${searchValue}%'
             )
         </if>
-        AND B.DEL_YN = 'N'
+        </where>
+
     </select>
 
 

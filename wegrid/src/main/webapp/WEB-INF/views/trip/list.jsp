@@ -40,21 +40,25 @@
             </div>
             <div></div>
             <div></div>
-            <div></div>
-                <div>
-                    <form action="" class="search-box" onsubmit="return submitSearchForm();">
-                
-                    <select name="searchType" id="trip-filter">
-                        <option value="all">전체</option>
-                        <option value="content">내용</option>
-                        <option value="title">제목</option>
-                        <option value="writerName">작성자</option>
-                        <option value="no">번호</option>
-                        <option value="client">고객사</option>
-                    </select>
-                    <div id="search-boc">
+            <form  onsubmit="return submitSearchForm();">
+            <div id="type-boc"> 
+                <select name="searchType" id="trip-filter" >
+                <option value="all">전체</option>
+                <option value="content">내용</option>
+                <option value="title">제목</option>
+                <option value="writerName">작성자</option>
+                <option value="no">번호</option>
+                <option value="client">고객사</option>
+            </select>
+            </div>
+                <div id="iwannagohome">
+                    <div  id="search-boc">
                         <input type="text" name="searchValue" placeholder="검색" id="searchTag">
-                        <i class="fas fa-search"></i>
+                        <span>
+                            <button type="submit" id="searchBtn">
+                                <i class="fas fa-search" id="search-i"></i>
+                            </button>
+                        </span>
                     </div>
                     </form>
                 </div>
@@ -126,7 +130,7 @@
                                 <label><input type="radio" name="typeNo" value="5"> 유지보수</label>
                                 <label><input type="radio" name="typeNo" value="6"> 기타</label>
                             </div>
-                            <input type="text" placeholder="기타 내용" class="longInput">
+                            <input type="text" placeholder="기타 내용" class="longInput" id="gita">
                         </div>
                         <div class="form-tripModal" id="api-div">
                             <label>출장지</label>

@@ -94,7 +94,7 @@ function combineAdress(){
     const address3 = document.querySelector("#sample6_postcode").value;
     const address1 = document.querySelector("#sample6_address").value;
     const address2 = document.querySelector("#sample6_detailAddress").value;
-    const address = address1 +" , "+ address2 +" , "+ address3;
+    const address = address1 +","+ address2 +","+ address3;
     const desTag = document.querySelector("#address");
 
     desTag.setAttribute("value" , address);
@@ -199,7 +199,7 @@ function loadTripList(searchType , searchValue){
             
             
         },
-        fail : 
+        error : 
         function(){
             alert("출장 조회 실패")
         },
@@ -219,20 +219,28 @@ tbodyTag.addEventListener("click" , function(evt){
     location.href=`/trip/detail?tno=${no}`;
 });
 
+
+
 function submitSearchForm(){
     
-    const searchType = document.querySelector("select[name=searchType]").value;
-    const searchValue = document.querySelector("input[name=searchValue]").value;
+    const searchType = document.querySelector("#trip-filter").value;
+    const searchValue = document.querySelector("#searchTag").value;
 
-    // let searchValue1 = "";
-    // if(searchType == "title"){
-    //     searchValue = titleTagValue;
-    // }else{ 
-    //     searchValue = categoryTagValue;
-    // }
-
-
-    loadBoardList(searchType , searchValue);
+    loadTripList(searchType , searchValue);
 
     return false; // 기본 이벤트 막을 수 있음
-}
+};
+
+document.addEventListener("DOMContentLoaded", function(){
+    const today = new Date().toISOString().split("T")[0]; // 현재 날짜
+    const startDateInput = document.querySelector("input[name=startDate]");
+    const endDateInput = document.querySelector("input[name=endDate]");
+
+    
+    startDateInput.min = today;
+
+    
+    startDateInput.addEventListener("change", function(){
+        endDateInput.min = startDateInput.value; // 종료 날짜 최소값 = 시작 날짜
+    });
+});

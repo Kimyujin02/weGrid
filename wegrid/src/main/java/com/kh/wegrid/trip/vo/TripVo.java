@@ -20,7 +20,8 @@ public class TripVo {
     private String client;
     private String clientName;
     private String delYn;
-
-
+    private String firstAddress;
+    private String SecondAddress;
+    private String thirdAddress;
 
 }
