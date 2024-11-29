@@ -3,7 +3,6 @@ package com.kh.wegrid.crm.mapper;
 import com.kh.wegrid.crm.vo.ClientRankVo;
 import com.kh.wegrid.crm.vo.ClientStatusVo;
 import com.kh.wegrid.crm.vo.ClientVo;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -27,8 +26,8 @@ public interface CrmMapper {
                 , C.START_DATE
             FROM
                 CLIENT C
-                JOIN CLIENT_RANK CR ON ( C.RANK_CODE = CR.NO )
-                JOIN CLIENT_STATUS CS ON ( C.STATUS_NO = CS.NO )
+                LEFT JOIN CLIENT_RANK CR ON ( C.RANK_CODE = CR.NO )
+                LEFT JOIN CLIENT_STATUS CS ON ( C.STATUS_NO = CS.NO )
             ORDER BY C.RANK_CODE ASC, C.NAME ASC
             """)
     List<ClientVo> getClientVoList();
@@ -50,4 +49,6 @@ public interface CrmMapper {
             ORDER BY NO ASC
             """)
     List<ClientStatusVo> getClientStatusVoList();
+
+    List<ClientVo> getClientVoList(String searchType, String searchValue);
 }

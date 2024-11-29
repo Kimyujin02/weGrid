@@ -16,5 +16,7 @@ public class ClientVo {
     private String presidentPhone;
     private String presidentEmail;
     private String startDate;
+    private String managerName;
+    private String managerPhone;
 
 }
