@@ -39,25 +39,23 @@
                 </button>
             </div>
             <div></div>
-            <div>필터</div>
-            <div>
-                <select name="" id="">
-                        <option value=""></option>
-                    </select>
-                </div>
+            <div></div>
+            <div></div>
                 <div>
-                    <form class="search-box" method="get">
+                    <form action="" class="search-box" onsubmit="return submitSearchForm();">
                 
-                    <select name="" id="trip-filter">
-                        <option value="">전체</option>
-                        <option value="">내용</option>
-                        <option value="">제목</option>
-                        <option value="">제목+내용</option>
-                        <option value="">고객사</option>
+                    <select name="searchType" id="trip-filter">
+                        <option value="all">전체</option>
+                        <option value="content">내용</option>
+                        <option value="title">제목</option>
+                        <option value="writerName">작성자</option>
+                        <option value="no">번호</option>
+                        <option value="client">고객사</option>
                     </select>
-                    
-                    <input type="text" name="" placeholder="검색" id="searchTag">
-                    <i class="fas fa-search"></i>
+                    <div id="search-boc">
+                        <input type="text" name="searchValue" placeholder="검색" id="searchTag">
+                        <i class="fas fa-search"></i>
+                    </div>
                     </form>
                 </div>
                 
@@ -92,16 +90,7 @@
             </div>
             <div class="bottom-line"></div>
             <div class="page">
-                <!-- 
-                <span><a href="#!"><i class="fas fa-angle-double-left fa-lg" style="color: #174880;"></i></a></span>
-                <span><a href="#!"><i class="fas fa-caret-left fa-lg" style="color: #174880;"></i></a></span>
-                <span><a href="#!">1</a></span>
-                <span><a href="#!">2</a></span>
-                <span><a href="#!">3</a></span>
-                <span><a href="#!">4</a></span>
-                <span><a href="#!">5</a></span>
-                <span><a href="#!"><i class="fas fa-caret-right fa-lg" style="color: #174880;"></i></a></span>
-                <span><a href="#!"><i class="fas fa-angle-double-right fa-lg" style="color: #174880;"></i></a></span> -->
+                
             </div>
         </div>
             

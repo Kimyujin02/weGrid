@@ -29,11 +29,15 @@ public class TripService {
 
     }
 
-    public List<TripVo> getTripVoList(PageVo pvo) {
-        return mapper.getTripVoList(pvo);
+    public List<TripVo> getTripVoList(PageVo pvo, String searchType, String searchValue) {
+        return mapper.getTripVoList(pvo , searchType , searchValue);
     }
 
-    public int getTripCnt() {
-        return mapper.getTripCnt();
+    public int getTripCnt(String searchType, String searchValue) {
+        return mapper.getTripCnt( searchType , searchValue );
+    }
+
+    public TripVo detail(String tno) {
+        return mapper.detail(tno);
     }
 }

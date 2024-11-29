@@ -142,7 +142,7 @@ function paintPageArea(pvo){
 
 
 
-function loadTripList(){
+function loadTripList(searchType , searchValue){
     const tbodyTag = document.querySelector("#table>tbody");
 
     const url = new URL(location);
@@ -153,10 +153,10 @@ function loadTripList(){
     $.ajax({
         
         url : `/trip/list/data?pno=${pno}` ,
-        // data : {
-        //     searchType ,
-        //     searchValue ,
-        // },
+        data : {
+            searchType ,
+            searchValue ,
+        },
        
         success : function(m){
             const tripVoList = m.a;
@@ -219,3 +219,20 @@ tbodyTag.addEventListener("click" , function(evt){
     location.href=`/trip/detail?tno=${no}`;
 });
 
+function submitSearchForm(){
+    
+    const searchType = document.querySelector("select[name=searchType]").value;
+    const searchValue = document.querySelector("input[name=searchValue]").value;
+
+    // let searchValue1 = "";
+    // if(searchType == "title"){
+    //     searchValue = titleTagValue;
+    // }else{ 
+    //     searchValue = categoryTagValue;
+    // }
+
+
+    loadBoardList(searchType , searchValue);
+
+    return false; // 기본 이벤트 막을 수 있음
+}

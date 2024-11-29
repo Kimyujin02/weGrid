@@ -42,11 +42,11 @@
 }
 #s-area > div:nth-child(1){
     display: grid;
-    grid-template: 1fr / 2fr 1fr 1fr ;
+    grid-template: 1fr / 1fr 1fr 1fr 1fr ;
 }
 #s-area > div:nth-child(2){
     display: grid;
-    grid-template: 1fr / 2fr 1fr 1fr ;
+    grid-template: 1fr / 1fr 1fr 1fr 1fr ;
 }
 #t-area{
     display: grid;

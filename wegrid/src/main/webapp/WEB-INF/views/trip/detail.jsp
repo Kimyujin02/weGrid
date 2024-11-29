@@ -28,37 +28,39 @@
                 <div></div>
                 <div>
                     <div>출장 상세 내용</div>
-                    <div>내용~~~~~~~~</div>
+                    <div>${tripVo.content}</div>
                     <div></div>
                 </div>
                 <div></div>
                 <div>
                     <div id="f-area">
                         <div class="centerplease">
-                            <div >작성자</div>
+                            <div >출장번호</div>
                             <div>제목</div>
                             <div>항목</div>
                             <div>고객사</div>
                         </div>
                         <div class="centerplease-second">
-                            <div>홍길동</div>
-                            <div>출장가요</div>
-                            <div>기술지원</div>
-                            <div>성삼전자</div>
+                            <div>${tripVo.no}</div>
+                            <div>${tripVo.title}</div>
+                            <div>${tripVo.typeName}</div>
+                            <div>${tripVo.client}</div>
                         </div>
                         <div></div>
                     </div>
                     <div></div>
                     <div id="s-area">
                         <div class="centerplease">
+                            <div>작성자</div>
                             <div>출장지</div>
                             <div>시작일</div>
                             <div>출발일</div>
                         </div>
                         <div class="centerplease-second">
-                            <div>서울특별시등촌동</div>
-                            <div>2024-11-26</div>
-                            <div>2024-11-27</div>
+                            <div>${tripVo.writerName}</div>
+                            <div>${tripVo.destination}</div>
+                            <div>${tripVo.startDate}</div>
+                            <div>${tripVo.endDate}</div>
                         </div>
                         <div></div>
                     </div>
@@ -78,7 +80,10 @@
                     <div id="q-area">
                         <div><button type="button" 
                             class="btn btn-primary" 
-                            id="preBtn" 
+                            id="preBtn"
+                            onclick="prePage(){
+                                 location.href=`/trip/detail?tno=${tripVo.no}`
+                            };" 
                             >이전항목
                         </button></div>
                         <div><button type="button" 
