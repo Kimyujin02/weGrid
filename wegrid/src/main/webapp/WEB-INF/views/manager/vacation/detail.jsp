@@ -8,11 +8,10 @@
 <title>WEGRID</title>
 
 <link rel="stylesheet" href="/css/common/main.css">
-<link rel="stylesheet" href="/css/vacation/enroll.css">
+<link rel="stylesheet" href="/css/manager/vacation/detail.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script defer src="/js/common/main.js"></script>
-<script src="/js/trip/list.js"></script>
 
 </head>
 <body>
@@ -38,7 +37,7 @@
                             <th>등록 가능 잔여 휴가</th>
                         </tr>
                     </thead>
-              
+
                     <tbody >
                         <tr class="list-middle">
                             <!-- tbody안쪽은 js사용해서 동적으로 채워줌   -->
@@ -54,7 +53,7 @@
                     </tbody>
                 </table>
                 <div class="bottom-line"></div>
-                
+
 
                 <table class="table">
                     <thead class="list-top">
@@ -76,7 +75,7 @@
                             <th>기타 연차</th>
                         </tr>
                     </thead>
-              
+
                     <tbody >
                         <tr class="list-middle">
                             <!-- tbody안쪽은 js사용해서 동적으로 채워줌   -->
@@ -99,9 +98,8 @@
                     </tbody>
                 </table>
                 <div class="bottom-line"></div>
-            </div>
 
-            <button class="register-btn" onclick="openTripModal();">휴가 등록하기</button>
+            </div>
 
             <h1 class="section-title">휴가 사용내역</h1>
             <div class="history-controls">
@@ -131,7 +129,7 @@
                             <th>수정 및 삭제</th>
                         </tr>
                     </thead>
-              
+
                     <tbody >
                         <tr class="list-middle">
                             <!-- tbody안쪽은 js사용해서 동적으로 채워줌   -->
@@ -142,7 +140,7 @@
                             <td>휴가라는 내용임</td>
                             <td>연차</td>
                             <td>4</td>
-                            <td><button class="edit" onclick="openTripModal();">수정</button> <button class="delete">삭제</button></td>
+                            <td><button class="edit">수정</button> <button class="delete">삭제</button></td>
                         </tr>
                         <tr class="list-middle">
                             <td>영업지원1팀</td>
@@ -152,7 +150,7 @@
                             <td>휴가라는 내용임</td>
                             <td>연차</td>
                             <td>4</td>
-                            <td><button class="edit" onclick="openTripModal();">수정</button> <button class="delete">삭제</button></td>
+                            <td><button class="edit">수정</button> <button class="delete">삭제</button></td>
                         </tr>
                         <tr class="list-middle">
                             <td>영업지원1팀</td>
@@ -162,7 +160,7 @@
                             <td>휴가라는 내용임</td>
                             <td>연차</td>
                             <td>4</td>
-                            <td><button class="edit" onclick="openTripModal();">수정</button> <button class="delete">삭제</button></td>
+                            <td><button class="edit">수정</button> <button class="delete">삭제</button></td>
                         </tr>
                         <tr class="list-middle">
                             <td>영업지원1팀</td>
@@ -172,7 +170,7 @@
                             <td>휴가라는 내용임</td>
                             <td>연차</td>
                             <td>4</td>
-                            <td><button class="edit" onclick="openTripModal();">수정</button> <button class="delete">삭제</button></td>
+                            <td><button class="edit">수정</button> <button class="delete">삭제</button></td>
                         </tr>
                         <tr class="list-middle">
                             <td>영업지원1팀</td>
@@ -182,7 +180,7 @@
                             <td>휴가라는 내용임</td>
                             <td>연차</td>
                             <td>4</td>
-                            <td><button class="edit" onclick="openTripModal();">수정</button> <button class="delete">삭제</button></td>
+                            <td><button class="edit">수정</button> <button class="delete">삭제</button></td>
                         </tr>
                         <tr class="list-middle">
                             <td>영업지원1팀</td>
@@ -192,7 +190,7 @@
                             <td>휴가라는 내용임</td>
                             <td>연차</td>
                             <td>4</td>
-                            <td><button class="edit" onclick="openTripModal();">수정</button> <button class="delete">삭제</button></td>
+                            <td><button class="edit">수정</button> <button class="delete">삭제</button></td>
                         </tr>
                         <tr class="list-middle">
                             <td>영업지원1팀</td>
@@ -202,7 +200,7 @@
                             <td>휴가라는 내용임</td>
                             <td>연차</td>
                             <td>4</td>
-                            <td><button class="edit" onclick="openTripModal();">수정</button> <button class="delete">삭제</button></td>
+                            <td><button class="edit">수정</button> <button class="delete">삭제</button></td>
                         </tr>
                         <tr class="list-middle">
                             <td>영업지원1팀</td>
@@ -212,7 +210,7 @@
                             <td>휴가라는 내용임</td>
                             <td>연차</td>
                             <td>4</td>
-                            <td><button class="edit" onclick="openTripModal();">수정</button> <button class="delete">삭제</button></td>
+                            <td><button class="edit">수정</button> <button class="delete">삭제</button></td>
                         </tr>
                         <tr class="list-middle">
                             <td>영업지원1팀</td>
@@ -222,7 +220,7 @@
                             <td>휴가라는 내용임</td>
                             <td>연차</td>
                             <td>4</td>
-                            <td><button class="edit" onclick="openTripModal();">수정</button> <button class="delete">삭제</button></td>
+                            <td><button class="edit">수정</button> <button class="delete">삭제</button></td>
                         </tr>
                         <tr class="list-middle">
                             <td>영업지원1팀</td>
@@ -232,7 +230,7 @@
                             <td>휴가라는 내용임</td>
                             <td>연차</td>
                             <td>4</td>
-                            <td><button class="edit" onclick="openTripModal();">수정</button> <button class="delete">삭제</button></td>
+                            <td><button class="edit">수정</button> <button class="delete">삭제</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -252,50 +250,6 @@
                 </div>
 
             </div>
-
-            <!-- 모달 -->
-                  <div id="tripModal" class="tripModal">
-                    <div class="tripModal-content">
-                        <div class="tripModal-header">
-                            <h2>출장등록</h2>
-                            <button class="close-tripModal" onclick="closeTripModal()">×</button>
-                        </div>
-                        <div class="tripModal-body">
-                            <!-- 왼쪽 섹션 -->
-                            <div class="tripModal-left">
-                                <div class="form-tripModal">
-                                    <label>기간 설정</label>
-                                    <input type="date"> ~ <input type="date">
-                                </div>
-                                <div class="form-tripModal">
-                                    <label>항목태그</label>
-                                    <div class="checkbox-group">
-                                        <label><input type="checkbox"> 기술지원</label>
-                                        <label><input type="checkbox"> 프로젝트</label>
-                                        <label><input type="checkbox"> 교육</label>
-                                        <label><input type="checkbox"> 영업</label>
-                                        <label><input type="checkbox"> 유지보수</label>
-                                        <label><input type="checkbox"> 기타</label>
-                                    </div>
-                                    <input type="text" placeholder="기타 내용">
-                                </div>
-                            </div>
-                            <!-- 오른쪽 섹션 -->
-                            <div class="tripModal-right">
-                                <div class="form-tripModal">
-                                    <label>휴가 사유</label>
-                                    <br>
-                                    <input type="text" placeholder="사유 입력">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tripModal-footer">
-                            <button class="submit-btn">등록</button>
-                            <button class="submit-btn">수정</button>
-                        </div>
-                    </div><!-- 모달 -->
-
-
         </div>
     </main>
 

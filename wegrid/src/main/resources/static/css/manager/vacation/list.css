@@ -30,19 +30,18 @@ main {
 }
 
 .section-title {
-display: flex;
-font-size: 1.8rem;
-font-weight: 450;
-color: #174880;
-margin-bottom: 10px;
-width: 1460px;
-border-bottom: 1px solid #174880;
+    display: flex;
+    font-size: 1.8rem;
+    font-weight: 450;
+    color: #174880;
+    margin-bottom: 20px;
+    width: 1460px;
+    border-bottom: 1px solid #174880;
 }
 
 .main-head {
     border-radius: 5px;
     width: 1460px;
-    height: 150px;
     margin-top: 0px;
     font-family: Arial, sans-serif;
     display: flex;
@@ -52,7 +51,7 @@ border-bottom: 1px solid #174880;
 .head-top{
     display: flex;
     width: 100%;
-    height: 100px;
+    height: 80px;
     margin: 0;
     padding: 0;
     border: 0;
@@ -81,23 +80,19 @@ border-bottom: 1px solid #174880;
 }
 
 
-.register-btn {
-    background-color: #2661A5;
-    width: 200px;
-    height: 50px;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    position: absolute;
-    left: 80px;
-    font-size: 14px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+
+label {
+    display: flex !important;
+    padding-top: 4px;
 }
 
-
+input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    margin-left: 10px;
+    margin-right: 20px;
+}
 
 .history-controls {
     display: flex;
@@ -126,11 +121,12 @@ cursor: pointer;
 
 .filter-controls {
     display: flex;
-      gap: 10px;
-      justify-content: right;
-      justify-content: flex-end;
-      position: absolute;
-      right: 80px;
+    gap: 10px;
+    justify-content: right;
+    justify-content: flex-end;
+    position: absolute;
+    right: 80px;
+    height: 30px;
 }
 
 .filter-controls select, .filter-controls input {
@@ -165,20 +161,24 @@ background-color: #174880;
 color: white;
 }
 
-
-
-
+.edit{
+padding: 0px 5px 1px 5px;
+background-color: #2661A5;
+color: white;
+border-radius: 15%;
+border: 0;
+}
 
 
 .table{
     margin: auto !important;
-    height: auto !important;
+    height: 400px !important;
     width: 1340px !important;
     border-radius: 5px !important;
     border-collapse: collapse !important;
     border-top: none !important;
     text-align: center !important;
-    margin-top: 30px !important;
+    margin-top: 18px !important;
 }
 
 .table tr{
@@ -192,7 +192,7 @@ color: white;
 }
 .table tr td{
     height: 12px !important;
-    padding: 0px !important;
+    padding: 2px !important;
     margin: 0px !important;
     border: 0px !important;
 }
@@ -204,10 +204,6 @@ color: white;
     font-size: 14px !important;
     background-color: rgba(23, 72, 128, 1) !important;
     color: white !important;
-}
-
-.title{
-width: 700px;
 }
 
 .body{
@@ -229,7 +225,7 @@ display: inline-block;
 text-decoration: none;
 color: rgba(23, 72, 128, 1);
 margin: 0 10px; /* 링크 간 간격 조정 */
-font-size: 16px;
+font-size: 20px;
 font-weight: bold;
 }
 
