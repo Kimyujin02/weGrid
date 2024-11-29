@@ -49,7 +49,7 @@ main {
     background-color: gray;
 }
 
-.board-detail {
+.notice-detail {
     display: flex;
     width: 1080px;
     height: 700px;
@@ -87,7 +87,17 @@ main {
     border-bottom: 1px solid #e5e5e5; /* 구분선 추가 */
 }
 
-.shortcut-title {
+.shortcut-title1 {
+    position: absolute;
+    width: 74px;
+    height: 20px;
+    text-align: left;
+    font-size: 20px;
+    color: red;
+}
+
+
+.shortcut-title2 {
     height: 20px;
     text-align: center;
     font-size: 20px;
@@ -117,7 +127,7 @@ main {
     padding: 5px 10px;
 }
 
-.user-info, .board-info {
+.user-info, .notice-info {
     height: 24px;
     width: 289px;
     display: flex;
@@ -125,7 +135,7 @@ main {
     margin-left: 10px;
 }
 
-.user-info > div, .board-info > div {
+.user-info > div, .notice-info > div {
     height: 20px;
     display: flex;
     flex-direction: row;
@@ -133,7 +143,7 @@ main {
     width: 261px;
 }
 
-.board-btns {
+.notice-btns {
     display: flex;
     width: 1080px;
     height: 700px;

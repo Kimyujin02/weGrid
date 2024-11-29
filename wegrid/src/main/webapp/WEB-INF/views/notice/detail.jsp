@@ -8,7 +8,7 @@
 <title>WEGRID</title>
 
 <link rel="stylesheet" href="/css/common/main.css">
-<link rel="stylesheet" href="/css/board/detail.css">
+<link rel="stylesheet" href="/css/notice/detail.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -26,7 +26,7 @@
 
             <div></div>
 
-            <div class="board-detail">
+            <div class="notice-detail">
                 <div class="content">
 
                     <div class="content-btns">
@@ -35,7 +35,10 @@
                     </div>
 
                     <div class="content-shortcut">
-                        <div><h1 class="shortcut-title">제목~~~~~</h1></div>
+                        <div>
+                            <h1 class="shortcut-title1">공지사항</h1>
+                            <h1 class="shortcut-title2">제목~~~~~</h1>
+                        </div>
 
                         <div class="shortcut-user">
                             <div class="user-propic"></div> <!-- 프로필 사진 -->
@@ -45,7 +48,7 @@
                                     <div>홍길동</div>
                                     <div>영업지원1팀</div>
                                 </div>
-                                <div class="board-info">
+                                <div class="notice-info">
                                     <div>2024-11-27-16:13:56</div>
                                     <div>조회수 : 1</div>
                                 </div>

@@ -8,7 +8,7 @@
 <title>WEGRID</title>
 
 <link rel="stylesheet" href="/css/common/main.css">
-<link rel="stylesheet" href="/css/board/detail.css">
+<link rel="stylesheet" href="/css/manager/board/detail.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -30,7 +30,6 @@
                 <div class="content">
 
                     <div class="content-btns">
-                        <button class="btn-edit">수정하기</button>
                         <button class="btn-delete">삭제하기</button>
                     </div>
 
