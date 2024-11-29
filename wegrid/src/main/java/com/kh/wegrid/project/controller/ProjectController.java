@@ -1,12 +1,23 @@
 package com.kh.wegrid.project.controller;
 
+import com.kh.wegrid.project.service.ProjectService;
+import com.kh.wegrid.project.vo.ProjectVo;
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("project")
+@RequiredArgsConstructor
+@Slf4j
 public class ProjectController {
+
+    private final ProjectService service;
 
     //프로젝트 메인 화면(카드형식)
     @GetMapping("card")
@@ -24,6 +35,21 @@ public class ProjectController {
     @GetMapping("create")
     public String create(){
         return "project/create";
+    }
+
+    // 신규 프로젝트 생성 호출(요청처리)
+    @PostMapping("create")
+    public String create( ProjectVo vo){
+        System.out.println("vo = " + vo);
+       // 서비스 호출
+        int result = service.create(vo);
+
+        // 결과 처리
+        if(result > 0){
+            return "redirect:/project/card";
+        }else{
+            return "redirct:/error";
+        }
     }
 
     //프로젝트 정보 수정 화면

@@ -35,20 +35,24 @@
 }
 
 .list{
-    display: grid;
-    grid-template-rows: 1fr 10fr;
-    box-shadow: 0px 0px 10px rgba(0.3, 0.3, 0.3, 0.3);
-    width: 100%;
-    margin: 0 auto;
-    height: auto;
-    border-radius: 8px;
-    text-align: center;
-    background-color: white;
+        /* display: flex
+; */
+grid-template-rows: 1fr 10fr;
+box-shadow: 0px 0px 10px rgba(0.3, 0.3, 0.3, 0.3);
+width: 100%;
+margin: 0 auto;
+height: auto;
+border-radius: 8px;
+text-align: center;
+background-color: white;
 }
 
 .list-header{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    justify-content: end;
+    margin-right: 34px;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 
 
@@ -198,6 +202,12 @@
 /* 준비 */
 .status-label.prepare{
     background-color: #4E83EB; 
+    width: 80px;
+    height: 25px;
+    margin: auto;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
 }
 
 /* 진행 */
@@ -206,6 +216,7 @@
     width: 80px;
     height: 25px;
     margin: auto;
+    border-radius: 10px;
     color: white;
     font-weight: bold;
 }
@@ -213,11 +224,23 @@
 /* 완료 */
 .status-label.complete {
     background-color: #12C557; 
+    width: 80px;
+    height: 25px;
+    margin: auto;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
 }
 
 /* 철회 */
 .status-label.cancel {
     background-color: #a625e2;
+    width: 80px;
+    height: 25px;
+    margin: auto;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
 }
 
 /* 
@@ -279,7 +302,7 @@
 }
 
 /* 
--------------- 일정버튼 / 인력 관리 --------------
+-------------- 일정 --------------
 */
 /* 일정 등록 버튼 */
 .add-btn{
@@ -359,7 +382,9 @@ hr {
 }
 
 
-/* 첨부파일 스타일 */
+/* 
+-------------- 첨부파일 --------------
+*/
 :root {
     --bgColor: #ffffff; /* 배경색 */
     --borderColor: #cccccc; /* 외곽선 색 */
@@ -371,7 +396,7 @@ hr {
 
 .attachments-container {
     display: grid;
-    width: 1135px;
+    width: 1140px;
     height: 203px;
     margin: 10px auto;
     padding: 16px 24px;
@@ -385,7 +410,7 @@ hr {
     font-weight: bold;
     color: var(--primaryColor);
 }
-
+   
 .line-divider {
     height: 1px;
     background-color: var(--primaryColor);

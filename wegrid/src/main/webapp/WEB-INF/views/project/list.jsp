@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="/css/project/list.css">
 
 <script defer src="/js/common/main.js"></script>
+<script defer src="/js/project/list.js"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css" />
 
@@ -27,12 +28,8 @@
                 <h2 class="sub-title">프로젝트 리스트</h2>
 
                 <div class="table-controls">
-                    <button type="button" class="btn btn-primary"  id="approvalBtn" >등록</button>
-                    <div class="date-area">
-                        <button class="arrow-btn">&lt;</button>
-                        <span class="date">2024.10.18</span>
-                        <button class="arrow-btn">&gt;</button>
-                    </div>
+                    <button type="button" onclick="location.href='/project/create'" class="btn btn-primary"  id="approvalBtn" >등록</button>
+                
                   
                     <div class="filter-controls">
                         <select>
