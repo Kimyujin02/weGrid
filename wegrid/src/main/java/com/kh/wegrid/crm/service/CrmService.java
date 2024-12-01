@@ -31,7 +31,11 @@ public class CrmService {
         return mapper.getClientStatusVoList();
     }
 
-    public List<ClientVo> getClientVoList(String searchType, String searchValue) {
-        return mapper.getClientVoList(searchType, searchValue);
+    public List<ClientVo> getClientVoListData(String searchType, String searchValue) {
+        return mapper.getClientVoListData(searchType, searchValue);
+    }
+
+    public int enroll(ClientVo vo) {
+        return mapper.enroll(vo);
     }
 }

@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     
-                    <form class="search-box" action="/crm/list">
+                    <form class="search-box" action="/crm/list" onsubmit="return submitSearchForm();">
 
                         <select id="searchType" name="searchType">
                             <option value="integration">통합</option>

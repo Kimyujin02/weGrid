@@ -18,5 +18,13 @@ public class ClientVo {
     private String startDate;
     private String managerName;
     private String managerPhone;
+    private String managerEmail;
+    private String roadAddress;   // 도로명 주소
+    private String detailAddress; // 상세 주소
+
+    // 결합된 주소 반환 메서드
+    public String getAddress() {
+        return roadAddress + " " + detailAddress;
+    }
 
 }

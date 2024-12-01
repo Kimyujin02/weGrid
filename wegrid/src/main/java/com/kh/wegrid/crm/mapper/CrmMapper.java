@@ -3,6 +3,7 @@ package com.kh.wegrid.crm.mapper;
 import com.kh.wegrid.crm.vo.ClientRankVo;
 import com.kh.wegrid.crm.vo.ClientStatusVo;
 import com.kh.wegrid.crm.vo.ClientVo;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -41,6 +42,17 @@ public interface CrmMapper {
             """)
     List<ClientRankVo> getClientRankVoList();
 
+//    @Select("""
+//            SELECT
+//                C.RANK_CODE
+//                , CR.NAME
+//            FROM
+//                CLIENT C
+//                LEFT JOIN CLIENT_RANK CR ON ( C.RANK_CODE = CR.NO )
+//            ORDER BY C.RANK_CODE ASC
+//            """)
+//    List<ClientRankVo> getClientRankVoList();
+
     @Select("""
             SELECT
                 NO
@@ -50,5 +62,31 @@ public interface CrmMapper {
             """)
     List<ClientStatusVo> getClientStatusVoList();
 
-    List<ClientVo> getClientVoList(String searchType, String searchValue);
+    List<ClientVo> getClientVoListData(String searchType, String searchValue);
+
+    @Insert("""
+            INSERT INTO CLIENT
+            (
+                NO
+                , RANK_CODE
+                , NAME
+                , ADDRESS
+                , PRESIDENT_NAME
+                , PRESIDENT_PHONE
+                , PRESIDENT_EMAIL
+                , START_DATE
+            )
+            VALUES
+            (
+                SEQ_CLIENT.NEXTVAL
+                , #{rankCode}
+                , #{name}
+                , #{address}
+                , #{presidentName}
+                , #{presidentPhone}
+                , #{presidentEmail}
+                , SYSDATE
+            )
+            """)
+    int enroll(ClientVo vo);
 }
