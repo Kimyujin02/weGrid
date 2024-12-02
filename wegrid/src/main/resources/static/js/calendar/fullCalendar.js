@@ -1,9 +1,62 @@
+
+function loadEvents(calcDate){
+  console.log("이벤트 로드 시작");
+  
+  const typeInfo = JSON.parse(localStorage.getItem("calendar-type-info"));
+
+  for(let i = 0; i<3; i++){
+    const itemName = calcDate+"_"+typeInfo[i].no;
+
+    if(localStorage.getItem(itemName) != null){
+      if(mainCalendar.getEventSourceById(itemName) == null){
+        mainCalendar.addEventSource( JSON.parse(localStorage.getItem(itemName)));
+      }
+      
+      if(i != 2){
+        continue;
+      }
+      else {
+        return "done";
+      }
+
+    }
+
+    $.ajax({
+        url: "/calendar/load",
+        async : false,
+        data: {
+            date:calcDate,
+            typeNo:typeInfo[i].no
+        },
+        success : function(getData){
+            localStorage.setItem(itemName, JSON.stringify(getData));
+            mainCalendar.addEventSource(JSON.parse(localStorage.getItem(itemName)));
+        },
+        error : function(){
+            alert("캘린더 조회 실패");
+            return "fail";
+        }      
+        
+    })   
+
+  }
+
+}
+
 // fullCalendar 로 달력 생성
-function loadCalendar(date, no) {
+let mainCalendar = "";
+function loadCalendar(nowDate) {
+  
+  console.log("로드 시작");
+
+  const typeInfo = JSON.parse(localStorage.getItem("calendar-type-info"));
+  if(typeInfo == null){
+    getTypeInfo();
+  }
 
   const calendarEl = document.querySelector("#calendar");
 
-  const mainCalendar = new FullCalendar.Calendar(calendarEl, {
+  mainCalendar = new FullCalendar.Calendar(calendarEl, {
     // themeSystem: 'bootstrap5',
     customButtons: {
       writeBtn: {
@@ -16,32 +69,32 @@ function loadCalendar(date, no) {
       customPrevY: { // 이전 연도로 이동
         icon: 'fc-icon-chevrons-left',
         click: function (evt) {
-          console.log(evt);
-          calculateDate(mainCalendar.getDate(),"-y");
+          const calcDate = calculateDate(mainCalendar.getDate(),"-y");
+          loadEvents(calcDate);
           mainCalendar.prevYear();
         }
       },
       customPrev: { // 이전 달로 이동
         icon: 'fc-icon-chevron-left',
         click: function (evt) {
-          console.log(evt);
-          calculateDate(mainCalendar.getDate(),"-m");
+          const calcDate = calculateDate(mainCalendar.getDate(),"-m");
+          loadEvents(calcDate);
           mainCalendar.prev();
         }
       },
       customNext: { // 다음 월로 이동
         icon: 'fc-icon-chevron-right',
         click: function(evt) {
-          console.log(evt);
-          calculateDate(mainCalendar.getDate(),"+m");
+          const calcDate = calculateDate(mainCalendar.getDate(),"+m");
+          loadEvents(calcDate);
           mainCalendar.next();
         }
       },
       customNextY: { // 다음 연도로 이동
         icon: 'fc-icon-chevrons-right',
         click: function(evt) {
-          console.log(evt);
-          calculateDate(mainCalendar.getDate(),"+y");
+          const calcDate = calculateDate(mainCalendar.getDate(),"+y");
+          loadEvents(calcDate);
           mainCalendar.nextYear();
         }
       }
@@ -54,7 +107,7 @@ function loadCalendar(date, no) {
     initialView: 'dayGridMonth',
     // editable: true,
     editable: false,
-    eventLimit: true,
+    // eventLimit: true,
     dayMaxEvents: true,
     timeZone: 'local',
     locale: 'ko',
@@ -66,73 +119,15 @@ function loadCalendar(date, no) {
       console.log(evt);
       // detail();
     },
-    eventSource:[
-      {
-        events: [
-         
-        ],
-        color: "#ABE1FF",
-        text: "#FFFFFF"
-      },
-      {
-        events: [
-          {
-            title: 'Business Lunch',
-            start: '2024-11-03T13:00:00',
-            constraint: 'businessHours'
-          },
-          {
-            title: 'Meeting',
-            start: '2024-11-13T11:00:00',
-            constraint: 'availableForMeeting', // defined below
-          },
-          {
-            title: 'Conference',
-            start: '2024-11-18',
-            end: '2024-11-20'
-          },
-          {
-            title: 'Party',
-            start: '2024-11-29T20:00:00'
-          },
-    
-          // areas where "Meeting" must be dropped
-          {
-            groupId: 'availableForMeeting',
-            start: '2024-10-11T10:00:00',
-            end: '2024-10-11T16:00:00',
-            rendering: 'background'
-          },
-          {
-            groupId: 'availableForMeeting',
-            start: '2024-10-13T10:00:00',
-            end: '2024-10-13T16:00:00',
-            rendering: 'background'
-          },
-    
-          // red areas where no events can be dropped
-          {
-            start: '2024-11-24',
-            end: '2024-11-28',
-            overlap: false,
-            rendering: 'background',
-            color: '#ff9f89'
-          },
-          {
-            start: '2024-12-06',
-            end: '2024-12-08',
-            overlap: false,
-            rendering: 'background',
-            color: '#ff9f89'
-          }
-        ]
-      }
-    
+    eventSources:[
+     
     ]
-   
-  })
 
+  })
+  
   // 캘린더 생성
-  mainCalendar.render()
+  mainCalendar.render();
+
+  console.log("로드 성공");
 
 }

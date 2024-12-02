@@ -34,10 +34,10 @@
             <div class="filter-box personal-calendar-color selected-calendar" id="personal" value="1">
                 개인
             </div>
-            <div class="filter-box department-calendar-color" id="department" value="2">
+            <div class="filter-box department-calendar-color selected-calendar" id="department" value="2">
                 부서
             </div>
-            <div class="filter-box project-calendar-color" id="project" value="3">
+            <div class="filter-box project-calendar-color selected-calendar" id="project" value="3">
                 프로젝트
             </div>
         </div>

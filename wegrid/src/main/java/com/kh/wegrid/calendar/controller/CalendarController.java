@@ -1,8 +1,11 @@
 package com.kh.wegrid.calendar.controller;
 
 import com.kh.wegrid.calendar.service.CalendarService;
+import com.kh.wegrid.calendar.vo.CalendarTypeVo;
 import com.kh.wegrid.calendar.vo.CalendarVo;
 import com.kh.wegrid.calendar.vo.EventVo;
+import com.kh.wegrid.member.vo.MemberVo;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -29,22 +32,47 @@ public class CalendarController {
     // 캘린더 데이터 불러오기
     @GetMapping("load")
     @ResponseBody
-    public HashMap loadCalendar(int typeNo,String date){
-
+    public HashMap loadCalendar(String date,int typeNo){
+        System.out.println("컨트롤러 시작");
+        System.out.println("date = " + date);
+        System.out.println("typeNo = " + typeNo);
         HashMap map = new HashMap();
 
-        List<EventVo> eventVoList = service.loadEvent(typeNo,date);
+        List<EventVo> eventVoList = service.loadEvent(date,typeNo);
+
         map.put("events",eventVoList);
-        map.put("id","personal");
-        map.put("color","#ABE1FF");
+        map.put("id",date+"_"+typeNo);
+        map.put("className",typeNo+"_schedule");
+        map.put( "textColor", "black");
         System.out.println("eventVoList = " + eventVoList);
 
         return map;
     }
-
+    
+    // 일정 추가
     @PostMapping("write")
-    public void write(CalendarVo vo){
+    @ResponseBody
+    public int write(CalendarVo vo, HttpSession session){
 
-    }
+        // 작성자의 사번 정보 수집
+//        MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
+//        vo.setWriterNo(loginVo.getNo());
+        vo.setWriterNo("1");
 
-}
+        System.out.println("vo = " + vo);
+
+        int result = service.write(vo);
+
+        return result;
+        
+    }//write
+
+
+    // 캘린더 항목 별 정보 조회
+    @GetMapping("getTypeInfo")
+    @ResponseBody
+    public List<CalendarTypeVo> getTypeInfo(){
+        return service.getTypeInfo();
+    }//getTypeInfo
+
+}//class
