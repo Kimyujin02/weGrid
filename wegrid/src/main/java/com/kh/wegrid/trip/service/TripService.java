@@ -2,6 +2,7 @@ package com.kh.wegrid.trip.service;
 
 import com.kh.wegrid.trip.mapper.TripMapper;
 import com.kh.wegrid.trip.vo.TripVo;
+import com.kh.wegrid.trip.vo.typeVo;
 import com.kh.wegrid.util.page.PageVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,5 +40,20 @@ public class TripService {
 
     public TripVo detail(String tno) {
         return mapper.detail(tno);
+    }
+
+    public TripVo edit(TripVo vo) {
+
+        if(mapper.edit(vo) == 1){
+            return mapper.editDetail(vo);
+        }else {
+            throw new IllegalStateException("수정 실패...");
+        }
+
+
+    }
+
+    public List<typeVo> getTypeList() {
+        return mapper.getTypeList();
     }
 }

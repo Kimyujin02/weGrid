@@ -20,6 +20,37 @@
     justify-items: center;
 }
 
+
+#table{
+    margin: 0;
+    /* height: 100%; */
+    /* height: 6.2%; */
+    width: 1340px;
+    border-radius: 5px;
+    border-collapse: collapse;
+    border-top : none;
+    text-align: center;
+}
+#table tr{
+    height: 28px;
+}
+.list-top{
+    border-bottom: 1px solid #d3d3d3 ;
+    height: 35px;
+    font-size: 16px;
+    background-color: rgba(23, 72, 128, 1);
+    color: white;
+}
+
+.body{
+    text-align: center;
+}
+.list-middle{
+    border-bottom: 1px solid gray;
+    font-size: 14px;
+}
+
+
 #approvalBtn{
     color: white;
     background-color: #174880;
@@ -48,15 +79,6 @@
     color: white;
 }
 
-#table{
-    margin: 0;
-    height: 100%;
-    width: 1340px;
-    border-radius: 5px;
-    border-collapse: collapse;
-    border-top : none;
-    text-align: center;
-}
 .list-top{
     border-bottom: 1px solid #d3d3d3 ;
     height: 30px;
@@ -164,5 +186,21 @@ td{
 }
 #approval-status > option > {
     text-align: center; 
+}
+
+#leftPageBtn{
+    color: #174880
+}
+#rightPageBtn{
+    color: #174880
+}
+form {
+   
+    display: contents; /* 자식 요소의 레이아웃을 그대로 유지 */
+}
+
+#table tbody tr:hover{
+    background-color: lightgray;
+    cursor: pointer;
 }
 

@@ -12,19 +12,24 @@ function closeTripModal() {
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
-          
+            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
             var addr = ''; // 주소 변수
             var extraAddr = ''; // 참고항목 변수
 
+            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
             if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
                 addr = data.roadAddress;
             } else { // 사용자가 지번 주소를 선택했을 경우(J)
                 addr = data.jibunAddress;
             }
 
-  
+            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
             if(data.userSelectedType === 'R'){
-             
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
                 if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
                     extraAddr += data.bname;
                 }
@@ -46,6 +51,7 @@ function sample6_execDaumPostcode() {
         }
     }).open();
 }
+
 // 드래그를 위한 변수 선언
 let isDragging = false;
 let startX, startY;
@@ -79,15 +85,6 @@ document.addEventListener("mouseup", () => {
     isDragging = false;
 });
 
-function combineAdress(){
-    const address3 = document.querySelector("#sample6_postcode").value;
-    const address1 = document.querySelector("#sample6_address").value;
-    const address2 = document.querySelector("#sample6_detailAddress").value;
-    const address = address1 +" , "+ address2 +" , "+ address3;
-    const desTag = document.querySelector("#address");
-
-    desTag.setAttribute("value" , address);
-}
 
 document.addEventListener("DOMContentLoaded", function(){
     const today = new Date().toISOString().split("T")[0]; // 현재 날짜

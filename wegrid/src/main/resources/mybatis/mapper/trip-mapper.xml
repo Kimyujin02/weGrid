@@ -12,7 +12,9 @@
             , B.TYPE_NO
             , T.NAME           AS TYPE_NAME
             , E.NAME           AS WRITER_NAME
-            , B.DESTINATION
+            , B.POST_ADDRESS
+            , B.ROAD_ADDRESS
+            , B.DETAIL_ADDRESS
             , B.TITLE
             , B.CONTENT
             , TO_CHAR(B.START_DATE, 'YYYY-MM-DD') AS START_DATE

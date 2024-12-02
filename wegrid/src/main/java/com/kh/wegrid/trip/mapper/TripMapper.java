@@ -1,10 +1,12 @@
 package com.kh.wegrid.trip.mapper;
 
 import com.kh.wegrid.trip.vo.TripVo;
+import com.kh.wegrid.trip.vo.typeVo;
 import com.kh.wegrid.util.page.PageVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -17,7 +19,9 @@ public interface TripMapper {
                 NO
                 , EMP_NO
                 , TYPE_NO
-                , DESTINATION
+                , POST_ADDRESS
+                , ROAD_ADDRESS
+                , DETAIL_ADDRESS
                 , TITLE
                 , CONTENT
                 , START_DATE
@@ -29,7 +33,9 @@ public interface TripMapper {
                 SEQ_BUSINESS_TRIP.NEXTVAL
                 , '1'
                 , #{typeNo}
-                , #{destination}
+                , #{postAddress}
+                , #{roadAddress}
+                , #{detailAddress}
                 , #{title}
                 , #{content}
                 , #{startDate}
@@ -53,7 +59,32 @@ public interface TripMapper {
                 , E.NAME            AS WRITER_NAME
                 , B.TYPE_NO
                 , T.NAME            AS TYPE_NAME
-                , SUBSTR(B.DESTINATION, 1, 2) AS DESTINATION
+                , B.POST_ADDRESS
+                , B.ROAD_ADDRESS
+                , B.DETAIL_ADDRESS
+                , B.TITLE
+                , B.CONTENT
+                , TO_CHAR(B.START_DATE, 'YYYY-MM-DD') AS START_DATE
+                , TO_CHAR(B.END_DATE, 'YYYY-MM-DD')   AS END_DATE
+                , B.CLIENT
+            FROM BUSINESS_TRIP B
+            JOIN EMPLOYEE E ON ( E.NO = B.EMP_NO )
+            JOIN TRIP_TYPE T ON ( T.NO = B.TYPE_NO)
+            WHERE B.NO = #{no}
+            AND B.DEL_YN = 'N'
+            """)
+    TripVo editDetail(TripVo vo);
+
+    @Select("""
+            SELECT
+                B.NO
+                , B.EMP_NO          AS WRITER_NO
+                , E.NAME            AS WRITER_NAME
+                , B.TYPE_NO
+                , T.NAME            AS TYPE_NAME
+                , B.POST_ADDRESS
+                , B.ROAD_ADDRESS
+                , B.DETAIL_ADDRESS
                 , B.TITLE
                 , B.CONTENT
                 , TO_CHAR(B.START_DATE, 'YYYY-MM-DD') AS START_DATE
@@ -66,4 +97,30 @@ public interface TripMapper {
             AND B.DEL_YN = 'N'
             """)
     TripVo detail(String tno);
+
+
+
+    @Update("""
+            UPDATE BUSINESS_TRIP
+            SET
+                 TYPE_NO = #{typeNo}
+                , POST_ADDRESS = #{postAddress}
+                , ROAD_ADDRESS = #{roadAddress}
+                , DETAIL_ADDRESS = #{detailAddress}
+                , TITLE = #{title}
+                , CONTENT = #{content}
+                , START_DATE = #{startDate}
+                , END_DATE = #{endDate}
+                , CLIENT = #{client}
+            WHERE NO = #{no}
+            """)
+    int edit(TripVo vo);
+
+    @Select("""
+            SELECT
+                NO
+                , NAME
+            FROM TRIP_TYPE
+            """)
+    List<typeVo> getTypeList();
 }

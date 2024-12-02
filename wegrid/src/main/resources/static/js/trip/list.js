@@ -90,15 +90,7 @@ document.addEventListener("mouseup", () => {
     isDragging = false;
 });
 
-function combineAdress(){
-    const address3 = document.querySelector("#sample6_postcode").value;
-    const address1 = document.querySelector("#sample6_address").value;
-    const address2 = document.querySelector("#sample6_detailAddress").value;
-    const address = address1 +","+ address2 +","+ address3;
-    const desTag = document.querySelector("#address");
 
-    desTag.setAttribute("value" , address);
-}
 
 function paintPageArea(pvo){
     const pageArea = document.querySelector(".page");
