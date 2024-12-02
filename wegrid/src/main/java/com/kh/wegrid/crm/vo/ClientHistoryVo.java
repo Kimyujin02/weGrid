@@ -8,6 +8,7 @@ public class ClientHistoryVo {
     private String no;
     private String clientNo;
     private String writerNo;
+    private String name;
     private String inquiry;
     private String reply;
     private String enrollDate;
