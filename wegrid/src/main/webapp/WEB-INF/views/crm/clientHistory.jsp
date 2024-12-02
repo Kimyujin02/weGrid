@@ -34,24 +34,22 @@
                 
                 <div class="client-info">
                     <div class="blueTag">고객사 명</div>
-                    <div class="whiteTag">세미 프로젝트</div>
-                    <div class="blueTag">담당자</div>
-                    <div class="whiteTag">홍길동</div>
-                    <div class="blueTag">이메일</div>
-                    <div class="whiteTag">yaho@naver.com</div>
-                    <div class="blueTag">등급</div>
-                    <div class="whiteTag">A</div>
-
-                    <div class="info-line"></div>
-
-                    <div class="blueTag">주소</div>
-                    <div class="whiteTag">서울특별시 강남구 테헤란로 14길 6</div>
+                    <div class="whiteTag">${vo.name}</div>
                     <div class="blueTag">대표</div>
-                    <div class="whiteTag">청길동</div>
+                    <div class="whiteTag">${vo.presidentName}</div>
+                    <div class="blueTag">이메일</div>
+                    <div class="whiteTag">${vo.presidentEmail}</div>
                     <div class="blueTag">대표 번호</div>
-                    <div class="whiteTag">010-1234-5678</div>
+                    <div class="whiteTag">${vo.presidentPhone}</div>
+                    
+                    <div class="info-line"></div>
+                    
+                    <div class="blueTag">주소</div>
+                    <div class="whiteTag" id="addressName">${vo.address}</div>
+                    <div class="blueTag">등급</div>
+                    <div class="whiteTag">${vo.rankName}</div>
                     <div class="blueTag">거래 시작일</div>
-                    <div class="whiteTag">2024-11-28</div>
+                    <div class="whiteTag">${vo.startDate.split(" ")[0]}</div>
 
                     <div class="info-line"></div>
                 </div>
@@ -64,7 +62,7 @@
 
                 <div class="tab_filter_search">
                     <div></div>
-                    <div class="prjTab"><button>프로젝트</button></div>
+                    <div class="prjTab"><button onclick="location.href='/crm/detail?cno=${sessionScope.cno}'">프로젝트</button></div>
                     <div class="hisTab"><button>히스토리</button></div>
                     <div></div>
                     <div class="query">
@@ -73,10 +71,12 @@
                         </select>
                     </div>
                     <div></div>
-                    <form class="search-box" method="get">
+                    <form class="search-box" method="post" action="/crm/history">
 
                         <input id="searchInput" type="text" name="" placeholder="검색">
-                        <i class="fas fa-search"></i>
+                        <button type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
                     
                     </form>
                     <div></div>
@@ -99,75 +99,15 @@
                         </thead>
                   
                         <tbody>
-                            <tr class="list-middle">
-                                <!-- tbody안쪽은 js사용해서 동적으로 채워줌   -->
+                            <td>로딩중</td>
+                            <!-- <tr class="list-middle">
                                 <td>5</td>
                                 <td>홍길동</td>
                                 <td>프로그램 강제종료 오류 발생</td>
                                 <td>2024.11.28</td>
                                 <td><button type="button" class="btn btn-primary">수정</button></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td>4</td>
-                                <td>홍길동</td>
-                                <td>프로그램 강제종료 오류 발생</td>
-                                <td>2024.11.27</td>
-                                <td><button type="button" class="btn btn-primary">수정</button></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td>3</td>
-                                <td>홍길동</td>
-                                <td>프로그램 강제종료 오류 발생</td>
-                                <td>2024.05.28</td>
-                                <td><button type="button" class="btn btn-primary">수정</button></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td>2</td>
-                                <td>홍길동</td>
-                                <td>프로그램 메모리 누수</td>
-                                <td>2024.01.28</td>
-                                <td><button type="button" class="btn btn-primary">수정</button></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td>1</td>
-                                <td>홍길동</td>
-                                <td>프로그램 메모리 누수</td>
-                                <td>2023.11.27</td>
-                                <td><button type="button" class="btn btn-primary">수정</button></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            </tr> -->
+                            
                         </tbody>
                         <tfoot>
                             <tr class="list-end">

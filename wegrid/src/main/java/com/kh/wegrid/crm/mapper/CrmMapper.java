@@ -1,8 +1,10 @@
 package com.kh.wegrid.crm.mapper;
 
+import com.kh.wegrid.crm.vo.ClientHistoryVo;
 import com.kh.wegrid.crm.vo.ClientRankVo;
 import com.kh.wegrid.crm.vo.ClientStatusVo;
 import com.kh.wegrid.crm.vo.ClientVo;
+//import com.kh.wegrid.crm.vo.historyVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -89,4 +91,61 @@ public interface CrmMapper {
             )
             """)
     int enroll(ClientVo vo);
+
+    @Select("""
+            SELECT
+                C.NO,
+                C.RANK_CODE,
+                CR.NAME AS RANK_NAME,
+                C.STATUS_NO,
+                CS.NAME AS STATUS_NAME,
+                C.NAME,
+                C.ADDRESS,
+                C.PRESIDENT_NAME,
+                C.PRESIDENT_PHONE,
+                C.PRESIDENT_EMAIL,
+                C.START_DATE,
+                CH.NO AS HISTORY_NO,
+                CH.WRITER_NO,
+                E.NAME AS EMPLOYEE_NAME,
+                CH.ENROLL_DATE AS HIS_ENROLL_DATE,
+                CH.INQUIRY,
+                CH.REPLY,
+                P.NO,
+                P.PROJECT_NAME,
+                P.START_DATE,
+                P.END_DATE,
+                PS.NAME
+            FROM
+                CLIENT C
+                LEFT JOIN CLIENT_RANK CR ON ( C.RANK_CODE = CR.NO )
+                LEFT JOIN CLIENT_STATUS CS ON ( C.STATUS_NO = CS.NO )
+                LEFT JOIN CLIENT_HISTORY CH ON ( C.NO = CH.CLIENT_NO )
+                LEFT JOIN EMPLOYEE E ON ( CH.WRITER_NO = E.NO )
+                LEFT JOIN PROJECT P ON ( C.NO = P.CLIENT_NO )
+                LEFT JOIN PROJECT_STATUS PS ON ( P.CLIENT_NO = PS.NO )
+            WHERE
+                C.NO = #{cno}
+            """)
+    ClientVo getDetail(String cno);
+
+    List<ClientVo> getPrjVoList(String cno, String searchValue);
+
+    @Select("""
+            SELECT
+                CH.NO,
+                CH.CLIENT_NO,
+                CH.WRITER_NO,
+                E.NAME,
+                CH.INQUIRY,
+                CH.REPLY,
+                CH.ENROLL_DATE,
+            FROM
+                CLIENT_HISTORY CH
+                LEFT JOIN EMPLOYEE E ON ( CH.WRITER_NO = E.NO )
+            WHERE
+                CH.CLIENT_NO = #{cno}
+                AND TITLE LIKE CONCAT('%', #{searchValue}, '%')
+            """)
+    List<ClientHistoryVo> getHistoryVoList(String cno, String searchValue);
 }

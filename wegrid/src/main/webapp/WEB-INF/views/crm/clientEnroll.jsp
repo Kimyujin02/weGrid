@@ -46,16 +46,7 @@
                         고객사 &nbsp; <input type="text" name="name">
                     </div>
                     <div class="cinfo_line"></div>
-                    
-                    <!-- <div class="client-address">
-                        <div class="text-address">주소</div>
-                        <div class="adress-input_1">
-                            <input type="text" name="address" id="address" readonly>
-                        </div>
-                        <div></div>
-                        <button type="button" class="btn btn-primary" id="postalCodeBtn">우편번호</button>
-                        <div></div>
-                    </div> -->
+
                     <div class="client-address">
                         <div class="text-address">주소</div>
                         

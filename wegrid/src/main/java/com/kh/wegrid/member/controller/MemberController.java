@@ -48,7 +48,7 @@ public class MemberController {
                     service.updateFailedAttempts(member);
 
                     model.addAttribute("loginFailed", "로그인 시도 횟수를 초과했습니다.");
-                    return "redirect:/member/login";
+                    return "member/login";
                 }
 
                 failedAttempts++;
@@ -57,7 +57,7 @@ public class MemberController {
             }
 
             model.addAttribute("loginFailed", "아이디 또는 비밀번호를 확인하세요.");
-            return "redirect:/member/login";
+            return "member/login";
         }
 
         // 로그인 성공 시 실패 횟수 초기화

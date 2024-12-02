@@ -96,6 +96,12 @@ main {
     font-weight: bold;
 }
 
+#addressName {
+    display: grid;
+    grid-column: span 3;
+    justify-self: center;
+}
+
 .info-line {
     display: grid;
     grid-column: span 8;

@@ -35,21 +35,23 @@
                 <div class="client-info">
                     <div class="blueTag">고객사 명</div>
                     <div class="whiteTag">세미 프로젝트</div>
-                    <div class="blueTag">담당자</div>
-                    <div class="whiteTag">홍길동</div>
-                    <div class="blueTag">이메일</div>
-                    <div class="whiteTag">yaho@naver.com</div>
-                    <div class="blueTag">등급</div>
-                    <div class="whiteTag">A</div>
-
-                    <div class="info-line"></div>
-
-                    <div class="blueTag">주소</div>
-                    <div class="whiteTag">서울특별시 강남구 테헤란로 14길 6</div>
+                    <!-- <div class="blueTag">담당자</div> -->
+                    <!-- <div class="whiteTag">홍길동</div> -->
                     <div class="blueTag">대표</div>
                     <div class="whiteTag">청길동</div>
+                    <div class="blueTag">이메일</div>
+                    <div class="whiteTag">yaho@naver.com</div>
                     <div class="blueTag">대표 번호</div>
                     <div class="whiteTag">010-1234-5678</div>
+                    
+                    <div class="info-line"></div>
+                    
+                    <div class="blueTag">주소</div>
+                    <div class="whiteTag" id="addressName">서울특별시 강남구 테헤란로 14길 6</div>
+                    <!-- <div></div>
+                    <div></div> -->
+                    <div class="blueTag">등급</div>
+                    <div class="whiteTag">A</div>
                     <div class="blueTag">거래 시작일</div>
                     <div class="whiteTag">2024-11-28</div>
 

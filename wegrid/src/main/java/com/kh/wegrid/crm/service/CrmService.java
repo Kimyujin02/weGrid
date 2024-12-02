@@ -1,6 +1,7 @@
 package com.kh.wegrid.crm.service;
 
 import com.kh.wegrid.crm.mapper.CrmMapper;
+import com.kh.wegrid.crm.vo.ClientHistoryVo;
 import com.kh.wegrid.crm.vo.ClientRankVo;
 import com.kh.wegrid.crm.vo.ClientStatusVo;
 import com.kh.wegrid.crm.vo.ClientVo;
@@ -35,7 +36,21 @@ public class CrmService {
         return mapper.getClientVoListData(searchType, searchValue);
     }
 
+    // 상세 조회
+    public ClientVo getDetail(String cno) {
+        return mapper.getDetail(cno);
+    }
+
+    // 상세 조회 (프로젝트 데이터)
+    public List<ClientVo> getPrjVoList(String cno, String searchValue) {
+        return mapper.getPrjVoList(cno, searchValue);
+    }
+
     public int enroll(ClientVo vo) {
         return mapper.enroll(vo);
+    }
+
+    public List<ClientHistoryVo> getHistoryVoList(String cno, String searchValue) {
+        return mapper.getHistoryVoList(cno, searchValue);
     }
 }

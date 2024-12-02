@@ -49,6 +49,11 @@ document.addEventListener("DOMContentLoaded", function () {
         // method : ~~~ ,
         success : function(m){
             const clientVoListData = m;
+            console.log(clientVoListData);
+            if (!Array.isArray(clientVoListData)) {
+              console.error("Received data is not an array.");
+              return;
+          }
             // const pvo = m.b;
             // paintPageArea(pvo);
 
@@ -66,16 +71,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 
                 const tdTag02 = document.createElement('td');
-                tdTag02.innerText = vo.name;
+                tdTag02.className = "linked-name";
                 trTag.appendChild(tdTag02);
-                // tdTag01.innerHTML = `<a href='/board/detail?bno=${vo.no}'>${vo.title}</a>`;
+                tdTag02.innerHTML = `<a href='/crm/detail?cno=${vo.no}'>${vo.name}</a>`;
 
                 const tdTag03 = document.createElement('td');
                 tdTag03.innerText = vo.rankName;
                 trTag.appendChild(tdTag03);
 
                 const tdTag04 = document.createElement('td');
-                tdTag04.innerText = vo.startDate;
+                tdTag04.innerText = vo.startDate.split(" ")[0];
                 trTag.appendChild(tdTag04);
 
                 tbodyTag.appendChild(trTag);

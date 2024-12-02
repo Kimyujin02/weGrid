@@ -13,6 +13,11 @@
 
 </head>
 <body>
+    <script>
+        <c:if test="${not empty loginFailed}">
+            alert("${loginFailed}");
+        </c:if>
+    </script>
 
     <div class="top1"></div>
 
