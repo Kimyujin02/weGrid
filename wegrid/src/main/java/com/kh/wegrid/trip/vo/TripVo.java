@@ -12,7 +12,10 @@ public class TripVo {
     private String writerDeptName;
     private String typeNo;
     private String typeName;
-    private String destination;
+    private String postAddress;
+    private String roadAddress;
+    private String detailAddress;
+    private String firstTwoAddress;
     private String title;
     private String content;
     private String startDate;
@@ -20,8 +23,5 @@ public class TripVo {
     private String client;
     private String clientName;
     private String delYn;
-    private String firstAddress;
-    private String SecondAddress;
-    private String thirdAddress;
 
 }

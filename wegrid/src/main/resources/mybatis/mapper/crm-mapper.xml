@@ -5,7 +5,7 @@
 
 <mapper namespace="com.kh.wegrid.crm.mapper.CrmMapper">
 
-    <select id="getClientVoList">
+    <select id="getClientVoListData">
         SELECT
         C.NO
         , C.RANK_CODE

@@ -308,3 +308,7 @@ form {
    
     display: contents; /* 자식 요소의 레이아웃을 그대로 유지 */
 }
+#gita{
+    visibility: hidden;
+}
+

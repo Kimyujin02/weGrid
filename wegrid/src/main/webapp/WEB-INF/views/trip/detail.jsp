@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="/css/trip/detail.css">
 
 <script defer src="/js/common/main.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script defer src="/js/trip/detail.js"></script>
 
 
@@ -59,7 +60,7 @@
                         </div>
                         <div class="centerplease-second">
                             <div>${tripVo.writerName}</div>
-                            <div>${tripVo.destination}</div>
+                            <div>${tripVo.firstTwoAddress}</div>
                             <div>${tripVo.startDate}</div>
                             <div>${tripVo.endDate}</div>
                         </div>
@@ -127,22 +128,19 @@
                       <div class="form-tripModal">
                           <label>항목태그</label>
                           <div class="radio-group">
-                              <label><input type="radio" name="typeNo" value="1"> 프로젝트</label>
-                              <label><input type="radio" name="typeNo" value="2"> 기술지원</label>
-                              <label><input type="radio" name="typeNo" value="3"> 교육</label>
-                              <label><input type="radio" name="typeNo" value="4"> 영업</label>
-                              <label><input type="radio" name="typeNo" value="5"> 유지보수</label>
-                              <label><input type="radio" name="typeNo" value="6"> 기타</label>
+                            <c:forEach items="${typeVoList}" var="vo">
+                                <label><input type="radio" name="typeNo" value="${vo.no}">${vo.name}</label>
+                            </c:forEach>
                           </div>
-                          <input type="text" placeholder="기타 내용" class="longInput" id="gita">
+                          <input type="text" placeholder="기타 내용" class="longInput" id="gita" name="no" value="${tripVo.no}">
                       </div>
                       <div class="form-tripModal" id="api-div">
                           <label>출장지</label>
-                          <input type="text" id="sample6_postcode" placeholder="우편번호" class="longInput" value="${tripVo.firstAddress}">
-                          <input type="text" id="sample6_address" placeholder="주소" class="longInput" value="${tripVo.secondAddress}">
-                          <input type="text" id="sample6_detailAddress" placeholder="상세주소" class="longInput" value="${tripVo.thirdAddress}">
+                          <input type="text" id="sample6_postcode" placeholder="우편번호" class="longInput" value="${tripVo.postAddress}" readonly="readonly" name="postAddress">
+                          <input type="text" id="sample6_address" placeholder="주소" class="longInput" value="${tripVo.roadAddress}" readonly="readonly" name="roadAddress">
+                          <input type="text" id="sample6_detailAddress" placeholder="상세주소" class="longInput" value="${tripVo.detailAddress}" name="detailAddress">
                           <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="longInput">
-                          <input type="hidden" name="destination" id="address">
+                          <input type="hidden" name="aaaaaaaaaaaa" id="address">
                           
                       </div>
                       
@@ -160,7 +158,7 @@
                   </div>
               </div>
               <div class="tripModal-footer">
-                  <button class="submit-btn" type="submit" onclick="combineAdress();">수정</button>
+                  <button class="submit-btn" type="submit">수정</button>
               </div>
           </div>
       </form>

@@ -2,6 +2,7 @@ package com.kh.wegrid.trip.controller;
 
 import com.kh.wegrid.trip.service.TripService;
 import com.kh.wegrid.trip.vo.TripVo;
+import com.kh.wegrid.trip.vo.typeVo;
 import com.kh.wegrid.util.page.PageVo;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -24,14 +25,16 @@ public class TripController {
     @PostMapping("write")
     public String write(TripVo vo , HttpSession session){
 
-
+        System.out.println("vo = " + vo);
         int result = service.write(vo);
 
         return "redirect:/trip/list";
     }
 
     @GetMapping("list")
-    public void list(){
+    public void list(Model model){
+        List<typeVo> typeVoList = service.getTypeList();
+        model.addAttribute("typeVoList" , typeVoList);
 
     }
 
@@ -51,46 +54,36 @@ public class TripController {
         HashMap map = new HashMap();
         map.put("a" , tripVoList);
         map.put("b" , pvo);
-        System.out.println("searchType = " + searchType);
-        System.out.println("searchValue = " + searchValue);
-        System.out.println("tripVoList = " + tripVoList);
+
+        System.out.println("pvo = " + pvo);
 
         return map;
     }
     @GetMapping("detail")
     public String detail(String tno , Model model){
         TripVo vo = service.detail(tno);
-        System.out.println("vo.getDestination() = " + vo.getDestination());
-        String[] splitAddress = vo.getDestination().split(",");
-        
-        System.out.println("splitAddress = " + splitAddress.length);
-        vo.setFirstAddress(splitAddress[2]);
-        vo.setSecondAddress(splitAddress[0]);
-        vo.setThirdAddress(splitAddress[1]);
+        List<typeVo> typeVoList = service.getTypeList();
+        model.addAttribute("typeVoList" , typeVoList);
+
+        String firstTwoAddress = vo.getRoadAddress().substring(0, 2);
+
+        vo.setFirstTwoAddress(firstTwoAddress);
         model.addAttribute("tripVo" , vo);
         return "trip/detail";
     }
 
-    @GetMapping("edit")
-    public void edit(){}
+
+
+    @PostMapping("edit")
+    public String edit(TripVo vo , Model model){
+
+        TripVo tvo = service.edit(vo);
+        String firstTwoAddress = tvo.getRoadAddress().substring(0, 2);
+        tvo.setFirstTwoAddress(firstTwoAddress);
+        model.addAttribute("tripVo" , tvo);
+
+        return "trip/detail";
+    }
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

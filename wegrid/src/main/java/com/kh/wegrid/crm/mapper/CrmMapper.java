@@ -50,5 +50,5 @@ public interface CrmMapper {
             """)
     List<ClientStatusVo> getClientStatusVoList();
 
-    List<ClientVo> getClientVoList(String searchType, String searchValue);
+    List<ClientVo> getClientVoListData(String searchType, String searchValue);
 }

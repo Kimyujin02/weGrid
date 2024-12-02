@@ -12,7 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script defer src="/js/common/main.js"></script>
-<script src="/js/approval/receiveList.js"></script>
+<script defer src="/js/approval/receiveList.js"></script>
 
 </head>
 <body>
@@ -30,12 +30,12 @@
             </div>
             <div id="menu-box">
                 <div></div>
-                <div id="filterDiv"><select name="filter" id="approval-status">
+                <div id="filterDiv"><select name="filter" id="approval-status" onchange="return submitSearchForm(this);">
                     <option value="">전체</option>
-                    <option value="">대기</option>
-                    <option value="">진행</option>
-                    <option value="">승인</option>
-                    <option value="">반려</option>
+                    <option value="1">대기</option>
+                    <option value="2">진행</option>
+                    <option value="3">승인</option>
+                    <option value="4">반려</option>
                 </select></div>
             </div>
             <div id="table-area">
@@ -59,130 +59,13 @@
                     </thead>
                 
                     <tbody >
-                        <tr class="list-middle">
-                            <td>5</td>
-                            <td>2024/11/26</td>
-                            <td>결재부탁드립니다 진짜급해요제발</td>
-                            <td>홍길동</td>
-                            <td>기안</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>5</td>
-                            <td>2024/11/26</td>
-                            <td>결재부탁드립니다 진짜급해요제발</td>
-                            <td>홍길동</td>
-                            <td>기안</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>5</td>
-                            <td>2024/11/26</td>
-                            <td>결재부탁드립니다 진짜급해요제발</td>
-                            <td>홍길동</td>
-                            <td>기안</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>5</td>
-                            <td>2024/11/26</td>
-                            <td>결재부탁드립니다 진짜급해요제발</td>
-                            <td>홍길동</td>
-                            <td>기안</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>5</td>
-                            <td>2024/11/26</td>
-                            <td>결재부탁드립니다 진짜급해요제발</td>
-                            <td>홍길동</td>
-                            <td>기안</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>5</td>
-                            <td>2024/11/26</td>
-                            <td>결재부탁드립니다 진짜급해요제발</td>
-                            <td>홍길동</td>
-                            <td>기안</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>5</td>
-                            <td>2024/11/26</td>
-                            <td>결재부탁드립니다 진짜급해요제발</td>
-                            <td>홍길동</td>
-                            <td>기안</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>5</td>
-                            <td>2024/11/26</td>
-                            <td>결재부탁드립니다 진짜급해요제발</td>
-                            <td>홍길동</td>
-                            <td>기안</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>5</td>
-                            <td>2024/11/26</td>
-                            <td>결재부탁드립니다 진짜급해요제발</td>
-                            <td>홍길동</td>
-                            <td>기안</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>5</td>
-                            <td>2024/11/26</td>
-                            <td>결재부탁드립니다 진짜급해요제발</td>
-                            <td>홍길동</td>
-                            <td>기안</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>5</td>
-                            <td>2024/11/26</td>
-                            <td>결재부탁드립니다 진짜급해요제발</td>
-                            <td>홍길동</td>
-                            <td>기안</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>5</td>
-                            <td>2024/11/26</td>
-                            <td>결재부탁드립니다 진짜급해요제발</td>
-                            <td>홍길동</td>
-                            <td>기안</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>5</td>
-                            <td>2024/11/26</td>
-                            <td>결재부탁드립니다 진짜급해요제발</td>
-                            <td>홍길동</td>
-                            <td>기안</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>5</td>
-                            <td>2024/11/26</td>
-                            <td>결재부탁드립니다 진짜급해요제발</td>
-                            <td>홍길동</td>
-                            <td>기안</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>5</td>
-                            <td>2024/11/26</td>
-                            <td>결재부탁드립니다 진짜급해요제발</td>
-                            <td>홍길동</td>
-                            <td>기안</td>
-                        </tr>
-
-                        
-
                         
                     </tbody>
                 </table>
             </div>
             <div class="bottom-line"></div>
             <div class="page">
-                <!-- js에서 동적으로 버튼 만들어줌-->
-                <span><a href="#!"><i class="fas fa-angle-double-left fa-lg" style="color: #174880;"></i></a></span>
-                <span><a href="#!"><i class="fas fa-caret-left fa-lg" style="color: #174880;"></i></a></span>
-                <span><a href="#!">1</a></span>
-                <span><a href="#!">2</a></span>
-                <span><a href="#!">3</a></span>
-                <span><a href="#!">4</a></span>
-                <span><a href="#!">5</a></span>
-                <span><a href="#!"><i class="fas fa-caret-right fa-lg" style="color: #174880;"></i></a></span>
-                <span><a href="#!"><i class="fas fa-angle-double-right fa-lg" style="color: #174880;"></i></a></span>
+               
             </div>
         </div>
             
