@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="/css/project/edit.css">
 
 <script defer src="/js/common/main.js"></script>
+<script defer src="/js/project/create.js"></script>
 
 </head>
 <body>
@@ -28,9 +29,9 @@
                     <div class="head-nav">
                         <h2 class="sub-title">프로젝트 수정</h2>
                         <div class="date-range">
-                            <input type="date" name="startDate" style="height: 40px; border-radius: 5px;">
-                            ~ <input type="date" name="endDate" style="height: 40px; border-radius: 5px;">
-                            <button class="date-btn"><i class="fas fa-calendar-alt fa-2x"></i></button>
+                            <input type="date" name="startDate" style="height: 30px; border-radius: 5px;">
+                            ~ <input type="date" name="endDate" style="height: 30px; border-radius: 5px;">
+                            <i class="fas fa-calendar-alt fa-2x"></i>
                         </div>
                     </div>
                     <!-- 여백 공간 -->
@@ -100,19 +101,14 @@
                      <div class="place"></div>
                 </div>
 
-                <!-- 인원 관리 영역 -->
+                <!-- 인원 관리섹션 -->
                 <div class="add-personnel">
-                    <div class="personnel-list">
-                        <button class="add-btn">+</button>
+                    <div class="personnel-list" id="personnelList">
+                        <button class="add-btn" onclick="addOpenModal()">+</button>
                         <p class="plus">인원 추가하기</p>
-                        <div class="person-line1"></div>
-                        <div class="person-line"></div>
-                        <div class="person-line"></div>
-                        <div class="person-line"></div>
-                        <div class="person-line"></div>
+                        <!-- 여기에 동적으로 추가된 사원 정보가 표시됨 -->
                     </div>
                 </div>
-            </div>
 
             <!-- 버튼 섹션 -->
             <div id="section-button">
@@ -122,7 +118,24 @@
            
     </div>
     </main>
-    
+
+     <!-- 사원 검색 모달 -->
+     <div id="searchModal" class="personAddmodal" style="display: none;">
+        <div class="personModal-content">
+            <span class="close-btn" onclick="addCloseModal()">&times;</span>
+            <h4>사원 검색</h4>
+            <input
+                type="text"
+                id="employeeSearch"
+                placeholder="사원명을 입력하세요"
+                oninput="searchEmployee(this.value)"
+            />
+            <ul id="employeeResults"></ul>
+        </div>
+    </div>
+
 </body>
 </html>
+
+
 

@@ -224,20 +224,7 @@
                                             <label for="" class="col-form-label">일정 종류</label>
                                             <div class="type-area">
                                                 <div class="typeBox">
-                                                    <label for="typeNo1">교육</label>
-                                                    <input type="radio" id="typeNo1" name="typeNo" value="1">
-                                                </div>
-                                                <div class="typeBox">
-                                                    <label for="typeNo2">업무</label>
-                                                    <input type="radio" id="typeNo2" name="typeNo" value="2">
-                                                </div>
-                                                <div class="typeBox">
-                                                    <label for="typeNo3">행사</label>
-                                                    <input type="radio" id="typeNo3" name="typeNo" value="3">
-                                                </div>
-                                                <div class="typeBox">
-                                                    <label for="typeNo4">기타</label>
-                                                    <input type="radio" id="typeNo4" name="typeNo" value="4">
+                                                    <label for="typeNo1">회의</label>
                                                 </div>
                                             </div>
                                         </div>

@@ -3,3 +3,4 @@ document.querySelectorAll('.project-dates').forEach(item => {
     const endDate = item.dataset.end.substring(0, 10);
     item.textContent = `${startDate} ~ ${endDate}`;
 });
+
