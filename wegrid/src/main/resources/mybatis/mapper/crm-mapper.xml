@@ -5,7 +5,7 @@
 
 <mapper namespace="com.kh.wegrid.crm.mapper.CrmMapper">
 
-    <select id="getClientVoList">
+    <select id="getClientVoListData">
         SELECT
         C.NO
         , C.RANK_CODE
@@ -25,25 +25,25 @@
         LEFT JOIN CLIENT_RANK CR ON ( C.RANK_CODE = CR.NO )
         LEFT JOIN CLIENT_STATUS CS ON ( C.STATUS_NO = CS.NO )
         LEFT JOIN PROJECT P ON ( C.NO = P.CLIENT_NO )
-        WHERE C.DEL_YN = 'N'
-        <if test="searchType == 'integration'">
-            AND (
-            C.NAME LIKE '%${searchValue}%'
-            OR P.MANAGER_NAME LIKE '%${searchValue}%'
-            OR P.MANAGER_PHONE LIKE '%${searchValue}%'
-            )
-        </if>
-        <if test="searchType == 'client'">
-            AND C.NAME LIKE '%${searchValue}%'
-        </if>
-        <if test="searchType == 'managerName'">
-            AND P.MANAGER_NAME LIKE '%${searchValue}%'
-        </if>
-        <if test="searchType == 'managerPhone'">
-            AND P.MANAGER_PHONE LIKE '%${searchValue}%'
-        </if>
+        <where>
+            <if test="searchType == 'integration'">
+                ( C.NAME LIKE '%${searchValue}%'
+                OR P.MANAGER_NAME LIKE '%${searchValue}%'
+                OR P.MANAGER_PHONE LIKE '%${searchValue}%' )
+            </if>
+            <if test="searchType == 'client'">
+                C.NAME LIKE '%${searchValue}%'
+            </if>
+            <if test="searchType == 'managerName'">
+                P.MANAGER_NAME LIKE '%${searchValue}%'
+            </if>
+            <if test="searchType == 'managerPhone'">
+                P.MANAGER_PHONE LIKE '%${searchValue}%'
+            </if>
+        </where>
         ORDER BY C.NO DESC
     </select>
+
 
 
 </mapper>

@@ -120,45 +120,40 @@
     font-weight: bold;
 }
 
-.adress-input_1 {
+.address-input_1 {
     align-self: center;
+    justify-self: center;
+    grid-column: span 2;
 }
-.adress-input_2 {
+.address-input_2 {
     align-self: center;
+    justify-self: center;
+    grid-column: span 4;
 }
-.adress-input_3 {
-    grid-column: span 3;
-    align-self: center;
-}
-
-.adress-input_4 {
-    grid-column: span 3;
+.address-input_3 {
+    grid-column: span 4;
+    justify-self: center;
     align-self: start;
 }
 
-.adress-input_1 > input {
-    width: 130px;
+
+.address-input_1 > input {
+    width: 200px;
     height: 30px;
-    margin-right: 20px;
 }
 
-.adress-input_2 > input {
-    width: 130px;
-    height: 30px;
-    margin-right: 20px;
-}
-
-.adress-input_3 > input {
+.address-input_2 > input {
     width: 400px;
     height: 30px;
     margin-right: 20px;
 }
 
-.adress-input_4 > input {
+.address-input_3 > input {
     width: 400px;
     height: 30px;
     margin-right: 20px;
 }
+
 
 .cinfo_line {
     height: 1px;
@@ -248,4 +243,10 @@ input {
 
 .cancel-btn .btn.btn-primary {
     width: 100px;
+}
+
+.address-btn {
+    align-self: center;
+    justify-self: end;
+    margin-right: 20px;
 }
