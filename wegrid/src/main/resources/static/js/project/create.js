@@ -1,34 +1,3 @@
-async function searchClient(query) {
-    const suggestions = document.getElementById('suggestions');
-    suggestions.innerHTML = ''; // 기존 검색 결과 초기화
-
-    if (query.length < 2) { // 최소 입력 길이 제한
-        suggestions.style.display = 'none';
-        return;
-    }
-
-    try {
-        // 서버로 검색어 전송
-        const response = await fetch(`/search-clients?q=${encodeURIComponent(query)}`);
-        const results = await response.json();
-
-        // 결과 표시
-        if (results.length > 0) {
-            suggestions.style.display = 'block';
-            results.forEach(client => {
-                const li = document.createElement('li');
-                li.textContent = client.name;
-                li.onclick = () => selectClient(client.name);
-                suggestions.appendChild(li);
-            });
-        } else {
-            suggestions.style.display = 'none';
-        }
-    } catch (error) {
-        console.error('Error fetching client names:', error);
-    }
-}
-
 function selectClient(name) {
     document.getElementById('clientName').value = name; // 선택된 이름 입력란에 설정
     document.getElementById('suggestions').style.display = 'none'; // 리스트 숨기기
@@ -38,7 +7,7 @@ function selectClient(name) {
 // 모달 열기
 function addOpenModal() {
     const modal = document.getElementById('searchModal');
-    modal.style.display = 'flex'; // flex로 설정하여 중앙에 위치
+    modal.style.display = 'flex'; 
 }
 
 // 모달 닫기
@@ -111,3 +80,14 @@ function removeEmployee(button) {
     personDiv.remove(); // 해당 요소 삭제
 }
 
+
+// 버튼 js
+document.getElementById("create-btn").addEventListener("click", function (event) {
+    const form = document.querySelector("form");
+    if (form.checkValidity()) {
+        alert("프로젝트가 생성되었습니다!");
+        form.submit();
+    } else {
+        alert("필수 입력 항목을 확인하세요!");
+    }
+});

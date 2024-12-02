@@ -105,7 +105,7 @@
     color: white;
 }
 
-.status1 {
+.status-ready {
     background-color: #4E83EB; 
     display: inline-block;
     padding: 5px 10px;
@@ -114,15 +114,25 @@
     color: white;
 }
 
-.status.ongoing {
+.status-ongoing {
     background: #EB4E4E;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    color: white;
 }
 
-.status.completed {
+.status-completed {
     background: #12C557;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    color: white;
 }
 
-.status4 {
+.status-canceled {
     background-color: #a625e2; 
     display: inline-block;
     padding: 5px 10px;
@@ -164,19 +174,19 @@
 .page a {
     display: inline-block; 
     text-decoration: none;
-    color: rgba(23, 72, 128, 1);
+    color: #174880;
     margin: 0 10px; /* 링크 간 간격 조정 */
     font-size: 16px;
     font-weight: bold;
 }
 
 .bottom-line{
-    width: 1380px;
+    width: 1350px;
     height: 8px;
     background-color: rgba(23, 72, 128, 1);
-   margin: auto;
-   margin-bottom: 10px;
-   margin-top: -15px;
+    margin: auto;
+    margin-bottom: 10px;
+    margin-top: -15px;
 }
 
 .search-box {
