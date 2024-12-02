@@ -9,7 +9,9 @@
       <title>시스템 관리자 계정 생성</title>
       <link rel="stylesheet" href="/css/common/main.css">
       <link rel="stylesheet" href="/css/system/create.css">
+
       <script defer src="/js/common/main.js"></script>
+      <script defer src="/js/system/create.js"></script>
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -20,6 +22,7 @@
     <%@ include file="/WEB-INF/views/common/nav.jsp" %>
 
     <main>
+    <form action="/system/create" name="personal-info" method="post">
     <div class="main-content">
     <h1 class="title">신규 계정 생성</h1>
             <div class="line-box"></div>
@@ -28,7 +31,7 @@
             <!-- 기본 개인 정보 -->
             <div class="left-panel">
                 <h3 class="sub-title">기본 개인 정보</h3>
-                <form action="" name="personal-info" method="post">
+                
                     <label for="name">이름</label>
                     <input type="text" id="name"><br>
                     <label for="id">아이디</label>
@@ -37,14 +40,14 @@
                     <input type="email" id="email"><br>
                     <label for="phone">연락처</label>
                     <input type="text" id="phone"><br><br>
-                </form>
+                
 
                 <!-- 주소 입력 필드 -->
-                    <input type="text" id="sample2_postcode" placeholder="우편번호" style="width: 30%;">
+                    <input type="text" name="postAddress" id="sample2_postcode" placeholder="우편번호" style="width: 30%;">
                     <input type="button" class="search-button"  onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
-                    <input type="text" id="sample2_address" placeholder="주소" style="width: 80%; margin: 5px 0px 5px 0px;"><br>
-                    <input type="text" id="sample2_detailAddress" placeholder="상세주소">
-                    <input type="text" id="sample2_extraAddress" placeholder="참고항목">
+                    <input type="text" name="roadAddress" id="sample2_address" placeholder="주소" style="width: 80%; margin: 5px 0px 5px 0px;"><br>
+                    <input type="text" name="detailAddress" id="sample2_detailAddress" placeholder="상세주소">
+                    <input type="text" name="detailAddress" id="sample2_extraAddress" placeholder="참고항목">
 
                 <!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
                 <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
@@ -148,8 +151,7 @@
                 <!-- 사원 정보 -->
                 <div class="right-panel">
                     <h3 class="sub-title">사원 정보</h3>
-                    <form action="" name="employee-info" method="post">
-
+                
                         <label for="employee-no">사번</label>
                         <input type="text" id="employee-no"><br>
 
@@ -183,8 +185,6 @@
                             <option>일반 사원</option>
                         </select>
                     </div>
-                    </form>
-
 
                 </div>
             </div>
@@ -194,6 +194,7 @@
                 <button type="button" class="btn btn-primary" id="delete-btn">삭제</button>
             </div>
         </div>
+    </form>
     </main>
   </body>
   </html>

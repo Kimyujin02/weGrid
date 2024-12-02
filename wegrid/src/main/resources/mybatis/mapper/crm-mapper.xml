@@ -25,24 +25,95 @@
         LEFT JOIN CLIENT_RANK CR ON ( C.RANK_CODE = CR.NO )
         LEFT JOIN CLIENT_STATUS CS ON ( C.STATUS_NO = CS.NO )
         LEFT JOIN PROJECT P ON ( C.NO = P.CLIENT_NO )
-        WHERE C.DEL_YN = 'N'
-        <if test="searchType == 'integration'">
-            AND (
-            C.NAME LIKE '%${searchValue}%'
-            OR P.MANAGER_NAME LIKE '%${searchValue}%'
-            OR P.MANAGER_PHONE LIKE '%${searchValue}%'
-            )
-        </if>
-        <if test="searchType == 'client'">
-            AND C.NAME LIKE '%${searchValue}%'
-        </if>
-        <if test="searchType == 'managerName'">
-            AND P.MANAGER_NAME LIKE '%${searchValue}%'
-        </if>
-        <if test="searchType == 'managerPhone'">
-            AND P.MANAGER_PHONE LIKE '%${searchValue}%'
-        </if>
+        <where>
+            <if test="searchType == 'integration'">
+                ( C.NAME LIKE '%${searchValue}%'
+                OR P.MANAGER_NAME LIKE '%${searchValue}%'
+                OR P.MANAGER_PHONE LIKE '%${searchValue}%' )
+            </if>
+            <if test="searchType == 'client'">
+                C.NAME LIKE '%${searchValue}%'
+            </if>
+            <if test="searchType == 'managerName'">
+                P.MANAGER_NAME LIKE '%${searchValue}%'
+            </if>
+            <if test="searchType == 'managerPhone'">
+                P.MANAGER_PHONE LIKE '%${searchValue}%'
+            </if>
+        </where>
         ORDER BY C.NO DESC
+    </select>
+
+    <select id="getPrjVoList">
+        SELECT
+            C.NO,
+            C.RANK_CODE,
+            CR.NAME AS RANK_NAME,
+            C.STATUS_NO,
+            CS.NAME AS STATUS_NAME,
+            C.NAME,
+            C.ADDRESS,
+            C.PRESIDENT_NAME,
+            C.PRESIDENT_PHONE,
+            C.PRESIDENT_EMAIL,
+            H.NO AS HISTORY_NO,
+            H.WRITER_NO,
+            H.ENROLL_DATE,
+            H.INQUIRY,
+            H.REPLY,
+            P.NO AS PROJECT_NO,
+            P.PROJECT_NAME,
+            P.START_DATE,
+            P.END_DATE,
+            PS.NAME AS PROJECT_STATUS_NAME
+        FROM
+            CLIENT C
+                LEFT JOIN CLIENT_RANK CR ON ( C.RANK_CODE = CR.NO )
+                LEFT JOIN CLIENT_STATUS CS ON ( C.STATUS_NO = CS.NO )
+                LEFT JOIN CLIENT_HISTORY H ON ( C.NO = H.CLIENT_NO )
+                JOIN PROJECT P ON ( C.NO = P.CLIENT_NO )
+                LEFT JOIN PROJECT_STATUS PS ON ( P.STATUS_NO = PS.NO )
+        WHERE
+            C.NO = #{cno}
+            AND P.PROJECT_NAME LIKE '%' || #{searchValue} || '%'
+        ORDER BY P.NO DESC
+    </select>
+
+    <select id="getHisVoList">
+        SELECT
+        C.NO,
+        C.RANK_CODE,
+        CR.NAME AS RANK_NAME,
+        C.STATUS_NO,
+        CS.NAME AS STATUS_NAME,
+        C.NAME,
+        C.ADDRESS,
+        C.PRESIDENT_NAME,
+        C.PRESIDENT_PHONE,
+        C.PRESIDENT_EMAIL,
+        CH.NO AS HISTORY_NO,
+        CH.WRITER_NO,
+        E.NAME AS EMPLOYEE_NAME,
+        CH.ENROLL_DATE AS HIS_ENROLL_DATE,
+        CH.INQUIRY,
+        CH.REPLY,
+        P.NO AS PROJECT_NO,
+        P.PROJECT_NAME,
+        P.START_DATE,
+        P.END_DATE,
+        PS.NAME AS PROJECT_STATUS_NAME
+        FROM
+        CLIENT C
+        LEFT JOIN CLIENT_RANK CR ON ( C.RANK_CODE = CR.NO )
+        LEFT JOIN CLIENT_STATUS CS ON ( C.STATUS_NO = CS.NO )
+        LEFT JOIN CLIENT_HISTORY CH ON ( C.NO = CH.CLIENT_NO )
+        LEFT JOIN PROJECT P ON ( C.NO = P.CLIENT_NO )
+        LEFT JOIN PROJECT_STATUS PS ON ( P.STATUS_NO = PS.NO )
+        LEFT JOIN EMPLOYEE E ON ( CH.WRITER_NO = E.NO )
+        WHERE
+        C.NO = #{cno}
+<!--        AND CH.INQUIRY LIKE '%' || #{searchValue} || '%'-->
+        ORDER BY HISTORY_NO DESC
     </select>
 
 

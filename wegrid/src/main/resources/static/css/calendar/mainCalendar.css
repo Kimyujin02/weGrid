@@ -67,3 +67,7 @@
     background-color: #ACC3F2;
     border-color: #577DCC;
 }
+
+.hidden-schedule {
+    display: none;
+}

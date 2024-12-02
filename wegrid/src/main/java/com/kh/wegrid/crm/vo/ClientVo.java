@@ -16,7 +16,21 @@ public class ClientVo {
     private String presidentPhone;
     private String presidentEmail;
     private String startDate;
+    private String endDate;
     private String managerName;
     private String managerPhone;
+    private String managerEmail;
+    private String roadAddress;   // 도로명 주소
+    private String detailAddress; // 상세 주소
+    private String projectNo;
+    private String projectName;
+    private String projectStatusNo;
+    private String projectStatusName;
+
+    private String historyNo;
+    private String employeeName;
+    private String inquiry;
+    private String hisEnrollDate;
+
 
 }

@@ -31,15 +31,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
-
-
-
-
   function loadClientList(searchType, searchValue){
-    const tbodyTag = document.querySelector("main table>tbody");
-    //tbodyTag 내용 채우기 ~~~
+    const tbodyTag = document.querySelector("main table > tbody");
+    const maxRows = 15; // 테이블의 고정 행 수
 
     // const url = new URL(location);
     // let pno = url.searchParams.get("pno");
@@ -52,39 +46,63 @@ document.addEventListener("DOMContentLoaded", function () {
             searchType ,
             searchValue ,
         } ,
-        // method : ~~~ , 어차피 기본값이 get
+        // method : ~~~ ,
         success : function(m){
-            const clientVoList = m;
+            const clientVoListData = m;
+            console.log(clientVoListData);
+            if (!Array.isArray(clientVoListData)) {
+              console.error("Received data is not an array.");
+              return;
+          }
             // const pvo = m.b;
             // paintPageArea(pvo);
 
-            console.log(clientVoList);
+            console.log(clientVoListData);
 
             tbodyTag.innerHTML = "";
 
-            for(const vo of clientVoList){
+            for(const vo of clientVoListData){
                 const trTag = document.createElement("tr");
+                trTag.className = "list-middle";
 
                 const tdTag01 = document.createElement('td');
                 tdTag01.innerText = vo.no;
                 trTag.appendChild(tdTag01);
 
-                tdTag01.innerHTML = `<a href='/board/detail?bno=${vo.no}'>${vo.title}</a>`;
-
+                
                 const tdTag02 = document.createElement('td');
-                tdTag02.innerText = vo.name;
+                tdTag02.className = "linked-name";
                 trTag.appendChild(tdTag02);
+                tdTag02.innerHTML = `<a href='/crm/detail?cno=${vo.no}'>${vo.name}</a>`;
 
                 const tdTag03 = document.createElement('td');
                 tdTag03.innerText = vo.rankName;
                 trTag.appendChild(tdTag03);
 
                 const tdTag04 = document.createElement('td');
-                tdTag04.innerText = vo.startDate;
+                tdTag04.innerText = vo.startDate.split(" ")[0];
                 trTag.appendChild(tdTag04);
 
                 tbodyTag.appendChild(trTag);
             }
+
+            // 데이터가 부족한 경우 빈 행 추가
+            const rowsToAdd = maxRows - clientVoListData.length;
+            if (rowsToAdd > 0) {
+                for (let i = 0; i < rowsToAdd; i++) {
+                    const emptyTr = document.createElement("tr");
+                    emptyTr.className = "list-middle";
+
+                    for (let j = 0; j < 4; j++) {
+                        const emptyTd = document.createElement("td");
+                        emptyTd.innerText = "";
+                        emptyTr.appendChild(emptyTd);
+                    }
+
+                    tbodyTag.appendChild(emptyTr);
+                }
+            }
+
         } ,
         fail : function(){
             alert("목록조회 실패");
@@ -94,4 +112,14 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 loadClientList();
-  
+
+
+function submitSearchForm() {
+
+  const searchType = document.querySelector("select[name=searchType]").value;
+  const searchValue = document.querySelector("input[name=searchValue]").value;
+
+  loadClientList(searchType, searchValue);
+
+  return false;
+}

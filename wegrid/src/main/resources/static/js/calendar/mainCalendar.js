@@ -1,12 +1,4 @@
 
-// 캘린터 페이지 로드 시 개인 캘린더 화면 실행
-document.addEventListener('DOMContentLoaded', function(){
-    
-    const today = new Date();
-    loadCalendar(today,1);
-
-})
-
 // 항목 별 탭 클릭 시 캘린더 일정 hide/show
 const filterBox = document.querySelector(".calendar-filter-area");
 
@@ -21,12 +13,18 @@ filterBox.addEventListener("click", function(evt){
 
     if(evt.target.className.includes("selected-calendar")){
         evt.target.classList.remove('selected-calendar');
+        hideEvtSource(evt);
+        
     }
+    // }
     else{
         evt.target.classList.add('selected-calendar');
+        showEvtSource(evt);
+        // console.log(document.querySelectorAll("."+evt.target.id+"_schedule"));
+        // document.querySelectorAll("."+evt.target.id+"_schedule").classList.remove('hidden-schedule');
+        // document.querySelectorAll("."+evt.target.id+"_schedule").style.display = "block";
     }
 
-    const no = evt.target.value;
 
 
 });
@@ -45,7 +43,7 @@ function calculateDate(date,type){
     else if(type=="+y"){
         calcDate.setFullYear(calcDate.getFullYear()+1);    
     }
-    else {
+    else if(type=="-y"){
         calcDate.setFullYear(calcDate.getFullYear()-1);    
     }
 
@@ -58,18 +56,65 @@ function calculateDate(date,type){
             mm = "0"+mm;
         }
     }
-    const x = yy+"-"+mm;
+    calcDate= yy+"-"+mm;
 
     return calcDate;
 
 }
 
-// function loadEvents(date,no){
+function showEvtSource(evt){
+    const targetArr = document.querySelectorAll("."+evt.target.id+"_schedule");
+    for(let i = 0; i < targetArr.length; i++){
+        targetArr[i].classList.remove('hidden-schedule');
+    }
 
-//     $.ajax({
-//         url: "/calendar/load",
+    // const calcDate = calculateDate(mainCalendar.getDate());
+    // const targetId = evt.target.id;
+    // const itemName = calcDate+"_"+targetId;
+    // const source = JSON.parse(localStorage.getItem(itemName));
+    // mainCalendar.addEventSource( source );
+}
 
-        
-//     })
+function hideEvtSource(evt){
+    const targetArr = document.querySelectorAll("."+evt.target.no+"_schedule");
+    for(let i = 0; i < targetArr.length; i++){
+        targetArr[i].classList.add('hidden-schedule');
+    }
 
-// }
+    // const calcDate = calculateDate(mainCalendar.getDate());
+    // const targetId = evt.target.id;
+    // const itemName = calcDate+"_"+targetId;
+    // const evtSources = mainCalendar.getEventSourceById(itemName);
+    // evtSources.remove();
+
+}
+
+// 캘린더 항목 별 정보 조회
+function getTypeInfo(){
+
+    $.ajax({
+        url: "/calendar/getTypeInfo",
+        async : false,
+        success : function(typeInfo){
+            localStorage.setItem("calendar-type-info" , JSON.stringify(typeInfo));
+        },
+        error : function(){
+            alert("캘린더 항목 별 정보 조회 실패");
+        } 
+
+    })
+
+}
+
+// 캘린터 페이지 로드 시 개인 캘린더 화면 실행
+document.addEventListener('DOMContentLoaded', function(){
+
+    
+    const today = calculateDate(new Date());
+
+    console.log("캘린더 생성");
+    
+    loadCalendar(today);   
+    loadEvents(today);
+
+})

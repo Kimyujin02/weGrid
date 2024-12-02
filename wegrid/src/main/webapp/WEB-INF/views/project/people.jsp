@@ -11,6 +11,8 @@
 <link rel="stylesheet" href="/css/project/people.css">
 
 <script defer src="/js/common/main.js"></script>
+<script defer src="/js/project/modal.js"></script>
+<script defer src="/js/project/page.js"></script>
 
 </head>
 <body>
@@ -38,7 +40,7 @@
                             <th>담당 PM</th>
                             <td>${pmName}</td>
                             <th>고객사 담당자</th>
-                            <td></td>
+                            <td>${managerName}</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,15 +50,24 @@
                             <th>고객 등급</th>
                             <td>A</td>
                             <th>고객사 연락처</th>
-                            <td>010-1234-5678</td>
+                            <td>${managerPhone}</td>
                         </tr>
                         <tr>
                             <th>진행 현황</th>
-                            <td><span class="status-label progress" style="text-align: center;">진행중</span></td>
+                            <td>
+                                <c:choose>
+                                <c:when test="${vo.statusNo == 1}"><span class="status-ready ">준비</span></c:when>
+                                <c:when test="${vo.statusNo == 2}"><span class="status-ongoing">진행</span></c:when>
+                                <c:when test="${vo.statusNo == 3}"><span class="status-completed">완료</span></c:when>
+                                <c:when test="${vo.statusNo == 4}"><span class="status-canceled">철회</span></c:when>
+                                </c:choose>
+                            </td>
                             <th>예산</th>
-                            <td>₩3,000,000,000</td>
+                            <td>₩ ${budget}</td>
                             <th>프로젝트 기간</th>
-                            <td>2024.01.18 ~ 2024.12.10</td>
+                            <td><p class="project-dates" data-start="${vo.startDate}" data-end="${vo.endDate}">
+                                ${vo.startDate} ~ ${vo.endDate}</p>
+                            </td>
                         </tr>
                         <tr>
                             <th>내용</th>
@@ -173,17 +184,9 @@
                         
                     </table>
                     <div class="bottom-line"></div>
-                    <div class="page">
-                        <!-- js에서 동적으로 버튼 만들어줌-->
-                        <span><a href="#!"><i class="fas fa-angle-double-left fa-lg" style="color: #174880;"></i></a></span>
-                        <span><a href="#!"><i class="fas fa-caret-left fa-lg" style="color: #174880;"></i></a></span>
-                        <span><a href="#!">1</a></span>
-                        <span><a href="#!">2</a></span>
-                        <span><a href="#!">3</a></span>
-                        <span><a href="#!">4</a></span>
-                        <span><a href="#!"><i class="fas fa-caret-right fa-lg" style="color: #174880;"></i></a></span>
-                        <span><a href="#!"><i class="fas fa-angle-double-right fa-lg" style="color: #174880;"></i></a></span>
-                    </div>
+                    <div class="page-area">
+                        <!-- js에서 동적으로 버튼 만들어줌 -->
+                     </div>
                 </div>
 
                 </div>
@@ -192,10 +195,58 @@
         
         <!-- 일정추가/ 현재 참여인원 관리 섹션 -->
          <div class="sub-info">
-            <!-- 일정 추가 버튼 -->
+            <!-- 1)일정 추가 버튼 -->
             <div class="add-btn">
-                <button type="button" class="btn btn-primary"  id="schedule-btn" > + 일정 등록</button>
+                <button type="button"  class="btn btn-primary" id="schedule-btn" data-bs-toggle="modal" data-bs-target="#writeModal" > + 일정 등록</button>
             </div>
+
+                <!-- 일정 추가 모달 -->
+                <div class="modal fade" id="writeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="exampleModalLabel">일정 추가</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="title-area">
+                                        <label for="calendar_title" class="col-form-label">제목</label>
+                                        <input type="text" class="form-control" id="calendar_title" name="title">
+                                    </div>
+                                    <br>
+                                    <div class="date-area">
+                                        <div class="date-label-area">
+                                            <label for="calendar_end_date" class="col-form-label">종료일</label>
+                                        </div>
+                                        <div class="date-input-area">
+                                            <input type="datetime-local" class="form-control" id="calendar_start_date" name="startDate">
+                                            <input type="datetime-local" class="form-control" id="calendar_end_date" name="endDate">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div>
+                                        <label for="" class="col-form-label">일정 종류</label>
+                                        <div class="type-area">
+                                            <div class="typeBox">
+                                                <label for="typeNo1">회의</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="content-area">
+                                        <label for="calendar_content" class="col-form-label">상세 내용</label>
+                                        <textarea class="form-control" id="calendar_content" name="content"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="addCalendar">추가</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             <!-- 현재 참여인원 -->
             <div class="profile-card">

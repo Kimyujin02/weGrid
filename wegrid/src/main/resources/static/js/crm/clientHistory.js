@@ -27,3 +27,94 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   });
+
+
+
+  function loadHisList(cno, searchValue) {
+    const tbodyTag = document.querySelector("main table > tbody");
+    const maxRows = 10; // 테이블의 고정 행 수
+
+$.ajax({
+      url : `/crm/history/data` ,
+      data : {
+          cno ,
+          searchValue ,
+      } ,
+      success : function(m){
+          const hisVoListData = m;
+          console.log(hisVoListData);
+          if (!Array.isArray(hisVoListData)) {
+            console.error("Received data is not an array.");
+            return;
+        }
+          // const pvo = m.b;
+          // paintPageArea(pvo);
+
+          console.log(hisVoListData);
+
+          tbodyTag.innerHTML = "";
+
+          for(const vo of hisVoListData){
+              const trTag = document.createElement("tr");
+              trTag.className = "list-middle";
+
+              const tdTag01 = document.createElement('td');
+              tdTag01.innerText = vo.historyNo;
+              trTag.appendChild(tdTag01);
+
+              const tdTag02 = document.createElement('td');
+              tdTag02.innerText = vo.employeeName;
+              trTag.appendChild(tdTag02);
+
+              const tdTag03 = document.createElement('td');
+              tdTag03.innerText = vo.inquiry;
+              trTag.appendChild(tdTag03);
+
+              const tdTag04 = document.createElement('td');
+              tdTag04.innerText = vo.hisEnrollDate;
+              trTag.appendChild(tdTag04);
+              
+              const tdTag05 = document.createElement('td');
+              tdTag05.innerHTML = '<button type="button" class="btn btn-primary">수정</button>';
+              trTag.appendChild(tdTag05);
+
+              tbodyTag.appendChild(trTag);
+          }
+
+          // 데이터가 부족한 경우 빈 행 추가
+          const rowsToAdd = maxRows - hisVoListData.length;
+          if (rowsToAdd > 0) {
+              for (let i = 0; i < rowsToAdd; i++) {
+                  const emptyTr = document.createElement("tr");
+                  emptyTr.className = "list-middle";
+
+                  for (let j = 0; j < 4; j++) {
+                      const emptyTd = document.createElement("td");
+                      emptyTd.innerText = "";
+                      emptyTr.appendChild(emptyTd);
+                  }
+
+                  tbodyTag.appendChild(emptyTr);
+              }
+          }
+
+      } ,
+      fail : function(){
+          alert("목록조회 실패");
+      } ,
+  });
+
+}
+
+loadHisList();
+
+
+function submitSearchForm() {
+
+    const cno = document.querySelector("input[name=cno]").value;
+    const searchValue = document.querySelector("input[name=searchValue]").value;
+
+    loadHisList(cno, searchValue);
+
+    return false;
+}
