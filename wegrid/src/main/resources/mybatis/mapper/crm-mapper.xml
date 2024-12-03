@@ -46,36 +46,36 @@
 
     <select id="getPrjVoList">
         SELECT
-            C.NO,
-            C.RANK_CODE,
-            CR.NAME AS RANK_NAME,
-            C.STATUS_NO,
-            CS.NAME AS STATUS_NAME,
-            C.NAME,
-            C.ADDRESS,
-            C.PRESIDENT_NAME,
-            C.PRESIDENT_PHONE,
-            C.PRESIDENT_EMAIL,
-            H.NO AS HISTORY_NO,
-            H.WRITER_NO,
-            H.ENROLL_DATE,
-            H.INQUIRY,
-            H.REPLY,
-            P.NO AS PROJECT_NO,
-            P.PROJECT_NAME,
-            P.START_DATE,
-            P.END_DATE,
-            PS.NAME AS PROJECT_STATUS_NAME
+        C.NO,
+        C.RANK_CODE,
+        CR.NAME AS RANK_NAME,
+        C.STATUS_NO,
+        CS.NAME AS STATUS_NAME,
+        C.NAME,
+        C.ADDRESS,
+        C.PRESIDENT_NAME,
+        C.PRESIDENT_PHONE,
+        C.PRESIDENT_EMAIL,
+        H.NO AS HISTORY_NO,
+        H.WRITER_NO,
+        H.ENROLL_DATE,
+        H.INQUIRY,
+        H.REPLY,
+        P.NO AS PROJECT_NO,
+        P.PROJECT_NAME,
+        P.START_DATE,
+        P.END_DATE,
+        PS.NAME AS PROJECT_STATUS_NAME
         FROM
-            CLIENT C
-                LEFT JOIN CLIENT_RANK CR ON ( C.RANK_CODE = CR.NO )
-                LEFT JOIN CLIENT_STATUS CS ON ( C.STATUS_NO = CS.NO )
-                LEFT JOIN CLIENT_HISTORY H ON ( C.NO = H.CLIENT_NO )
-                JOIN PROJECT P ON ( C.NO = P.CLIENT_NO )
-                LEFT JOIN PROJECT_STATUS PS ON ( P.STATUS_NO = PS.NO )
+        CLIENT C
+        LEFT JOIN CLIENT_RANK CR ON ( C.RANK_CODE = CR.NO )
+        LEFT JOIN CLIENT_STATUS CS ON ( C.STATUS_NO = CS.NO )
+        LEFT JOIN CLIENT_HISTORY H ON ( C.NO = H.CLIENT_NO )
+        JOIN PROJECT P ON ( C.NO = P.CLIENT_NO )
+        LEFT JOIN PROJECT_STATUS PS ON ( P.STATUS_NO = PS.NO )
         WHERE
-            C.NO = #{cno}
-            AND P.PROJECT_NAME LIKE '%' || #{searchValue} || '%'
+        C.NO = #{cno}
+        AND P.PROJECT_NAME LIKE '%' || #{searchValue} || '%'
         ORDER BY P.NO DESC
     </select>
 
@@ -112,7 +112,7 @@
         LEFT JOIN EMPLOYEE E ON ( CH.WRITER_NO = E.NO )
         WHERE
         C.NO = #{cno}
-<!--        AND CH.INQUIRY LIKE '%' || #{searchValue} || '%'-->
+        <!--        AND CH.INQUIRY LIKE '%' || #{searchValue} || '%'-->
         ORDER BY HISTORY_NO DESC
     </select>
 
