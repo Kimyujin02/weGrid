@@ -4,7 +4,8 @@ import com.kh.wegrid.crm.vo.ClientHistoryVo;
 import com.kh.wegrid.crm.vo.ClientRankVo;
 import com.kh.wegrid.crm.vo.ClientStatusVo;
 import com.kh.wegrid.crm.vo.ClientVo;
-//import com.kh.wegrid.crm.vo.historyVo;
+import com.kh.wegrid.project.vo.ProjectVo;
+import com.kh.wegrid.util.page.PageVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -14,26 +15,13 @@ import java.util.List;
 @Mapper
 public interface CrmMapper {
 
+    List<ClientVo> getClientVoList(PageVo pvo, String searchType, String searchValue);
+
     @Select("""
-            SELECT
-                C.NO
-                , C.RANK_CODE
-                , CR.NAME AS RANK_NAME
-                , C.STATUS_NO
-                , CS.NAME AS STATUS_NAME
-                , C.NAME
-                , C.ADDRESS
-                , C.PRESIDENT_NAME
-                , C.PRESIDENT_PHONE
-                , C.PRESIDENT_EMAIL
-                , C.START_DATE
-            FROM
-                CLIENT C
-                LEFT JOIN CLIENT_RANK CR ON ( C.RANK_CODE = CR.NO )
-                LEFT JOIN CLIENT_STATUS CS ON ( C.STATUS_NO = CS.NO )
-            ORDER BY C.RANK_CODE ASC, C.NAME ASC
+            SELECT COUNT(*)
+            FROM CLIENT
             """)
-    List<ClientVo> getClientVoList();
+    int getClientCnt();
 
     @Select("""
             SELECT
@@ -44,17 +32,6 @@ public interface CrmMapper {
             """)
     List<ClientRankVo> getClientRankVoList();
 
-//    @Select("""
-//            SELECT
-//                C.RANK_CODE
-//                , CR.NAME
-//            FROM
-//                CLIENT C
-//                LEFT JOIN CLIENT_RANK CR ON ( C.RANK_CODE = CR.NO )
-//            ORDER BY C.RANK_CODE ASC
-//            """)
-//    List<ClientRankVo> getClientRankVoList();
-
     @Select("""
             SELECT
                 NO
@@ -64,15 +41,15 @@ public interface CrmMapper {
             """)
     List<ClientStatusVo> getClientStatusVoList();
 
-    List<ClientVo> getClientVoListData(String searchType, String searchValue);
-
     @Insert("""
             INSERT INTO CLIENT
             (
                 NO
                 , RANK_CODE
                 , NAME
-                , ADDRESS
+                , POST_ADDRESS
+                , ROAD_ADDRESS
+                , DETAIL_ADDRESS
                 , PRESIDENT_NAME
                 , PRESIDENT_PHONE
                 , PRESIDENT_EMAIL
@@ -83,14 +60,16 @@ public interface CrmMapper {
                 SEQ_CLIENT.NEXTVAL
                 , #{rankCode}
                 , #{name}
-                , #{address}
+                , #{postAddress}
+                , #{roadAddress}
+                , #{detailAddress}
                 , #{presidentName}
                 , #{presidentPhone}
                 , #{presidentEmail}
                 , SYSDATE
             )
             """)
-    int enroll(ClientVo vo);
+    int enrollClient(ClientVo vo);
 
     @Select("""
             SELECT
@@ -100,36 +79,25 @@ public interface CrmMapper {
                 C.STATUS_NO,
                 CS.NAME AS STATUS_NAME,
                 C.NAME,
-                C.ADDRESS,
+                C.POST_ADDRESS,
+                C.ROAD_ADDRESS,
+                C.DETAIL_ADDRESS,
                 C.PRESIDENT_NAME,
                 C.PRESIDENT_PHONE,
                 C.PRESIDENT_EMAIL,
-                C.START_DATE,
-                CH.NO AS HISTORY_NO,
-                CH.WRITER_NO,
-                E.NAME AS EMPLOYEE_NAME,
-                CH.ENROLL_DATE AS HIS_ENROLL_DATE,
-                CH.INQUIRY,
-                CH.REPLY,
-                P.NO,
-                P.PROJECT_NAME,
-                P.START_DATE,
-                P.END_DATE,
-                PS.NAME
+                C.START_DATE
             FROM
                 CLIENT C
                 LEFT JOIN CLIENT_RANK CR ON ( C.RANK_CODE = CR.NO )
                 LEFT JOIN CLIENT_STATUS CS ON ( C.STATUS_NO = CS.NO )
-                LEFT JOIN CLIENT_HISTORY CH ON ( C.NO = CH.CLIENT_NO )
-                LEFT JOIN EMPLOYEE E ON ( CH.WRITER_NO = E.NO )
-                LEFT JOIN PROJECT P ON ( C.NO = P.CLIENT_NO )
-                LEFT JOIN PROJECT_STATUS PS ON ( P.CLIENT_NO = PS.NO )
             WHERE
                 C.NO = #{cno}
             """)
-    ClientVo getDetail(String cno);
+    ClientVo getClientDetail(String cno);
 
-    List<ClientVo> getPrjVoList(String cno, String searchValue);
+    int getPrjCnt(String cno, String searchValue);
+
+    List<ProjectVo> getProjectVoList(String cno, PageVo pvo, String searchValue);
 
     @Select("""
             SELECT
@@ -148,4 +116,6 @@ public interface CrmMapper {
                 AND CH.INQUIRY LIKE '%' || #{searchValue} || '%'
             """)
     List<ClientHistoryVo> getHistoryVoList(String cno, String searchValue);
+
+
 }

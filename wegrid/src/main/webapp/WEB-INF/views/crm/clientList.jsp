@@ -48,8 +48,8 @@
                         <div class="dropdown-menu">
                           <div class="option-list">
 
-                            <c:forEach items="${clientStatusVoList}" var="clientStatusVo">
-                                <label><input type="checkbox" value="${clientStatusVo.no}" />${clientStatusVo.name}</label>
+                            <c:forEach items="${clientVoList}" var="clientVo">
+                                <label><input type="checkbox" value="${clientVo.statusNo}" />${clientVo.statusName}</label>
                             </c:forEach>
 
                           </div>
@@ -61,24 +61,24 @@
                         <div class="dropdown-menu">
                           <div class="option-list">
                             
-                            <c:forEach items="${clientRankVoList}" var="clientRankVo">
-                                <label><input type="checkbox" value="${clientRankVo.name}" />${clientRankVo.name}</label>
+                            <c:forEach items="${clientVoList}" var="clientVo">
+                                <label><input type="checkbox" value="${clientVo.rankName}" />${clientVo.rankName}</label>
                             </c:forEach>
 
                           </div>
                         </div>
                     </div>
                     
-                    <form class="search-box" action="/crm/list" onsubmit="return submitSearchForm();">
+                    <form class="search-box" action="/crm/list">
 
-                        <select id="searchType" name="searchType">
+                        <select class="searchType" name="searchType">
                             <option value="integration">통합</option>
                             <option value="client">고객사</option>
                             <option value="managerName">고객사 담당자명</option>
                             <option value="managerPhone">담당자 연락처</option>
                         </select>
 
-                        <input id="searchInput" type="text" name="searchValue" placeholder="검색">
+                        <input type="text" class="searchValue" name="searchValue" placeholder="검색">
                         <button class="form-submit" type="submit">
                             <i class="fas fa-search"></i>
                         </button>
@@ -102,14 +102,16 @@
                         </thead>
                   
                         <tbody>
-                            <!-- <tr class="list-middle">
-                                <td>1</td>
-                                <td>KH 정보교육원</td>
-                                <td>S</td>
-                                <td>2024-11-26</td>
-                            </tr> -->
-                            <td>로딩중</td>
+                            <c:forEach items="${clientVoList}" var="vo">
+                                <tr class="list-middle">
+                                    <td>${vo.no}</td>
+                                    <td class="linked-name"><a href='/crm/detail?cno=${vo.no}'>${vo.name}</a></td>
+                                    <td>${vo.rankName}</td>
+                                    <td>${vo.startDate}</td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
+
                         <tfoot>
                             <tr class="list-end">
                                 <td></td>
@@ -124,20 +126,30 @@
 
                 <!-- row4 -->
                 <div class="paging-area">
-                    <!-- js에서 동적으로 버튼 만들어줌-->
-                    <span><a href="#!"><i class="fas fa-angle-double-left fa-lg" style="color: #174880;"></i></a></span>
-                    &nbsp;
-                    <span><a href="#!"><i class="fas fa-caret-left fa-lg" style="color: #174880;"></i></a></span>
-                    &nbsp;
-                    <span><a id="black" href="#!">1</a></span>
-                    &nbsp;
-                    <span><a href="#!">2</a></span>
-                    &nbsp;
-                    <span><a href="#!">3</a></span>
-                    &nbsp;
-                    <span><a href="#!"><i class="fas fa-caret-right fa-lg" style="color: #174880;"></i></a></span>
-                    &nbsp;
-                    <span><a href="#!"><i class="fas fa-angle-double-right fa-lg" style="color: #174880;"></i></a></span>
+                    <c:if test="${pvo.startPage != 1}">
+                        <a class="previous" href="/crm/list?pno=${pvo.startPage-1}&searchValue=${searchValue}">
+                            <i class="fas fa-caret-left fa-lg" style="color: #174880;"></i>
+                        </a>
+                    </c:if>
+                    <c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i" step="1">
+                        <c:choose>
+                            <c:when test="${i == pvo.currentPage}">
+                                <a class="current" href="/crm/list?pno=${i}&searchValue=${searchValue}">
+                                    ${i}
+                                </a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="pageNum" href="/crm/list?pno=${i}&searchValue=${searchValue}">
+                                    ${i}
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>                    
+                    <c:if test="${pvo.endPage != pvo.maxPage}">
+                        <a href="/crm/list?pno=${pvo.endPage+1}&searchValue=${searchValue}">
+                            <i class="fas fa-caret-right fa-lg" style="color: #174880;"></i>
+                        </a>
+                    </c:if>
                 </div>
             </div>
 

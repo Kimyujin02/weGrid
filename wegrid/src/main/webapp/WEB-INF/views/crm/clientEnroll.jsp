@@ -52,7 +52,7 @@
                         
                         <!-- 우편번호 입력 칸 -->
                         <div class="address-input_1">
-                            <input type="text" name="zipcode" id="zipcode" readonly placeholder="우편번호">
+                            <input type="text" name="postAddress" id="postAddress" readonly placeholder="우편번호">
                         </div>
                         
                         <div class="address-btn">
@@ -76,8 +76,8 @@
                         등급 &nbsp; 
                         <label>
                             <select class="select-grade" name="rankCode">
-                                <c:forEach items="${clientRankVoList}" var="clientRankVo">
-                                    <option value="${clientRankVo.no}">${clientRankVo.name}</option>
+                                <c:forEach items="${clientRankVoList}" var="vo">
+                                    <option value="${vo.no}">${vo.name}</option>
                                 </c:forEach>
                             </select>
                         </label>
@@ -139,7 +139,7 @@
                     new daum.Postcode({
                         oncomplete: function(data) {
                             // 우편번호 입력
-                            document.getElementById("zipcode").value = data.zonecode;
+                            document.getElementById("postAddress").value = data.zonecode;
 
                             // 도로명 주소 입력
                             document.getElementById("roadAddress").value = data.roadAddress;
