@@ -463,3 +463,17 @@ input[type=radio] {
     display:  none;
 }
 
+
+.page {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.page a {
+    display: inline-block; 
+    text-decoration: none;
+    color: #174880;
+    margin: 0 10px; /* 링크 간 간격 조정 */
+    font-size: 16px;
+    font-weight: bold;
+}

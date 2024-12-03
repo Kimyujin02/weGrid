@@ -33,13 +33,13 @@
                 <h3 class="sub-title">기본 개인 정보</h3>
                 
                     <label for="name">이름</label>
-                    <input type="text" id="name"><br>
+                    <input type="text" id="name" name="name"><br>
                     <label for="id">아이디</label>
-                    <input type="text" id="id"><br>
+                    <input type="text" id="id" name="id"><br>
                     <label for="email">이메일</label>
-                    <input type="email" id="email"><br>
+                    <input type="email" id="email" name="email"><br>
                     <label for="phone">연락처</label>
-                    <input type="text" id="phone"><br><br>
+                    <input type="text" id="phone" name="phone"><br><br>
                 
 
                 <!-- 주소 입력 필드 -->
@@ -153,15 +153,15 @@
                     <h3 class="sub-title">사원 정보</h3>
                 
                         <label for="employee-no">사번</label>
-                        <input type="text" id="employee-no"><br>
+                        <input type="text" id="employee-no" name="empNum"><br>
 
                         <label for="department">부서명</label>
 
                         <div class="department-row">
-                            <input type="text" id="department-name">
+                            <input type="text" id="department-name" name="deptNo">
                             <div class="filter-controls">
                                 <select id="department">
-                                    <option>경영지원</option>
+                                    <option value="${jobVo.no}">${jobVo.name}</option>
                                     <option>개발팀</option>
                                     <option>영업팀</option>
                                 </select>

@@ -63,6 +63,7 @@
                     </div>
     
                     <div id="card-content">
+                        <input type="hidden" name="no">
                         <h3 class="project-title" name="">${vo.projectName}</h3>
                         <p class="project-dates" data-start="${vo.startDate}" data-end="${vo.endDate}">
                             ${vo.startDate} ~ ${vo.endDate}
