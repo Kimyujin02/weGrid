@@ -5,21 +5,23 @@
 
 <mapper namespace="com.kh.wegrid.crm.mapper.CrmMapper">
 
-    <select id="getClientVoListData">
+    <select id="getClientVoList">
         SELECT
         C.NO
         , C.RANK_CODE
-        , CR.NAME AS RANK_NAME
         , C.STATUS_NO
-        , CS.NAME AS STATUS_NAME
         , C.NAME
-        , C.ADDRESS
+        , C.POST_ADDRESS
+        , C.ROAD_ADDRESS
+        , C.DETAIL_ADDRESS
         , C.PRESIDENT_NAME
         , C.PRESIDENT_PHONE
         , C.PRESIDENT_EMAIL
         , C.START_DATE
         , P.MANAGER_NAME
         , P.MANAGER_PHONE
+        , CR.NAME AS RANK_NAME
+        , CS.NAME AS STATUS_NAME
         FROM
         CLIENT C
         LEFT JOIN CLIENT_RANK CR ON ( C.RANK_CODE = CR.NO )
@@ -42,6 +44,7 @@
             </if>
         </where>
         ORDER BY C.NO DESC
+        OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
     </select>
 
     <select id="getPrjVoList">
@@ -52,7 +55,9 @@
         C.STATUS_NO,
         CS.NAME AS STATUS_NAME,
         C.NAME,
-        C.ADDRESS,
+        C.POST_ADDRESS,
+        C.ROAD_ADDRESS,
+        C.DETAIL_ADDRESS,
         C.PRESIDENT_NAME,
         C.PRESIDENT_PHONE,
         C.PRESIDENT_EMAIL,
@@ -87,7 +92,9 @@
         C.STATUS_NO,
         CS.NAME AS STATUS_NAME,
         C.NAME,
-        C.ADDRESS,
+        C.POST_ADDRESS,
+        C.ROAD_ADDRESS,
+        C.DETAIL_ADDRESS,
         C.PRESIDENT_NAME,
         C.PRESIDENT_PHONE,
         C.PRESIDENT_EMAIL,

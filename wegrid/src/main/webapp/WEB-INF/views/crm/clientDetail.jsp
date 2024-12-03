@@ -45,7 +45,7 @@
                     <div class="info-line"></div>
                     
                     <div class="blueTag">주소</div>
-                    <div class="whiteTag" id="addressName">${vo.address}</div>
+                    <div class="whiteTag" id="addressName">${vo.roadAddress}${vo.detailAddress}</div>
                     <div class="blueTag">등급</div>
                     <div class="whiteTag">${vo.rankName}</div>
                     <div class="blueTag">거래 시작일</div>

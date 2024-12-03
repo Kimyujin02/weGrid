@@ -40,7 +40,10 @@
 }
 
 .paging-area {
+    display: grid;
     grid-column: span 4;
+    grid-template-columns: repeat(7, 1fr);
+    column-gap: 15px;
     place-self: center;
 }
 
@@ -69,7 +72,7 @@
 
 .search-box {
     display: grid;
-    grid-template-columns: 1fr 250px 20px;
+    grid-template-columns: 150px 200px 20px;
     gap: 5px;
     align-items: center;
     justify-items: end;
@@ -145,22 +148,23 @@
 .linked-name > a {
     color: black;
     text-decoration: none;
-};
+}
 
 
 /* ----------------------
 -------- paging ---------
 ------------------------- */
 
-
-.paging-area > span > a {
+.paging-area .pageNum {
     text-decoration: none;
     color: #797979;
     font-weight: bold;
 }
 
-.paging-area > span > #black {
-    color: black;
+.paging-area .current {
+    text-decoration: none;
+    color: #174880;
+    font-weight: bold;
 }
 
 
