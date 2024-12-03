@@ -1,12 +1,12 @@
 // 일정 추가
-function write(date) {
+function openWriteModal(date) {
 
     // 창 실행 전 내용 초기화
     document.querySelector("#calendar_title").value = "";
     document.querySelector("#calendar_content").value = "";
     document.querySelector("#calendar_start_date").value = "";
     document.querySelector("#calendar_end_date").value = "";
-    // document.querySelector("#calendar_type").value = "";
+    document.querySelector("#calendar_type").value = "";
 
     // 전달받은 날짜 정보 YYYY-MM-DD 형식으로 변환
     const yyyy = date.getFullYear().toString();
@@ -14,7 +14,6 @@ function write(date) {
     mm = mm < 10 ? '0' + mm.toString() : mm.toString();
     let dd = date.getDate();
     dd = dd < 10 ? '0' + dd.toString() : dd.toString();
-
 
     // 입력창 기본 날짜 설정
     // const todayDate = info.dateStr+"T00:00"; // 클릭할 날짜 값을 input 태그 형식에 맞게 00시로 변환
@@ -79,14 +78,11 @@ function loadTypeInfo(){
         }
 
     }else{
-        console.log(selectTag.firstElementChild);
-        
         selectTag.firstElementChild.setAttribute("selected","selected");
     }
     
     let colorTag = document.querySelector("input[name=color]");
     if(colorTag == null){
-
         colorTag = document.createElement("input");
         colorTag.setAttribute("type","color");
         colorTag.setAttribute("name","color");
@@ -105,9 +101,18 @@ function loadTypeInfo(){
 
 
 function insertToDB(){
-    
+
     // 입력할 데이터 수집
-    var formData = $("form").serialize();
+    const aa = document.querySelector("form");
+    var formData = new FormData(aa);
+    const a = $("#calendar_title").val();
+    console.log(a);
+    
+    console.log(aa);
+    console.log(formData);
+
+    // formData = $("form").serialize();
+    return false;
 
     // 서버에 데이터 전달
     $.ajax({
@@ -116,9 +121,8 @@ function insertToDB(){
         data: formData,
         success: function(result){
             console.log(result);
-
             
-            loadEvents(date);
+            // loadEvents(date,typeNo);
         },
         error: function(){
             

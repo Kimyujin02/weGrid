@@ -31,13 +31,13 @@
     <main>
 
         <div class="calendar-filter-area">
-            <div class="filter-box personal-calendar-color selected-calendar" id="personal" value="1">
+            <div class="filter-box personal-calendar-color selected-calendar" id="personal" no="1">
                 개인
             </div>
-            <div class="filter-box department-calendar-color selected-calendar" id="department" value="2">
+            <div class="filter-box department-calendar-color selected-calendar" id="department" no="2">
                 부서
             </div>
-            <div class="filter-box project-calendar-color selected-calendar" id="project" value="3">
+            <div class="filter-box project-calendar-color selected-calendar" id="project" no="3">
                 프로젝트
             </div>
         </div>
@@ -49,6 +49,7 @@
 
         <!-- 모달창 include -->
         <%@ include file="/WEB-INF/views/calendar/write.jsp" %>
+        <%@ include file="/WEB-INF/views/calendar/detail.jsp" %>
     </main>
 </body>
 </html>

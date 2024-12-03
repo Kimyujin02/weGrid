@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,23 +33,36 @@ public class CalendarController {
     // 캘린더 데이터 불러오기
     @GetMapping("load")
     @ResponseBody
-    public HashMap loadCalendar(String date,int typeNo){
+    public HashMap loadCalendar(String date,String type){
         System.out.println("컨트롤러 시작");
         System.out.println("date = " + date);
-        System.out.println("typeNo = " + typeNo);
+        System.out.println("type = " + type);
         HashMap map = new HashMap();
 
-        List<EventVo> eventVoList = service.loadEvent(date,typeNo);
+        List<EventVo> eventVoList = service.loadEvent(date,type);
 
         map.put("events",eventVoList);
-        map.put("id",date+"_"+typeNo);
-        map.put("className",typeNo+"_schedule");
+        map.put("id",date+"_"+type);
+        map.put("className",type+"_schedule");
         map.put( "textColor", "black");
         System.out.println("eventVoList = " + eventVoList);
 
         return map;
     }
-    
+
+    // 일정 상세정보 조회ByNo
+    @GetMapping("detail")
+    @ResponseBody
+    public CalendarVo getScheduleByNo(String no, Model model){
+        
+        // service 호출
+        CalendarVo vo = service.getScheduleByNo(no);
+        model.addAttribute("calendarVo", vo);
+
+        return vo;
+
+    }//getScheduleByNo
+
     // 일정 추가
     @PostMapping("write")
     @ResponseBody
@@ -66,7 +80,6 @@ public class CalendarController {
         return result;
         
     }//write
-
 
     // 캘린더 항목 별 정보 조회
     @GetMapping("getTypeInfo")

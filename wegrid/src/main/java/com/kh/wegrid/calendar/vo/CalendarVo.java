@@ -9,7 +9,9 @@ public class CalendarVo {
     private String writerNo;
     private String writerName;
     private String typeNo;
+    private String typeName;
     private String kindNo;
+    private String kindName;
     private String isEditable;
     private String title;
     private String content;

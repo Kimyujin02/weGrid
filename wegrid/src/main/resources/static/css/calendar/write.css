@@ -1,4 +1,8 @@
 
+#writeModal > div > div{
+    background-color: #EFEFEF;
+}
+
 .date-label-area, .date-input-area {
     display: flex;
     align-items: center;
@@ -21,7 +25,6 @@
     align-items: start;
     justify-content: space-between;
 }
-
 
 .kindBox {
     display: flex;
