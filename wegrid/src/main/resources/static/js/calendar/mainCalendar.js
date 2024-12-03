@@ -76,7 +76,10 @@ function showEvtSource(evt){
 }
 
 function hideEvtSource(evt){
-    const targetArr = document.querySelectorAll("."+evt.target.no+"_schedule");
+    
+    console.log("no 값 : ",evt.target.id);
+    
+    const targetArr = document.querySelectorAll("."+evt.target.id+"_schedule");
     for(let i = 0; i < targetArr.length; i++){
         targetArr[i].classList.add('hidden-schedule');
     }
@@ -114,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     console.log("캘린더 생성");
     
-    loadCalendar(today);   
-    loadEvents(today);
+    loadCalendar();
+    loadEvents(today,0);
 
 })

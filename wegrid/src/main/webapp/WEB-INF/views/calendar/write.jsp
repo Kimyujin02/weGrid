@@ -14,13 +14,12 @@
                         <span aria-hidden="true">&times;</span>
                     </button> -->
                     
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
-
+                    <label for="calendar_type" class="col-form-label">항목</label>
                     <div class="type-area">
-                        <label for="calendar_type" class="col-form-label">항목</label>
                         <select name="typeNo" class="form-control" id="calendar_type">
 
                         </select>
@@ -32,8 +31,8 @@
                     <br>
                     <div class="date-area">
                         <div class="date-label-area">
-                            
-                            <label for="calendar_end_date" class="col-form-label">종료일</label>
+                            <label for="calendar_start_date" class="col-form-label">시작</label>
+                            <label for="calendar_end_date" class="col-form-label">종료</label>
                         </div>
                         <div class="date-input-area">
                             <input type="datetime-local" class="form-control" id="calendar_start_date" name="startDate">
@@ -67,11 +66,11 @@
                         <label for="calendar_content" class="col-form-label">상세 내용</label>
                         <textarea class="form-control" id="calendar_content" name="content"></textarea>
                     </div>
-                    
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" id="addCalendar"  >추가</button>
+                <button type="submit" class="btn btn-primary" id="addCalendar">추가</button>
+                <!-- <button type="button" class="btn btn-primary" id="addCalendar"  onclick="insertToDB();">추가</button> -->
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
             </div>
             </form>
