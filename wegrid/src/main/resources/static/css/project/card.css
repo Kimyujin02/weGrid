@@ -69,10 +69,11 @@ main {
     padding-top: 60px;
     justify-content: center;
     align-items: center;
-    margin-left: 50px
+    margin-left: 50px;
 }
 
 #card{
+    cursor: pointer;
     width: 300px; 
     margin: 20px;
     background-color: #fff; 

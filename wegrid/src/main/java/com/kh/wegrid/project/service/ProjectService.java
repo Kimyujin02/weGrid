@@ -1,6 +1,7 @@
 package com.kh.wegrid.project.service;
 
 import com.kh.wegrid.project.mapper.ProjectMapper;
+import com.kh.wegrid.project.vo.EmployeeVo;
 import com.kh.wegrid.project.vo.ProjectMemberVo;
 import com.kh.wegrid.project.vo.ProjectVo;
 import com.kh.wegrid.util.page.PageVo;
@@ -19,10 +20,17 @@ public class ProjectService {
 
     private final ProjectMapper mapper;
 
+
     // 프로젝트 생성
     public int create(ProjectVo vo) {
         return mapper.create(vo);
     }
+
+    // 사원 검색
+    public List<EmployeeVo> searchEmployees(String query) {
+        return mapper.searchEmployees(query);
+    }
+
 
     // 프로젝트 목록
     public List<ProjectVo> getProjectList(PageVo pvo, String searchType) {
@@ -40,13 +48,20 @@ public class ProjectService {
     }
 
 
-    // 프로젝트 참여 인원
-    public int memberCnt(ProjectMemberVo pmvo) {
-        return mapper.memberCnt(pmvo);
-    }
-
     // 프로젝트 상세조회
     public ProjectVo getProjectByNo(String no) {
         return mapper.getProjectByNo(no);
+    }
+
+    public List<ProjectMemberVo> getPeopleList(PageVo pvo) {
+        return mapper.getPeopleList(pvo);
+    }
+
+    public ProjectVo getPeopleByNo(String no) {
+        return mapper.getPeopleByNo(no);
+    }
+
+    public int getMemberCnt() {
+        return mapper.getMemberCnt();
     }
 }

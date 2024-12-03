@@ -12,4 +12,11 @@ public class ProjectMemberVo {
     private String startDate;
     private String endDate;
     private String delYn;
+
+    private String projectName;
+    private String name;
+    private String empName;
+    private String empNum;
+    private String email;
+    private String deptNo;
 }

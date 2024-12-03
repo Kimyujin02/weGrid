@@ -1,6 +1,6 @@
 package com.kh.wegrid.systemManager.mapper;
 
-import com.kh.wegrid.systemManager.vo.SystemManagerVo;
+import com.kh.wegrid.member.vo.MemberVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -37,5 +37,5 @@ public interface SystemManergerMapper {
                 , #{isManager}
             )
             """)
-    int create(SystemManagerVo vo);
+    int create(MemberVo vo);
 }

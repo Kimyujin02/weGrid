@@ -24,7 +24,7 @@
    <%@ include file="/WEB-INF/views/common/nav.jsp" %>
 
     <!-- Main -->
-        <>
+        <main>
             <div class="main-content " id="main-content">
             <div id="content">
                 <h2 class="sub-title">프로젝트 리스트</h2>

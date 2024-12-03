@@ -10,6 +10,7 @@ public class ProjectVo {
     private String clientNo;
     private String clientName;
     private String empNo;
+    private String empName;
     private int statusNo;
     private String statusName;
     private String projectName;

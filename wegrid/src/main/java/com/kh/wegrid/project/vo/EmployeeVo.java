@@ -1,9 +1,9 @@
-package com.kh.wegrid.systemManager.vo;
+package com.kh.wegrid.project.vo;
 
 import lombok.Data;
 
 @Data
-public class SystemManagerVo {
+public class EmployeeVo {
 
     private String no;
     private String deptNo;

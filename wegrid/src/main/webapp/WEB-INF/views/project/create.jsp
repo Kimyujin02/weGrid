@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/css/project/create.css">
 
 <script defer src="/js/common/main.js"></script>
-<script defer src="/js/project/create.js"></script>
+<script defer src="/js/project/creates.js"></script>
 
 </head>
 <body>
@@ -90,7 +90,7 @@
                         <div class="place"></div>
                     </div>
         
-                    <!-- 사람 추가 관리 섹션 -->
+                   <!-- 사람 추가 관리 섹션 -->
                     <div class="add-personnel">
                         <div class="personnel-list" id="personnelList">
                             <button type="button" class="add-btn" onclick="addOpenModal()">+</button>
@@ -124,21 +124,21 @@
         
     </main>
 
-    <!-- 사원 검색 모달 -->
-    <div id="searchModal" class="personAddmodal" style="display: none;">
-        <div class="personModal-content">
-            <span class="close-btn" onclick="addCloseModal()">&times;</span>
-            <h4>사원 검색</h4>
-            <input
-                type="text"
-                id="employeeSearch"
-                placeholder="사원명을 입력하세요"
-                oninput="searchEmployee(this.value)"
-            />
-            <ul id="employeeResults"></ul>
-        </div>
-    </div>
 
+<!-- 사원 검색 모달 -->
+<div id="searchModal" class="personAddmodal" style="display: none;">
+    <div class="personModal-content">
+        <span class="close-btn" onclick="addCloseModal()">&times;</span>
+        <h4>사원 검색</h4>
+        <input
+            type="text"
+            id="employeeSearch"
+            placeholder="사원명을 입력하세요"
+            oninput="searchEmployee(this.value)"
+        />
+        <ul id="employeeResults"></ul>
+    </div>
+</div>
 </body>
 </html>
 

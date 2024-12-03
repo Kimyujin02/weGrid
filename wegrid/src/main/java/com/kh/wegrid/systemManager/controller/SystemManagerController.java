@@ -1,7 +1,7 @@
 package com.kh.wegrid.systemManager.controller;
 
+import com.kh.wegrid.member.vo.MemberVo;
 import com.kh.wegrid.systemManager.service.SystemManagerSevice;
-import com.kh.wegrid.systemManager.vo.SystemManagerVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,7 @@ public class SystemManagerController {
 
     // 계정 생성 요청
     @PostMapping("create")
-    public String create(SystemManagerVo vo){
+    public String create(MemberVo vo){
         int result = service.create(vo);
 
         if(result > 0){

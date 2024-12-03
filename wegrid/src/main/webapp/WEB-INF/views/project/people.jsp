@@ -35,22 +35,25 @@
                 <table class="project-table">
                     <thead>
                         <tr style="border-top: 1px solid #797979ab;">
+
+                            <!-- 프로젝트 번호를 hidden 필드로 추가 -->
+                            <input type="hidden" name="projectNo" value="${vo.projectNo}">
                             <th>프로젝트 명</th>
-                            <td>${projectName}</td>
+                            <td>${vo.projectName}</td>
                             <th>담당 PM</th>
-                            <td>${pmName}</td>
+                            <td>${vo.pmName}</td>
                             <th>고객사 담당자</th>
-                            <td>${managerName}</td>
+                            <td>${vo.managerName}</td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <th>고객사</th>
-                            <td>${clientName}</td>
+                            <td>${vo.clientName}</td>
                             <th>고객 등급</th>
                             <td>A</td>
                             <th>고객사 연락처</th>
-                            <td>${managerPhone}</td>
+                            <td>${vo.managerPhone}</td>
                         </tr>
                         <tr>
                             <th>진행 현황</th>
@@ -63,7 +66,7 @@
                                 </c:choose>
                             </td>
                             <th>예산</th>
-                            <td>₩ ${budget}</td>
+                            <td>₩ ${vo.budget}</td>
                             <th>프로젝트 기간</th>
                             <td><p class="project-dates" data-start="${vo.startDate}" data-end="${vo.endDate}">
                                 ${vo.startDate} ~ ${vo.endDate}</p>
@@ -71,7 +74,7 @@
                         </tr>
                         <tr>
                             <th>내용</th>
-                            <td colspan="5">${description}</td>
+                            <td colspan="5">${vo.description}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -117,76 +120,41 @@
                                 <th>소속부서</th>
                                 <th>담당업무</th>
                                 <th>이메일</th>
-                                <th>시작일</th>
-                                <th>종료일</th>
+                                <!-- <th>시작일</th>
+                                <th>종료일</th> -->
                             </tr>
                         </thead>
                   
                         <tbody >
                             <c:forEach items="${voList}" var="vo">
                                 <tr class="list-middle">
-                                    <td>${vo.employeeName}</td>
-                                    <td>${vo.empNo}</td>
-                                    <td>${vo.jobName}</td>
-                                    <td>몰루?</td>
+                                    <td>${vo.empName}</td>
+                                    <td>${vo.empNum}</td>
+                                    <td>${vo.name}</td>
+                                    <td>${vo.deptNo}</td>
                                     <td>${vo.email}</td>
-                                    <td>${vo.startDate}</td>
-                                    <td>${vo.endDate}</td>
+                                    <!-- <td>${vo.startDate}</td>
+                                    <td>${vo.endDate}</td> -->
                                 </tr>
                             </c:forEach>
                             
-                            <tr class="list-middle">
-                                <td>홍길동</td>
-                                <td>kh123456</td>
-                                <td>영업 1팀</td>
-                                <td>몰루?</td>
-                                <td>kh1234@gmail.com</td>
-                                <td>2024.11.22</td>
-                                <td>2024.12.10</td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td>홍길동</td>
-                                <td>kh123456</td>
-                                <td>영업 1팀</td>
-                                <td>몰루?</td>
-                                <td>kh1234@gmail.com</td>
-                                <td>2024.11.22</td>
-                                <td>2024.12.10</td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td>홍길동</td>
-                                <td>kh123456</td>
-                                <td>영업 1팀</td>
-                                <td>몰루?</td>
-                                <td>kh1234@gmail.com</td>
-                                <td>2024.11.22</td>
-                                <td>2024.12.10</td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td>홍길동</td>
-                                <td>kh123456</td>
-                                <td>영업 1팀</td>
-                                <td>몰루?</td>
-                                <td>kh1234@gmail.com</td>
-                                <td>2024.11.22</td>
-                                <td>2024.12.10</td>
-                            </tr>
-                            <tr class="list-middle"><td colspan="8" class="empty-row">데이터가 없습니다.</td></tr>
-                            <tr class="list-middle"><td colspan="8" class="empty-row">데이터가 없습니다.</td></tr>
-                            <tr class="list-middle"><td colspan="8" class="empty-row">데이터가 없습니다.</td></tr>
-                            <tr class="list-middle"><td colspan="8" class="empty-row">데이터가 없습니다.</td></tr>
-                            <tr class="list-middle"><td colspan="8" class="empty-row">데이터가 없습니다.</td></tr>
-                            <tr class="list-middle"><td colspan="8" class="empty-row">데이터가 없습니다.</td></tr>
-                            <tr class="list-middle"><td colspan="8" class="empty-row">데이터가 없습니다.</td></tr>
-                            <tr class="list-middle"><td colspan="8" class="empty-row">데이터가 없습니다.</td></tr>
-                            <tr class="list-middle"><td colspan="8" class="empty-row">데이터가 없습니다.</td></tr>
                         </tbody>
                         
                     </table>
                     <div class="bottom-line"></div>
-                    <div class="page-area">
-                        <!-- js에서 동적으로 버튼 만들어줌 -->
-                     </div>
+                    <div class="page">
+                        <c:if test="${pvo.startPage != 1}">
+                            <a href="/project/people?pno=${pvo.startPage-1}&searchValue=${searchValue}">◀</a>
+                        </c:if>
+                       
+                         <c:forEach begin ="${pvo.startPage}" end="${pvo.endPage}" var="i" step="1">
+                         <a href="/project/people?pno=${i}&searchValue=${searchValue}">${i}</a>
+                         </c:forEach>
+            
+                         <c:if test="${pvo.endPage != pvo.maxPage}">
+                            <a href="/project/people?pno=${pvo.endPage+1}&searchValue=${searchValue}">▶</a>
+                         </c:if>
+                </div>
                 </div>
 
                 </div>
@@ -253,43 +221,12 @@
                 <div class="profile">
                     <img src="profile1.jpg" alt="사원" class="profile-img">
                     <div class="profile-info">
-                        <span class="name">김태훈</span>
-                        <span class="role">조장</span>
+                        <span class="name">${vo.empName}</span>
+                        <span class="role">${vo.name}</span>
                     </div>
                 </div>
                 <hr>
-                <div class="profile">
-                    <img src="profile2.jpg" alt="왕두수" class="profile-img">
-                    <div class="profile-info">
-                        <span class="name">왕두수</span>
-                        <span class="role">디자인팀</span>
-                    </div>
-                </div>
-                <hr>
-                <div class="profile">
-                    <img src="profile3.jpg" alt="???" class="profile-img">
-                    <div class="profile-info">
-                        <span class="name">????</span>
-                        <span class="role">??</span>
-                    </div>
-                </div>
-                <hr>
-                <div class="profile">
-                    <img src="profile3.jpg" alt="???" class="profile-img">
-                    <div class="profile-info">
-                        <span class="name">????</span>
-                        <span class="role">??</span>
-                    </div>
-                </div>
-                <hr>
-                <div class="profile">
-                    <img src="profile3.jpg" alt="???" class="profile-img">
-                    <div class="profile-info">
-                        <span class="name">????</span>
-                        <span class="role">??</span>
-                    </div>
-                </div>
-                <hr>
+    
             </div>
             
          </div>

@@ -16,13 +16,18 @@ function addCloseModal() {
     modal.style.display = 'none';
 }
 
-// 사원 검색 함수 (샘플 데이터 활용)
+// 사원 검색 함수
 function searchEmployee(query) {
     const resultsContainer = document.getElementById('employeeResults');
-    resultsContainer.innerHTML = ''; // 기존 검색 결과 초기화
+    resultsContainer.innerHTML = " "; // 기존 검색 결과 초기화
+    
+    // 검색어가 없으면 중단
+    if (query.trim() === '') {
+        return; 
+    }
 
-    // 간단한 검색 데이터 시뮬레이션
-    const sampleData = [
+    //간단한 검색 데이터 시뮬레이션
+    const name = [
         '김철수',
         '김태훈',
         '정재성',
@@ -32,10 +37,31 @@ function searchEmployee(query) {
         '홍길동'
     ];
 
-    // 입력값과 일치하는 데이터 필터링
-    const filteredData = sampleData.filter((name) =>
+    //입력값과 일치하는 데이터 필터링
+    const filteredData = name.filter((name) =>
         name.includes(query.trim())
     );
+
+     // AJAX 요청
+     $.ajax({
+        url: '/employee/search',
+        method: 'GET',
+        data: { query },
+        success: function (data) {
+            // 검색 결과 렌더링
+            data.forEach((employee) => {
+                const li = $('<li></li>').text(employee.name);
+                li.on('click', function () {
+                    selectEmployee(employee.name); // 사원 선택 시 이벤트
+                });
+                resultsContainer.appendChild(li);
+            });
+        },
+        error: function (error) {
+            console.error('Error-employees:', error);
+            alert('사원 검색에 실패했습니다.');
+        }
+    });
 
     // 필터링된 결과를 리스트에 추가
     filteredData.forEach((name) => {
