@@ -9,6 +9,7 @@ import com.kh.wegrid.util.page.PageVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -57,7 +58,7 @@ public interface CrmMapper {
             )
             VALUES
             (
-                SEQ_CLIENT.NEXTVAL
+                CLIENT_SEQ.NEXTVAL
                 , #{rankCode}
                 , #{name}
                 , #{postAddress}
@@ -95,8 +96,31 @@ public interface CrmMapper {
             """)
     ClientVo getClientDetail(String cno);
 
+    @Select("""
+            SELECT COUNT(*)
+            FROM PROJECT
+            WHERE CLIENT_NO = #{cno}
+              AND PROJECT_NAME LIKE '%' || #{searchValue} || '%'
+            """)
     int getPrjCnt(String cno, String searchValue);
 
+    @Select("""
+            SELECT
+                P.NO AS PROJECT_NO,
+                P.PROJECT_NAME,
+                P.START_DATE,
+                P.END_DATE,
+                P.CLIENT_NO,
+                PS.NAME AS STATUS_NAME
+            FROM
+                PROJECT P
+                JOIN PROJECT_STATUS PS ON ( P.STATUS_NO = PS.NO )
+            WHERE
+                P.PROJECT_NAME LIKE '%' || #{searchValue} || '%'
+                AND P.CLIENT_NO = #{cno}
+            ORDER BY P.NO DESC
+            OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
+            """)
     List<ProjectVo> getProjectVoList(String cno, PageVo pvo, String searchValue);
 
     @Select("""
@@ -104,18 +128,118 @@ public interface CrmMapper {
                 CH.NO,
                 CH.CLIENT_NO,
                 CH.WRITER_NO,
-                E.NAME,
                 CH.INQUIRY,
                 CH.REPLY,
-                CH.ENROLL_DATE
+                CH.ENROLL_DATE,
+                CH.DEL_YN,
+                E.NAME AS WRITER_NAME
             FROM
                 CLIENT_HISTORY CH
                 LEFT JOIN EMPLOYEE E ON ( CH.WRITER_NO = E.NO )
             WHERE
                 CH.CLIENT_NO = #{cno}
                 AND CH.INQUIRY LIKE '%' || #{searchValue} || '%'
+            ORDER BY CH.NO DESC
+            OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
             """)
-    List<ClientHistoryVo> getHistoryVoList(String cno, String searchValue);
+    List<ClientHistoryVo> getHistoryVoList(String cno, PageVo pvo, String searchValue);
 
+    @Update("""
+            UPDATE CLIENT
+            SET
+                NAME = #{name},
+                POST_ADDRESS = #{postAddress},
+                ROAD_ADDRESS = #{roadAddress},
+                DETAIL_ADDRESS = #{detailAddress},
+                RANK_CODE = #{rankCode},
+                PRESIDENT_NAME = #{presidentName},
+                PRESIDENT_EMAIL = #{presidentEmail},
+                PRESIDENT_PHONE = #{presidentPhone}
+            WHERE
+                NO = #{no}
+            """)
+    int editClient(ClientVo vo);
 
+    @Select("""
+            SELECT COUNT(*)
+            FROM CLIENT_HISTORY
+            WHERE CLIENT_NO = #{cno}
+            """)
+    int getHistoryCnt(String cno);
+
+    @Select("""
+            SELECT
+                CH.NO,
+                CH.CLIENT_NO,
+                CH.WRITER_NO,
+                CH.INQUIRY,
+                CH.REPLY,
+                CH.ENROLL_DATE,
+                CH.DEL_YN,
+                E.NAME AS WRITER_NAME
+            FROM
+                CLIENT_HISTORY CH
+                LEFT JOIN EMPLOYEE E ON ( CH.WRITER_NO = E.NO )
+            WHERE
+                CH.CLIENT_NO = #{cno}
+            ORDER BY CH.NO DESC
+            OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
+            """)
+    List<ClientHistoryVo> getHistoryVoListMini(String cno, PageVo pvo);
+
+    @Insert("""
+            INSERT INTO CLIENT_HISTORY
+            (
+                NO
+                , CLIENT_NO
+                , WRITER_NO
+                , INQUIRY
+                , REPLY
+                , ENROLL_DATE
+                , DEL_YN
+            )
+            VALUES
+            (
+                SEQ_CLIENT_HISTORY.NEXTVAL
+                , #{cno}
+                , #{eno}
+                , #{vo.inquiry}
+                , #{vo.reply}
+                , SYSDATE
+                , 'N'
+            )
+            """)
+    int createHistory(ClientHistoryVo vo, String cno, String eno);
+
+    @Select("""
+            SELECT
+                NO
+                , CLIENT_NO
+                , WRITER_NO
+                , INQUIRY
+                , REPLY
+                , ENROLL_DATE
+            FROM
+                CLIENT_HISTORY
+            WHERE
+                NO = #{hno}
+                AND DEL_YN = 'N'
+            """)
+    ClientHistoryVo getHistoryDetail(String hno);
+
+//    @Select("""
+//            SELECT
+//                NO,
+//                CLIENT_NO,
+//                WRITER_NO,
+//                INQUIRY,
+//                REPLY,
+//                ENROLL_DATE,
+//                DEL_YN
+//            FROM
+//                CLIENT_HISTORY
+//            WHERE
+//                CLIENT_NO = #{cno}
+//            """)
+//    ClientHistoryVo getClientHistory(String cno);
 }

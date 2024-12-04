@@ -13,5 +13,6 @@ public class ClientHistoryVo {
     private String reply;
     private String enrollDate;
     private String delYn;
+    private String writerName;
 
 }

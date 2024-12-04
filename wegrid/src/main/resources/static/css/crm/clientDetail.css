@@ -237,6 +237,12 @@ main {
     font-weight: bold;
 }
 
+.linked-name > a {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
 
 
 /* ----------------------
@@ -251,19 +257,23 @@ main {
     align-items: center; /* 세로 정렬 */
 }
 
-.paging-area > span > a {
+/* .paging-area {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    column-gap: 15px;
+    place-self: center;
+} */
+
+.paging-area .pageNum {
     text-decoration: none;
     color: #797979;
     font-weight: bold;
 }
 
-.paging-area > span > #black {
-    color: black;
-}
-
-.linked-name a {
-    color: black;
+.paging-area .current {
     text-decoration: none;
+    color: #174880;
+    font-weight: bold;
 }
 
 /* ----------------------

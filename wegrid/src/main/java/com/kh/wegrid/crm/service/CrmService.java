@@ -51,12 +51,37 @@ public class CrmService {
         return mapper.getProjectVoList(cno, pvo, searchValue);
     }
 
+    // 고객사 등록
     public int enrollClient(ClientVo vo) {
         return mapper.enrollClient(vo);
     }
 
-    public List<ClientHistoryVo> getHistoryVoList(String cno, String searchValue) {
-        return mapper.getHistoryVoList(cno, searchValue);
+    // 고객사 정보 수정
+    public int editClient(ClientVo vo) {
+        return mapper.editClient(vo);
     }
 
+    // 히스토리 카운트
+    public int getHistoryCnt(String cno) {
+        return mapper.getHistoryCnt(cno);
+    }
+
+    // 고객사 히스토리 목록
+    public List<ClientHistoryVo> getHistoryVoList(String cno, PageVo pvo, String searchValue) {
+        return mapper.getHistoryVoList(cno, pvo, searchValue);
+    }
+
+    // 고객사 히스토리 목록 (검색기능x)
+    public List<ClientHistoryVo> getHistoryVoListMini(String cno, PageVo pvo) {
+        return mapper.getHistoryVoListMini(cno, pvo);
+    }
+
+    // 고객사 히스토리 등록
+    public int createHistory(ClientHistoryVo vo, String cno, String eno) {
+        return mapper.createHistory(vo, cno, eno);
+    }
+
+    public ClientHistoryVo getHistoryDetail(String hno) {
+        return mapper.getHistoryDetail(hno);
+    }
 }

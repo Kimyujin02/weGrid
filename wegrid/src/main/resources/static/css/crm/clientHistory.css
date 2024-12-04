@@ -182,6 +182,12 @@ main {
     box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.form-submit {
+    background-color: white;
+    border: none;
+}
+
+
 .content-line {
     display: grid;
     width: 1400px;
@@ -190,6 +196,12 @@ main {
     background-color: #A7A7A7;
 
     justify-self: center;
+}
+
+.linked-name > a {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 /* ----------------------
@@ -291,12 +303,14 @@ td .btn-primary {
     align-items: center; /* 세로 정렬 */
 }
 
-.paging-area > span > a {
+.paging-area .pageNum {
     text-decoration: none;
     color: #797979;
     font-weight: bold;
 }
 
-.paging-area > span > #black {
-    color: black;
+.paging-area .current {
+    text-decoration: none;
+    color: #174880;
+    font-weight: bold;
 }
