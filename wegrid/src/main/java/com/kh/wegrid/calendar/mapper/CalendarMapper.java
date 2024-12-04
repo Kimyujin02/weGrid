@@ -6,6 +6,7 @@ import com.kh.wegrid.calendar.vo.EventVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -13,22 +14,22 @@ import java.util.List;
 public interface CalendarMapper {
 
     // 항목 별 이벤트 호출
-    @Select("""
-            SELECT
-                C.NO AS ID
-                , C.TYPE_NO
-                , C.TITLE
-                , TO_CHAR(C.START_DATE,'YYYY-MM-DD HH24:mi') AS "START"
-                , TO_CHAR(C.END_DATE,'YYYY-MM-DD HH24:mi') AS END
-                , C.COLOR
-            FROM CALENDAR C
-            JOIN EMPLOYEE E ON (C.WRITER_NO = E.NO)
-            JOIN CALENDAR_TYPE CT ON (C.TYPE_NO = CT.NO)
-            WHERE CT.TYPE = #{type}
-            AND TO_CHAR(C.START_DATE,'YYYY-MM') LIKE '${date}%'
-            ORDER BY C.START_DATE
-            """)
-    List<EventVo> loadEvent(String date, String type);
+//    @Select("""
+//            SELECT
+//                C.NO AS ID
+//                , C.TYPE_NO
+//                , C.TITLE
+//                , TO_CHAR(C.START_DATE,'YYYY-MM-DD HH24:mi') AS "START"
+//                , TO_CHAR(C.END_DATE,'YYYY-MM-DD HH24:mi') AS END
+//                , C.COLOR
+//            FROM CALENDAR C
+//            JOIN EMPLOYEE E ON (C.WRITER_NO = E.NO)
+//            JOIN CALENDAR_TYPE CT ON (C.TYPE_NO = CT.NO)
+//            WHERE CT.TYPE = #{type}
+//            AND TO_CHAR(C.START_DATE,'YYYY-MM') LIKE '${date}%'
+//            ORDER BY C.START_DATE
+//            """)
+    List<EventVo> loadEvent(String date, String type , int typeNo, String writerNo);
 
     // 일정 상세정보 조회
     @Select("""
@@ -42,8 +43,8 @@ public interface CalendarMapper {
                 , S.NAME AS KIND_NAME
                 , C.TITLE
                 , C.CONTENT
-                , C.START_DATE
-                , C.END_DATE
+                , TO_CHAR(C.START_DATE,'YYYY-MM-DD HH24:mi')
+                , TO_CHAR(C.END_DATE,'YYYY-MM-DD HH24:mi')
                 , C.COLOR
                 , C.DEL_YN
             FROM CALENDAR C
@@ -84,6 +85,16 @@ public interface CalendarMapper {
             """)
     int write(CalendarVo vo);
 
+    // 일정 삭제
+    @Update("""
+            UPDATE CALENDAR
+            SET
+                DEL_YN = 'Y'
+            WHERE NO = #{scheduleNo}
+            AND WRITER_NO = #{writerNo}
+            """)
+    int delete(String scheduleNo, String writerNo);
+
     // 캘린더 항목 별 정보 조회
     @Select("""
             SELECT
@@ -94,5 +105,5 @@ public interface CalendarMapper {
             FROM CALENDAR_TYPE
             """)
     List<CalendarTypeVo> getTypeInfo();
-
+    
 }//interface

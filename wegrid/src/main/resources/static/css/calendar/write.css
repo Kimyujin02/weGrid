@@ -53,24 +53,18 @@ input[type=radio] {
     display:  none;
 }
 
-/* input[type=radio]:checked:has(.typeBox) {
-    background-color: #999999;
-} */
-/* 체크되면 표시해줄 방법이  */
 input[type=radio]:checked {
     display: inline;
 }
 
-.type-area {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
 #calendar_type {
-    width: 80%;
+    width: 100%;
 }
 
 input[type=color]{
-    width: 10%;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    margin-right: 5px;
+    border-width: 0;
 }

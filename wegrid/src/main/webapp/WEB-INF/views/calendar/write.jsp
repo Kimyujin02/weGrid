@@ -10,20 +10,18 @@
             <form action="" onsubmit="return insertToDB();">
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalLabel">일정 추가</h4>
-                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button> -->
-                    
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
                     <label for="calendar_type" class="col-form-label">항목</label>
                     <div class="type-area">
+                        <input type="color" name="color">
                         <select name="typeNo" class="form-control" id="calendar_type">
 
                         </select>
                     </div>
+                    <br>
                     <div class="title-area">
                         <label for="calendar_title" class="col-form-label">제목</label>
                         <input type="text" class="form-control" id="calendar_title" name="title">
@@ -69,8 +67,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary" id="addCalendar">추가</button>
-                <!-- <button type="button" class="btn btn-primary" id="addCalendar"  onclick="insertToDB();">추가</button> -->
+                <button type="submit" class="btn btn-primary" id="addSchedule">추가</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
             </div>
             </form>
