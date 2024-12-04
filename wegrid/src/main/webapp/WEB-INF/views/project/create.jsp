@@ -50,8 +50,16 @@
                                 <br><br>
                                 <div>
                                     <label for="empNo">PM(담당자)</label>
-                                    <input type="text" id="empNo" name="empNo" required>
+                                    <input type="hidden" name="empNo" id="empNo">
+                                    <input
+                                        type="text"
+                                        id="empName"
+                                        oninput="searchPm(this.value)"
+                                        autocomplete="off" 
+                                    />
+                                    <p id="searchResults" class="search-results"></p> 
                                 </div>
+                                
                                 <br><br>
                                 <div>
                                     <label for="budget">예산</label>
@@ -62,8 +70,13 @@
                                 <br>
                                 <div>
                                     <label for="clientNo">고객사</label>
-                                    <input type="text" id="clientNo" name="clientNo" required>
+                                    <input type="hidden" name="clientNo" id="clientNo">
+                                    <input type="text" id="clientName"  
+                                    oninput="searchClient(this.value)" autocomplete="off" />
+                                    <ul id="searchClient" class="search-client"></ul> 
                                 </div>
+                                
+
                                 <br><br>
                                 <div>
                                     <label for="managerName">고객사 담당자</label>
@@ -116,7 +129,7 @@
                       <!-- 버튼 섹션 -->
                     <div id="section-button">
                         <button type="submit" class="btn btn-primary" id="create-btn">생성</button>
-                        <button type="button" class="btn btn-primary" id="delete-btn">취소</button>
+                        <button type="button" class="btn btn-primary" id="delete-btn" onclick="location.href='/project/list'">취소</button>
                     </div>
                 </div>
             </div>

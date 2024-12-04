@@ -30,9 +30,9 @@
             <div class="project-info">
                  <!-- 공백 -->
                  <div class="edit-icon">
-                    <a href="/project/edit"><i class="fas fa-edit" style="color:#666;"></i></a>
+                    <a href="/project/edit?projectNo=${vo.projectNo}"><i class="fas fa-edit" style="color:#666;"></i></a>
                 </div>
-                <table class="project-table">
+                <table class="project-table" id="project-tb">
                     <thead>
                         <tr style="border-top: 1px solid #797979ab;">
 
@@ -51,24 +51,18 @@
                             <th>고객사</th>
                             <td>${vo.clientName}</td>
                             <th>고객 등급</th>
-                            <td>A</td>
+                            <td>${vo.rankName}</td>
                             <th>고객사 연락처</th>
                             <td>${vo.managerPhone}</td>
                         </tr>
                         <tr>
                             <th>진행 현황</th>
-                            <td>
-                                <c:choose>
-                                <c:when test="${vo.statusNo == 1}"><span class="status-ready ">준비</span></c:when>
-                                <c:when test="${vo.statusNo == 2}"><span class="status-ongoing">진행</span></c:when>
-                                <c:when test="${vo.statusNo == 3}"><span class="status-completed">완료</span></c:when>
-                                <c:when test="${vo.statusNo == 4}"><span class="status-canceled">철회</span></c:when>
-                                </c:choose>
-                            </td>
+                            <td value="${statusVo.no}">${statusVo.name}</td>
+                                
                             <th>예산</th>
                             <td>₩ ${vo.budget}</td>
                             <th>프로젝트 기간</th>
-                            <td><p class="project-dates" data-start="${vo.startDate}" data-end="${vo.endDate}">
+                            <td><p id="project-dates" data-start="${vo.startDate}" data-end="${vo.endDate}">
                                 ${vo.startDate} ~ ${vo.endDate}</p>
                             </td>
                         </tr>
@@ -90,10 +84,10 @@
                 <div class="sidebar">
                
                     <div class="sidebar">
-                        <a href="/project/people" class="sidebar-btn active" id="btn1">
+                        <a href="/project/people?projectNo=${vo.projectNo}&pno=${vo.projectNo}" class="sidebar-btn active" id="btn1">
                             <i class="fas fa-user-friends"></i> 
                         </a>
-                        <a href="/project/attach" class="sidebar-btn" id="btn2">
+                        <a href="/project/attach?projectNo=${vo.projectNo}&pno=${vo.projectNo}" class="sidebar-btn" id="btn2">
                             <i class="fas fa-paperclip"></i>
                         </a>
                     </div>
@@ -130,7 +124,7 @@
                                 <tr class="list-middle">
                                     <td>${vo.empName}</td>
                                     <td>${vo.empNum}</td>
-                                    <td>${vo.name}</td>
+                                    <td>${vo.deptName}</td>
                                     <td>${vo.deptNo}</td>
                                     <td>${vo.email}</td>
                                     <!-- <td>${vo.startDate}</td>
@@ -144,7 +138,7 @@
                     <div class="bottom-line"></div>
                     <div class="page">
                         <c:if test="${pvo.startPage != 1}">
-                            <a href="/project/people?pno=${pvo.startPage-1}&searchValue=${searchValue}">◀</a>
+                            <a href="/project/people?pno=${pvo.startPage-1}&searchValue=${searchValue}"><i class="fas fa-caret-left fa-lg" style="color: #174880;"></i></a>
                         </c:if>
                        
                          <c:forEach begin ="${pvo.startPage}" end="${pvo.endPage}" var="i" step="1">
@@ -152,7 +146,7 @@
                          </c:forEach>
             
                          <c:if test="${pvo.endPage != pvo.maxPage}">
-                            <a href="/project/people?pno=${pvo.endPage+1}&searchValue=${searchValue}">▶</a>
+                            <a href="/project/people?pno=${pvo.endPage+1}&searchValue=${searchValue}"><i class="fas fa-caret-right fa-lg" style="color: #174880;"></i></a>
                          </c:if>
                 </div>
                 </div>
@@ -219,13 +213,18 @@
             <!-- 현재 참여인원 -->
             <div class="profile-card">
                 <div class="profile">
-                    <img src="profile1.jpg" alt="사원" class="profile-img">
+                    <!-- <img src="profile1.jpg" alt="사원" class="profile-img"> -->
+                    
                     <div class="profile-info">
-                        <span class="name">${vo.empName}</span>
-                        <span class="role">${vo.name}</span>
+                        <c:forEach items="${voList}" var="vo">
+                            <span class="name">${vo.empName}</span>
+                            <span class="role">${vo.deptName}</span>
+                            <hr>
+                        </c:forEach>
                     </div>
                 </div>
-                <hr>
+
+                
     
             </div>
             

@@ -17,6 +17,10 @@ main {
 
 /* /////////////////////////////////////////////////////////////////////////////////////// */
 
+.card-container a{
+    text-decoration: none;
+    color : black;
+}
 
 .header-menu {
     display: flex;

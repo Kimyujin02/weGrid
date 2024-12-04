@@ -1,14 +1,4 @@
-// 버튼 클릭 시 모달 열기
-// document.getElementById('schedule-btn').addEventListener('click', function() {
-//     var myModal = new bootstrap.Modal(document.getElementById('writeModal'));
-//     myModal.show();
-// });
 
-// 모달 닫기
-// function closeModal() {
-//     var myModal = bootstrap.Modal.getInstance(document.getElementById('writeModal')); // 모달 인스턴스 가져오기
-//     myModal.hide(); 
-// }
 
  // 모달 창 띄우기
  $("#writeModal").modal("show");
