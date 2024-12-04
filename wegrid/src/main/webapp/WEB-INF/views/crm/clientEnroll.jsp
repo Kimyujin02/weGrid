@@ -17,7 +17,7 @@
     <script defer src="/js/crm/clientEnroll.js"></script>
 
     <!-- 카카오 우편번호 서비스 스크립트 추가 (최신 경로) -->
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 최신 버전 -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 

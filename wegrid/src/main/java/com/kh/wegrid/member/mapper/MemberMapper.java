@@ -20,7 +20,9 @@ public interface MemberMapper {
                 , NAME
                 , PHONE
                 , EMAIL
-                , ADDRESS
+                , POST_ADDRESS
+                , ROAD_ADDRESS
+                , DETAIL_ADDRESS
                 , ENROLL_DATE
                 , MODIFY_DATE
                 , IS_MANAGER

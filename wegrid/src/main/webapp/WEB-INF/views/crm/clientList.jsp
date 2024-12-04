@@ -105,7 +105,7 @@
                             <c:forEach items="${clientVoList}" var="vo">
                                 <tr class="list-middle">
                                     <td>${vo.no}</td>
-                                    <td class="linked-name"><a href='/crm/detail?cno=${vo.no}'>${vo.name}</a></td>
+                                    <td class="linked-name"><a href='/crm/detail?cno=${vo.no}&pno=1'>${vo.name}</a></td>
                                     <td>${vo.rankName}</td>
                                     <td>${vo.startDate}</td>
                                 </tr>

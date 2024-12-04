@@ -27,33 +27,29 @@
             <div class="info-area">
                 <div class="title-name">
                     <h4>고객사 정보</h4>
-                    <button>
+                    <button onclick="location.href='/crm/edit?cno=${param.cno}'">
                         <i class="fa-solid fa-pen-to-square fa-xl" style="color: #174880;"></i>
                     </button>
                 </div>
                 
                 <div class="client-info">
                     <div class="blueTag">고객사 명</div>
-                    <div class="whiteTag">세미 프로젝트</div>
-                    <!-- <div class="blueTag">담당자</div> -->
-                    <!-- <div class="whiteTag">홍길동</div> -->
+                    <div class="whiteTag">${vo.name}</div>
                     <div class="blueTag">대표</div>
-                    <div class="whiteTag">청길동</div>
+                    <div class="whiteTag">${vo.presidentName}</div>
                     <div class="blueTag">이메일</div>
-                    <div class="whiteTag">yaho@naver.com</div>
+                    <div class="whiteTag">${vo.presidentEmail}</div>
                     <div class="blueTag">대표 번호</div>
-                    <div class="whiteTag">010-1234-5678</div>
+                    <div class="whiteTag">${vo.presidentPhone}</div>
                     
                     <div class="info-line"></div>
                     
                     <div class="blueTag">주소</div>
-                    <div class="whiteTag" id="addressName">서울특별시 강남구 테헤란로 14길 6</div>
-                    <!-- <div></div>
-                    <div></div> -->
+                    <div class="whiteTag" id="addressName">${vo.roadAddress}${vo.detailAddress}</div>
                     <div class="blueTag">등급</div>
-                    <div class="whiteTag">A</div>
+                    <div class="whiteTag">${vo.rankName}</div>
                     <div class="blueTag">거래 시작일</div>
-                    <div class="whiteTag">2024-11-28</div>
+                    <div class="whiteTag">${vo.startDate.split(" ")[0]}</div>
 
                     <div class="info-line"></div>
                 </div>
@@ -66,8 +62,8 @@
 
                 <div class="tab-area">
                     <div></div>
-                    <div class="prjTab"><button>프로젝트</button></div>
-                    <div class="hisTab"><button>히스토리</button></div>
+                    <div class="prjTab"><button onclick="location.href='/crm/detail?cno=${param.cno}'">프로젝트</button></div>
+                    <div class="hisTab"><button onclick="location.href='/crm/history?cno=${param.cno}'">히스토리</button></div>
                     <div></div>
                 </div>
 
@@ -91,42 +87,7 @@
                                 </thead>
                           
                                 <tbody>
-                                    <tr class="list-middle">
-                                        <!-- tbody안쪽은 js사용해서 동적으로 채워줌   -->
-                                        <td>5</td>
-                                        <td>홍길동</td>
-                                        <td>프로그램 강제종료 오류 발생</td>
-                                        <td>2024.11.28</td>
-                                        <td><button type="button" class="btn btn-primary">수정</button></td>
-                                    </tr>
-                                    <tr class="list-middle">
-                                        <td>4</td>
-                                        <td>홍길동</td>
-                                        <td>프로그램 강제종료 오류 발생</td>
-                                        <td>2024.11.27</td>
-                                        <td><button type="button" class="btn btn-primary">수정</button></td>
-                                    </tr>
-                                    <tr class="list-middle">
-                                        <td>3</td>
-                                        <td>홍길동</td>
-                                        <td>프로그램 강제종료 오류 발생</td>
-                                        <td>2024.05.28</td>
-                                        <td><button type="button" class="btn btn-primary">수정</button></td>
-                                    </tr>
-                                    <tr class="list-middle">
-                                        <td>2</td>
-                                        <td>홍길동</td>
-                                        <td>프로그램 메모리 누수</td>
-                                        <td>2024.01.28</td>
-                                        <td><button type="button" class="btn btn-primary">수정</button></td>
-                                    </tr>
-                                    <tr class="list-middle">
-                                        <td>1</td>
-                                        <td>홍길동</td>
-                                        <td>프로그램 메모리 누수</td>
-                                        <td>2023.11.27</td>
-                                        <td><button type="button" class="btn btn-primary">수정</button></td>
-                                    </tr>
+                                    <td>로딩중...</td>
                                 </tbody>
                                 <tfoot>
                                     <tr class="list-end">
@@ -141,20 +102,7 @@
                         </div>
 
                         <div class="paging-area">
-                            <!-- js에서 동적으로 버튼 만들어줌-->
-                            <span><a href="#!"><i class="fas fa-angle-double-left fa-lg" style="color: #174880;"></i></a></span>
-                            &nbsp;
-                            <span><a href="#!"><i class="fas fa-caret-left fa-lg" style="color: #174880;"></i></a></span>
-                            &nbsp;
-                            <span><a id="black" href="#!">1</a></span>
-                            &nbsp;
-                            <span><a href="#!">2</a></span>
-                            &nbsp;
-                            <span><a href="#!">3</a></span>
-                            &nbsp;
-                            <span><a href="#!"><i class="fas fa-caret-right fa-lg" style="color: #174880;"></i></a></span>
-                            &nbsp;
-                            <span><a href="#!"><i class="fas fa-angle-double-right fa-lg" style="color: #174880;"></i></a></span>
+                            
                         </div>
                     </div>
 
@@ -163,20 +111,21 @@
                     <div class="create-area">
                         <div class="history-title"><h5>히스토리 세부내용</h5></div>
                         <div>
-                            <form class="form-area" action="">
+                            <form class="form-area" action="/crm/history/create" method="post">
                                 <div class="query-insert">
                                     <div>문의 &nbsp;&nbsp;</div>
-                                    <textarea name="" id=""></textarea>
+                                    <textarea name="inquiry" id="inquiry"></textarea>
                                 </div>
                                 <div class="gray-line"></div>
                                 <div class="reply-insert">
                                     <div>답변 &nbsp;&nbsp;</div>
-                                    <textarea name="" id=""></textarea>
+                                    <textarea name="reply" id="reply"></textarea>
                                 </div>
+                                <input type="hidden" name="cno" value="${param.cno}">
                                 <div class="btn-area">
                                     <div></div>
-                                    <button>등록</button>
-                                    <button>취소</button>
+                                    <button type="submit">등록</button>
+                                    <button onclick="location.href='/crm/history?cno=${param.cno}'">취소</button>
                                     <div></div>
                                 </div>
                             </form>

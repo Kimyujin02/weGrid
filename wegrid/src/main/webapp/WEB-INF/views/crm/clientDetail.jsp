@@ -27,7 +27,7 @@
             <div class="info-area">
                 <div class="title-name">
                     <h4>고객사 정보</h4>
-                    <button onclick="location.href='/crm/edit?cno=${sessionScope.cno}'">
+                    <button onclick="location.href='/crm/edit?cno=${param.cno}'">
                         <i class="fa-solid fa-pen-to-square fa-xl" style="color: #174880;"></i>
                     </button>
                 </div>
@@ -62,8 +62,8 @@
 
                 <div class="tab_filter_search">
                     <div></div>
-                    <div class="prjTab"><button>프로젝트</button></div>
-                    <div class="hisTab"><button onclick="location.href='/crm/history?cno=${sessionScope.cno}'">히스토리</button></div>
+                    <div class="prjTab"><button onclick="location.href='/crm/project?cno=${param.cno}'">프로젝트</button></div>
+                    <div class="hisTab"><button onclick="location.href='/crm/history?cno=${param.cno}'">히스토리</button></div>
                     <div></div>
                     <div class="dropdown" id="drop">
                         <button class="dropdown-toggle">진행 현황 &nbsp;</button>
@@ -76,9 +76,9 @@
                         </div>
                     </div>
                     <div></div>
-                    <form class="search-box" method="get" action="/crm/detail" onsubmit="return submitSearchForm();">
+                    <form class="search-box" method="get" action="/crm/detail">
 
-                        <input id="searchInput" type="hidden" name="cno" value="${sessionScope.cno}">
+                        <input type="hidden" name="cno" value="${param.cno}">
                         <input id="searchInput" type="text" name="searchValue" placeholder="검색">
                         <button class="form-submit" type="submit">
                             <i class="fas fa-search"></i>
@@ -117,21 +117,9 @@
                 </div>
 
                 <div class="paging-area">
-                    <!-- js에서 동적으로 버튼 만들어줌-->
-                    <span><a href="#!"><i class="fas fa-angle-double-left fa-lg" style="color: #174880;"></i></a></span>
-                    &nbsp;
-                    <span><a href="#!"><i class="fas fa-caret-left fa-lg" style="color: #174880;"></i></a></span>
-                    &nbsp;
-                    <span><a id="black" href="#!">1</a></span>
-                    &nbsp;
-                    <span><a href="#!">2</a></span>
-                    &nbsp;
-                    <span><a href="#!">3</a></span>
-                    &nbsp;
-                    <span><a href="#!"><i class="fas fa-caret-right fa-lg" style="color: #174880;"></i></a></span>
-                    &nbsp;
-                    <span><a href="#!"><i class="fas fa-angle-double-right fa-lg" style="color: #174880;"></i></a></span>
+
                 </div>
+
             </div>
 
         </div>

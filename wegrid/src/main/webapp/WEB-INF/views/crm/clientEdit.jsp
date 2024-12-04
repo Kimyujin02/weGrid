@@ -27,7 +27,7 @@
     <main>
         <div class="main-content">
             
-            <form class="content-area" action="/crm/enroll" method="post">
+            <form class="content-area" action="/crm/edit" method="post">
                 <!-- row1 -->
                 <div class="title-area">
                     <h2 class="title-text">고객 수정</h2>
@@ -51,7 +51,7 @@
                         
                         <!-- 우편번호 입력 칸 -->
                         <div class="address-input_1">
-                            <input type="text" name="zipcode" id="zipcode" readonly placeholder="우편번호">
+                            <input type="text" name="postAddress" value="${vo.postAddress}" id="postAddress" readonly placeholder="우편번호">
                         </div>
                         
                         <div class="address-btn">
@@ -121,6 +121,7 @@
 
                     <div class="blank_space"></div>
                 </div>
+                <input type="hidden" name="no" value="${vo.no}">
 
                 <!-- row3 -->
                 <div class="btn-area">
@@ -142,7 +143,7 @@
                     new daum.Postcode({
                         oncomplete: function(data) {
                             // 우편번호 입력
-                            document.getElementById("zipcode").value = data.zonecode;
+                            document.getElementById("postAddress").value = data.zonecode;
 
                             // 도로명 주소 입력
                             document.getElementById("roadAddress").value = data.roadAddress;

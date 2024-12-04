@@ -27,7 +27,7 @@
             <div class="info-area">
                 <div class="title-name">
                     <h4>고객사 정보</h4>
-                    <button>
+                    <button onclick="location.href='/crm/edit?cno=${param.cno}'">
                         <i class="fa-solid fa-pen-to-square fa-xl" style="color: #174880;"></i>
                     </button>
                 </div>
@@ -45,7 +45,7 @@
                     <div class="info-line"></div>
                     
                     <div class="blueTag">주소</div>
-                    <div class="whiteTag" id="addressName">${vo.address}</div>
+                    <div class="whiteTag" id="addressName">${vo.roadAddress}${vo.detailAddress}</div>
                     <div class="blueTag">등급</div>
                     <div class="whiteTag">${vo.rankName}</div>
                     <div class="blueTag">거래 시작일</div>
@@ -62,7 +62,7 @@
 
                 <div class="tab_filter_search">
                     <div></div>
-                    <div class="prjTab"><button onclick="location.href='/crm/detail?cno=${sessionScope.cno}'">프로젝트</button></div>
+                    <div class="prjTab"><button onclick="location.href='/crm/detail?cno=${param.cno}'">프로젝트</button></div>
                     <div class="hisTab"><button>히스토리</button></div>
                     <div></div>
                     <div class="query">
@@ -73,8 +73,9 @@
                     <div></div>
                     <form class="search-box" method="post" action="/crm/history">
 
-                        <input id="searchInput" type="text" name="" placeholder="검색">
-                        <button type="submit">
+                        <input type="hidden" name="cno" value="${param.cno}">
+                        <input id="searchValue" type="text" name="searchValue" placeholder="검색">
+                        <button type="submit" class="form-submit">
                             <i class="fas fa-search"></i>
                         </button>
                     
@@ -84,7 +85,12 @@
 
                 <div class="content-line"></div>
 
-                <div><button type="button" class="btn btn-primary">히스토리 추가</button></div>
+                <div>
+                    <form action="/crm/history/create" method="get">
+                        <input type="hidden" name="cno" value="${param.cno}">
+                        <button type="submit" class="btn btn-primary">히스토리 추가</button>
+                    </form>
+                </div>
 
                 <div class="table-area">
                     <table class="client-table">
@@ -122,20 +128,7 @@
                 </div>
 
                 <div class="paging-area">
-                    <!-- js에서 동적으로 버튼 만들어줌-->
-                    <span><a href="#!"><i class="fas fa-angle-double-left fa-lg" style="color: #174880;"></i></a></span>
-                    &nbsp;
-                    <span><a href="#!"><i class="fas fa-caret-left fa-lg" style="color: #174880;"></i></a></span>
-                    &nbsp;
-                    <span><a id="black" href="#!">1</a></span>
-                    &nbsp;
-                    <span><a href="#!">2</a></span>
-                    &nbsp;
-                    <span><a href="#!">3</a></span>
-                    &nbsp;
-                    <span><a href="#!"><i class="fas fa-caret-right fa-lg" style="color: #174880;"></i></a></span>
-                    &nbsp;
-                    <span><a href="#!"><i class="fas fa-angle-double-right fa-lg" style="color: #174880;"></i></a></span>
+                    
                 </div>
             </div>
 
