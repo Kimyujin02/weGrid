@@ -12,7 +12,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script defer src="/js/common/main.js"></script>
-<script src="/js/trip/list.js"></script>
+<script defer src="/js/trip/list.js"></script>
+<!-- jquery -->
+<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <style>
+    .wrong_text{font-size:1rem;color:#f44e38;letter-spacing:-.2px;font-weight:300;margin:8px 0 2px;line-height:1em;display:none}
+  </style>
 
 </head>
 <body>
@@ -33,25 +39,27 @@
                 </button>
             </div>
             <div></div>
-            <div>필터</div>
-            <div>
-                <select name="" id="">
-                        <option value=""></option>
-                    </select>
-                </div>
-                <div>
-                    <form class="search-box" method="get">
-                
-                    <select name="" id="trip-filter">
-                        <option value="">전체</option>
-                        <option value="">내용</option>
-                        <option value="">제목</option>
-                        <option value="">제목+내용</option>
-                        <option value="">고객사</option>
-                    </select>
-                    
-                    <input type="text" name="" placeholder="검색" id="searchTag">
-                    <i class="fas fa-search"></i>
+            <div></div>
+            <form  onsubmit="return submitSearchForm();">
+            <div id="type-boc"> 
+                <select name="searchType" id="trip-filter" >
+                <option value="all">전체</option>
+                <option value="content">내용</option>
+                <option value="title">제목</option>
+                <option value="writerName">작성자</option>
+                <option value="no">번호</option>
+                <option value="client">고객사</option>
+            </select>
+            </div>
+                <div id="iwannagohome">
+                    <div  id="search-boc">
+                        <input type="text" name="searchValue" placeholder="검색" id="searchTag">
+                        <span>
+                            <button type="submit" id="searchBtn">
+                                <i class="fas fa-search" id="search-i"></i>
+                            </button>
+                        </span>
+                    </div>
                     </form>
                 </div>
                 
@@ -79,204 +87,83 @@
                         </tr>
                     </thead>
                 
-                    <tbody >
-                        <tr class="list-middle">
-                            <td>5</td>
-                            <td>출장갑니다</td>
-                            <td>2024/11/25</td>
-                            <td>2024-11-26</td>
-                            <td>홍길동</td>
-                            <td>기술지원</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>서울</td>
-                            <td>출장갑니다</td>
-                            <td>2024/11/25</td>
-                            <td>2024-11-26</td>
-                            <td>홍길동</td>
-                            <td>기술지원</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>서울</td>
-                            <td>출장갑니다</td>
-                            <td>2024/11/25</td>
-                            <td>2024-11-26</td>
-                            <td>홍길동</td>
-                            <td>기술지원</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>서울</td>
-                            <td>출장갑니다</td>
-                            <td>2024/11/25</td>
-                            <td>2024-11-26</td>
-                            <td>홍길동</td>
-                            <td>기술지원</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>서울</td>
-                            <td>출장갑니다</td>
-                            <td>2024/11/25</td>
-                            <td>2024-11-26</td>
-                            <td>홍길동</td>
-                            <td>기술지원</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>서울</td>
-                            <td>출장갑니다</td>
-                            <td>2024/11/25</td>
-                            <td>2024-11-26</td>
-                            <td>홍길동</td>
-                            <td>기술지원</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>서울</td>
-                            <td>출장갑니다</td>
-                            <td>2024/11/25</td>
-                            <td>2024-11-26</td>
-                            <td>홍길동</td>
-                            <td>기술지원</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>서울</td>
-                            <td>출장갑니다</td>
-                            <td>2024/11/25</td>
-                            <td>2024-11-26</td>
-                            <td>홍길동</td>
-                            <td>기술지원</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>서울</td>
-                            <td>출장갑니다</td>
-                            <td>2024/11/25</td>
-                            <td>2024-11-26</td>
-                            <td>홍길동</td>
-                            <td>기술지원</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>서울</td>
-                            <td>출장갑니다</td>
-                            <td>2024/11/25</td>
-                            <td>2024-11-26</td>
-                            <td>홍길동</td>
-                            <td>기술지원</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>서울</td>
-                            <td>출장갑니다</td>
-                            <td>2024/11/25</td>
-                            <td>2024-11-26</td>
-                            <td>홍길동</td>
-                            <td>기술지원</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>서울</td>
-                            <td>출장갑니다</td>
-                            <td>2024/11/25</td>
-                            <td>2024-11-26</td>
-                            <td>홍길동</td>
-                            <td>기술지원</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>서울</td>
-                            <td>출장갑니다</td>
-                            <td>2024/11/25</td>
-                            <td>2024-11-26</td>
-                            <td>홍길동</td>
-                            <td>기술지원</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>서울</td>
-                            <td>출장갑니다</td>
-                            <td>2024/11/25</td>
-                            <td>2024-11-26</td>
-                            <td>홍길동</td>
-                            <td>기술지원</td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>서울</td>
-                            <td>출장갑니다</td>
-                            <td>2024/11/25</td>
-                            <td>2024-11-26</td>
-                            <td>홍길동</td>
-                            <td>기술지원</td>
-                        </tr>
-
-                        
-
+                    <tbody>
                        
                     </tbody>
                 </table>
             </div>
             <div class="bottom-line"></div>
             <div class="page">
-                <!-- js에서 동적으로 버튼 만들어줌-->
-                <span><a href="#!"><i class="fas fa-angle-double-left fa-lg" style="color: #174880;"></i></a></span>
-                <span><a href="#!"><i class="fas fa-caret-left fa-lg" style="color: #174880;"></i></a></span>
-                <span><a href="#!">1</a></span>
-                <span><a href="#!">2</a></span>
-                <span><a href="#!">3</a></span>
-                <span><a href="#!">4</a></span>
-                <span><a href="#!">5</a></span>
-                <span><a href="#!"><i class="fas fa-caret-right fa-lg" style="color: #174880;"></i></a></span>
-                <span><a href="#!"><i class="fas fa-angle-double-right fa-lg" style="color: #174880;"></i></a></span>
+                
             </div>
         </div>
             
     </main>
       <!-- 모달 -->
       <div id="tripModal" class="tripModal">
-        <div class="tripModal-content">
-            <div class="tripModal-header">
-                <h2>출장등록</h2>
-                <button class="close-tripModal" onclick="closeTripModal()">×</button>
-            </div>
-            <div class="tripModal-body">
-                <!-- 왼쪽 섹션 -->
-                <div class="tripModal-left">
-                    <div class="form-tripModal">
-                        <label>기간 설정</label>
-                        <input type="date"> ~ <input type="date">
-                    </div>
-                    <div class="form-tripModal">
-                        <label>항목태그</label>
-                        <div class="checkbox-group">
-                            <label><input type="checkbox"> 기술지원</label>
-                            <label><input type="checkbox"> 프로젝트</label>
-                            <label><input type="checkbox"> 교육</label>
-                            <label><input type="checkbox"> 영업</label>
-                            <label><input type="checkbox"> 유지보수</label>
-                            <label><input type="checkbox"> 기타</label>
+          <div class="tripModal-content">
+              <div class="tripModal-header">
+                  <h2>출장등록</h2>
+                  <button class="close-tripModal" onclick="closeTripModal()">×</button>
+                </div>
+                <form action="/trip/write" method="post">
+                <div class="tripModal-body">
+
+                        <!-- 왼쪽 섹션 -->
+                    <div class="tripModal-left">
+                        <div class="form-tripModal" id="date-boc">
+                            <div><label>기간 설정</label></div>
+                            <div>
+                                <div><input type="date" class="shortInput" name="startDate"></div>
+                                <div>~</div>
+                                <div><input type="date" class="shortInput" name="endDate"></div>
+                            </div>
+                            
                         </div>
-                        <input type="text" placeholder="기타 내용">
+                        <div class="form-tripModal">
+                            <label>항목태그</label>
+                            <div class="radio-group">
+                                <c:forEach items="${typeVoList}" var="vo">
+                                    <label><input type="radio" name="typeNo" value="${vo.no}">${vo.name}</label>
+                                </c:forEach>
+                            </div>
+                            <input type="text" placeholder="기타 내용" class="longInput" id="gita">
+                        </div>
+                        <div class="form-tripModal" id="api-div">
+                            <label>출장지</label>
+                            <input type="text" id="sample6_postcode" placeholder="우편번호" class="longInput" readonly="readonly" name="postAddress">
+                            <input type="text" id="sample6_address" placeholder="주소" class="longInput" readonly="readonly" name="roadAddress">
+                            <input type="text" id="sample6_detailAddress" placeholder="상세주소" class="longInput" name="detailAddress">
+                            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="longInput">
+                            <input type="hidden" name="aaaaaaaaaaaa" id="address">
+                            
+                        </div>
+                        
+                        <div class="form-tripModal">
+                            <label>고객사 회사명</label>
+                            <input type="text" placeholder="신규입력" class="longInput" name="client">
+                        </div>
                     </div>
-                    <div class="form-tripModal">
-                        <label>출장지</label>
-                        <input type="text" placeholder="경기도 무슨시 무슨구 ...">
-                    </div>
-                    
-                    <div class="form-tripModal">
-                        <label>고객사 회사명</label>
-                        <input type="text" placeholder="신규입력">
+                    <!-- 오른쪽 섹션 -->
+                    <div class="tripModal-right">
+                        <div><label>제목</label></div>
+                        <div id="titleDiv"><input type="text" placeholder="제목" class="longInput" name="title"></div>
+                        <div><label>내용</label></div>
+                        <div><textarea placeholder="내용" name="content"></textarea></div>
                     </div>
                 </div>
-                <!-- 오른쪽 섹션 -->
-                <div class="tripModal-right">
-                    <div class="form-tripModal">
-                        <label>제목 및 내용</label>
-                        <br>
-                        <input type="text" placeholder="제목">
-                        <br>
-                        <br>
-                        <textarea placeholder="내용"></textarea>
-                    </div>
+                <div class="tripModal-footer">
+                    <button class="submit-btn" type="submit" onclick="combineAdress();">등록</button>
                 </div>
             </div>
-            <div class="tripModal-footer">
-                <button class="submit-btn">등록</button>
-            </div>
+        </form>
         </div>
-    </div>
     
 </body>
 </html>
+
+
+
+
+
 

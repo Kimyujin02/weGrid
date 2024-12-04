@@ -1,0 +1,347 @@
+/* ----------------------
+----------layout---------
+------------------------- */
+
+main {
+    grid-area: main;
+    background-color: #d1dce8;
+    padding: 0px;
+}
+
+.main-content {
+    display: grid;
+    grid-template-rows: 200px 20px 520px;
+    background-color: #d1dce8;
+    border-radius: 5px;
+    width: 1500px;
+    height: 740px;
+    margin-top: 0px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 50px;
+}
+
+.info-area {
+    display: grid;
+    grid-template-rows: 70px 100px 30px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0.3, 0.3, 0.3, 0.3);
+}
+
+.content-area {
+    display: grid;
+    grid-template-rows: 80px 0fr 380px 60px;
+
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0.3, 0.3, 0.3, 0.3);
+}
+
+.tab_filter_search {
+    display: grid;
+    grid-template-columns: 90px 150px 150px 500px 1fr 15px 250px 150px;
+}
+
+
+/* ----------------------
+----------info-----------
+------------------------- */
+
+.form-submit {
+    background-color: white;
+    border: none;
+}
+
+.title-name {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+.title-name h4 {
+    color: #174880;
+    margin-bottom: 0px;
+    padding-left: 50px;
+}
+
+.title-name button {
+    background-color: white;
+    border: none;
+    justify-self: end;
+    margin-right: 110px;
+}
+
+.blank-space {
+    background-color: #d1dce8;
+}
+
+.client-info {
+    display: grid;
+    grid-template-columns: 150px 350px 100px 150px 100px 200px 100px 150px;
+    grid-template-rows: 1fr 0fr 1fr 0fr;
+    padding-left: 90px;
+}
+
+.blueTag {
+    display: grid;
+    color: white;
+    background-color: #174880;
+    text-align: center;
+    align-content: center;
+    font-weight: bold;
+
+}
+
+.whiteTag {
+    color: black;
+    background-color: white;
+    text-align: center;
+    align-self: center;
+    font-weight: bold;
+}
+
+#addressName {
+    display: grid;
+    grid-column: span 3;
+    justify-self: center;
+}
+
+.info-line {
+    display: grid;
+    grid-column: span 8;
+    width: 1300px;
+    height: 1px;
+    color: #A7A7A7;
+    background-color: #A7A7A7;
+}
+
+/* ----------------------
+--------content----------
+------------------------- */
+
+.prjTab {
+    align-self: end;
+}
+
+.hisTab {
+    align-self: end;
+}
+
+.prjTab button {
+    width: 150px;
+    height: 45px;
+
+    border: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    
+    background-color: #174880;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.hisTab button {
+    width: 150px;
+    height: 35px;
+
+    border: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    
+    background-color: #8C8A8A;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.search-box {
+    white-space: nowrap !important;
+    justify-self: end;
+    align-self: end;
+    margin-bottom: 10px;
+}
+
+#searchInput {
+    width: 230px !important;
+    height: 30px;
+
+    border: 1px solid #ccc;
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.content-line {
+    display: grid;
+    width: 1400px;
+    height: 1px;    
+    color: #A7A7A7;
+    background-color: #A7A7A7;
+
+    justify-self: center;
+}
+
+/* ----------------------
+----------table----------
+------------------------- */
+
+.table-area {
+    display: grid;
+    align-content: end;
+}
+
+.client-table{
+    margin: auto;
+    height: auto;
+    width: 1200px;
+    border-radius: 5px;
+    border-collapse: collapse;
+    border-top : none;
+    text-align: center;
+    
+    grid-template-columns: 1fr 10fr 1fr 1fr;
+}
+
+.list-top{
+    border-bottom: 1px solid rgb(211, 211, 211) ;
+    height: 30px;
+    font-size: 14px;
+    background-color: rgba(23, 72, 128, 1);
+    color: white;
+}
+
+.list-middle{
+    border-bottom: 1px solid gray;
+    height: 30px;
+}
+
+.list-end {
+    background-color: rgba(23, 72, 128, 1);
+    height: 10px;
+}
+
+.num{
+    width: 75px;
+    font-weight: bold;
+}
+.prj-name {
+    width: 800px;
+    font-weight: bold;
+}
+.prj-prog {
+    width: 100px;
+    font-weight: bold;
+}
+.period {
+    width: 225px;
+    font-weight: bold;
+}
+
+.linked-name > a {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+
+/* ----------------------
+----------paging---------
+------------------------- */
+
+.paging-area {
+    display: flex;
+    white-space: nowrap;
+    gap: 8px; /* 요소 간 간격 조정 */
+    justify-content: center;
+    align-items: center; /* 세로 정렬 */
+}
+
+/* .paging-area {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    column-gap: 15px;
+    place-self: center;
+} */
+
+.paging-area .pageNum {
+    text-decoration: none;
+    color: #797979;
+    font-weight: bold;
+}
+
+.paging-area .current {
+    text-decoration: none;
+    color: #174880;
+    font-weight: bold;
+}
+
+/* ----------------------
+---------dropdown--------
+------------------------- */
+
+
+.dropdown {
+    align-self: end;
+    justify-self: end;
+    margin-bottom: 10px;
+
+    position: relative;
+    display: grid !important;
+}
+  
+.dropdown-toggle {
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    border-radius: 5px;
+    white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 설정 */
+    display: inline-flex; /* 플렉스 레이아웃으로 버튼 내용 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    justify-content: center;
+    
+    height: 30px;
+    width: 100px;
+}
+  
+.dropdown-menu {
+    display: none; /* 기본적으로 숨김 */
+    position: absolute;
+    top: 100%;
+    width: 100px !important;
+    min-width: 100px !important;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 설정 */
+
+    justify-content: start !important;
+    padding: 10px !important;
+
+}
+  
+/* 옵션 리스트 */
+.option-list {
+    display: flex;
+    flex-direction: column; /* 항목을 세로로 배치 */
+    gap: 10px; /* 항목 간 간격 */
+}
+  
+.option-list label {
+    display: flex; /* 체크박스와 텍스트를 한 줄로 정렬 */
+    align-items: center; /* 세로 정렬 */
+    cursor: pointer;
+}
+  
+.option-list input[type="checkbox"] {
+    margin-right: 8px; /* 체크박스와 텍스트 간 간격 */
+}
+  
+/* 드롭다운 활성화 시 표시 */
+  .dropdown.active .dropdown-menu {
+    display: grid;
+}

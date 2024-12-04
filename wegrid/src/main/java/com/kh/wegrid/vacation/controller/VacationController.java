@@ -5,6 +5,7 @@ import com.kh.wegrid.vacation.temp.vo.EmpVo;
 import com.kh.wegrid.vacation.temp.vo.JobInfoVo;
 import com.kh.wegrid.vacation.vo.*;
 import jakarta.servlet.http.HttpSession;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -52,6 +53,7 @@ public class VacationController {
         int updateVacation = service.updateVacation(vo);
 
         return "redirect:/vacation/menu";
+
     }
 
 

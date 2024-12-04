@@ -81,7 +81,7 @@ header {
 }
 
 /* 모달 배경 */
-.modal {
+header .modal {
     display: none;
     position: fixed;
     top: -255px;
@@ -93,7 +93,7 @@ header {
 }
 
 /* 모달 창 */
-.modal-content {
+header .modal-content {
     position: absolute;
     top: 50%;
     left: 50%;

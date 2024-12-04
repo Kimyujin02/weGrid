@@ -1,0 +1,73 @@
+
+/* 캘린더 항목 영역 */
+.calendar-filter-area {
+    display: flex;
+    position: absolute;
+
+    width: 300px;
+    height: 50px;
+    
+    top:110px;
+    margin-left: 120px;
+}
+
+/* 캘린더 항목 */
+.filter-box{
+    display: inline;
+    
+    width: 100px;
+    height: 35px;
+    
+    margin-top: 15px;
+    margin-right: 8px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    
+    align-content: center;
+    text-align: center;
+    
+    color: white;
+    font-weight: bold;
+}
+
+/* 캘린더 항목 호버 시 */
+.filter-box:not(.selected-calendar):hover{
+    height: 43px;
+
+    margin-top: 7px;
+    
+    padding-top: 8px;
+    
+    cursor: pointer;
+}
+/* 선택된 캘린더 항목 표시 */
+.selected-calendar {
+    height: 43px;
+    
+    margin-top: 7px;
+
+    border-top: 5px solid;
+    padding-top: 3px;
+
+    cursor: default;
+}
+
+/* 캘린더 타입 별 색상 정보 */
+.personal-calendar-color {
+    background-color: #ABE1FF;
+    border-color: #4092BF;
+}
+
+.department-calendar-color {
+    background-color: #54BFBF;
+    border-color: #288E8E;
+}
+
+.project-calendar-color {
+    background-color: #ACC3F2;
+    border-color: #577DCC;
+}
+
+.hidden-schedule {
+    display: none;
+}

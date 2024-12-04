@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.wegrid.trip.mapper.TripMapper">
+
+    <select id="getTripVoList">
+        SELECT
+            B.NO
+            , B.EMP_NO
+            , B.TYPE_NO
+            , T.NAME           AS TYPE_NAME
+            , E.NAME           AS WRITER_NAME
+            , B.POST_ADDRESS
+            , B.ROAD_ADDRESS
+            , B.DETAIL_ADDRESS
+            , B.TITLE
+            , B.CONTENT
+            , TO_CHAR(B.START_DATE, 'YYYY-MM-DD') AS START_DATE
+            , TO_CHAR(B.END_DATE, 'YYYY-MM-DD')   AS END_DATE
+            , B.CLIENT
+        FROM BUSINESS_TRIP B
+        JOIN EMPLOYEE E ON ( E.NO = B.EMP_NO )
+        JOIN TRIP_TYPE T ON ( B.TYPE_NO = T.NO )
+
+        <where>
+        B.DEL_YN = 'N'
+        <if test="searchType == 'title'">
+            AND B.TITLE LIKE '%${searchValue}%'
+        </if>
+        <if test="searchType == 'content'">
+            AND B.CONTENT LIKE '%${searchValue}%'
+        </if>
+        <if test="searchType == 'no'">
+            AND B.NO LIKE '%${searchValue}%'
+        </if>
+        <if test="searchType == 'client'">
+            AND B.CLIENT LIKE '%${searchValue}%'
+        </if>
+        <if test="searchType == 'writerName'">
+            AND E.NAME LIKE '%${searchValue}%'
+        </if>
+        <if test="searchType == 'all'">
+            AND
+            (
+            B.TITLE LIKE '%${searchValue}%'
+            OR B.CONTENT LIKE '%${searchValue}%'
+            OR B.NO LIKE '%${searchValue}%'
+            OR B.CLIENT LIKE '%${searchValue}%'
+            OR E.NAME LIKE '%${searchValue}%'
+            )
+        </if>
+
+        </where>
+
+
+        ORDER BY B.START_DATE
+        OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
+    </select>
+
+
+    <select id="getTripCnt">
+        SELECT
+            COUNT(B.NO)
+        FROM BUSINESS_TRIP B
+        JOIN EMPLOYEE E ON ( E.NO = B.EMP_NO )
+
+
+        <where>
+            B.DEL_YN = 'N'
+        <if test="searchType == 'title'">
+            AND B.TITLE LIKE '%${searchValue}%'
+        </if>
+        <if test="searchType == 'content'">
+            AND B.CONTENT LIKE '%${searchValue}%'
+        </if>
+        <if test="searchType == 'no'">
+            AND B.NO = #{searchValue}
+        </if>
+        <if test="searchType == 'client'">
+            AND B.CLIENT LIKE '%${searchValue}%'
+        </if>
+        <if test="searchType == 'writerName'">
+            AND E.NAME LIKE '%${searchValue}%'
+        </if>
+        <if test="searchType == 'all'">
+            AND
+            (
+            TITLE LIKE '%${searchValue}%'
+            OR B.CONTENT LIKE '%${searchValue}%'
+            OR B.NO LIKE '%${searchValue}%'
+            OR B.CLIENT LIKE '%${searchValue}%'
+            OR E.NAME LIKE '%${searchValue}%'
+            )
+        </if>
+        </where>
+
+    </select>
+
+
+
+
+
+
+
+
+
+</mapper>

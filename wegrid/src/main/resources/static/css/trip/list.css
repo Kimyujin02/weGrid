@@ -18,6 +18,7 @@
 }
 #table-area{
     justify-items: center;
+    align-items: start;
 }
 
 #bootbtn{
@@ -29,37 +30,37 @@
 }
 
 
-.pagination {
-    display: flex;
-    justify-content: center;
-    gap: 5px;
+.page {
+    text-align: center;
+    margin-top: 20px;
+}
+    
+.page a {
+display: inline-block; 
+text-decoration: none;
+color: rgba(23, 72, 128, 1);
+margin: 0 10px; /* 링크 간 간격 조정 */
+font-size: 16px;
+font-weight: bold;
 }
 
-.page-btn {
-    background: none;
-    border: none;
-    font-size: 1em;
-    cursor: pointer;
-    padding: 5px 10px;
-}
-
-.page-btn.active {
-    background-color: #174880;
-    color: white;
-}
 
 #table{
     margin: 0;
-    height: 100%;
+    /* height: 100%; */
+    /* height: 6.2%; */
     width: 1340px;
     border-radius: 5px;
     border-collapse: collapse;
     border-top : none;
     text-align: center;
 }
+#table tr{
+    height: 28px;
+}
 .list-top{
     border-bottom: 1px solid #d3d3d3 ;
-    height: 30px;
+    height: 35px;
     font-size: 16px;
     background-color: rgba(23, 72, 128, 1);
     color: white;
@@ -98,29 +99,49 @@ td{
    margin: auto;
    margin-bottom: 10px;
 }
-.search-box {
+#iwannagohome{
     display: flex;
-    flex-direction: row;
     align-items: center;
-    
 }
-
-.search-box input[type="text"] {
+#type-boc{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#type-boc > select{ 
+    height: 34px;
+    width: 80px;
+}
+#search-boc{
+    width: 370px;
+    height: 40px;
+    display: flex;
+    align-items: center;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: white;
-    padding: 5px;
-    /* border: none;
-    outline: none; */
-    padding: 5px;
-    font-size: 12px;
-    flex-grow: 1;
 }
-
-.search-box i {
+#searchTag{
+    width: 310px;
+    height: 38px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    flex-grow: 1;
+    margin-left: 5px;
+}
+#searchBtn{
+    width: 38px;
+    height: 38px;
     font-size: 16px;
     color: #666;
-    margin-left: 5px;
+    margin-left: 0px;
+    border: none;
+    background-color: white;
+}
+#searchBtn > i {
+    color: rgba(23, 72, 128, 1);;
 }
 #title-area{
     display: flex;
@@ -139,7 +160,6 @@ td{
 /* 모달 전체 배경 */
 .tripModal {
     display: none;
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -151,15 +171,16 @@ td{
 /* 모달 창 */
 .tripModal-content {
     position: absolute;
-    top: 50%;
     left: 50%;
+    top: 50%;
     transform: translate(-50%, -50%);
     background-color: lightgray;
     padding: 20px;
     border-radius: 10px;
     width: 1000px;
-    height: 600px;
+    height: 650px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
 }
 
 /* 헤더 */
@@ -170,6 +191,7 @@ td{
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
     margin-bottom: 10px;
+    cursor: pointer; 
 }
 
 .tripModal-header h2 {
@@ -205,9 +227,14 @@ td{
     margin-bottom: 5px;
     color: #555;
 }
+.tripModal-right label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
+}
 
-.tripModal-left input,
-.tripModal-left textarea {
+.longInput{
     width: 100%;
     padding: 8px;
     border: 1px solid #ddd;
@@ -215,12 +242,12 @@ td{
     font-size: 14px;
 }
 
-.tripModal-left input[type="checkbox"] {
+.tripModal-left input[type="radio"] {
     width: auto;
     margin-right: 5px;
 }
 
-.tripModal-left .checkbox-group {
+.tripModal-left .radio-group {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -230,6 +257,8 @@ td{
 /* 오른쪽 영역 */
 .tripModal-right {
     width: 48%;
+    display: grid;
+    grid-template: 30px 50px 30px 1fr / 1fr;
 }
 
 .tripModal-right textarea {
@@ -260,4 +289,52 @@ td{
 
 .submit-btn:hover {
     background: #0056b3;
+}
+#date-boc{
+    height: 80px;
+    display: grid;
+    grid-template: 30px 1fr / 1fr;
+}
+#date-boc > div:nth-child(2){
+    display: grid;
+    grid-template: 1fr / 1fr 0.2fr 1fr;
+}
+#date-boc > div:nth-child(2) div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#date-boc > div:nth-child(2) > div:nth-child(2){
+   
+    font-weight: bold;
+}
+.shortInput{
+    height: 80%;
+    width: 95%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 8px;
+}
+#titleDiv{
+    display: flex;
+    align-items: center;
+}
+form {
+   
+    display: contents; /* 자식 요소의 레이아웃을 그대로 유지 */
+}
+
+#table tbody tr:hover{
+    background-color: lightgray;
+    cursor: pointer;
+}
+#leftPageBtn{
+    color: #174880
+}
+#rightPageBtn{
+    color: #174880
+}
+#gita{
+    visibility: hidden;
 }

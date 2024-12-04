@@ -1,3 +1,5 @@
+<!-- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -11,6 +13,7 @@
 <link rel="stylesheet" href="/css/project/list.css">
 
 <script defer src="/js/common/main.js"></script>
+<script defer src="/js/project/list.js"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css" />
 
@@ -27,17 +30,13 @@
                 <h2 class="sub-title">프로젝트 리스트</h2>
 
                 <div class="table-controls">
-                    <button type="button" class="btn btn-primary"  id="approvalBtn" >등록</button>
-                    <div class="date-area">
-                        <button class="arrow-btn">&lt;</button>
-                        <span class="date">2024.10.18</span>
-                        <button class="arrow-btn">&gt;</button>
-                    </div>
+                    <button type="button" onclick="location.href='/project/create'" class="btn btn-primary"  id="approvalBtn" >등록</button>
+                
                   
                     <div class="filter-controls">
                         <select>
                             <option value="전체">전체</option>
-                            <option value="진행중">진행중</option>
+                            <option value="진행중">진행</option>
                             <option value="완료">완료</option>
                             <option value="철회">철회</option>
                             <option value="준비">준비</option>
@@ -68,144 +67,52 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>프로젝트1</td>
-                            <td>차은우</td>
-                            <td>신한 은행</td>
-                            <td>황철웅</td>
-                            <td>2024.10 ~ 2025.01</td>
-                            <td>10명</td>
-                            <td><span class="status1">준비</span></td>
-                        </tr>
-                        <tr>
-                            <td>프로젝트2</td>
-                            <td>차은우</td>
-                            <td>신한 은행</td>
-                            <td>황철웅</td>
-                            <td>2024.10 ~ 2025.01</td>
-                            <td>30명</td>
-                            <td><span class="status completed">완료</span></td>
-                        </tr>
-                        <tr>
-                            <td>프로젝트1</td>
-                            <td>차은우</td>
-                            <td>신한 은행</td>
-                            <td>황철웅</td>
-                            <td>2024.10 ~ 2025.01</td>
-                            <td>10명</td>
-                            <td><span class="status ongoing">진행</span></td>
-                        </tr>
-                        <tr>
-                            <td>프로젝트1</td>
-                            <td>차은우</td>
-                            <td>신한 은행</td>
-                            <td>황철웅</td>
-                            <td>2024.10 ~ 2025.01</td>
-                            <td>10명</td>
-                            <td><span class="status ongoing">진행</span></td>
-                        </tr>
-                        <tr>
-                            <td>프로젝트1</td>
-                            <td>차은우</td>
-                            <td>신한 은행</td>
-                            <td>황철웅</td>
-                            <td>2024.10 ~ 2025.01</td>
-                            <td>10명</td>
-                            <td><span class="status ongoing">진행</span></td>
-                        </tr>
-                        <tr>
-                            <td>프로젝트1</td>
-                            <td>차은우</td>
-                            <td>신한 은행</td>
-                            <td>황철웅</td>
-                            <td>2024.10 ~ 2025.01</td>
-                            <td>10명</td>
-                            <td><span class="status completed">완료</span></td>
-                        </tr>
-                        <tr>
-                            <td>프로젝트1</td>
-                            <td>차은우</td>
-                            <td>신한 은행</td>
-                            <td>황철웅</td>
-                            <td>2024.10 ~ 2025.01</td>
-                            <td>10명</td>
-                            <td><span class="status ongoing">진행</span></td>
-                        </tr>
-                        <tr>
-                            <td>프로젝트1</td>
-                            <td>차은우</td>
-                            <td>신한 은행</td>
-                            <td>황철웅</td>
-                            <td>2024.10 ~ 2025.01</td>
-                            <td>10명</td>
-                            <td><span class="status ongoing">진행</span></td>
-                        </tr>
-                        <tr>
-                            <td>프로젝트1</td>
-                            <td>차은우</td>
-                            <td>신한 은행</td>
-                            <td>황철웅</td>
-                            <td>2024.10 ~ 2025.01</td>
-                            <td>10명</td>
-                            <td><span class="status4">철회</span></td>
-                        </tr>
-                        <tr>
-                            <td>프로젝트1</td>
-                            <td>차은우</td>
-                            <td>신한 은행</td>
-                            <td>황철웅</td>
-                            <td>2024.10 ~ 2025.01</td>
-                            <td>10명</td>
-                            <td><span class="status1">준비</span></td>
-                        </tr>
-                        <tr>
-                            <td>프로젝트2</td>
-                            <td>차은우</td>
-                            <td>신한 은행</td>
-                            <td>황철웅</td>
-                            <td>2024.10 ~ 2025.01</td>
-                            <td>30명</td>
-                            <td><span class="status completed">완료</span></td>
-                        </tr>
-                        <tr>
-                            <td>프로젝트2</td>
-                            <td>차은우</td>
-                            <td>신한 은행</td>
-                            <td>황철웅</td>
-                            <td>2024.10 ~ 2025.01</td>
-                            <td>30명</td>
-                            <td><span class="status completed">완료</span></td>
-                        </tr>
-                        <tr>
-                            <td>프로젝트1</td>
-                            <td>차은우</td>
-                            <td>신한 은행</td>
-                            <td>황철웅</td>
-                            <td>2024.10 ~ 2025.01</td>
-                            <td>10명</td>
-                            <td><span class="status ongoing">진행</span></td>
-                        </tr>
-                        
+                        <c:forEach items="${voList}" var="vo">
+                            <tr >
+                                
+                               
+                                <td> <a href="/project/people?projectNo=${vo.projectNo}&pno=${vo.projectNo}">${vo.projectName}</a></td>
+                                <td>${vo.pmName}</td>
+                                <td>${vo.clientName}</td>
+                                <td>${vo.managerName}</td>
+                                <td><p class="project-dates" data-start="${vo.startDate}" data-end="${vo.endDate}">
+                                    ${vo.startDate} ~ ${vo.endDate}
+                                </p>
+                                </td>
+                                <td>${vo.projectMemberCount}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${vo.statusNo == 1}"><span class="status-ready ">준비</span></c:when>
+                                        <c:when test="${vo.statusNo == 2}"><span class="status-ongoing">진행</span></c:when>
+                                        <c:when test="${vo.statusNo == 3}"><span class="status-completed">완료</span></c:when>
+                                        <c:when test="${vo.statusNo == 4}"><span class="status-canceled">철회</span></c:when>
+                                    </c:choose>
+                                </td>
+                                </a>
+                            </tr>
+                        </c:forEach>
+
                         <!-- 추가 행들 -->
                     </tbody>
                 </table>
                 </div>
                 <div class="bottom-line"></div>
+
                 <div class="page">
-                    <!-- js에서 동적으로 버튼 만들어줌-->
-                    <span><a href="#!"><i class="fas fa-angle-double-left fa-lg" style="color: #174880;"></i></a></span>
-                    <span><a href="#!"><i class="fas fa-caret-left fa-lg" style="color: #174880;"></i></a></span>
-                    <span><a href="#!">1</a></span>
-                    <span><a href="#!">2</a></span>
-                    <span><a href="#!">3</a></span>
-                    <span><a href="#!">4</a></span>
-                    <span><a href="#!">5</a></span>
-                    <span><a href="#!"><i class="fas fa-caret-right fa-lg" style="color: #174880;"></i></a></span>
-                    <span><a href="#!"><i class="fas fa-angle-double-right fa-lg" style="color: #174880;"></i></a></span>
-                </div>
+                    <c:if test="${pvo.startPage != 1}">
+                        <a href="/project/list?pno=${pvo.startPage-1}"><i class="fas fa-caret-left fa-lg" style="color: #174880;"></i></a>
+                    </c:if>
+                   
+                     <c:forEach begin ="${pvo.startPage}" end="${pvo.endPage}" var="i" step="1">
+                     <a href="/project/list?pno=${i}">${i}</a>
+                     </c:forEach>
+        
+                     <c:if test="${pvo.endPage != pvo.maxPage}">
+                        <a href="/project/list?pno=${pvo.endPage+1}"><i class="fas fa-caret-right fa-lg" style="color: #174880;"></i></a>
+                     </c:if>
             </div>
         </div>
-    
+            
     </main>
     
         

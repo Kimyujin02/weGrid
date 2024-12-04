@@ -17,6 +17,10 @@ main {
 
 /* /////////////////////////////////////////////////////////////////////////////////////// */
 
+.card-container a{
+    text-decoration: none;
+    color : black;
+}
 
 .header-menu {
     display: flex;
@@ -69,10 +73,11 @@ main {
     padding-top: 60px;
     justify-content: center;
     align-items: center;
-    margin-left: 50px
+    margin-left: 50px;
 }
 
 #card{
+    cursor: pointer;
     width: 300px; 
     margin: 20px;
     background-color: #fff; 
@@ -109,7 +114,7 @@ main {
     font-weight: bold;
 }
 
-.status1 {
+.status-ready {
     background-color: #4E83EB; 
     color: white;
     font-size: 12px;
@@ -117,7 +122,7 @@ main {
     border-radius: 12px;
     font-weight: bold;
 }
-.status2 {
+.status-ongoing {
     background-color: #EB4E4E; 
     color: white;
     font-size: 12px;
@@ -125,7 +130,7 @@ main {
     border-radius: 12px;
     font-weight: bold;
 }
-.status3 {
+.status-completed {
     background-color: #12C557; 
     color: white;
     font-size: 12px;
@@ -134,7 +139,7 @@ main {
     font-weight: bold;
 }
 
-.status4 {
+.status-canceled {
     background-color: #a625e2; 
     color: white;
     font-size: 12px;
@@ -154,4 +159,19 @@ main {
 .team-count {
     font-size: 14px;
     font-weight: bold;
+}
+
+.page-area{
+    display: flex;
+        text-align: center;
+        color: #174880;
+        margin: 17px 10px;
+        font-size: 16px;
+        font-weight: bold;
+        gap: 15px;
+        justify-content: center;
+}
+
+.page-area a{
+    text-decoration: none;
 }

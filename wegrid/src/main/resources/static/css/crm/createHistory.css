@@ -1,0 +1,402 @@
+/* ----------------------
+----------layout---------
+------------------------- */
+
+main {
+    grid-area: main;
+    background-color: #d1dce8;
+    padding: 0px;
+}
+
+.main-content {
+    display: grid;
+    grid-template-rows: 200px 20px 520px;
+    background-color: #d1dce8;
+    border-radius: 5px;
+    width: 1500px;
+    height: 740px;
+    margin-top: 0px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 50px;
+}
+
+.info-area {
+    display: grid;
+    grid-template-rows: 70px 100px 30px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0.3, 0.3, 0.3, 0.3);
+}
+
+.content-area {
+    display: grid;
+    grid-template-rows: 80px 0fr 380px 60px;
+
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0.3, 0.3, 0.3, 0.3);
+}
+
+.tab-area {
+    display: grid;
+    grid-template-columns: 90px 150px 150px 1fr;
+}
+
+.list-create-area {
+    display: grid;
+    grid-template-columns: 1fr 0fr 1fr;
+}
+
+.list-area {
+    display: grid;
+    grid-template-rows: 80px 220px 80px;
+}
+
+.create-area {
+    display: grid;
+    grid-template-rows: 80px 300px;
+}
+
+.form-area {
+    display: grid;
+    grid-template-rows: 120px 0fr 120px 60px;
+}
+
+/* ----------------------
+----------info-----------
+------------------------- */
+
+.title-name {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+.title-name h4 {
+    color: #174880;
+    margin-bottom: 0px;
+    padding-left: 50px;
+}
+
+.title-name button {
+    background-color: white;
+    border: none;
+    justify-self: end;
+    margin-right: 110px;
+}
+
+.blank-space {
+    background-color: #d1dce8;
+}
+
+.client-info {
+    display: grid;
+    grid-template-columns: 150px 350px 100px 150px 100px 200px 100px 150px;
+    grid-template-rows: 1fr 0fr 1fr 0fr;
+    padding-left: 90px;
+}
+
+.blueTag {
+    display: grid;
+    color: white;
+    background-color: #174880;
+    text-align: center;
+    align-content: center;
+    font-weight: bold;
+
+}
+
+.whiteTag {
+    color: black;
+    background-color: white;
+    text-align: center;
+    align-self: center;
+    font-weight: bold;
+}
+
+#addressName {
+    display: grid;
+    grid-column: span 3;
+    justify-self: center;
+}
+
+.info-line {
+    display: grid;
+    grid-column: span 8;
+    width: 1300px;
+    height: 1px;
+    color: #A7A7A7;
+    background-color: #A7A7A7;
+}
+
+/* ----------------------
+--------content----------
+------------------------- */
+
+.prjTab {
+    align-self: end;
+}
+
+.hisTab {
+    align-self: end;
+}
+
+.prjTab button {
+    width: 150px;
+    height: 35px;
+
+    border: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    
+    background-color: #8C8A8A;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.hisTab button {
+    width: 150px;
+    height: 45px;
+
+    border: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    
+    background-color: #174880;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.content-line {
+    display: grid;
+    width: 1400px;
+    height: 1px;
+    color: #A7A7A7;
+    background-color: #A7A7A7;
+
+    justify-self: center;
+}
+
+.history-title {
+    margin-left: 90px;
+    align-self: center;
+}
+
+.history-title h5 {
+    margin-bottom: 0px;
+    color: #174880;
+}
+
+.vertical-line {
+    width: 1px;
+    height: 250px;
+
+    color: #A7A7A7;
+    background-color: #A7A7A7;
+    align-self: center;
+}
+
+/* ----------------------
+----------table----------
+------------------------- */
+
+.table-area {
+    display: grid;
+}
+
+.history-table{
+    margin: auto;
+    margin-left: 90px;
+    height: auto;
+    width: 600px;
+    border-radius: 5px;
+    border-collapse: collapse;
+    border-top : none;
+    text-align: center;
+}
+
+.list-top{
+    border-bottom: 1px solid rgb(211, 211, 211) ;
+    height: 30px;
+    font-size: 14px;
+    background-color: rgba(23, 72, 128, 1);
+    color: white;
+}
+
+.list-middle{
+    border-bottom: 1px solid gray;
+    height: 30px;
+}
+
+.list-end {
+    background-color: rgba(23, 72, 128, 1);
+    height: 10px;
+}
+
+.num{
+    width: 37.5px;
+    font-weight: bold;
+}
+.writer-name {
+    width: 62.5px;
+    font-weight: bold;
+}
+.query-content {
+    width: 300px;
+    font-weight: bold;
+}
+.enroll-date {
+    width: 100px;
+    font-weight: bold;
+}
+.edit {
+    width: 100px;
+    font-weight: bold;
+}
+
+.btn-primary {
+    height: 30px; /* 버튼의 고정 높이 */
+    padding: 0 20px !important; /* 좌우 여백 */
+    font-size: 16px; /* 텍스트 크기 */
+    line-height: 30px !important; /* 텍스트 줄 높이 */
+    display: grid !important; /* `flex`로 전환 */
+    justify-self: end !important;
+    font-weight: bold !important;
+
+    margin-right: 150px !important;
+    margin-top: 5px;
+}
+
+td .btn-primary {
+    height: 25px; /* 버튼의 고정 높이 */
+    padding: 0 10px !important; /* 좌우 여백 */
+    font-size: 16px; /* 텍스트 크기 */
+    line-height: 15px !important; /* 텍스트 줄 높이 */
+    display: grid !important; /* `flex`로 전환 */
+    align-items: center; /* 세로 중앙 정렬 */
+    align-self: center; /* 가로 중앙 정렬 */
+    justify-self: center !important;
+    font-weight: normal !important;
+
+    margin-right: 0px !important;
+    margin-top: 0px;
+}
+
+.linked-name > a {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* ----------------------
+----------paging---------
+------------------------- */
+
+.paging-area {
+    display: flex;
+    white-space: nowrap;
+    gap: 8px; /* 요소 간 간격 조정 */
+    justify-content: center;
+    align-items: center; /* 세로 정렬 */
+}
+
+.paging-area .pageNum {
+    text-decoration: none;
+    color: #797979;
+    font-weight: bold;
+}
+
+.paging-area .current {
+    text-decoration: none;
+    color: #174880;
+    font-weight: bold;
+}
+
+
+/* ----------------------
+-------write history-----
+------------------------- */
+
+.query-insert {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+}
+
+.query-insert div {
+    justify-self: end;
+    font-weight: bold;
+}
+
+.query-insert textarea {
+    width: 550px;
+    height: 100px;
+
+    border: 1px solid #CFCFCF;
+    border-radius: 5px;
+}
+
+.reply-insert {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+
+    margin-top: 20px;
+}
+
+.reply-insert div {
+    justify-self: end;
+    font-weight: bold;
+}
+
+.reply-insert textarea {
+    width: 550px;
+    height: 100px;
+
+    border: 1px solid #CFCFCF;
+    border-radius: 5px;
+}
+
+.gray-line {
+    width: 650px;
+    height: 1px;
+    background-color: #A7A7A7;
+    color: #A7A7A7;
+
+    justify-self: center;
+}
+
+.btn-area {
+    display: grid;
+    grid-template-columns: 400px 125px 125px 100px;
+
+}
+
+.btn-area button:nth-of-type(1) {
+    width: 100px;
+    height: 35px;
+
+    align-self: end;
+    justify-self: end;
+
+    border: none;
+    border-radius: 5px;
+    background-color: #0D6EFD;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-area button:nth-of-type(2) {
+    width: 100px;
+    height: 35px;
+
+    align-self: end;
+    justify-self: end;
+
+    border: none;
+    border-radius: 5px;
+    background-color: #8C8A8A;
+    color: white;
+    font-weight: bold;
+}

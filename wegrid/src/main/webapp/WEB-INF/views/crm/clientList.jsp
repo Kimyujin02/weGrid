@@ -37,7 +37,9 @@
                 <!-- row2 -->
                 <div></div>
                 <div class="btn-area">
-                    <button type="button" class="btn btn-primary">&nbsp;등록&nbsp;</button>
+                    <form action="http://127.0.0.1/crm/enroll" method="get">
+                        <button type="submit" class="btn btn-primary">&nbsp;등록&nbsp;</button>
+                    </form>
                 </div>
 
                 <div class="search-area">
@@ -45,8 +47,11 @@
                         <button class="dropdown-toggle">진행 여부 &nbsp;</button>
                         <div class="dropdown-menu">
                           <div class="option-list">
-                            <label><input type="checkbox" value="진행중" />진행중</label>
-                            <label><input type="checkbox" value="미진행" />미진행</label>
+
+                            <c:forEach items="${clientVoList}" var="clientVo">
+                                <label><input type="checkbox" value="${clientVo.statusNo}" />${clientVo.statusName}</label>
+                            </c:forEach>
+
                           </div>
                         </div>
                     </div>
@@ -55,26 +60,28 @@
                         <button class="dropdown-toggle">등급 필터 &nbsp;</button>
                         <div class="dropdown-menu">
                           <div class="option-list">
-                            <label><input type="checkbox" value="S" />S</label>
-                            <label><input type="checkbox" value="A" />A</label>
-                            <label><input type="checkbox" value="B" />B</label>
-                            <label><input type="checkbox" value="C" />C</label>
-                            <label><input type="checkbox" value="D" />D</label>
+                            
+                            <c:forEach items="${clientVoList}" var="clientVo">
+                                <label><input type="checkbox" value="${clientVo.rankName}" />${clientVo.rankName}</label>
+                            </c:forEach>
+
                           </div>
                         </div>
                     </div>
                     
-                    <form class="search-box" method="get">
+                    <form class="search-box" action="/crm/list">
 
-                        <select id="searchType">
-                            <option value="통합">통합</option>
-                            <option value="고객사">고객사</option>
-                            <option value="고객사 담당자명">고객사 담당자명</option>
-                            <option value="담당자 연락처">담당자 연락처</option>
+                        <select class="searchType" name="searchType">
+                            <option value="integration">통합</option>
+                            <option value="client">고객사</option>
+                            <option value="managerName">고객사 담당자명</option>
+                            <option value="managerPhone">담당자 연락처</option>
                         </select>
 
-                        <input id="searchInput" type="text" name="" placeholder="검색">
-                        <i type="submit" class="fas fa-search"></i>
+                        <input type="text" class="searchValue" name="searchValue" placeholder="검색">
+                        <button class="form-submit" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
                     
                     </form>
 
@@ -95,98 +102,16 @@
                         </thead>
                   
                         <tbody>
-                            <tr class="list-middle">
-                                <!-- tbody안쪽은 js사용해서 동적으로 채워줌   -->
-                                <td>1</td>
-                                <td>KH 정보교육원</td>
-                                <td>S</td>
-                                <td>2024-11-26</td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td>2</td>
-                                <td>KA 정보교육원</td>
-                                <td>A</td>
-                                <td>2024-11-26</td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td>3</td>
-                                <td>KB 정보교육원</td>
-                                <td>B</td>
-                                <td>2024-11-26</td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td>4</td>
-                                <td>KC 정보교육원</td>
-                                <td>C</td>
-                                <td>2024-11-26</td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td>5</td>
-                                <td>KD 정보교육원</td>
-                                <td>D</td>
-                                <td>2024-11-26</td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr class="list-middle">
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            <c:forEach items="${clientVoList}" var="vo">
+                                <tr class="list-middle">
+                                    <td>${vo.no}</td>
+                                    <td class="linked-name"><a href='/crm/detail?cno=${vo.no}&pno=1'>${vo.name}</a></td>
+                                    <td>${vo.rankName}</td>
+                                    <td>${vo.startDate}</td>
+                                </tr>
+                            </c:forEach>
                         </tbody>
+
                         <tfoot>
                             <tr class="list-end">
                                 <td></td>
@@ -201,20 +126,30 @@
 
                 <!-- row4 -->
                 <div class="paging-area">
-                    <!-- js에서 동적으로 버튼 만들어줌-->
-                    <span><a href="#!"><i class="fas fa-angle-double-left fa-lg" style="color: #174880;"></i></a></span>
-                    &nbsp;
-                    <span><a href="#!"><i class="fas fa-caret-left fa-lg" style="color: #174880;"></i></a></span>
-                    &nbsp;
-                    <span><a id="black" href="#!">1</a></span>
-                    &nbsp;
-                    <span><a href="#!">2</a></span>
-                    &nbsp;
-                    <span><a href="#!">3</a></span>
-                    &nbsp;
-                    <span><a href="#!"><i class="fas fa-caret-right fa-lg" style="color: #174880;"></i></a></span>
-                    &nbsp;
-                    <span><a href="#!"><i class="fas fa-angle-double-right fa-lg" style="color: #174880;"></i></a></span>
+                    <c:if test="${pvo.startPage != 1}">
+                        <a class="previous" href="/crm/list?pno=${pvo.startPage-1}&searchValue=${searchValue}">
+                            <i class="fas fa-caret-left fa-lg" style="color: #174880;"></i>
+                        </a>
+                    </c:if>
+                    <c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i" step="1">
+                        <c:choose>
+                            <c:when test="${i == pvo.currentPage}">
+                                <a class="current" href="/crm/list?pno=${i}&searchValue=${searchValue}">
+                                    ${i}
+                                </a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="pageNum" href="/crm/list?pno=${i}&searchValue=${searchValue}">
+                                    ${i}
+                                </a>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>                    
+                    <c:if test="${pvo.endPage != pvo.maxPage}">
+                        <a href="/crm/list?pno=${pvo.endPage+1}&searchValue=${searchValue}">
+                            <i class="fas fa-caret-right fa-lg" style="color: #174880;"></i>
+                        </a>
+                    </c:if>
                 </div>
             </div>
 

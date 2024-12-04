@@ -1,0 +1,41 @@
+
+.main-content {
+    display: flex;
+    align-items: center;
+}
+
+#calendar{
+    height: 95%;
+    width: 100%;
+}
+
+/* 달력 헤더 영역*/
+.fc-toolbar-chunk {
+    display: flex;  
+    align-items: center;
+}
+
+/* 메인 날짜 */
+.fc-toolbar-title {
+    display: inline;
+    color: #174880;
+    font-weight: bolder;
+}
+
+/* 버튼 간격 */
+.fc-direction-ltr .fc-toolbar > * > * {
+    margin-top: 0.5em;
+    margin-left: 0.75em;
+    margin-right: 0.75em;
+}
+
+/* 날짜 css (부트스트랩 때문에 기본 css 깨져서 재적용) */
+.fc-daygrid-day-number , .fc-col-header-cell-cushion{
+    color: rgb(33, 37, 41);
+    text-decoration: none;
+}
+
+/* 일요일 컬러 */
+.fc-day-sun a {
+    color: var(--bs-red);
+}
