@@ -33,14 +33,20 @@ public class CalendarService {
     public int write(CalendarVo vo){
         return mapper.write(vo);
     }//write
+    
+    // 일정 수정
+    public int edit(CalendarVo vo){
+        return mapper.edit(vo);
+    }//edit
+
+    // 일정 삭제
+    public int delete(String ScheduleNo, String writerNo) {
+        return mapper.delete(ScheduleNo,writerNo);
+    }//delete
 
     // 캘린더 항목 별 정보 조회
     public List<CalendarTypeVo> getTypeInfo() {
         return mapper.getTypeInfo();
     }//getTypeInfo
 
-    // 일정 삭제
-    public int delete(String ScheduleNo, String writerNo) {
-        return mapper.delete(ScheduleNo,writerNo);
-    }//delete
 }//class

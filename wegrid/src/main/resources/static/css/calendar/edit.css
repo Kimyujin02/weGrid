@@ -1,0 +1,70 @@
+
+#editModal > div > div{
+    background-color: #EFEFEF;
+}
+
+.date-label-area, .date-input-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#calendar_start_date , #calendar_end_date {
+    display: inline;
+    width: 49%;
+}
+
+#calendar_content {
+    resize: none;
+    height: 200px;
+}
+
+.kind-area {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: space-between;
+}
+
+.kindBox {
+    display: flex;
+    /* width: calc(60px - 0px); */
+    width: 60px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: #585858;
+    color: white;
+}
+
+.kindBox:hover {
+    background-color: #999999;
+}
+
+.kindBox label {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    align-content: center;
+    z-index: 10;
+    cursor: pointer;
+}
+
+input[type=radio] {
+    display:  none;
+}
+
+input[type=radio]:checked {
+    display: inline;
+}
+
+#calendar_type {
+    width: 100%;
+}
+
+input[type=color]{
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    margin-right: 5px;
+    border-width: 0;
+}

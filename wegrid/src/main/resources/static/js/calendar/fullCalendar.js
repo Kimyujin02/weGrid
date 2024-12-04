@@ -1,5 +1,5 @@
 
-// 
+// 전역 변수 선언
 let mainCalendar = "";
 let typeInfo = JSON.parse(localStorage.getItem("calendar-type-info"));
 

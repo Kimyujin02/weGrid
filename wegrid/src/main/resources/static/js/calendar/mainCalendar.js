@@ -107,7 +107,7 @@ function hideEvtSource(evt){
 
 }
 
-// 캘린더 항목 별 정보 조회
+// 서버에서 캘린더 항목 별 정보 가져오기
 function getTypeInfo(){
     console.log("캘린더 항목 별 정보 불러오기 시작");
     if(typeInfo == null){

@@ -2,11 +2,12 @@
 .main-content {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 #calendar{
     height: 95%;
-    width: 100%;
+    width: 98%;
 }
 
 /* 달력 헤더 영역*/
@@ -38,4 +39,14 @@
 /* 일요일 컬러 */
 .fc-day-sun a {
     color: var(--bs-red);
+}
+
+/* 기본 텍스트 컬러 */
+.fc-daygrid-event {
+    color: black;
+}
+
+.fc-daygrid-dot-event.personal_schedule {
+    background-color: #ABE1FF;
+    background-color: rgba(171,225,255,0.2);
 }

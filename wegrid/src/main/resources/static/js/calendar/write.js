@@ -1,3 +1,4 @@
+
 // 일정 추가 모달 창 실행
 function openWriteModal(date) {
 

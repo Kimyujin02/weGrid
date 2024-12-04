@@ -2,11 +2,12 @@
     pageEncoding="UTF-8"%>
 
 <link rel="stylesheet" href="/css/calendar/edit.css">
+<script defer src="/js/calendar/detail.js"></script>
 
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
-            <form action="" onsubmit="return insertToDB();">
+            <form action="" onsubmit="return editAtDB();">
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalLabel">일정 수정</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

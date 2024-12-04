@@ -1,5 +1,4 @@
 
-
 // 상세정보 모달 실행
 function showEventDetail(evt) {
     
@@ -110,13 +109,5 @@ function deleteSchedule(){
         }
 
     })
-
-}
-
-// 일정 수정 모달로 이동
-function moveToeditModal(){
-
-     // 모달 창 띄우기
-     $("#detailModal").modal("show");
 
 }

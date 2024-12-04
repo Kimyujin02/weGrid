@@ -43,8 +43,8 @@ public interface CalendarMapper {
                 , S.NAME AS KIND_NAME
                 , C.TITLE
                 , C.CONTENT
-                , TO_CHAR(C.START_DATE,'YYYY-MM-DD HH24:mi')
-                , TO_CHAR(C.END_DATE,'YYYY-MM-DD HH24:mi')
+                , TO_CHAR(C.START_DATE,'YYYY-MM-DD HH24:mi') AS START_DATE
+                , TO_CHAR(C.END_DATE,'YYYY-MM-DD HH24:mi') AS END_DATE
                 , C.COLOR
                 , C.DEL_YN
             FROM CALENDAR C
@@ -84,6 +84,23 @@ public interface CalendarMapper {
             )
             """)
     int write(CalendarVo vo);
+    
+    // 일정 수정
+    @Update("""
+            UPDATE CALENDAR
+            SET
+                TYPE_NO = #{typeNo}
+                , KIND_NO = #{kindNo}
+                , TITLE = #{title}
+                , CONTENT = #{content}
+                , START_DATE = #{startDate}
+                , END_DATE = #{endDate}
+                , COLOR = UPPER(#{color})
+            WHERE NO = #{no}
+            AND WRITER_NO = #{writerNo}
+            AND DEL_YN = 'N'
+            """)
+    int edit(CalendarVo vo);
 
     // 일정 삭제
     @Update("""
