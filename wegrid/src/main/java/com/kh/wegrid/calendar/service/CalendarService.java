@@ -20,8 +20,8 @@ public class CalendarService {
     private final CalendarMapper mapper;
 
     // 이벤트 조회
-    public List<EventVo> loadEvent(String date, String type) {
-        return mapper.loadEvent(date,type);
+    public List<EventVo> loadEvent(String date, String type, int typeNo, String writerNo) {
+        return mapper.loadEvent(date,type,typeNo,writerNo);
     }//loadEvent
 
     // 일정 상세정보 조회
@@ -39,6 +39,8 @@ public class CalendarService {
         return mapper.getTypeInfo();
     }//getTypeInfo
 
-
-
+    // 일정 삭제
+    public int delete(String ScheduleNo, String writerNo) {
+        return mapper.delete(ScheduleNo,writerNo);
+    }//delete
 }//class

@@ -22,14 +22,15 @@
 
 </head>
 <body>
+
+    <!-- 헤더 -->
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
+    <!-- 사이드 네비게이션 -->
     <%@ include file="/WEB-INF/views/common/nav.jsp" %>
 
-    
     <!-- Main -->
-    
     <main>
-
+        <!-- calendar 선택 박스 -->
         <div class="calendar-filter-area">
             <div class="filter-box personal-calendar-color selected-calendar" id="personal" no="1">
                 개인
@@ -40,17 +41,16 @@
             <div class="filter-box project-calendar-color selected-calendar" id="project" no="3">
                 프로젝트
             </div>
-        </div>
-        
+        </div>  
         <!-- calendar 영역-->
         <div class="main-content"> 
             <div id="calendar"></div> 
         </div>
-
         <!-- 모달창 include -->
         <%@ include file="/WEB-INF/views/calendar/write.jsp" %>
         <%@ include file="/WEB-INF/views/calendar/detail.jsp" %>
     </main>
+    
 </body>
 </html>
 

@@ -30,25 +30,30 @@ public class CalendarController {
     @GetMapping("mainCalendar")
     public void mainCalender(){}
     
-    // 캘린더 데이터 불러오기
+    // 이벤트 데이터 불러오기
     @GetMapping("load")
     @ResponseBody
-    public HashMap loadCalendar(String date,String type){
-        System.out.println("컨트롤러 시작");
-        System.out.println("date = " + date);
-        System.out.println("type = " + type);
+    public HashMap loadCalendar(String date,String type,int typeNo,HttpSession session){
+
+        // 접속한 사원의 사번 정보 수집
+//        MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
+//        String writerNo = loginVo.getNo();
+        String writerNo = "1";
+
+        // service 호출
+        List<EventVo> eventVoList = service.loadEvent(date,type,typeNo,writerNo);
+        
+        // 결과 변수 생성
         HashMap map = new HashMap();
-
-        List<EventVo> eventVoList = service.loadEvent(date,type);
-
         map.put("events",eventVoList);
         map.put("id",date+"_"+type);
         map.put("className",type+"_schedule");
         map.put( "textColor", "black");
-        System.out.println("eventVoList = " + eventVoList);
-
+        
+        // 결과 반환
         return map;
-    }
+
+    }//loadCalendar
 
     // 일정 상세정보 조회ByNo
     @GetMapping("detail")
@@ -67,19 +72,33 @@ public class CalendarController {
     @PostMapping("write")
     @ResponseBody
     public int write(CalendarVo vo, HttpSession session){
-
+        
         // 작성자의 사번 정보 수집
 //        MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
 //        vo.setWriterNo(loginVo.getNo());
         vo.setWriterNo("1");
-
-        System.out.println("vo = " + vo);
-
+        // service 호출
         int result = service.write(vo);
-
+        
+        // 결과 반환
         return result;
         
     }//write
+
+    // 일정 삭제
+    @GetMapping("delete")
+    @ResponseBody
+    public int delete(String no, HttpSession session){
+
+        // 접속한 사원의 사원정보 수집
+//        MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
+//        String writerNo = loginVo.getNo();
+        String writerNo = "1";
+
+        int result = service.delete(no , writerNo);
+
+        return result;
+    }//delete
 
     // 캘린더 항목 별 정보 조회
     @GetMapping("getTypeInfo")
