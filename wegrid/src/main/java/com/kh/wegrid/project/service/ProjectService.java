@@ -1,9 +1,11 @@
 package com.kh.wegrid.project.service;
 
+import com.kh.wegrid.crm.vo.ClientVo;
 import com.kh.wegrid.project.mapper.ProjectMapper;
 import com.kh.wegrid.project.vo.EmployeeVo;
 import com.kh.wegrid.project.vo.ProjectMemberVo;
 import com.kh.wegrid.project.vo.ProjectVo;
+import com.kh.wegrid.project.vo.StatusVo;
 import com.kh.wegrid.util.page.PageVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +29,8 @@ public class ProjectService {
     }
 
     // 사원 검색
-    public List<EmployeeVo> searchEmployees(String query) {
-        return mapper.searchEmployees(query);
+    public List<EmployeeVo> searchEmployees(String name) {
+        return mapper.searchEmployees(name);
     }
 
 
@@ -48,20 +50,33 @@ public class ProjectService {
     }
 
 
-    // 프로젝트 상세조회
-    public ProjectVo getProjectByNo(String no) {
-        return mapper.getProjectByNo(no);
-    }
-
-    public List<ProjectMemberVo> getPeopleList(PageVo pvo) {
-        return mapper.getPeopleList(pvo);
-    }
-
-    public ProjectVo getPeopleByNo(String no) {
-        return mapper.getPeopleByNo(no);
+    public List<ProjectMemberVo> getPeopleList(PageVo pvo, String projectNo) {
+        return mapper.getPeopleList(pvo, projectNo);
     }
 
     public int getMemberCnt() {
         return mapper.getMemberCnt();
+    }
+
+    public ProjectVo projectDetail(String projectNo) {
+        return mapper.projectDetail(projectNo);
+    }
+
+    public int edit(ProjectVo vo, String projectNo) {
+        return mapper.edit(vo, projectNo);
+    }
+
+    public List<StatusVo> getStatusVoList() {
+        return mapper.getStatusVoList();
+    }
+
+    public List<ClientVo> searchClient(String clientName) {
+        return mapper.searchClient(clientName);
+    }
+
+
+
+    public ProjectMemberVo addMember(ProjectMemberVo pmVo) {
+        return mapper.addMember(pmVo);
     }
 }

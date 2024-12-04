@@ -1,18 +1,18 @@
 package com.kh.wegrid.project.controller;
 
+import com.kh.wegrid.crm.vo.ClientVo;
 import com.kh.wegrid.project.service.ProjectService;
 import com.kh.wegrid.project.vo.EmployeeVo;
 import com.kh.wegrid.project.vo.ProjectMemberVo;
 import com.kh.wegrid.project.vo.ProjectVo;
+import com.kh.wegrid.project.vo.StatusVo;
 import com.kh.wegrid.util.page.PageVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -44,11 +44,7 @@ public class ProjectController {
 
     //프로젝트 화면 (리스트 형식)
     @GetMapping("list")
-    public String list(Model model, String no, @RequestParam(name = "pno" , required = false, defaultValue = "1") int currentPage, String searchValue) {
-       // 프로젝트 정보 가져오기
-        ProjectVo vo = service.getProjectByNo(no);
-        model.addAttribute("vo", vo);
-
+    public String list(Model model, @RequestParam(name = "pno" , required = false, defaultValue = "1") int currentPage, String searchValue) {
 
         // 페이징
         int listCount = service.getProjectCnt();
@@ -74,14 +70,21 @@ public class ProjectController {
     // 사원 검색
     @GetMapping("/employee/search")
     @ResponseBody
-    public List<EmployeeVo> searchEmployees(String query) {
-        return service.searchEmployees(query);
+    public List<EmployeeVo> searchEmployees(String name) {
+        return service.searchEmployees(name);
+    }
+    
+    // 고객사 검색
+    @GetMapping("/client/search")
+    @ResponseBody
+    public List<ClientVo> searchClient(String clientName){
+        return service.searchClient(clientName);
     }
 
     // 신규 프로젝트 생성 호출(요청처리)
     @PostMapping("create")
-    public String create(ProjectVo vo){
-        System.out.println("vo = " + vo);
+    public String create(ProjectVo vo, ProjectMemberVo pmVo){
+        ProjectMemberVo addMember = service.addMember(pmVo);
 
         // 서비스 호출
         int result = service.create(vo);
@@ -94,17 +97,11 @@ public class ProjectController {
         }
     }
 
-    //프로젝트 정보 수정 화면 / update
-    @GetMapping("edit")
-    public String edit(){
-        return "project/edit";
-    }
-
-
     // 프로젝트 상세조회 화면 1 (참여인력 조회)
     @GetMapping("people")
-    public String peopleList(Model model,String no, @RequestParam(name = "pno", defaultValue = "1") int currentPage) {
-        ProjectVo vo = service.getProjectByNo(no);
+    public String peopleList(Model model,String projectNo, @RequestParam(name = "pno") int currentPage) {
+        //프로젝트 정보
+        ProjectVo vo = service.projectDetail(projectNo);
         model.addAttribute("vo", vo);
 
         // 페이징 처리
@@ -114,18 +111,46 @@ public class ProjectController {
 
         PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
 
-        List<ProjectMemberVo> voList = service.getPeopleList(pvo); // projectNo를 넘겨줌
+        List<ProjectMemberVo> voList = service.getPeopleList(pvo, projectNo); // projectNo를 넘겨줌
         model.addAttribute("voList", voList);
         model.addAttribute("pvo", pvo);
-
+        System.out.println("voList = " + voList);
         return "project/people";
     }
 
 
     // 프로젝트 상세 조회 화면 2 (첨부파일 조회)
     @GetMapping("attach")
-    public String attachList(Model model, String no){
-        //AttachVo vo = service.get
+    public String attachList(Model model, String projectNo){
+        //프로젝트 정보
+        ProjectVo vo = service.projectDetail(projectNo);
+        model.addAttribute("vo", vo);
+        
+        // 첨부파일 목록
         return "project/attach";
+    }
+
+    //프로젝트 정보 수정 화면 / update
+    @GetMapping("edit")
+    public String edit(Model model, String projectNo){
+        
+        ProjectVo vo = service.projectDetail(projectNo);
+        List<StatusVo> statusVoList = service.getStatusVoList();
+//        List<ClientVo> clientVoList = service.getClientVoList();
+        model.addAttribute("vo", vo);
+        System.out.println("vo = " + vo);
+        model.addAttribute("statusVoList", statusVoList);
+        return "project/edit";
+    }
+
+    @PostMapping("edit")
+    public String edit(ProjectVo vo, String projectNo){
+        int result = service.edit(vo, projectNo);
+
+        if(result != 1){
+            throw new IllegalStateException("ERROR- 프로젝트 정보 수정 중 에러 발생함");
+        }
+
+        return "redirect:/project/people";
     }
 }

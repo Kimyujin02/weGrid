@@ -14,7 +14,7 @@ public class ProjectMemberVo {
     private String delYn;
 
     private String projectName;
-    private String name;
+    private String deptName;
     private String empName;
     private String empNum;
     private String email;

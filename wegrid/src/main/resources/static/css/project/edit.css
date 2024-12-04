@@ -55,6 +55,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 100px;
 }
 
 .content textarea{
@@ -73,6 +74,8 @@
     align-items: center;
     justify-items: stretch;
     align-content: space-between;
+    justify-content: center;
+    margin-top: 15px;
 }
 
 .right-panel{

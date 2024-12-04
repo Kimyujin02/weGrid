@@ -10,7 +10,6 @@ public class ProjectVo {
     private String clientNo;
     private String clientName;
     private String empNo;
-    private String empName;
     private int statusNo;
     private String statusName;
     private String projectName;
@@ -23,4 +22,5 @@ public class ProjectVo {
     private String managerPhone;
     private String managerEmail;
     private int projectMemberCount;
+    private String rankName;
 }

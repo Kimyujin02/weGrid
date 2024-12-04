@@ -68,8 +68,10 @@
                     </thead>
                     <tbody>
                         <c:forEach items="${voList}" var="vo">
-                            <tr>
-                                <td>${vo.projectName}</td>
+                            <tr >
+                                
+                               
+                                <td> <a href="/project/people?projectNo=${vo.projectNo}&pno=${vo.projectNo}">${vo.projectName}</a></td>
                                 <td>${vo.pmName}</td>
                                 <td>${vo.clientName}</td>
                                 <td>${vo.managerName}</td>
@@ -86,6 +88,7 @@
                                         <c:when test="${vo.statusNo == 4}"><span class="status-canceled">철회</span></c:when>
                                     </c:choose>
                                 </td>
+                                </a>
                             </tr>
                         </c:forEach>
 
@@ -97,15 +100,15 @@
 
                 <div class="page">
                     <c:if test="${pvo.startPage != 1}">
-                        <a href="/project/list?pno=${pvo.startPage-1}&searchValue=${searchValue}">◀</a>
+                        <a href="/project/list?pno=${pvo.startPage-1}"><i class="fas fa-caret-left fa-lg" style="color: #174880;"></i></a>
                     </c:if>
                    
                      <c:forEach begin ="${pvo.startPage}" end="${pvo.endPage}" var="i" step="1">
-                     <a href="/project/list?pno=${i}&searchValue=${searchValue}">${i}</a>
+                     <a href="/project/list?pno=${i}">${i}</a>
                      </c:forEach>
         
                      <c:if test="${pvo.endPage != pvo.maxPage}">
-                        <a href="/project/list?pno=${pvo.endPage+1}&searchValue=${searchValue}">▶</a>
+                        <a href="/project/list?pno=${pvo.endPage+1}"><i class="fas fa-caret-right fa-lg" style="color: #174880;"></i></a>
                      </c:if>
             </div>
         </div>

@@ -31,39 +31,51 @@
                 <div class="project-info">
                      <!-- 공백 -->
                 <div class="edit-icon">
-                    <a href="/project/edit"><i class="fas fa-edit" style="color:#666;"></i></a>
+                    <a href="/project/edit?projectNo=${vo.projectNo}&pno=${vo.projectNo}"><i class="fas fa-edit" style="color:#666;"></i></a>
                 </div>
                 <table class="project-table">
                     <thead>
                         <tr style="border-top: 1px solid #797979ab;">
+
+                            <!-- 프로젝트 번호를 hidden 필드로 추가 -->
+                            <input type="hidden" name="projectNo" value="${vo.projectNo}">
                             <th>프로젝트 명</th>
-                            <td>새미 프로젝트</td>
+                            <td>${vo.projectName}</td>
                             <th>담당 PM</th>
-                            <td>누구누구</td>
+                            <td>${vo.pmName}</td>
                             <th>고객사 담당자</th>
-                            <td>누구누구</td>
+                            <td>${vo.managerName}</td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <th>고객사</th>
-                            <td>KH 정보교육원</td>
+                            <td>${vo.clientName}</td>
                             <th>고객 등급</th>
-                            <td>A</td>
+                            <td>${vo.rankName}</td>
                             <th>고객사 연락처</th>
-                            <td>010-1234-5678</td>
+                            <td>${vo.managerPhone}</td>
                         </tr>
                         <tr>
                             <th>진행 현황</th>
-                            <td><span class="status-label progress" style="text-align: center;">진행중</span></td>
+                            <td>
+                                <c:choose>
+                                <c:when test="${vo.statusNo == 1}"><span class="status-ready ">준비</span></c:when>
+                                <c:when test="${vo.statusNo == 2}"><span class="status-ongoing">진행</span></c:when>
+                                <c:when test="${vo.statusNo == 3}"><span class="status-completed">완료</span></c:when>
+                                <c:when test="${vo.statusNo == 4}"><span class="status-canceled">철회</span></c:when>
+                                </c:choose>
+                            </td>
                             <th>예산</th>
-                            <td>₩3,000,000,000</td>
+                            <td>₩ ${vo.budget}</td>
                             <th>프로젝트 기간</th>
-                            <td>2024.01.18 ~ 2024.12.10</td>
+                            <td><p class="project-dates" data-start="${vo.startDate}" data-end="${vo.endDate}">
+                                ${vo.startDate} ~ ${vo.endDate}</p>
+                            </td>
                         </tr>
                         <tr>
                             <th>내용</th>
-                            <td colspan="5"></td>
+                            <td colspan="5">${vo.description}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -75,7 +87,7 @@
                 <!-- 3)참여인원 목록 -->
                 <div class="people-info">
                     <div class="sidebar">
-                        <a href="/project/people" class="sidebar-btn " id="btn1">
+                        <a href="/project/people?projectNo=${vo.projectNo}&pno=${vo.projectNo}" class="sidebar-btn " id="btn1">
                             <i class="fas fa-user-friends"></i> 
                         </a>
                         <a href="/project/attach" class="sidebar-btn active" id="btn2">
