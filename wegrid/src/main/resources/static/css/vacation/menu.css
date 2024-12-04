@@ -231,7 +231,8 @@ color: black;
 
 /* -------------------------------------모달 창------------------------------------- */
 /* 모달 전체 배경 */
-.tripModal {
+
+.vacationModal {
     display: none;
     position: fixed;
     top: 0;
@@ -242,7 +243,7 @@ color: black;
     z-index: 1000;
 }
 
-.tripModal-content {
+.vacationModal-content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -250,13 +251,13 @@ color: black;
     background-color: lightgray;
     padding: 20px;
     border-radius: 10px;
-    width: 1000px;
-    height: 600px;
+    width: 340px;
+    height: 530px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* 헤더 */
-.tripModal-header {
+.vacationModal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -265,12 +266,12 @@ color: black;
     margin-bottom: 10px;
 }
 
-.tripModal-header h2 {
+.vacationModal-header h2 {
     margin: 0;
     font-size: 18px;
 }
 
-.close-tripModal {
+.close-vacationModal {
     background: none;
     border: none;
     font-size: 16px;
@@ -278,29 +279,29 @@ color: black;
 }
 
 /* 모달 내용 */
-.tripModal-body {
+.vacationModal-body {
     display: flex;
     justify-content: space-between;
 }
 
 /* 왼쪽 영역 */
-.tripModal-left {
-    width: 48%;
+.vacationModal-left {
+    width: 300px;
 }
 
-.tripModal-left .form-tripModal {
+.vacationModal-left .form-vacationModal {
     margin-bottom: 15px;
 }
 
-.tripModal-left label {
+.vacationModal-left label {
     display: block;
     font-size: 14px;
     margin-bottom: 5px;
     color: #555;
 }
 
-.tripModal-left input,
-.tripModal-left textarea {
+.vacationModal-left input,
+.vacationModal-left textarea {
     width: 100%;
     padding: 8px;
     border: 1px solid #ddd;
@@ -308,35 +309,22 @@ color: black;
     font-size: 14px;
 }
 
-.tripModal-left input[type="checkbox"] {
+.vacationModal-left input[type="checkbox"] {
     width: auto;
     margin-right: 5px;
 }
 
-.tripModal-left .checkbox-group {
+.vacationModal-left .checkbox-group {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
+    flex-wrap: wrap;
 }
 
-/* 오른쪽 영역 */
-.tripModal-right {
-    width: 48%;
-}
-
-.tripModal-right textarea {
-    width: 100%;
-    height: 362px;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-    resize: none;
-}
 
 /* 등록 버튼 */
-.tripModal-footer {
+.vacationModal-footer {
     text-align: center;
     margin-top: 10px;
 }
