@@ -1,8 +1,6 @@
 package com.kh.wegrid.vacation.controller;
 
 import com.kh.wegrid.vacation.service.VacationService;
-import com.kh.wegrid.vacation.temp.vo.EmpVo;
-import com.kh.wegrid.vacation.temp.vo.JobInfoVo;
 import com.kh.wegrid.vacation.vo.*;
 import jakarta.servlet.http.HttpSession;
 

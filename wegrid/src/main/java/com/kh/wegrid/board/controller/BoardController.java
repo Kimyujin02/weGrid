@@ -4,7 +4,6 @@ import com.kh.wegrid.board.service.BoardService;
 import com.kh.wegrid.board.vo.BoardAttachmentVo;
 import com.kh.wegrid.board.vo.BoardVo;
 import com.kh.wegrid.board.vo.MemberVo;
-import com.kh.wegrid.dsutil.FileUploader;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,8 +28,6 @@ public class BoardController {
 
     private final BoardService service;
 
-    @Value("#{pathInfo.getBoardAttachmentPath()}")
-    private String path;
 
     @GetMapping("list")
     public String list(){
@@ -45,38 +42,7 @@ public class BoardController {
         return "board/insert";
     }
 
-    @PostMapping("insert")
-    public String insert(BoardVo bvo
-            , HttpSession session
-            , @RequestParam(name = "f") List<MultipartFile> fileList) throws IOException {
 
-        List<String> changeNameList = new ArrayList<>();
-        BoardAttachmentVo attachVo = new BoardAttachmentVo();
-        List<BoardAttachmentVo> attachmentVoList = new ArrayList<>();
-
-        for (MultipartFile f : fileList) {
-            if (f.isEmpty()) {break;}
-            String changeName = FileUploader.save(f,path);
-            String originName = f.getOriginalFilename();
-
-            attachVo.setOriginName(originName);
-            attachVo.setChangeName(changeName);
-
-            attachmentVoList.add(attachVo);
-
-        }
-
-        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
-        bvo.setWriterNo( loginMemberVo.getNo() );
-
-        int result = service.insert(bvo, attachmentVoList);
-        if (result > 0) {
-            return "redirect:/board/list";
-        }else{
-            return "redirect:/error";
-        }
-
-    }
 
 
     @GetMapping("detail")

@@ -1,6 +1,5 @@
 package com.kh.wegrid.vacation.mapper;
 
-import com.kh.wegrid.vacation.temp.vo.EmpVo;
 import com.kh.wegrid.vacation.vo.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
