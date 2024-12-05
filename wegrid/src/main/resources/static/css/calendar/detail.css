@@ -17,14 +17,14 @@
     justify-content: space-between;
 }
 
-#startDate-view , #endDate-view {
-    display: inline;
+#calendar-start-date-view , #calendar-start-date-view {
+    display: flex;
     width: 49%;
 
     text-align: center;
 }
 
-#content-view {
+#calendar-content-view {
     resize: none;
     height: 200px;
 
@@ -36,11 +36,11 @@
     align-items: center;
 }
 
-#typName-view {
+#calendar-typName-view {
     width: 100%;
 }
 
-#color-view {
+#calendar-color-view {
     width: 25px;
     height: 25px;
     border-radius: 5px;

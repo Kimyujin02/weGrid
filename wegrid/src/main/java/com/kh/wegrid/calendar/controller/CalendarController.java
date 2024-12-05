@@ -46,8 +46,8 @@ public class CalendarController {
         // 결과 변수 생성
         HashMap map = new HashMap();
         map.put("events",eventVoList);
-        map.put("id",date+"_"+type);
-        map.put("className",type+"_schedule");
+        map.put("id",date+"-"+type);
+        map.put("className",type+"-schedule");
         map.put( "textColor", "black");
         
         // 결과 반환
@@ -64,6 +64,7 @@ public class CalendarController {
         CalendarVo vo = service.getScheduleByNo(no);
         model.addAttribute("calendarVo", vo);
 
+        // 결과 반환
         return vo;
 
     }//getScheduleByNo
@@ -116,6 +117,19 @@ public class CalendarController {
         return result;
     }//delete
 
+    // 캘린더 항목 , 일정종류 정보 조회
+    @GetMapping("calendarInfo")
+    @ResponseBody
+    public HashMap getCalendarInfo(){
+
+        // service 호출
+        HashMap map = service.getCalendarInfo();
+
+        // 결과 반환
+        return map;
+
+    }//getCalendarInfo
+    
     // 캘린더 항목 별 정보 조회
     @GetMapping("getTypeInfo")
     @ResponseBody

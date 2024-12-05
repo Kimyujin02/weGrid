@@ -2,8 +2,9 @@
 // 전역 변수 선언
 let mainCalendar = "";
 let typeInfo = JSON.parse(localStorage.getItem("calendar-type-info"));
+let kindInfo = JSON.parse(localStorage.getItem("calendar-kind-info"));
 
-// 일정정보 불러오기
+// 서버에서 일정정보 불러오기
 function loadEvents(date,type,typeNo,itemName){  
   console.log("서버에서 데이터 호출 시작" , itemName);
   let loadDataJSON = "";
@@ -40,7 +41,7 @@ function addEventToCalendar(calcDate,typeNo1,typeNo2){
     
     // local 저장소에 저장할 일정정보 이름 생성
     const typeName = typeInfo[i].type;
-    const itemName = calcDate+"_"+typeName;
+    const itemName = calcDate+"-"+typeName;
     
     if(mainCalendar.getEventSourceById(itemName) == null){
       
@@ -58,7 +59,7 @@ function addEventToCalendar(calcDate,typeNo1,typeNo2){
     }
     
   }
-  console.log("eventsources",mainCalendar.getEventSources());
+  console.log("추가 후 eventsources",mainCalendar.getEventSources());
   
   console.log("일정정보 추가 완료",calcDate);
 }
@@ -69,23 +70,22 @@ function removeEventSource(typeNo,date){
   const typeName = typeInfo[typeNo].type;
 
   if(date != null){
-    const EventId = date+"_"+typeName;
-    (mainCalendar.getEventSourceById(EventId)).remove();
+    const eventId = date+"-"+typeName;
+    (mainCalendar.getEventSourceById(eventId)).remove();
   }
   else{
     const evtList = mainCalendar.getEventSources();
     for(let i=evtList.size()-1; i>=0; i--){
-      const EventId = evtList[i].id;
-      console.log("id",EventId);
-      if(EventId.includes(typeName)){
-        (mainCalendar.getEventSourceById(EventId)).remove();
+      const eventId = evtList[i].id;
+      if(eventId.includes(typeName)){
+        (mainCalendar.getEventSourceById(eventId)).remove();
       }
     }
   }
 
 }
 
-// fullCalendar 로 달력 생성
+// fullCalendar로 달력 생성
 function loadCalendar() {
   console.log("로드 시작");
   const calendarEl = document.querySelector("#calendar");
@@ -156,9 +156,9 @@ function loadCalendar() {
 
   })
   
-  // 캘린더 항목 정보 전역변수 저장
-  getTypeInfo();
-  
+  // 캘린더 항목, 일정종류 정보 전역변수 저장
+  getCalendarInfo();
+
   // 개인일정 제외한 local 저장소 초기화
   deleteLocalStorage(2);
   deleteLocalStorage(3);

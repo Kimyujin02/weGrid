@@ -46,7 +46,14 @@
     color: black;
 }
 
-.fc-daygrid-dot-event.personal_schedule {
-    background-color: #ABE1FF;
+.fc-daygrid-dot-event.personal-schedule {
     background-color: rgba(171,225,255,0.2);
+}
+
+.fc-daygrid-dot-event.department-schedule {
+    background-color: rgba(84, 191, 191,0.2);
+}
+
+.fc-daygrid-dot-event.projects-chedule {
+    background-color: rgba(172, 195, 242,0.2);
 }

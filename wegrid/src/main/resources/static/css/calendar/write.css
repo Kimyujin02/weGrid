@@ -9,12 +9,12 @@
     justify-content: space-between;
 }
 
-#calendar_start_date , #calendar_end_date {
+#calendar-start-date , #calendar-end-date {
     display: inline;
     width: 49%;
 }
 
-#calendar_content {
+#calendar-content {
     resize: none;
     height: 200px;
 }
@@ -57,7 +57,7 @@ input[type=radio]:checked {
     display: inline;
 }
 
-#calendar_type {
+#calendar-type {
     width: 100%;
 }
 

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <link rel="stylesheet" href="/css/calendar/edit.css">
-<script defer src="/js/calendar/detail.js"></script>
+<script defer src="/js/calendar/edit.js"></script>
 
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -10,58 +10,64 @@
             <form action="" onsubmit="return editAtDB();">
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalLabel">일정 수정</h4>
+                <input type="hidden" name="no">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="form-group">
+                    <label for="calendar-type-edit" class="col-form-label">항목</label>
+                    <div class="type-area">
+                        <input type="color" name="color">
+                        <select name="typeNo" class="form-control" id="calendar-type-edit">
 
+                        </select>
+                    </div>
+                    <br>
                     <div class="title-area">
-                        <label for="calendar_title" class="col-form-label">제목</label>
-                        <input type="text" class="form-control" id="calendar_title" name="title">
+                        <label for="calendar-title-edit" class="col-form-label">제목</label>
+                        <input type="text" class="form-control" id="calendar-title-edit" name="title">
                     </div>
                     <br>
                     <div class="date-area">
                         <div class="date-label-area">
-                            
-                            <label for="calendar_end_date" class="col-form-label">종료일</label>
+                            <label for="calendar-start-date-edit" class="col-form-label">종료일</label>
+                            <label for="calendar-end-date-edit" class="col-form-label">종료일</label>
                         </div>
                         <div class="date-input-area">
-                            <input type="datetime-local" class="form-control" id="calendar_start_date" name="startDate" value="">
-                            <input type="datetime-local" class="form-control" id="calendar_end_date" name="endDate">
+                            <input type="datetime-local" class="form-control" id="calendar-start-date-edit" name="startDate">
+                            <input type="datetime-local" class="form-control" id="calendar-end-date-edit" name="endDate">
                         </div>
                     </div>
                     <br>
-                    <div>
-                        <label for="" class="col-form-label">일정 종류</label>
-                        <div class="type-area">
-                            <div class="typeBox">
-                                <label for="typeNo1">교육</label>
-                                <input type="radio" id="typeNo1" name="typeNo" value="1">
-                            </div>
-                            <div class="typeBox">
-                                <label for="typeNo2">업무</label>
-                                <input type="radio" id="typeNo2" name="typeNo" value="2">
-                            </div>
-                            <div class="typeBox">
-                                <label for="typeNo3">행사</label>
-                                <input type="radio" id="typeNo3" name="typeNo" value="3">
-                            </div>
-                            <div class="typeBox">
-                                <label for="typeNo4">기타</label>
-                                <input type="radio" id="typeNo4" name="typeNo" value="4">
-                            </div>
+                    <label class="col-form-label">일정 종류</label>
+                    <div class="kind-area">
+                        <div class="kindBox">
+                            <label for="kindNo1">교육</label>
+                            <input type="radio" id="typeNo1" name="typeNo" value="1">
+                        </div>
+                        <div class="kindBox">
+                            <label for="kindNo2">업무</label>
+                            <input type="radio" id="typeNo2" name="typeNo" value="2">
+                        </div>
+                        <div class="kindBox">
+                            <label for="kindNo3">행사</label>
+                            <input type="radio" id="typeNo3" name="typeNo" value="3">
+                        </div>
+                        <div class="kindBox">
+                            <label for="kindNo4">기타</label>
+                            <input type="radio" id="typeNo4" name="typeNo" value="4">
                         </div>
                     </div>
                     <br>
                     <div class="content-area">
-                        <label for="calendar_content" class="col-form-label">상세 내용</label>
-                        <textarea class="form-control" id="calendar_content" name="content"></textarea>
+                        <label for="calendar-content-edit" class="col-form-label">상세 내용</label>
+                        <textarea class="form-control" id="calendar-content-edit" name="content"></textarea>
                     </div>
 
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="editSchedule">수정</button>
+                <button type="button" class="btn btn-primary" id="editSchedule">완료</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
             </div>
             </form>
