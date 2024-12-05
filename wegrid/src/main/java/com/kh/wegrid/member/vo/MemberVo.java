@@ -7,6 +7,8 @@ public class MemberVo {
 
     private String no;
     private String deptNo;
+    private String deptName;
+    private String jobName;
     private String jobNo;
     private String empNum;
     private String id;
