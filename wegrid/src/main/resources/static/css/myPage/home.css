@@ -1,0 +1,141 @@
+/* ----------------------
+----------layout---------
+------------------------- */
+
+main {
+    grid-area: main;
+    background-color: #d1dce8;
+    padding: 0px;
+}
+
+.main-content {
+    display: grid;
+    grid-template-rows: 100px 0fr 180px 360px 100px;
+    background-color: white;
+    border-radius: 5px;
+    width: 1500px;
+    height: 740px;
+    margin-top: 0px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 50px;
+}
+
+.title-area {
+    
+    padding-left: 50px;
+    justify-self: start;
+    align-self: center;
+    color: #174880;
+}
+
+.title-text {
+    margin-bottom: 0;
+}
+
+.line-area {
+
+    display: grid;
+    height: 2px;
+    background-color: #C0C0C0;
+    color: #C0C0C0;
+    width: 1400px;
+    place-self: center center;
+}
+
+.profile-area {
+    display: grid;
+    align-items: end;
+    justify-items: center;
+}
+
+/* .profile-area {
+    text-align: center;
+} */
+.profile-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.info-area {
+    display: grid;
+}
+
+.btn-area {
+    display: grid;
+    grid-template-columns: 1fr 150px 150px;
+    column-gap: 5px;
+
+    align-items: center;
+    margin-right: 50px;
+}
+/*  */
+
+.my-info {
+    padding-left: 350px;
+    justify-self: start;
+    align-self: center;
+    color: #174880;
+}
+
+.my-info h4 {
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.readonly-input {
+    display: grid;
+    grid-template-columns: 120px 750px;
+    column-gap: 10px;
+    
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+
+    font-weight: bold;
+}
+
+.readonly-input input {
+    width: 700px;
+    height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.line {
+    display: grid;
+    height: 1.5px;
+    background-color: #C0C0C0;
+    color: #C0C0C0;
+    width: 950px;
+    place-self: center center;
+}
+
+.btn-area button {
+    width: 140px;
+    height: 30px;
+
+}
+
+.btn.btn-primary {
+    font-weight: bold !important;
+}
+
+.btn {
+    --bs-btn-padding-x: 0 !important;
+    --bs-btn-padding-y: 0 !important;
+}
+
+.changePwd {
+    background-color: gray !important;
+    border: none !important;
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 500px;
+}

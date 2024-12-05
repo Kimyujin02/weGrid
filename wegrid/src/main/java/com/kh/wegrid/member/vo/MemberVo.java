@@ -14,7 +14,9 @@ public class MemberVo {
     private String name;
     private String phone;
     private String email;
-    private String address;
+    private String postAddress;
+    private String roadAddress;
+    private String detailAddress;
     private String enrollDate;
     private String modifyDate;
     private String isManager;

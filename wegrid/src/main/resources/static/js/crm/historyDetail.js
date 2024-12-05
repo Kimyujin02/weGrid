@@ -84,9 +84,22 @@ function paintPageArea(pvo, cno = "") {
                 trTag.appendChild(tdTag04);
   
                 const tdTag05 = document.createElement('td');
-                tdTag05.innerHTML = `<button type="button" class="btn btn-primary" onclick="location.href='/crm/history/edit?cno=${cno}&hno=${vo.no}'">수정</button>`
-                trTag.appendChild(tdTag05);
+                const editButton = document.createElement('button');
+                editButton.type = "button";
+                editButton.className = "btn btn-primary";
+                editButton.textContent = "수정";
   
+                // 버튼 클릭 시 로그인 정보와 작성자 번호 비교
+                editButton.addEventListener('click', function() {
+                    if (loginMemberNo !== vo.writerNo) {
+                        alert("권한이 없습니다.");
+                    } else {
+                        location.href = `/crm/history/edit?cno=${cno}&hno=${vo.no}`;
+                    }
+                });
+  
+                tdTag05.appendChild(editButton);
+                trTag.appendChild(tdTag05);
                 tbodyTag.appendChild(trTag);
             }
   

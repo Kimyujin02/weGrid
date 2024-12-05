@@ -158,8 +158,9 @@ public class CrmController {
         MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
         // 로그인된 사용자가 없을 때 처리
         if (loginMemberVo == null) {
-            redirectAttributes.addFlashAttribute("errorMessage", "로그인 정보가 없습니다. 다시 로그인 해주세요.");
-            return "redirect:/crm/history?cno=" + cno;
+            session.removeAttribute("errorMessage");
+            session.setAttribute("errorMessage", "로그인 정보가 없습니다.");
+            return  "redirect:/member/login";
         }
 
         model.addAttribute("vo" , vo);
@@ -232,6 +233,13 @@ public class CrmController {
     @PostMapping("history/edit")
     private String editHistory(ClientHistoryVo vo, String hno, String cno, HttpSession session) {
         MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        // 로그인된 사용자가 없을 때 처리
+        if (loginMemberVo == null) {
+            session.removeAttribute("errorMessage");
+            session.setAttribute("errorMessage", "로그인 정보가 없습니다.");
+            return  "redirect:/member/login";
+        }
+
         String eno = loginMemberVo.getNo();
         System.out.println("eno = " + eno);
         System.out.println("hno = " + hno);
