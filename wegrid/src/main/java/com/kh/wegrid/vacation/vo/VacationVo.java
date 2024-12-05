@@ -1,7 +1,5 @@
 package com.kh.wegrid.vacation.vo;
 
-import com.kh.wegrid.vacation.temp.vo.EmpVo;
-import com.kh.wegrid.vacation.temp.vo.JobInfoVo;
 import lombok.Data;
 
 @Data
