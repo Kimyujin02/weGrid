@@ -26,7 +26,9 @@ public class CrmService {
         return mapper.getClientVoList(pvo, searchType, searchValue);
     }
 
-    public int getClientCnt() { return mapper.getClientCnt(); }
+    public int getClientCnt() {
+        return mapper.getClientCnt();
+    }
 
     public List<ClientRankVo> getClientRankVoList() {
         return mapper.getClientRankVoList();
@@ -80,8 +82,14 @@ public class CrmService {
     public int createHistory(ClientHistoryVo vo, String cno, String eno) {
         return mapper.createHistory(vo, cno, eno);
     }
-
+    
+    // 고객사 히스토리 정보
     public ClientHistoryVo getHistoryDetail(String hno) {
         return mapper.getHistoryDetail(hno);
+    }
+
+    // 고객사 히스토리 수정
+    public int editHistory(ClientHistoryVo vo, String hno, String cno, String eno) {
+        return mapper.editHistory(vo, hno, cno, eno);
     }
 }

@@ -7,19 +7,18 @@
 <meta charset="UTF-8">
 <title>WEGRID</title>
 
-<link rel="stylesheet" href="/css/crm/createHistory.css">
+<link rel="stylesheet" href="/css/crm/historyDetail.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script defer src="/js/crm/createHistory.js"></script>
+<script defer src="/js/crm/historyDetail.js"></script>
 
 </head>
 <body>
 
    <%@ include file="/WEB-INF/views/common/header.jsp" %>
    <%@ include file="/WEB-INF/views/common/nav.jsp" %>
-
 
     <!-- Main -->
     <main>
@@ -86,7 +85,7 @@
                                         <th class="edit">수정</th>
                                     </tr>
                                 </thead>
-                          
+                                
                                 <tbody>
                                     <td>로딩중...</td>
                                 </tbody>
@@ -112,22 +111,20 @@
                     <div class="create-area">
                         <div class="history-title"><h5>히스토리 세부내용</h5></div>
                         <div>
-                            <form class="form-area" action="/crm/history/create" method="post">
+                            <form class="form-area">
                                 <div class="query-insert">
                                     <div>문의 &nbsp;&nbsp;</div>
-                                    <textarea name="inquiry" id="inquiry"></textarea>
+                                    <textarea name="inquiry" id="inquiry" readonly>${hvo.inquiry}</textarea>
                                 </div>
                                 <div class="gray-line"></div>
+
                                 <div class="reply-insert">
                                     <div>답변 &nbsp;&nbsp;</div>
-                                    <textarea name="reply" id="reply"></textarea>
+                                    <textarea name="reply" id="reply" readonly>${hvo.reply}</textarea>
                                 </div>
-                                <input type="hidden" name="cno" value="${param.cno}">
+
                                 <div class="btn-area">
-                                    <div></div>
-                                    <button type="submit">등록</button>
-                                    <button onclick="location.href='/crm/history?cno=${param.cno}'">취소</button>
-                                    <div></div>
+                                    
                                 </div>
                             </form>
                         </div>
@@ -138,5 +135,6 @@
 
         </div>
     </main>
+
 </body>
 </html>

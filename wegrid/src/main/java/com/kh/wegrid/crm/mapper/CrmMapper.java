@@ -227,19 +227,17 @@ public interface CrmMapper {
             """)
     ClientHistoryVo getHistoryDetail(String hno);
 
-//    @Select("""
-//            SELECT
-//                NO,
-//                CLIENT_NO,
-//                WRITER_NO,
-//                INQUIRY,
-//                REPLY,
-//                ENROLL_DATE,
-//                DEL_YN
-//            FROM
-//                CLIENT_HISTORY
-//            WHERE
-//                CLIENT_NO = #{cno}
-//            """)
-//    ClientHistoryVo getClientHistory(String cno);
+    @Update("""
+            UPDATE CLIENT_HISTORY
+            SET
+                CLIENT_NO = #{cno}
+                , WRITER_NO = #{eno}
+                , INQUIRY = #{vo.inquiry}
+                , REPLY = #{vo.reply}
+                , DEL_YN = 'N'
+            WHERE
+                NO = #{hno}
+            """)
+    int editHistory(ClientHistoryVo vo, String hno, String cno, String eno);
+
 }

@@ -5,6 +5,22 @@
 
 <mapper namespace="com.kh.wegrid.crm.mapper.CrmMapper">
 
+<!--    &lt;!&ndash; 전체 데이터 개수 &ndash;&gt;-->
+<!--    <select id="getClientCnt" resultType="int">-->
+<!--        SELECT COUNT(*)-->
+<!--        FROM clients-->
+<!--        WHERE 1 = 1-->
+<!--        <if test="status != null and status != ''">-->
+<!--            AND status = #{status}-->
+<!--        </if>-->
+<!--        <if test="grade != null and grade != ''">-->
+<!--            AND grade = #{grade}-->
+<!--        </if>-->
+<!--        <if test="searchType != null and searchValue != null">-->
+<!--            AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%')-->
+<!--        </if>-->
+<!--    </select>-->
+
     <select id="getClientVoList">
         SELECT
         C.NO

@@ -5,7 +5,7 @@ function paintPageArea(pvo, cno = "") {
     // 이전 버튼
     if (pvo.startPage > 1) {
         const prevTag = document.createElement("a");
-        prevTag.setAttribute("href", `/crm/history/create?cno=${cno}&pno=${pvo.startPage - 1}`);
+        prevTag.setAttribute("href", `/crm/history/detail?cno=${cno}&pno=${pvo.startPage - 1}`);
         prevTag.className = "previous";
         prevTag.innerHTML = '<i class="fas fa-caret-left fa-lg" style="color: #174880;"></i>';
         pagingArea.appendChild(prevTag);
@@ -14,7 +14,7 @@ function paintPageArea(pvo, cno = "") {
     // 페이지 번호 버튼
     for (let i = pvo.startPage; i <= pvo.endPage; i++) {
         const pageTag = document.createElement("a");
-        pageTag.setAttribute("href", `/crm/history/create?cno=${cno}&pno=${i}`);
+        pageTag.setAttribute("href", `/crm/history/detail?cno=${cno}&pno=${i}`);
         pageTag.className = i === pvo.currentPage ? "current" : "pageNum";
         pageTag.innerText = i;
         pagingArea.appendChild(pageTag);
@@ -23,7 +23,7 @@ function paintPageArea(pvo, cno = "") {
     // 다음 버튼
     if (pvo.endPage < pvo.maxPage) {
         const nextTag = document.createElement("a");
-        nextTag.setAttribute("href", `/crm/history/create?cno=${cno}&pno=${pvo.endPage + 1}`);
+        nextTag.setAttribute("href", `/crm/history/detail?cno=${cno}&pno=${pvo.endPage + 1}`);
         nextTag.className = "next";
         nextTag.innerHTML = '<i class="fas fa-caret-right fa-lg" style="color: #174880;"></i>';
         pagingArea.appendChild(nextTag);
@@ -46,7 +46,7 @@ function paintPageArea(pvo, cno = "") {
     console.log(pno);
   
     $.ajax({
-        url : `/crm/history/create/data` ,
+        url : `/crm/history/detail/data` ,
         type: "GET",
         data : {
             cno,
@@ -116,6 +116,3 @@ function paintPageArea(pvo, cno = "") {
   }
     
   loadHistoryList();
-
-  
-

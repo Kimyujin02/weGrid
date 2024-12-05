@@ -27,7 +27,7 @@
             <div class="info-area">
                 <div class="title-name">
                     <h4>고객사 정보</h4>
-                    <button>
+                    <button onclick="location.href='/crm/edit?cno=${param.cno}'">
                         <i class="fa-solid fa-pen-to-square fa-xl" style="color: #174880;"></i>
                     </button>
                 </div>
@@ -45,7 +45,7 @@
                     <div class="info-line"></div>
                     
                     <div class="blueTag">주소</div>
-                    <div class="whiteTag" id="addressName">${vo.roadAddress}${vo.detailAddress}</div>
+                    <div class="whiteTag" id="addressName">${vo.roadAddress}&nbsp;${vo.detailAddress}</div>
                     <div class="blueTag">등급</div>
                     <div class="whiteTag">${vo.rankName}</div>
                     <div class="blueTag">거래 시작일</div>
@@ -122,7 +122,8 @@
                                     <textarea name="reply" id="reply">${hvo.reply}</textarea>
                                 </div>
                                 <div class="btn-area">
-                                    <div></div>
+                                    <div><input type="hidden" name="cno" value="${param.cno}"></div>
+                                    <div><input type="hidden" name="hno" value="${param.hno}"></div>
                                     <button type="submit">수정</button>
                                     <button onclick="location.href='/crm/history?cno=${param.cno}'">취소</button>
                                     <div></div>
