@@ -3,6 +3,7 @@ package com.kh.wegrid.crm.controller;
 import com.kh.wegrid.crm.service.CrmService;
 import com.kh.wegrid.crm.vo.ClientHistoryVo;
 import com.kh.wegrid.crm.vo.ClientRankVo;
+import com.kh.wegrid.crm.vo.ClientStatusVo;
 import com.kh.wegrid.crm.vo.ClientVo;
 import com.kh.wegrid.member.vo.MemberVo;
 import com.kh.wegrid.project.vo.ProjectVo;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,12 +36,18 @@ public class CrmController {
             ,String searchValue
     ){
         int listCount = service.getClientCnt();
+
         int pageLimit = 5;
         int boardLimit = 15;
         PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
 
         List<ClientVo> clientVoList = service.getClientVoList(pvo, searchType, searchValue);
+        List<ClientRankVo> clientRankVoList = service.getClientRankVoList();
+        List<ClientStatusVo> clientStatusVoList = service.getClientStatusVoList();
+
         model.addAttribute("clientVoList", clientVoList);
+        model.addAttribute("clientRankVoList", clientRankVoList);
+        model.addAttribute("clientStatusVoList", clientStatusVoList);
         model.addAttribute("pvo", pvo);
         model.addAttribute("searchType", searchType);
         model.addAttribute("searchValue", searchValue);
@@ -144,8 +152,16 @@ public class CrmController {
 
     // 고객사 히스토리 작성 탭 (화면)
     @GetMapping("history/create")
-    private String historyCreate(String cno, Model model) {
+    private String historyCreate(String cno, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         ClientVo vo = service.getClientDetail(cno);
+
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        // 로그인된 사용자가 없을 때 처리
+        if (loginMemberVo == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "로그인 정보가 없습니다. 다시 로그인 해주세요.");
+            return "redirect:/crm/history?cno=" + cno;
+        }
+
         model.addAttribute("vo" , vo);
         return "crm/createHistory";
     }
@@ -212,15 +228,48 @@ public class CrmController {
         return map;
     }
 
-//    // 고객사 히스토리 작성 탭 (작성)
-//    @PostMapping("history/create")
-//    private String createHistory(ClientHistoryVo vo, String cno, HttpSession session) {
-//        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
-//        String eno = loginMemberVo.getNo();
-//
-//        int result = service.createHistory(vo, cno, eno);
-//
-//        return "redirect:/crm/history?cno=" + cno;
-//    }
+    // 고객사 히스토리 수정 (동작)
+    @PostMapping("history/edit")
+    private String editHistory(ClientHistoryVo vo, String hno, String cno, HttpSession session) {
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        String eno = loginMemberVo.getNo();
+        System.out.println("eno = " + eno);
+        System.out.println("hno = " + hno);
+        System.out.println("cno = " + cno);
+        System.out.println("vo = " + vo);
+        int result = service.editHistory(vo, hno, cno, eno);
 
+        return "redirect:/crm/history?cno=" + cno;
+    }
+
+    // 고객사 히스토리 상세조회
+    @GetMapping("history/detail")
+    private String historyDetail(String cno, String hno, Model model) {
+        ClientVo vo = service.getClientDetail(cno);
+        ClientHistoryVo hvo = service.getHistoryDetail(hno);
+
+        model.addAttribute("vo" , vo);
+        model.addAttribute("hvo", hvo);
+        return "crm/historyDetail";
+    }
+
+    // 고객사 히스토리 상세조회 (데이터)
+    @GetMapping("history/detail/data")
+    @ResponseBody
+    public HashMap getHistoryVoListDetail(
+            @RequestParam(name = "pno" , defaultValue = "1" , required = false) int currentPage
+            , String cno)
+    {
+        int listCount = service.getHistoryCnt(cno);
+        int pageLimit = 5;
+        int boardLimit = 5;
+        PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
+
+        List<ClientHistoryVo> historyVoList = service.getHistoryVoListMini(cno, pvo);
+
+        HashMap map = new HashMap();
+        map.put("a" , historyVoList);
+        map.put("b" , pvo);
+        return map;
+    }
 }

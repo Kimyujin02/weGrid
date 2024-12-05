@@ -43,29 +43,45 @@
                 </div>
 
                 <div class="search-area">
+                    <!-- 진행 여부 필터 -->
                     <div class="dropdown">
                         <button class="dropdown-toggle">진행 여부 &nbsp;</button>
                         <div class="dropdown-menu">
-                          <div class="option-list">
-
-                            <c:forEach items="${clientVoList}" var="clientVo">
-                                <label><input type="checkbox" value="${clientVo.statusNo}" />${clientVo.statusName}</label>
-                            </c:forEach>
-
-                          </div>
+                            <div class="option-list">
+                                <!-- '전체' 선택 추가 -->
+                                <label>
+                                    <input type="radio" name="status" value="" <c:if test="${status == null || status == ''}">checked</c:if> />
+                                    &nbsp;&nbsp;전체
+                                </label>
+                                
+                                <c:forEach items="${clientStatusVoList}" var="clientStatusVo">
+                                    <label>
+                                        <input type="radio" name="status" value="${clientStatusVo.no}" <c:if test="${status == clientStatusVo.no}">checked</c:if> />
+                                        &nbsp;&nbsp;${clientStatusVo.name}
+                                    </label>
+                                </c:forEach>
+                            </div>
                         </div>
                     </div>
-                    
+
+                    <!-- 등급 필터 -->
                     <div class="dropdown">
                         <button class="dropdown-toggle">등급 필터 &nbsp;</button>
                         <div class="dropdown-menu">
-                          <div class="option-list">
-                            
-                            <c:forEach items="${clientVoList}" var="clientVo">
-                                <label><input type="checkbox" value="${clientVo.rankName}" />${clientVo.rankName}</label>
-                            </c:forEach>
+                            <div class="option-list">
+                                <!-- '전체' 선택 추가 -->
+                                <label>
+                                    <input type="radio" name="grade" value="" <c:if test="${grade == null || grade == ''}">checked</c:if> />
+                                    &nbsp;&nbsp;전체
+                                </label>
 
-                          </div>
+                                <c:forEach items="${clientRankVoList}" var="clientRankVo">
+                                    <label>
+                                        <input type="radio" name="grade" value="${clientRankVo.name}" <c:if test="${grade == clientRankVo.name}">checked</c:if> />
+                                        &nbsp;&nbsp;${clientRankVo.name}
+                                    </label>
+                                </c:forEach>
+                            </div>
                         </div>
                     </div>
                     

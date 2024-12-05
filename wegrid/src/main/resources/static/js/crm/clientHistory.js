@@ -118,7 +118,7 @@ function loadHistoryList(){
               const tdTag03 = document.createElement('td');
               // tdTag03.innerText = vo.inquiry;
               tdTag03.className = "linked-name";
-              tdTag03.innerHTML = `<a href='/crm/history/create?cno=${cno}&hno=${vo.no}'>${vo.inquiry}</a>`;
+              tdTag03.innerHTML = `<a href='/crm/history/detail?cno=${cno}&hno=${vo.no}'>${vo.inquiry}</a>`;
               trTag.appendChild(tdTag03);
 
               const tdTag04 = document.createElement('td');
