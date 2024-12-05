@@ -61,11 +61,6 @@ public class ProjectController {
         return "project/list";
     }
 
-    // 신규 프로젝트 생성 화면
-    @GetMapping("create")
-    public String create(){
-        return "project/create";
-    }
 
     // 사원 검색
     @GetMapping("/employee/search")
@@ -81,13 +76,19 @@ public class ProjectController {
         return service.searchClient(clientName);
     }
 
+    // 신규 프로젝트 생성 화면
+    @GetMapping("create")
+    public String create(){
+        return "project/create";
+    }
+
     // 신규 프로젝트 생성 호출(요청처리)
     @PostMapping("create")
-    public String create(ProjectVo vo, ProjectMemberVo pmVo){
-        ProjectMemberVo addMember = service.addMember(pmVo);
+    public String create( ProjectVo vo, ProjectMemberVo pmVo){
+        System.out.println("ProjectController.create ~~~~~~~~~~~~~~~~~~~~~~");
 
         // 서비스 호출
-        int result = service.create(vo);
+        int result = service.create(vo , pmVo);    //플젝 생성
 
         // 결과 처리
         if(result > 0){
@@ -97,6 +98,33 @@ public class ProjectController {
         }
     }
 
+    //프로젝트 정보 수정 화면 / update
+    @GetMapping("edit")
+    public String edit(Model model, String projectNo,PageVo pvo){
+
+        ProjectVo vo = service.projectDetail(projectNo);
+        List<StatusVo> statusVoList = service.getStatusVoList();
+        List<ProjectMemberVo> voList = service.getPeopleList(pvo, projectNo); // projectNo를 넘겨줌
+
+        model.addAttribute("vo", vo); // 정보를 담아 jsp 화면에 넘겨주기 위한 것
+        model.addAttribute("statusVoList", statusVoList);
+        model.addAttribute("voList", voList);
+        return "project/edit";
+    }
+
+
+    //프로젝트 수정
+    @PostMapping("edit") // 정보 수정, 멤버 추가, 삭제
+    public String edit(ProjectVo vo, String projectNo, ProjectMemberVo pmVo){
+
+        int result = service.edit(vo, projectNo, pmVo);
+
+
+        return "redirect:/project/people";
+    }
+
+
+    
     // 프로젝트 상세조회 화면 1 (참여인력 조회)
     @GetMapping("people")
     public String peopleList(Model model,String projectNo, @RequestParam(name = "pno") int currentPage) {
@@ -130,27 +158,6 @@ public class ProjectController {
         return "project/attach";
     }
 
-    //프로젝트 정보 수정 화면 / update
-    @GetMapping("edit")
-    public String edit(Model model, String projectNo){
-        
-        ProjectVo vo = service.projectDetail(projectNo);
-        List<StatusVo> statusVoList = service.getStatusVoList();
-//        List<ClientVo> clientVoList = service.getClientVoList();
-        model.addAttribute("vo", vo);
-        System.out.println("vo = " + vo);
-        model.addAttribute("statusVoList", statusVoList);
-        return "project/edit";
-    }
 
-    @PostMapping("edit")
-    public String edit(ProjectVo vo, String projectNo){
-        int result = service.edit(vo, projectNo);
 
-        if(result != 1){
-            throw new IllegalStateException("ERROR- 프로젝트 정보 수정 중 에러 발생함");
-        }
-
-        return "redirect:/project/people";
-    }
 }

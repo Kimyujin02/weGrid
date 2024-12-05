@@ -352,3 +352,52 @@ label{
     background-color: #f0f0f0;
 }
 
+
+.search-results {
+    position: absolute;
+    list-style: none;
+    margin-left: 91px;
+    margin-top: -4px;
+    padding: 0;
+    background-color: white;
+    border: 1px solid #ebebeb;
+    width: calc(17% - 37px);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+/* //////////////////////////////////////////////////////////////////////////////////// */
+
+
+.search-item {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.search-item:hover {
+    background-color: #f0f0f0;
+}
+
+.search-client {
+    position: absolute;
+    list-style: none;
+    margin-left: 57px;
+    margin-top: -4px;
+    padding: 0;
+    background-color: white;
+    border: 1px solid #ebebeb;
+    width: calc(26% - 209px);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.search-items{
+    padding: 8px;
+    cursor: pointer;
+}
+
+.search-items:hover {
+    background-color: #f0f0f0;
+}

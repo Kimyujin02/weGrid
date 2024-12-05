@@ -254,50 +254,21 @@
                             </div>
                         </div>
                     </div>
-
-                <!-- 2)현재 참여중인 사원리스트 -->
-                <div class="profile-card">
-                    <div class="profile">
-                        <img src="profile1.jpg" alt="김태훈" class="profile-img">
-                        <div class="profile-info">
-                            <span class="name">김태훈</span>
-                            <span class="role">조장</span>
+                    
+                    <!-- 현재 참여인원 -->
+                    <div class="profile-card">
+                        <div class="profile">
+                            
+                            <div class="profile-info">
+                                <c:forEach items="${voList}" var="vo">
+                                    <img src="profile1.jpg" alt="사원" class="profile-img">
+                                    <span class="name">${vo.empName}</span>
+                                    <span class="role">${vo.deptName}</span>
+                                    <hr>
+                                </c:forEach>
+                            </div>
                         </div>
                     </div>
-                    <hr>
-                    <div class="profile">
-                        <img src="profile2.jpg" alt="왕두수" class="profile-img">
-                        <div class="profile-info">
-                            <span class="name">왕두수</span>
-                            <span class="role">디자인팀</span>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="profile">
-                        <img src="profile3.jpg" alt="???" class="profile-img">
-                        <div class="profile-info">
-                            <span class="name">????</span>
-                            <span class="role">??</span>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="profile">
-                        <img src="profile3.jpg" alt="???" class="profile-img">
-                        <div class="profile-info">
-                            <span class="name">????</span>
-                            <span class="role">??</span>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="profile">
-                        <img src="profile3.jpg" alt="???" class="profile-img">
-                        <div class="profile-info">
-                            <span class="name">????</span>
-                            <span class="role">??</span>
-                        </div>
-                    </div>
-                    <hr>
-                </div>
             </div>
         </div>
     </main>

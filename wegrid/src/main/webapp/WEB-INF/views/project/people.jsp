@@ -213,19 +213,17 @@
             <!-- 현재 참여인원 -->
             <div class="profile-card">
                 <div class="profile">
-                    <!-- <img src="profile1.jpg" alt="사원" class="profile-img"> -->
                     
                     <div class="profile-info">
                         <c:forEach items="${voList}" var="vo">
+                            <img src="profile1.jpg" alt="사원" class="profile-img">
                             <span class="name">${vo.empName}</span>
-                            <span class="role">${vo.deptName}</span>
+                            <br>
+                            <span class="role">${vo.deptNo}</span>
                             <hr>
                         </c:forEach>
                     </div>
                 </div>
-
-                
-    
             </div>
             
          </div>

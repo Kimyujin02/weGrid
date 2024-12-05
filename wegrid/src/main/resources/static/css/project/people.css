@@ -366,7 +366,7 @@
 
 /* 각 프로필의 컨테이너 */
 .profile {
-    display: flex;
+    display: grid;
     align-items: center;
     padding: 10px 0;
 }
@@ -384,14 +384,19 @@
 /* 프로필 정보 */
 .profile-info {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
 }
+
 
 /* 이름 스타일 */
 .profile-info .name {
     font-weight: bold;
     font-size: 16px;
     margin-bottom: 4px;
+    margin-left: 20px;
 }
 
 /* 직책 스타일 */
