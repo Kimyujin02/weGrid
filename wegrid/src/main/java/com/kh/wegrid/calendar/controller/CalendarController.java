@@ -36,9 +36,8 @@ public class CalendarController {
     public HashMap loadCalendar(String date,String type,int typeNo,HttpSession session){
 
         // 접속한 사원의 사번 정보 수집
-//        MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
-//        String writerNo = loginVo.getNo();
-        String writerNo = "1";
+        MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
+        String writerNo = loginVo.getNo();
 
         // service 호출
         List<EventVo> eventVoList = service.loadEvent(date,type,typeNo,writerNo);
@@ -58,11 +57,17 @@ public class CalendarController {
     // 일정 상세정보 조회ByNo
     @GetMapping("detail")
     @ResponseBody
-    public CalendarVo getScheduleByNo(String no, Model model){
+    public CalendarVo getScheduleByNo(String no,HttpSession session, Model model){
+
+        // 접속한 사원의 사번 정보 수집
+        MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
+        String writerNo = loginVo.getNo();
         
+        // 검색 정보 배열 저장
+        String[] searchKey = no.split("_");
+
         // service 호출
-        CalendarVo vo = service.getScheduleByNo(no);
-        model.addAttribute("calendarVo", vo);
+        CalendarVo vo = service.getScheduleByNo(searchKey,writerNo);
 
         // 결과 반환
         return vo;
@@ -75,9 +80,9 @@ public class CalendarController {
     public int write(CalendarVo vo, HttpSession session){
         
         // 작성자의 사번 정보 수집
-//        MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
-//        vo.setWriterNo(loginVo.getNo());
-        vo.setWriterNo("1");
+        MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
+        vo.setWriterNo(loginVo.getNo());
+
         // service 호출
         int result = service.write(vo);
         
@@ -90,10 +95,11 @@ public class CalendarController {
     @PostMapping("edit")
     @ResponseBody
     public int edit(CalendarVo vo, HttpSession session){
+
         // 작성자의 사번 정보 수집
-//        MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
-//        vo.setWriterNo(loginVo.getNo());
-        vo.setWriterNo("1");
+        MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
+        vo.setWriterNo(loginVo.getNo());
+
         // service 호출
         int result = service.edit(vo);
 
@@ -108,13 +114,15 @@ public class CalendarController {
     public int delete(String no, HttpSession session){
 
         // 접속한 사원의 사원정보 수집
-//        MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
-//        String writerNo = loginVo.getNo();
-        String writerNo = "1";
-
+        MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
+        String writerNo = loginVo.getNo();
+        
+        // service 호출
         int result = service.delete(no , writerNo);
 
+        // 결과 반환
         return result;
+
     }//delete
 
     // 캘린더 항목 , 일정종류 정보 조회
@@ -129,12 +137,5 @@ public class CalendarController {
         return map;
 
     }//getCalendarInfo
-    
-    // 캘린더 항목 별 정보 조회
-    @GetMapping("getTypeInfo")
-    @ResponseBody
-    public List<CalendarTypeVo> getTypeInfo(){
-        return service.getTypeInfo();
-    }//getTypeInfo
 
 }//class

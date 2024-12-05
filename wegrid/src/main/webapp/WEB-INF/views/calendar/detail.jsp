@@ -27,7 +27,8 @@
                     <br>
                     <div class="writer-area hidden-area">
                         <label class="col-form-label">작성자</label>
-
+                        <div id="calendar-writerName-view" class="calendar-detail-view-box"></div>
+                        <br>
                     </div>
                     <div class="date-area">
                         <div class="date-label-area">
@@ -49,14 +50,12 @@
                         <label for="calendar-content-view" class="col-form-label">상세 내용</label>
                         <div id="calendar-content-view" class="calendar-detail-view-box"></div>
                     </div>
-
+                    <div class="modal-footer .hidden-area">
+                        
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <input type="hidden" name="isEditable">
-                <button type="button" class="btn btn-primary" id="toEditBtn">수정</button>
-                <button type="button" class="btn btn-secondary" onclick="deleteSchedule();">삭제</button>
-            </div>
+            
         </div>
     </div>
 </div>
