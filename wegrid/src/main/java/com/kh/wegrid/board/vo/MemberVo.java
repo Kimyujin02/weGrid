@@ -1,25 +1,27 @@
-package com.kh.wegrid.vacation.temp.vo;
+package com.kh.wegrid.board.vo;
 
 import lombok.Data;
 
 @Data
-public class EmpVo {
+public class MemberVo {
 
-    private int no;
+    private String no;
     private String deptNo;
-    private int jobNo;
+    private String jobNo;
     private String empNum;
-    private String id;
     private String pwd;
     private String name;
     private String phone;
     private String email;
-    private String address;
+    private String postAddress;
+    private String roadAddress;
+    private String detailAddress;
     private String enrollDate;
     private String modifyDate;
     private String isManager;
     private String delYn;
     private String profile;
-    private int failedAttempts;
+    private String failedAttempts;
     private String isLocked;
+
 }
