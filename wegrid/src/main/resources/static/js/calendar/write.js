@@ -68,14 +68,14 @@ function loadKindInfo(){
         boxTag.className = "kindBox";
 
         const labelTag = document.createElement("label");
-        labelTag.htmlFor = "type"+(i+1);
+        labelTag.htmlFor = "kind"+(i+1);
         labelTag.className = "col-form-label";
         labelTag.innerText = kindInfo[i].name;
 
         const radioTag = document.createElement("input");
         radioTag.type = "radio";
-        radioTag.id = "type"+(i+1);
-        radioTag.name = "typeNo";
+        radioTag.id = "kind"+(i+1);
+        radioTag.name = "kindNo";
         radioTag.value = kindInfo[i].no;
 
         boxTag.appendChild(labelTag);

@@ -36,8 +36,8 @@
                     </div>
                     <div class="date-area">
                         <div class="date-label-area">
-                            <label for="calendar-start-date-edit" class="col-form-label">종료일</label>
-                            <label for="calendar-end-date-edit" class="col-form-label">종료일</label>
+                            <label for="calendar-start-date-edit" class="col-form-label">시작</label>
+                            <label for="calendar-end-date-edit" class="col-form-label">종료</label>
                         </div>
                         <div class="date-input-area">
                             <input type="datetime-local" class="form-control" id="calendar-start-date-edit" name="startDate">

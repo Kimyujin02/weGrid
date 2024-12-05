@@ -57,7 +57,7 @@ public class CalendarController {
     // 일정 상세정보 조회ByNo
     @GetMapping("detail")
     @ResponseBody
-    public CalendarVo getScheduleByNo(String no,HttpSession session, Model model){
+    public HashMap getScheduleByNo(String no,HttpSession session, Model model){
 
         // 접속한 사원의 사번 정보 수집
         MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
@@ -69,8 +69,12 @@ public class CalendarController {
         // service 호출
         CalendarVo vo = service.getScheduleByNo(searchKey,writerNo);
 
+        HashMap map = new HashMap();
+        map.put("vo",vo);
+        map.put("loginInfo",loginVo);
+
         // 결과 반환
-        return vo;
+        return map;
 
     }//getScheduleByNo
 
@@ -78,7 +82,7 @@ public class CalendarController {
     @PostMapping("write")
     @ResponseBody
     public int write(CalendarVo vo, HttpSession session){
-        
+
         // 작성자의 사번 정보 수집
         MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
         vo.setWriterNo(loginVo.getNo());

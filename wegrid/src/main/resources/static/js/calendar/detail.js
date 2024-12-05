@@ -7,10 +7,11 @@ function showEventDetail(evt) {
         data :{
             no : evt.event.id
         },
-        success:function(vo){
-            
-            console.log("통신 성공");
-            console.log("vo",vo);
+        success:function(map){
+            console.log("통신 성공");        
+            const vo = map.vo;
+            const loginInfo = map.loginInfo;
+
             document.querySelector("input[name=scheduleNo]").value=vo.no;
             if(vo.typeName == null){
                 document.querySelector("#calendar-typName-view").innerText=typeInfo[vo.typeNo].name;
@@ -31,7 +32,7 @@ function showEventDetail(evt) {
                 addKindInfo(vo);
             }
             document.querySelector("#calendar-content-view").innerHTML=vo.content;
-            activateModalFooter(vo);
+            activateModalFooter(vo,loginInfo);
              
         
             // 모달 창 띄우기
@@ -76,13 +77,9 @@ function addWriterInfo(vo){
 }
 
 // 수정, 삭제 버튼 추가
-function activateModalFooter(vo){
-
-    console.log("loginMemberVo",sessionStorage.getItem("loginMemberVo"));
-    console.log("loginMemberVoNO",sessionStorage.getItem("loginMemberVo").no);
+function activateModalFooter(vo,loginInfo){
     
-
-    if(vo.isEditable == 'Y' && sessionStorage.getItem("loginMemberVo").no == vo.writerNo){
+    if(vo.isEditable == 'Y' && loginInfo.no == vo.writerNo){
         const footerTag = document.querySelector("#detailModal .modal-footer");
         
         const btn1Tag = document.createElement("button");
@@ -104,6 +101,7 @@ function activateModalFooter(vo){
         btn1Tag.onclick = function(){openEditModal(vo)};
         btn2Tag.onclick = function(){deleteSchedule()};
     }
+    
 }
 
 // 일정 종류 다시 숨기기

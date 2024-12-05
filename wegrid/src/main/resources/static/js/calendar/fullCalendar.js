@@ -171,6 +171,7 @@ function loadCalendar() {
   getCalendarInfo();
 
   // 개인일정 제외한 local 저장소 초기화
+  deleteLocalStorage(1);
   deleteLocalStorage(2);
   deleteLocalStorage(3);
 
