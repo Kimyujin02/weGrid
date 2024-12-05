@@ -23,12 +23,26 @@ public class CalendarService {
 
     // 이벤트 조회
     public List<EventVo> loadEvent(String date, String type, int typeNo, String writerNo) {
-        return mapper.loadEvent(date,type,typeNo,writerNo);
+
+        if(typeNo == 3){
+            return mapper.loadProjectEvent(date,type,typeNo,writerNo);
+        }
+        else{
+            return mapper.loadEvent(date,type,typeNo,writerNo);
+        }
+
     }//loadEvent
 
     // 일정 상세정보 조회
-    public CalendarVo getScheduleByNo(String no) {
-        return mapper.getScheduleByNo(no);
+    public CalendarVo getScheduleByNo(String[] searchKey, String writerNo) {
+
+        if(searchKey[1].equals("3")){
+            return mapper.getProjectScheduleByNo(searchKey[0],writerNo);
+        }
+        else {
+            return mapper.getScheduleByNo(searchKey[0]);
+        }
+
     }//getScheduleByNo
 
     // 일정 추가
@@ -61,10 +75,5 @@ public class CalendarService {
 
         return map;
     }//getCalendarInfo
-
-    // 캘린더 항목 별 정보 조회
-    public List<CalendarTypeVo> getTypeInfo() {
-        return mapper.getTypeInfo();
-    }//getTypeInfo
 
 }//class
