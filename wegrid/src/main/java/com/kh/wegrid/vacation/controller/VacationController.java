@@ -39,9 +39,6 @@ public class VacationController {
         model.addAttribute("name", selectPersonalCntInfo.get(0).getName());
         model.addAttribute("vacCnt", selectPersonalCntInfo.get(0).getVacCnt());
 
-        System.out.println("selectPersonalCnt = " + selectPersonalCnt);
-        System.out.println("selectPersonalCntInfo = " + selectPersonalCntInfo);
-
         return "vacation/menu";
     }
 

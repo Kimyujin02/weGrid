@@ -1,8 +1,8 @@
 package com.kh.wegrid.board.vo;
 
-import org.apache.ibatis.annotations.Mapper;
+import lombok.Data;
 
-@Mapper
+@Data
 public class BoardVo {
 
     private String no;

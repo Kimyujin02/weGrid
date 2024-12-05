@@ -33,28 +33,35 @@
             </div>
 
             <div class="main-main">
-                <div class="board-title">
-                    <input class="title" type="text" name="title" placeholder="제목을 입력하세요(65자 이내)" maxlength="64">
-                    </input>
-                </div>
-                <div class="board-content">
-                    <textarea class="content" name="content" placeholder="내용을 입력하세요(500자 이내)" maxlength="500"></textarea>
-                </div>
-
-                <div class="board-attach">
-                    <div class="line-title">첨부파일</div>
-                    <div class="line-divider"></div>
-                    <div class="inner">
-                        <button class="file-button" onclick="document.getElementById('input').click()">파일 선택</button>
-                        <input type="file" id="input" style="display: none;">
-                        <div class="info-text">또는 파일을 여기로 드래그 하세요.</div>
+                <form action="/board/intsert" method="post" enctype="multipart/form-data">
+                    <div class="board-title">
+                    </form>
+                        <input class="title" type="text" name="title" placeholder="제목을 입력하세요(65자 이내)" maxlength="64">
+                        </input>
                     </div>
-                </div>
+                    <div class="board-content">
+                        <textarea class="content" name="content" placeholder="내용을 입력하세요(500자 이내)" maxlength="500"></textarea>
+                    </div>
 
-                <div class="board-btns">
-                    <button class="btn-insert">작성하기</button>
-                    <button class="btn-cancel">취소</button>
-                </div>
+                    <div class="board-attach">
+                        <div class="line-title">첨부파일</div>
+                        <div class="line-divider"></div>
+                        <div class="inner">
+                            <button class="file-button" onclick="document.getElementById('input').click()">파일 선택</button>
+                            <input type="file" id="input" style="display: none;" multiple>
+                            <div class="info-text">또는 파일을 여기로 드래그 하세요.
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="board-btns">
+                        <button class="btn-insert" type="submit">작성하기</button>
+                        <button class="btn-cancel" type="submit">취소</button>
+                    </div>
+                </form>
+
+
 
             </div>
         </div>
