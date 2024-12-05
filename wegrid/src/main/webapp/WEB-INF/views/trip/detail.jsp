@@ -27,7 +27,6 @@
             <div id="title-area"><h2>출장 상세조회</h2></div>
             <div></div>
             <div id="detail-area">
-                <div></div>
                 <div>
                     <div>출장 상세 내용</div>
                     <div>${tripVo.content}</div>

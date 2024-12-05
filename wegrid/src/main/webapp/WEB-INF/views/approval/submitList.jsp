@@ -39,9 +39,11 @@
                     <option value="4">반려</option>
                 </select>
             </div>
-                <div id="btn-area"><button type="button" 
+                <div id="btn-area">
+                    <button type="button" 
                     class="btn btn-primary" 
-                    id="approvalBtn" 
+                    id="approvalBtn"
+                    onclick="location.href='/approval/write'" 
                     >등록하기
                 </button>
                 </div>

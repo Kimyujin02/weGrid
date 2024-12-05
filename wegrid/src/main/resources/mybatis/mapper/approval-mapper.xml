@@ -59,40 +59,92 @@
 
     <select id="getReceiveApprovalVoList">
         SELECT
-            A.NO
-            , A.EMP_NO          AS WRITER_NO
-            , E.NAME            AS WRITER_NAME
-            , A.L_LINE
-            , L.NAME            AS L_LINE_NAME
-            , A.M_LINE
-            , M.NAME            AS M_LINE_NAME
-            , A.STATUS_NO
-            , S.NAME            AS STATUS_NAME
-            , A.TITLE
-            , TO_CHAR( A.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE
-
+            A.NO,
+            A.EMP_NO          AS WRITER_NO,
+            E.NAME            AS WRITER_NAME,
+            A.L_LINE,
+            L.NAME            AS L_LINE_NAME,
+            A.M_LINE,
+            COALESCE(M.NAME, '미지정') AS M_LINE_NAME,
+            A.STATUS_NO,
+            S.NAME            AS STATUS_NAME,
+            A.TITLE,
+            TO_CHAR(A.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE
         FROM APPROVAL A
         JOIN EMPLOYEE E ON ( E.NO = A.EMP_NO )
         JOIN APPROVAL_STATUS S ON ( S.NO = A.STATUS_NO )
         JOIN EMPLOYEE L ON ( L.NO = A.L_LINE )
-        LEFT JOIN EMPLOYEE M ON ( M.NO = A.M_LINE )
-
-        WHERE   A.M_LINE = #{no}
-
-                OR (
-                A.M_STATUS = '2'
-                AND A.L_LINE = #{no}
-                )
-                OR(
-                A.M_STATUS = '0'
-                AND A.L_LINE = #{no}
-                )
+        JOIN EMPLOYEE M ON ( M.NO = COALESCE(A.M_LINE, -1) )
+        WHERE (A.M_LINE = #{no} )
+        OR ( A.M_STATUS = '2' AND A.L_LINE = #{no} )
+        OR ( A.M_STATUS = '0' AND A.L_LINE = #{no} )
         <if test="statusFilter != null and statusFilter != ''">
             AND A.STATUS_NO = #{statusFilter}
         </if>
-
         ORDER BY A.ENROLL_DATE
         OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
     </select>
+<!--    OR A.M_LINE IS NULL-->
+    <select id="getEmpListCnt">
+        SELECT
+            COUNT(NO)
+        FROM EMPLOYEE
+        WHERE DEL_YN = 'N'
+
+        <if test="searchType != null and searchType != ''">
+            AND DEPT_NO = #{searchType}
+        </if>
+        <if test="searchValue != null and searchValue != ''">
+            AND NAME LIKE '%${searchValue}%'
+        </if>
+
+    </select>
+
+    <select id="getEmpVoList">
+        SELECT
+        E.NO,
+        E.NAME,
+        E.EMP_NUM,
+        E.DEPT_NO,
+        D.NAME AS DEPT_NAME,
+        J.NAME AS JOB_NAME,
+        E.ENROLL_DATE
+        FROM EMPLOYEE E
+        JOIN DEPARTMENT D ON ( D.CODE = E.DEPT_NO )
+        JOIN JOB_INFO J ON ( J.NO = E.JOB_NO )
+
+        <where>
+            E.DEL_YN = 'N'
+            <if test="searchType != null and searchType != ''">
+                AND E.DEPT_NO = #{searchType}
+            </if>
+            <if test="searchValue != null and searchValue != ''">
+                AND E.NAME LIKE '%${searchValue}%'
+            </if>
+        </where>
+        ORDER BY E.ENROLL_DATE
+        OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
+    </select>
+
+    <insert id="insertApprovalAttachment">
+        INSERT ALL
+        <foreach collection="list" item="x">
+            INTO APPROVAL_ATTACHMENT
+            (
+            NO
+            ,APPR_NO
+            ,ORIGIN_NAME
+            ,CHANGE_NAME
+            )
+            VALUES
+            (
+            (SELECT GET_APPROVAL_ATTACHMENT_NO FROM DUAL)
+            , SEQ_APPROVAL.CURRVAL
+            , #{x.originName}
+            , #{x.changeName}
+            )
+        </foreach>
+        SELECT 1 FROM DUAL
+    </insert>
 
 </mapper>

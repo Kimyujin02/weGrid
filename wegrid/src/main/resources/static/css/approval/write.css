@@ -121,3 +121,230 @@ textarea:focus{
     height: 44px;
     width: 159px;
 }
+
+#lineBtnDiv{
+    display: grid;
+    grid-template: 1fr / 1fr 1fr 1fr;
+}
+#lineBtnDiv div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+
+
+
+
+
+
+/* 모달 전체 배경 */
+.empSearchModal {
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: rgba(0, 0, 0, 0.5); */
+    z-index: 1000;
+}
+
+/* 모달 창 */
+.empSearchModal-content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: lightgray;
+    padding: 20px;
+    border-radius: 10px;
+    width: 650px;
+    height: 650px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: grid;
+    grid-template: 1fr 1fr 5fr 0.5fr 1fr / 1fr;
+    
+}
+
+/* 헤더 */
+.empSearchModal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    cursor: pointer; 
+}
+
+.empSearchModal-header h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.close-empSearchModal {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    width: 10px;
+}
+
+/* 모달 내용 */
+.empSearchModal-body {
+    display: flex;
+    /* justify-content: space-between; */
+    justify-items: center;
+    align-items: start;
+}
+
+
+
+/* 등록 버튼 */
+.tripModal-footer {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.submit-btn {
+    background: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.submit-btn:hover {
+    background: #0056b3;
+}
+
+form {
+    display: contents;
+}
+
+#iwannagohome{
+    display: flex;
+    align-items: center;
+}
+#type-boc{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#type-boc > select{ 
+    height: 34px;
+    width: 80px;
+}
+#search-boc{
+    width: 370px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+}
+#searchTag{
+    width: 310px;
+    height: 38px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    flex-grow: 1;
+    margin-left: 5px;
+}
+#searchBtn{
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+    color: #666;
+    margin-left: 0px;
+    border: none;
+    background-color: white;
+}
+#searchBtn > i {
+    color: rgba(23, 72, 128, 1);;
+}
+#searchMenu{
+    display: grid;
+    grid-template: 1fr / 1fr 3fr;
+}
+#empSearchModalTable{
+    width: 550px;
+    height: 350px;
+
+    margin: 0;
+    border-radius: 5px;
+    border-collapse: collapse;
+    border-top : none;
+    text-align: center;
+}
+
+
+#empSearchModalTable tbody tr:hover{
+    background-color: lightgray;
+    cursor: pointer;
+}
+#leftPageBtn{
+    color: #174880
+}
+#rightPageBtn{
+    color: #174880
+}
+
+/* .empSearchModalTr{
+    height: 30px;
+} */
+
+#empSearchModalTable tbody tr{
+    height: 30px;
+}
+.list-top{
+    border-bottom: 1px solid #d3d3d3 ;
+    height: 35px;
+    font-size: 16px;
+    background-color: rgba(23, 72, 128, 1);
+    color: white;
+}
+
+.list-middle{
+    border-bottom: 1px solid gray;
+    font-size: 14px;
+   
+}
+
+.page {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.page a {
+    display: inline-block; 
+    text-decoration: none;
+    color: rgba(23, 72, 128, 1);
+    margin: 0 10px; /* 링크 간 간격 조정 */
+    font-size: 16px;
+    font-weight: bold;
+}
+
+a{
+    cursor: pointer;
+}
+
+td{
+    font-weight: 300;
+}
+
+.bottom-line{
+    width: 1340px;
+    height: 8px;
+    background-color: rgba(23, 72, 128, 1);
+   margin: auto;
+   margin-bottom: 10px;
+}

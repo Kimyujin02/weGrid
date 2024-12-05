@@ -26,7 +26,7 @@ public interface TripMapper {
                 , CONTENT
                 , START_DATE
                 , END_DATE
-                , CLIENT
+                , CLIENTo
             )
             VALUES
             (

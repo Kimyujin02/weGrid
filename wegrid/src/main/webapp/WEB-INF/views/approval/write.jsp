@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="/css/approval/write.css">
 
 <script defer src="/js/common/main.js"></script>
+<script defer src="/js/approval/write.js"></script>
 
 </head>
 <body>
@@ -25,46 +26,123 @@
            <div id="use-area">
                 <div><h2>결재등록</h2></div>
                 <div></div>
-                <div id="title-boc">
-                    <div><h4 class="subtitle-color">제목</h4></div>
-                    <div><input type="text" placeholder="제목을 입력하세요" id="title-a"></div>
-                </div>
-                <div></div>
-                <div id="content-boc">
-                    <div></div>
-                    <div><h4 class="subtitle-color">내용</h4></div>
-                    <div></div>
-                    <div></div>
-                    <div><textarea name="" id="content-a"></textarea></div>
-                    <div></div>
-                </div>
-                <div></div>
-                <div id="menu-boc">
-                    <div id="attach-area">
-                        <div>
-                            <div></div>
-                            <div><h4 class="subtitle-color">첨부파일</h4></div>
-                            <div></div>
-                        </div>
-                        <div>파일선택</div>
+                <form action="/approval/write" method="post" enctype="multipart/form-data">
+                    <input type="hidden" id="approvalMiddle" name="mline">
+                    <input type="hidden" id="approvalLast" name="lline">
+                    <div id="title-boc">
+                        <div><h4 class="subtitle-color">제목</h4></div>
+                        <div><input type="text" placeholder="제목을 입력하세요" id="title-a" name="title"></div>
                     </div>
                     <div></div>
-                    <div id="line-area">
-                        <div>
-                            <div></div>
-                            <div><h4 class="subtitle-color">결재선</h4></div>
-                            <div></div>
-                        </div>
-                        <div>등록취소</div>
+                    <div id="content-boc">
+                        <div></div>
+                        <div><h4 class="subtitle-color">내용</h4></div>
+                        <div></div>
+                        <div></div>
+                        <div><textarea name="content" id="content-a"></textarea></div>
+                        <div></div>
                     </div>
-                    <div id="submitBtnDiv"><button type="button" class="btn btn-primary" id="submit-btn">등록</button></div>
                     <div></div>
-                    <div id="cancleBtnDiv"><button type="button" class="btn btn-primary" id="cancle-btn">취소</button></div>
+                    <div id="menu-boc">
+                        <div id="attach-area">
+                            <div>
+                                <div></div>
+                                <div><h4 class="subtitle-color">첨부파일</h4></div>
+                                <div></div>
+                            </div>
+                            <div><input type="file" name="approvalAttachment" multiple></div>
+                        </div>
+                        <div></div>
+                        <div id="line-area">
+                            <div>
+                                <div></div>
+                                <div><h4 class="subtitle-color">결재선</h4></div>
+                                <div></div>
+                            </div>
+                            <div id="lineBtnDiv">
+                                <div>
+                                    <div>프로필</div>
+                                    <div>기안자이름</div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <button id="approvalMiddleBtn" onclick="return handleApproval('middle');">
+                                            중간결재자이름
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <button id="approvalLastBtn" name="lline" onclick="return handleApproval('last');">
+                                            최종결재자이름
+                                        </button>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div id="submitBtnDiv"><button type="submit" class="btn btn-primary" id="submit-btn">등록</button></div>
+                        <div></div>
+                        <div id="cancleBtnDiv"><button type="button" class="btn btn-primary" id="cancle-btn">취소</button></div>
+                    </div>
+                </form>
                 </div>
-           </div>
-           <div></div>
-           
+                <div></div>
+                
+            </div>
+
+         <!-- 모달 -->
+      <div id="empSearchModal" class="empSearchModal">
+        <div class="empSearchModal-content">
+            <div class="empSearchModal-header">
+                <h2>사원 검색</h2>
+                <button class="close-empSearchModal" onclick="closeEmpSearchModal()">×</button>
+            </div>
+            
+            <div id="searchMenu">
+                
+                    <div id="type-boc"> 
+                        <select name="searchType" id="dept-filter" value="" onchange="submitSearchForm();">
+                            
+                        </select>
+                    </div>
+                        <div id="iwannagohome">
+                            <div  id="search-boc">
+                                <input type="text" name="searchValue" placeholder="검색" id="searchTag">
+                                <span>
+                                    <button id="searchBtn" onclick="submitSearchForm();">
+                                        <i class="fas fa-search" id="search-i"></i>
+                                    </button>
+                                </span>
+                            </div>
+                           
+                        </div>
+            </div>
+            <div class="empSearchModal-body">
+                <table id="empSearchModalTable">
+                    <thead id="empSearchModalThead">
+                        <tr>
+                            <th class="list-top">사번</th>
+                            <th class="list-top">부서</th>
+                            <th class="list-top">직급</th>
+                            <th class="list-top">이름</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                    
+                </table>
+                
+            </div>
+            <div class="page"></div>
+          
+                <div class="tripModal-footer">
+                 
+                </div>
+                 
         </div>
+      </div>
     </main>
 
 </body>

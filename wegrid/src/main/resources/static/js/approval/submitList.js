@@ -109,7 +109,7 @@ const tbodyTag = document.querySelector("#table>tbody");
 tbodyTag.addEventListener("click" , function(evt){
     if(evt.target.tagName != "TD"){return;}
     const no = evt.target.parentNode.children[0].innerText;
-    location.href=`/approval/detail?tno=${no}`;
+    location.href=`/approval/detail?ano=${no}`;
 });
 
 
