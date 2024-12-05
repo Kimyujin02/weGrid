@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.wegrid.member.vo.MemberVo" %>
 
 <!DOCTYPE html>
 <html>
@@ -134,6 +135,15 @@
 
         </div>
     </main>
+
+    <% 
+        // 로그인한 사원 정보 가져오기
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        String loginMemberNo = (loginMemberVo != null) ? String.valueOf(loginMemberVo.getNo()) : "null";
+    %>
+    <script>
+        var loginMemberNo = '<%= loginMemberNo %>';
+    </script>
 
 </body>
 </html>

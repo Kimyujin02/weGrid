@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.wegrid.member.vo.MemberVo" %>
 
 <!DOCTYPE html>
 <html>
@@ -124,7 +125,7 @@
                                 <div class="btn-area">
                                     <div><input type="hidden" name="cno" value="${param.cno}"></div>
                                     <div><input type="hidden" name="hno" value="${param.hno}"></div>
-                                    <button type="submit">수정</button>
+                                    <button type="submit" onclick="checkPermission('<%= loginMemberNo %>', '<%= writerNo %>')">수정</button>
                                     <button onclick="location.href='/crm/history?cno=${param.cno}'">취소</button>
                                     <div></div>
                                 </div>

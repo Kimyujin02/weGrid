@@ -126,7 +126,7 @@
                 <!-- row3 -->
                 <div class="btn-area">
                     <div class="enroll-btn"><button type="submit" class="btn btn-primary">등록</button></div>
-                    <div class="cancel-btn"><button type="button" class="btn btn-primary" onclick="location.href='/crm/detail?cno=${cno}'">취소</button></div>
+                    <div class="cancel-btn"><button type="button" class="btn btn-primary" onclick="location.href='/crm/detail?cno=${param.cno}'">취소</button></div>
                 </div>
             </form>
 

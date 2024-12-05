@@ -57,6 +57,12 @@
 
     <div class="bottom"></div>
 
+    <c:if test="${not empty errorMessage}">
+        <script type="text/javascript">
+            alert("${errorMessage}");
+        </script>
+    </c:if>
+
 </body>
 </html>
 
