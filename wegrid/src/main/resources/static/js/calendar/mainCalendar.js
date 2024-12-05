@@ -4,20 +4,20 @@ const filterBox = document.querySelector(".calendar-filter-area");
 filterBox.addEventListener("click", function(evt){
 
     // 캘린더 타입 div 외 선택 시 return
-    if(evt.target.tagName !="DIV" || !(evt.target.className).includes('filter-box')){
+    if(evt.target.tagName !="DIV" || !(evt.target.className).includes("filter-box")){
         return
     }
 
     // 선택된 캘린더 타입에 '선택됨' 클래스 부여 및 선택했어던 다른 캘린더 타입 '선택됨' 제거
 
     if(evt.target.className.includes("selected-calendar")){
-        evt.target.classList.remove('selected-calendar');
+        evt.target.classList.remove("selected-calendar");
         // hideEvtSource(evt);
         removeEventSource(evt.target.no);
     }
     // }
     else{
-        evt.target.classList.add('selected-calendar');
+        evt.target.classList.add("selected-calendar");
         showEvtSource(evt);
         // console.log(document.querySelectorAll("."+evt.target.id+"_schedule"));
         // document.querySelectorAll("."+evt.target.id+"_schedule").classList.remove('hidden-schedule');
@@ -63,13 +63,13 @@ function calculateDate(date,type){
 function deleteLocalStorage(typeNo,date){
     console.log("삭제 시작");
     if(date != null){
-        const itemName = date+"_"+typeInfo[typeNo].type;
+        const itemName = date+"-"+typeInfo[typeNo].type;
         localStorage.removeItem(itemName);
     }
     else{
         for(let i=localStorage.length-1; i>=0; i--){
           const itemName = localStorage.key(i);
-          if(itemName.includes(typeInfo[typeNo].type) && itemName != "calendar-type-info"){
+          if(itemName.includes(typeInfo[typeNo].type) && itemName != "calendar-type-info" && itemName != "calendar-kind-info"){
             localStorage.removeItem(itemName);
           }
         }
@@ -78,7 +78,7 @@ function deleteLocalStorage(typeNo,date){
 }
 
 function showEvtSource(evt){
-    const targetArr = document.querySelectorAll("."+evt.target.id+"_schedule");
+    const targetArr = document.querySelectorAll("."+evt.target.id+"-schedule");
     for(let i = 0; i < targetArr.length; i++){
         targetArr[i].classList.remove('hidden-schedule');
     }
@@ -94,7 +94,7 @@ function hideEvtSource(evt){
     
     console.log("no 값 : ",evt.target.id);
     
-    const targetArr = document.querySelectorAll("."+evt.target.id+"_schedule");
+    const targetArr = document.querySelectorAll("."+evt.target.id+"-schedule");
     for(let i = 0; i < targetArr.length; i++){
         targetArr[i].classList.add('hidden-schedule');
     }
@@ -107,9 +107,49 @@ function hideEvtSource(evt){
 
 }
 
-// 캘린더 항목 별 정보 조회
+// 서버에서 캘린더 항목 별 정보 가져오기
+function getCalendarInfo(){
+    console.log("캘린더 항목, 일정종류 정보 불러오기 시작");
+    if(typeInfo == null){
+        // 서버에서 정보 불러오기
+        $.ajax({
+            url: "/calendar/calendarInfo",
+            async : false,
+            success : function(infoDataMap){
+                // 데이터 꺼내기
+                const getTypeInfo = infoDataMap.typeInfo;
+                const getKindInfo = infoDataMap.kindInfo;
+                // 인덱스 맞추기 위해 항목 정보 리스트에 빈 값 추가
+                const emptyData = {};
+                getTypeInfo.unshift(emptyData);
+                // local 저장소에 저장
+                localStorage.setItem("calendar-type-info" , JSON.stringify(getTypeInfo));           
+                localStorage.setItem("calendar-kind-info" , JSON.stringify(getKindInfo));           
+            },
+            error : function(){
+                alert("캘린더 항목, 일정종류 정보 조회 실패");
+            } 
+        })
+        // 전역변수에 불러온 정보 저장
+        typeInfo = JSON.parse(localStorage.getItem("calendar-type-info"));
+        kindInfo = JSON.parse(localStorage.getItem("calendar-kind-info"));
+        
+    }
+    console.log("캘린더 항목, 일정종류 정보 불러오기 완료");
+}
+
+// 캘린터 페이지 로드 시 캘린더 화면 실행
+document.addEventListener('DOMContentLoaded', function(){
+    console.log("캘린더 생성 시작");  
+    // 캘린더 생성
+    loadCalendar();
+    console.log("캘린더 생성 완료"); 
+})
+
+
+/* 서버에서 캘린더 항목 정보 가져오기
 function getTypeInfo(){
-    console.log("캘린더 항목 별 정보 불러오기 시작");
+    console.log("캘린더 항목 불러오기 시작");
     if(typeInfo == null){
         // 서버에서 캘린더 타입 정보 불러오기
         $.ajax({
@@ -128,13 +168,6 @@ function getTypeInfo(){
         typeInfo = JSON.parse(localStorage.getItem("calendar-type-info"));
         
     }
-    console.log("캘린더 항목 별 정보 불러오기 완료");
-}
+    console.log("캘린더 항목 정보 불러오기 완료");
 
-// 캘린터 페이지 로드 시 캘린더 화면 실행
-document.addEventListener('DOMContentLoaded', function(){
-    console.log("캘린더 생성 시작");  
-    // 캘린더 생성
-    loadCalendar();
-    console.log("캘린더 생성 완료"); 
-})
+}*/

@@ -1,5 +1,5 @@
 
-#writeModal > div > div{
+#editModal > div > div{
     background-color: #EFEFEF;
 }
 
@@ -9,12 +9,12 @@
     justify-content: space-between;
 }
 
-#calendar-start-date , #calendar-end-date {
+#calendar-start-date-edit , #calendar-end-date-edit {
     display: inline;
     width: 49%;
 }
 
-#calendar-content {
+#calendar-content-edit {
     resize: none;
     height: 200px;
 }
@@ -57,7 +57,7 @@ input[type=radio]:checked {
     display: inline;
 }
 
-#calendar-type {
+#calendar-type-edit {
     width: 100%;
 }
 

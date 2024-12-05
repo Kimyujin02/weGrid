@@ -3,6 +3,7 @@ package com.kh.wegrid.calendar.mapper;
 import com.kh.wegrid.calendar.vo.CalendarTypeVo;
 import com.kh.wegrid.calendar.vo.CalendarVo;
 import com.kh.wegrid.calendar.vo.EventVo;
+import com.kh.wegrid.calendar.vo.KindVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -41,10 +42,11 @@ public interface CalendarMapper {
                 , CT.NAME AS TYPE_NAME
                 , C.KIND_NO
                 , S.NAME AS KIND_NAME
+                , C.IS_EDITABLE
                 , C.TITLE
                 , C.CONTENT
-                , TO_CHAR(C.START_DATE,'YYYY-MM-DD HH24:mi')
-                , TO_CHAR(C.END_DATE,'YYYY-MM-DD HH24:mi')
+                , TO_CHAR(C.START_DATE,'YYYY-MM-DD HH24:mi') AS START_DATE
+                , TO_CHAR(C.END_DATE,'YYYY-MM-DD HH24:mi') AS END_DATE
                 , C.COLOR
                 , C.DEL_YN
             FROM CALENDAR C
@@ -84,6 +86,23 @@ public interface CalendarMapper {
             )
             """)
     int write(CalendarVo vo);
+    
+    // 일정 수정
+    @Update("""
+            UPDATE CALENDAR
+            SET
+                TYPE_NO = #{typeNo}
+                , KIND_NO = #{kindNo}
+                , TITLE = #{title}
+                , CONTENT = #{content}
+                , START_DATE = #{startDate}
+                , END_DATE = #{endDate}
+                , COLOR = UPPER(#{color})
+            WHERE NO = #{no}
+            AND WRITER_NO = #{writerNo}
+            AND DEL_YN = 'N'
+            """)
+    int edit(CalendarVo vo);
 
     // 일정 삭제
     @Update("""
@@ -105,5 +124,14 @@ public interface CalendarMapper {
             FROM CALENDAR_TYPE
             """)
     List<CalendarTypeVo> getTypeInfo();
+
+    // 일정종류 정보 조회
+    @Select("""
+            SELECT
+                NO
+                , NAME
+            FROM SCHEDULE_KIND
+            """)
+    List<KindVo> getKindInfo();
     
 }//interface

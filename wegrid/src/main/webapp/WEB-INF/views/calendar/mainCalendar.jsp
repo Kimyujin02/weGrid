@@ -49,6 +49,7 @@
         <!-- 모달창 include -->
         <%@ include file="/WEB-INF/views/calendar/write.jsp" %>
         <%@ include file="/WEB-INF/views/calendar/detail.jsp" %>
+        <%@ include file="/WEB-INF/views/calendar/edit.jsp" %>
     </main>
     
 </body>

@@ -1,12 +1,13 @@
+
 // 일정 추가 모달 창 실행
 function openWriteModal(date) {
 
     // 창 실행 전 내용 초기화
-    document.querySelector("#calendar_title").value = "";
-    document.querySelector("#calendar_content").value = "";
-    document.querySelector("#calendar_start_date").value = "";
-    document.querySelector("#calendar_end_date").value = "";
-    document.querySelector("#calendar_type").value = "";
+    document.querySelector("#calendar-title").value = "";
+    document.querySelector("#calendar-content").value = "";
+    document.querySelector("#calendar-start-date").value = "";
+    document.querySelector("#calendar-end-date").value = "";
+    document.querySelector("#calendar-type").value = "";
 
     // 전달받은 날짜 정보 YYYY-MM-DD 형식으로 변환
 
@@ -15,15 +16,13 @@ function openWriteModal(date) {
     mm = mm < 10 ? '0' + mm.toString() : mm.toString();
     let dd = date.getDate();
     dd = dd < 10 ? '0' + dd.toString() : dd.toString();
-    let dd2 = date.getDate()+1;
-    dd2 = dd2 < 10 ? '0' + dd2.toString() : dd2.toString();
 
     // 입력창 기본 날짜 설정
-    // const todayDate = yyyy + "-" + mm + "-" + dd + "T00:00"; // 클릭할 날짜 값을 input 태그 형식에 맞게 00시로 변환
-    const startDateTag = document.querySelector("#calendar_start_date");
-    startDateTag.value=yyyy + "-" + mm + "-" + dd + "T00:00"; // 클릭할 날짜 값을 input 태그 형식에 맞게 00시로 변환
-    const endDateTag = document.querySelector("#calendar_end_date");
-    endDateTag.value=yyyy + "-" + mm + "-" + dd2 + "T00:00"; // 클릭할 날짜 값을 input 태그 형식에 맞게 00시로 변환
+    const todayDate = yyyy + "-" + mm + "-" + dd + "T00:00"; // 클릭할 날짜 값을 input 태그 형식에 맞게 00시로 변환
+    const startDateTag = document.querySelector("#calendar-start-date");
+    startDateTag.value=todayDate;
+    const endDateTag = document.querySelector("#calendar-end-date");
+    endDateTag.value=todayDate;
 
     // 모달창에 항목 정보 추가
     loadTypeInfo();
@@ -33,49 +32,76 @@ function openWriteModal(date) {
 
 }
 
-// 캘린더 항목 정보 모달창에 추가
+// 캘린더 항목 정보 작성 모달창에 추가
 function loadTypeInfo(){
 
-    const selectTag = document.querySelector("#calendar_type");
-    const areaTag = document.querySelector(".type-area");
+    const selectTag = document.querySelector("#calendar-type");
+    const colorTag = document.querySelector("#writeModal input[name=color]");
 
-    if( selectTag.firstElementChild == null){
-                
-        for (let i = 1; i < typeInfo.length; i++) {
-            const optionTag = document.createElement("option");
-            optionTag.value = typeInfo[i].no;
-            optionTag.innerText = typeInfo[i].name;
-            if(i==0){
-                optionTag.setAttribute("selected","selected");
-            }
-            selectTag.appendChild(optionTag);
+    for (let i = 1; i < typeInfo.length; i++) {
+        const optionTag = document.createElement("option");
+        optionTag.value = typeInfo[i].no;
+        optionTag.innerText = typeInfo[i].name;
+        if(i==1){
+            optionTag.setAttribute("selected","selected");
+            colorTag.value=typeInfo[1].color;
         }
-
-    }else{
-        selectTag.firstElementChild.setAttribute("selected","selected");
+        selectTag.appendChild(optionTag);
     }
     
-    let colorTag = document.querySelector("input[name=color]");
-    colorTag.value=typeInfo[1].color;
-
     selectTag.addEventListener("change", function(evt){
         colorTag.value=typeInfo[evt.target.value].color;
     })
 
 }
 
+// 일정종류 정보 작성 모달창에 추가
+function loadKindInfo(){
+
+    const selectTag = document.querySelector(".kind-area");
+    const colorTag = document.querySelector("#writeModal input[name=color]");
+
+    for (let i = 1; i < typeInfo.length; i++) {
+        const optionTag = document.createElement("option");
+        optionTag.value = typeInfo[i].no;
+        optionTag.innerText = typeInfo[i].name;
+        if(i==1){
+            optionTag.setAttribute("selected","selected");
+            colorTag.value=typeInfo[1].color;
+        }
+        selectTag.appendChild(optionTag);
+    }
+    
+    selectTag.addEventListener("change", function(evt){
+        colorTag.value=typeInfo[evt.target.value].color;
+    })
+}
+
+
+// 캘린더 항목 선택란 초기화
+const writeModal = document.querySelector("#writeModal");
+writeModal.addEventListener("hide.bs.modal", function(){
+    const selectTag = document.querySelector("#calendar-type");
+    if(selectTag.firstElementChild != null){
+        selectTag.innerHTML = null;
+    }
+    // if(document.querySelector("#calendar-kindName-view") != null){
+    //     document.querySelector("#calendar-kindName-view").remove();
+    // }
+});
+
 // 서버에 일정정보 추가
 function insertToDB(){
 
     // 입력할 데이터 수집
-    const formData = $("form").serialize();
+    const formData = $("#writeForm").serialize();
 
     // 저장할 월 정보 수집
-    const date = document.querySelector("#calendar_start_date").value;
+    const date = document.querySelector("#calendar-start-date").value;
     const calcDate = calculateDate(new Date(date.replace("T"," ")));
     
     // 저장할 캘린더 항목 정보 수집
-    const typeNo = document.querySelector("#calendar_type").value;
+    const typeNo = document.querySelector("#calendar-type").value;
 
     // 서버에 데이터 전달
     $.ajax({
@@ -105,6 +131,8 @@ function insertToDB(){
     return false; 
 
 }
+
+
 
 
    // 추가 버튼 클릭 시

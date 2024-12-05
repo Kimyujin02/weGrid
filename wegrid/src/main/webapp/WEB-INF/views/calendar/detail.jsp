@@ -16,13 +16,13 @@
                 <div class="form-group">
                     <label class="col-form-label">항목</label>
                     <div class="type-area">
-                        <div id="color-view"></div>
-                        <div id="typName-view" class="calendar-detail-view-box"></div>
+                        <div id="calendar-color-view"></div>
+                        <div id="calendar-typName-view" class="calendar-detail-view-box"></div>
                     </div>
                     <br>
                     <div class="title-area">
-                        <label for="calendar_title" class="col-form-label">제목</label>
-                        <div id="title-view" class="calendar-detail-view-box"></div>
+                        <label for="calendar-title-view" class="col-form-label">제목</label>
+                        <div id="calendar-title-view" class="calendar-detail-view-box"></div>
                     </div>
                     <br>
                     <div class="writer-area hidden-area">
@@ -31,12 +31,12 @@
                     </div>
                     <div class="date-area">
                         <div class="date-label-area">
-                            <label for="calendar_start_date" class="col-form-label">시작</label>
-                            <label for="calendar_end_date" class="col-form-label">종료</label>
+                            <label for="calendar-start-date-view" class="col-form-label">시작</label>
+                            <label for="calendar-end-date-view" class="col-form-label">종료</label>
                         </div>
                         <div class="date-input-area">
-                            <div id="startDate-view" class="calendar-detail-view-box"></div>
-                            <div id="endDate-view" class="calendar-detail-view-box"></div>
+                            <div id="calendar-start-Date-view" class="calendar-detail-view-box"></div>
+                            <div id="calendar-end-Date-view" class="calendar-detail-view-box"></div>
                         </div>
                     </div>
                     <br>
@@ -46,14 +46,15 @@
                     </div>
                     <br>
                     <div class="content-area">
-                        <label for="calendar_content" class="col-form-label">상세 내용</label>
-                        <div id="content-view" class="calendar-detail-view-box"></div>
+                        <label for="calendar-content-view" class="col-form-label">상세 내용</label>
+                        <div id="calendar-content-view" class="calendar-detail-view-box"></div>
                     </div>
 
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="moveToeditModal()">수정</button>
+                <input type="hidden" name="isEditable">
+                <button type="button" class="btn btn-primary" id="toEditBtn">수정</button>
                 <button type="button" class="btn btn-secondary" onclick="deleteSchedule();">삭제</button>
             </div>
         </div>
