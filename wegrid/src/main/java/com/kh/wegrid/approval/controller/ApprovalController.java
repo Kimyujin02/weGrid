@@ -1,19 +1,24 @@
 package com.kh.wegrid.approval.controller;
 
 import com.kh.wegrid.approval.service.ApprovalService;
+import com.kh.wegrid.approval.vo.ApprovalAttachmentVo;
 import com.kh.wegrid.approval.vo.ApprovalVo;
+import com.kh.wegrid.approval.vo.DeptVo;
+import com.kh.wegrid.approval.vo.MemberListVo;
 import com.kh.wegrid.member.vo.MemberVo;
-import com.kh.wegrid.trip.vo.TripVo;
+import com.kh.wegrid.util.FileUploader;
 import com.kh.wegrid.util.page.PageVo;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,10 +28,49 @@ import java.util.List;
 @Slf4j
 public class ApprovalController {
 
+    @Value("#{pathInfo.getApprovalAttachmentPath}")
+    private String path;
+
     private final ApprovalService service;
 
     @GetMapping("write")
     public void write(){
+
+    }
+
+    @PostMapping("write")
+    public String write(ApprovalVo avo , HttpSession session
+    ,@RequestParam(name = "approvalAttachment") List<MultipartFile> fileList ) throws IOException {
+
+
+        List<String> changNameList = new ArrayList<>();
+        ApprovalAttachmentVo attachVo = new ApprovalAttachmentVo();
+        List<ApprovalAttachmentVo> attachmentVoList = new ArrayList<>();
+
+        for(MultipartFile f : fileList){
+            if(f.isEmpty()){break;}
+            String changeName = FileUploader.save(f , path);
+            String originName = f.getOriginalFilename();
+
+            attachVo.setOriginName(originName);
+            attachVo.setChangeName(changeName);
+
+            attachmentVoList.add(attachVo);
+//            changNameList.add(changeName);
+//            changNameList.add(originName);
+        }
+
+        MemberVo loginMemverVo = (MemberVo) session.getAttribute("loginMemberVo");
+        avo.setWriterNo(loginMemverVo.getNo());
+
+
+        int result = service.insertApproval(avo , attachmentVoList);
+
+        if(result>0){
+            return "redirect:/approval/submitList";
+        }else{
+            return "redirect:/error";
+        }
 
     }
     @GetMapping("submitList")
@@ -85,6 +129,72 @@ public class ApprovalController {
     }
 
     @GetMapping("detail")
-    public void detail(){}
+    public String detail(String ano , Model model){
+        List<ApprovalAttachmentVo> attachList = service.attDetail(ano);
+        ApprovalVo avo = service.approvalDetail(ano);
+
+        model.addAttribute("attVoList" , attachList);
+        model.addAttribute("avo" , avo);
+
+        return "approval/detail";
+    }
+
+    @GetMapping("emp/list/data")
+    @ResponseBody
+    public HashMap empList(@RequestParam(name = "pno"
+            , defaultValue = "1"
+            , required = false) int currentPage
+            , String searchType
+            , String searchValue){
+
+        List<DeptVo> deptVoList = service.getDeptVoList();
+        int listCount = service.getEmpListCnt(searchType , searchValue);
+        int pageLimit = 5;
+        int boardLimit = 10;
+        PageVo pvo = new PageVo(listCount , currentPage , pageLimit , boardLimit);
+        System.out.println("searchValue = " + searchValue);
+        List<MemberListVo> memberVoList = service.getEmpVoList( pvo , searchType , searchValue);
+        System.out.println("memberVoList = " + memberVoList);
+
+        HashMap map = new HashMap();
+        map.put("a",memberVoList);
+        map.put("b",pvo);
+        map.put("c",deptVoList);
+
+
+        return map;
+
+    }
+    @PostMapping("delete")
+    public String delete(String no , HttpSession session){
+
+        int result = service.deleteApproval(no);
+
+        return "approval/submitList";
+    }
+    @PostMapping("mline/allow")
+    public String middelAllow(String no , HttpSession session){
+
+        int result = service.middleAllow(no);
+        return "approval/receiveList";
+
+    }
+    @PostMapping("mline/companion")
+    public String middleCompanion(String no , HttpSession session){
+        int result = service.middleCompanion(no);
+        return "approval/receiveList";
+    }
+    @PostMapping("lline/allow")
+    public String lastAllow(String no , HttpSession session){
+        int result = service.lastAllow(no);
+        return "approval/receiveList";
+    }
+    @PostMapping("lline/companion")
+    public String lastCompanion(String no , HttpSession session){
+        int result = service.lastCompanion(no);
+        return "approval/receiveList";
+    }
+
+
 
 }

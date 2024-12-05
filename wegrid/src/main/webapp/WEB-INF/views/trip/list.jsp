@@ -55,7 +55,7 @@
                     <div  id="search-boc">
                         <input type="text" name="searchValue" placeholder="검색" id="searchTag">
                         <span>
-                            <button type="submit" id="searchBtn">
+                            <button type="submit" id="searchBtn" onclick="return submitSearchForm();">
                                 <i class="fas fa-search" id="search-i"></i>
                             </button>
                         </span>
@@ -153,7 +153,7 @@
                     </div>
                 </div>
                 <div class="tripModal-footer">
-                    <button class="submit-btn" type="submit" onclick="combineAdress();">등록</button>
+                    <button class="submit-btn" type="submit">등록</button>
                 </div>
             </div>
         </form>
