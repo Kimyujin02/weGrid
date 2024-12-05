@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -85,7 +86,6 @@ public class ProjectController {
     // 신규 프로젝트 생성 호출(요청처리)
     @PostMapping("create")
     public String create( ProjectVo vo, ProjectMemberVo pmVo){
-        System.out.println("ProjectController.create ~~~~~~~~~~~~~~~~~~~~~~");
 
         // 서비스 호출
         int result = service.create(vo , pmVo);    //플젝 생성
@@ -101,13 +101,10 @@ public class ProjectController {
     //프로젝트 정보 수정 화면 / update
     @GetMapping("edit")
     public String edit(Model model, String projectNo,PageVo pvo){
-
-        ProjectVo vo = service.projectDetail(projectNo);
-        List<StatusVo> statusVoList = service.getStatusVoList();
+        HashMap map = service.projectDetail(projectNo);
         List<ProjectMemberVo> voList = service.getPeopleList(pvo, projectNo); // projectNo를 넘겨줌
 
-        model.addAttribute("vo", vo); // 정보를 담아 jsp 화면에 넘겨주기 위한 것
-        model.addAttribute("statusVoList", statusVoList);
+        model.addAttribute("map", map); // 정보를 담아 jsp 화면에 넘겨주기 위한 것
         model.addAttribute("voList", voList);
         return "project/edit";
     }
@@ -116,11 +113,22 @@ public class ProjectController {
     //프로젝트 수정
     @PostMapping("edit") // 정보 수정, 멤버 추가, 삭제
     public String edit(ProjectVo vo, String projectNo, ProjectMemberVo pmVo){
+        System.out.println("ProjectController.edit ~~~~~~~~~~~~~~~~~~~~~~");
 
         int result = service.edit(vo, projectNo, pmVo);
 
+        System.out.println("ProjectVo: " + vo);
+        System.out.println("ProjectMemberVo: " + pmVo);
+        System.out.println("ProjectNo: " + projectNo);
 
-        return "redirect:/project/people";
+
+        // 결과 처리
+        if(result > 0){
+            return "redirect:/project/people";
+        }else{
+            return "redirect:/error";
+        }
+
     }
 
 
@@ -128,16 +136,24 @@ public class ProjectController {
     // 프로젝트 상세조회 화면 1 (참여인력 조회)
     @GetMapping("people")
     public String peopleList(Model model,String projectNo, @RequestParam(name = "pno") int currentPage) {
-        //프로젝트 정보
-        ProjectVo vo = service.projectDetail(projectNo);
-        model.addAttribute("vo", vo);
 
+        System.out.println("projectNo = " + projectNo);
+        System.out.println("currentPage = " + currentPage);
+        
+        //프로젝트 정보
+        HashMap map = service.projectDetail(projectNo);
+        model.addAttribute("map", map);
+
+        System.out.println("map = " + map);
+        
         // 페이징 처리
         int listCount = service.getMemberCnt();
         int pageLimit = 5;
         int boardLimit = 13;
 
         PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
+
+        System.out.println("pvo = " + pvo);
 
         List<ProjectMemberVo> voList = service.getPeopleList(pvo, projectNo); // projectNo를 넘겨줌
         model.addAttribute("voList", voList);
@@ -151,9 +167,12 @@ public class ProjectController {
     @GetMapping("attach")
     public String attachList(Model model, String projectNo){
         //프로젝트 정보
-        ProjectVo vo = service.projectDetail(projectNo);
-        model.addAttribute("vo", vo);
-        
+        HashMap map = service.projectDetail(projectNo);
+        model.addAttribute("map", map);
+
+        List<ProjectMemberVo> voList = service.getAttachPeopleList(projectNo); // projectNo를 넘겨줌
+        model.addAttribute("voList", voList);
+
         // 첨부파일 목록
         return "project/attach";
     }

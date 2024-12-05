@@ -1,8 +1,13 @@
 package com.kh.wegrid.systemManager.mapper;
 
 import com.kh.wegrid.member.vo.MemberVo;
+import com.kh.wegrid.systemManager.vo.DepartMentVo;
+import com.kh.wegrid.systemManager.vo.JobInfoVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+
+import java.util.List;
 
 @Mapper
 public interface SystemManergerMapper {
@@ -20,7 +25,6 @@ public interface SystemManergerMapper {
                 ,DETAIL_ADDRESS
                 ,EMP_NUM
                 ,JOB_NO
-                ,IS_MANAGER
             )
             VALUES
             (
@@ -34,8 +38,20 @@ public interface SystemManergerMapper {
                 , #{detailAddress}
                 , #{empNum}
                 , #{jobNo}
-                , #{isManager}
             )
             """)
     int create(MemberVo vo);
+
+
+    @Select("""
+            SELECT *
+            FROM JOB_INFO
+            """)
+    List<JobInfoVo> getJobInfoVoList();
+
+    @Select("""
+            SELECT *
+            FROM DEPARTMENT
+            """)
+    List<DepartMentVo> getDepartmentVoList();
 }

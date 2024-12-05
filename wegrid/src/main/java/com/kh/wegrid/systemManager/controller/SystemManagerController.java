@@ -2,12 +2,17 @@ package com.kh.wegrid.systemManager.controller;
 
 import com.kh.wegrid.member.vo.MemberVo;
 import com.kh.wegrid.systemManager.service.SystemManagerSevice;
+import com.kh.wegrid.systemManager.vo.DepartMentVo;
+import com.kh.wegrid.systemManager.vo.JobInfoVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("system")
@@ -19,21 +24,27 @@ public class SystemManagerController {
 
     // 시스템 관리자 계정 생성 화면
     @GetMapping("create")
-    public String create(){
+    public String create(Model model) {
+        List<JobInfoVo> jobInfoVoList = service.getJobInfoVoList();
+        List<DepartMentVo> departMentVoList = service.getDepartmentVoList();
+
+        model.addAttribute("jobInfoVoList", jobInfoVoList); // JSP로 데이터 전달
+        model.addAttribute("departMentVoList", departMentVoList);
         return "system/create";
     }
 
     // 계정 생성 요청
     @PostMapping("create")
-    public String create(MemberVo vo){
+    public String create(MemberVo vo) {
         int result = service.create(vo);
 
-        if(result > 0){
-        return "redirect:/system/list";
-        }else{
+        if (result > 0) {
+            return "redirect:/system/list";
+        } else {
             return "redirect:/common/error";
         }
     }
+
 
     // 시스템 관리자 계정 수정 화면
     @GetMapping("edit")
