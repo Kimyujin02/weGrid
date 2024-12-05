@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/css/project/edit.css">
 
 <script defer src="/js/common/main.js"></script>
-<script defer src="/js/project/create.js"></script>
+<script defer src="/js/project/edit.js"></script>
 
 </head>
 <body>
@@ -51,7 +51,11 @@
                                 <br>
                                 <div>
                                     <label for="pm-name">PM(담당자)</label>
-                                    <input type="text" id="pm-name" value="${vo.pmName}">
+                                    <input type="hidden" name="empNo" id="empNo">
+                                    <input type="text" id="empName" value="${vo.pmName}"
+                                    oninput="searchPm(this.value)"  autocomplete="off" >
+                        
+                                <p id="searchResults" class="search-results"></p> 
                                 </div>
                                 <br>
                                 <div class="status">
@@ -71,7 +75,10 @@
                               
                                 <div>
                                     <label for="client-name">고객사</label>
-                                    <input type="text" id="client-name" value="${vo.clientName}">
+                                    <input type="hidden" name="clientNo" id="clientNo">
+                                    <input type="text" id="clientName" value="${vo.clientName}"
+                                    oninput="searchClient(this.value)" autocomplete="off">
+                                    <ul id="searchClient" class="search-client"></ul> 
                                 </div>
                                 <br>
                                 <br>

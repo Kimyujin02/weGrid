@@ -290,11 +290,23 @@ public interface ProjectMapper {
             VALUES
             (
                 SEQ_PROJECT_MEMBER.NEXTVAL
-                ,#{projectNo}
+                ,SEQ_PROJECT.CURRVAL
                 ,#{empNo}
-                ,#{startDate}
-                ,#{endDate}
+                ,SYSDATE
+                ,NULL
             )
             """)
-    ProjectMemberVo addMember(ProjectMemberVo pmVo);
+    int addMember(ProjectMemberVo pmVo);
+
+    // 사원 삭제하기 UPDATE
+    @Update("""
+    UPDATE PROJECT_MEMBER
+        SET
+             END_DATE = SYSDATE
+             ,DEL_YN = 'Y'
+    WHERE PROJECT_NO = #{projectNo}
+      AND EMP_NO = #{empNo}
+      AND END_DATE IS NULL  -- 이미 삭제된 멤머는 중복 업데이트 되지 않게 함
+    """)
+    int removeMember(ProjectMemberVo pmVo);
 }

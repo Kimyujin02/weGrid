@@ -45,7 +45,7 @@
                                 <br>
                                 <div>
                                     <label for="projectName">프로젝트 명</label>
-                                    <input type="text" id="projectName" name="projectName" required>
+                                    <input type="text" id="projectName" name="projectName">
                                 </div>
                                 <br><br>
                                 <div>
@@ -128,7 +128,7 @@
         
                       <!-- 버튼 섹션 -->
                     <div id="section-button">
-                        <button type="submit" class="btn btn-primary" id="create-btn">생성</button>
+                        <button type="submit" class="btn btn-primary" id="create-btn" onclick="location.href='/project/list'">생성</button>
                         <button type="button" class="btn btn-primary" id="delete-btn" onclick="location.href='/project/list'">취소</button>
                     </div>
                 </div>
