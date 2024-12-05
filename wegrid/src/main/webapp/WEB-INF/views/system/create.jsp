@@ -156,41 +156,48 @@
                         <input type="text" id="employee-no" name="empNum"><br>
 
                         <label for="department">부서명</label>
-
                         <div class="department-row">
-                            <input type="text" id="department-name" name="deptNo">
-                            <div class="filter-controls">
-                                <select id="department">
-                                    <option value="${jobVo.no}">${jobVo.name}</option>
-                                    <option>개발팀</option>
-                                    <option>영업팀</option>
-                                </select>
-                                <br>
-                            </div>
+                            <!-- 기본 직급 표시하는 입력 필드 -->
+                            <input 
+                                type="text" 
+                                id="department-name" 
+                                name="deptNo" 
+                                value="${departMentVoList[0].name}" 
+                            />
+
+                            <!-- departMentVoList를 순회하여 옵션 생성 -->
+                            <select id="deptName" name="deptNo">
+                            <c:forEach var="departMentVo" items="${departMentVoList}">
+                                <option value="${departMentVo.code}">${departMentVo.name}</option>
+                            </c:forEach>
+                            </select>
+                            
                         </div>
 
                         <label for="position">직급</label>
-                        <div class="filter-controls">
-                        <select id="position">
-                            <option>전체</option>
-                            <option>관리자</option>
-                            <option>일반 사원</option>
-                        </select>
+                            <div class="filter-controls">
+                                <select id="job" name="jobNo">
+                                    <!-- jobInfoList를 순회하여 옵션 생성 -->
+                                    <c:forEach var="JobInfoVo" items="${jobInfoVoList}">
+                                        <option value="${JobInfoVo.no}">${JobInfoVo.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
                         <br>
-                    </div>
                         <label for="authority">권한</label>
                         <div class="filter-controls">
-                        <select id="authority">
-                            <option>관리자</option>
-                            <option>일반 사원</option>
-                        </select>
+                            <select id="authority">
+                                <option>관리자</option>
+                                <option>일반 사원</option>
+                            </select>
+                        </div>
+                        
                     </div>
-
                 </div>
             </div>
-
+            
             <div class="button-group">
-                <button type="button" class="btn btn-primary" id="create-btn">등록하기</button>
+                <button type="submit" class="btn btn-primary" id="create-btn" onclick="location.href='/system/list'">등록하기</button>
                 <button type="button" class="btn btn-primary" id="delete-btn">삭제</button>
             </div>
         </div>

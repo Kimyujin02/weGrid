@@ -115,6 +115,7 @@ public interface ProjectMapper {
           SELECT
               P.NO AS PROJECT_NO
               ,P.PROJECT_NAME
+              ,P.STATUS_NO
               ,P.START_DATE
               ,P.END_DATE
               ,E.NAME AS PM_NAME
@@ -130,7 +131,7 @@ public interface ProjectMapper {
               ON P.EMP_NO = E.NO
           JOIN
               CLIENT C
-              ON P.CLIENT_NO = C.NO 
+              ON P.CLIENT_NO = C.NO
           LEFT JOIN
               PROJECT_MEMBER PM
               ON P.NO = PM.PROJECT_NO 
@@ -141,6 +142,7 @@ public interface ProjectMapper {
               P.NO
               , P.PROJECT_NAME
               , P.START_DATE
+              , P.STATUS_NO
               , P.END_DATE
               , P.STATUS_NO
               , P.MANAGER_NAME
@@ -190,6 +192,7 @@ public interface ProjectMapper {
                 P.NO AS PROJECT_NO
                 ,P.PROJECT_NAME
                 ,P.START_DATE
+                ,P.STATUS_NO
                 ,P.END_DATE
                 ,P.BUDGET
                 ,P.DESCRIPTION
@@ -221,6 +224,7 @@ public interface ProjectMapper {
             GROUP BY
                 P.NO
                 , P.PROJECT_NAME
+                , P.STATUS_NO
                 , P.START_DATE
                 , P.END_DATE
                 , P.BUDGET
@@ -248,34 +252,6 @@ public interface ProjectMapper {
             WHERE NO = #{no}
             """)
     int edit(ProjectVo vo, String projectNo);
-
-
-    //프로젝트 상태 카테고리
-    @Select("""
-            SELECT *
-            FROM PROJECT_STATUS
-            """)
-    List<StatusVo> getStatusVoList();
-
-    @Select("""
-             SELECT
-                NO
-               ,RANK_CODE
-               ,STATUS_NO
-               ,NAME
-               ,POST_ADDRESS
-               ,ROAD_ADDRESS
-               ,DETAIL_ADDRESS
-               ,PRESIDENT_NAME
-               ,PRESIDENT_PHONE
-               ,PRESIDENT_EMAIL
-               ,START_DATE
-               FROM CLIENT
-            WHERE NAME LIKE '%${clientName}%'
-            """)
-    List<ClientVo> searchClient(String clientName);
-
-
 
     // 프로젝트 참여 멤버 추가하기(insert)
     @Insert("""
@@ -309,4 +285,49 @@ public interface ProjectMapper {
       AND END_DATE IS NULL  -- 이미 삭제된 멤머는 중복 업데이트 되지 않게 함
     """)
     int removeMember(ProjectMemberVo pmVo);
+
+    //프로젝트 상태 카테고리
+    @Select("""
+            SELECT *
+            FROM PROJECT_STATUS
+            """)
+    List<StatusVo> getStatusVoList();
+
+    @Select("""
+             SELECT
+                NO
+               ,RANK_CODE
+               ,STATUS_NO
+               ,NAME
+               ,POST_ADDRESS
+               ,ROAD_ADDRESS
+               ,DETAIL_ADDRESS
+               ,PRESIDENT_NAME
+               ,PRESIDENT_PHONE
+               ,PRESIDENT_EMAIL
+               ,START_DATE
+               FROM CLIENT
+            WHERE NAME LIKE '%${clientName}%'
+            """)
+    List<ClientVo> searchClient(String clientName);
+
+    @Select("""
+            SELECT
+                M.NO
+                ,M.PROJECT_NO
+                ,M.EMP_NO
+                ,M.DEL_YN
+                ,E.NAME  AS EMP_NAME
+                ,E.EMAIL
+                ,E.DEPT_NO
+                ,E.EMP_NUM
+                ,P.PROJECT_NAME
+                ,D.NAME
+            FROM PROJECT_MEMBER M
+            JOIN EMPLOYEE E ON M.EMP_NO = E.NO
+            JOIN PROJECT P ON P.NO = M.PROJECT_NO
+            JOIN DEPARTMENT D ON D.CODE = E.DEPT_NO
+            WHERE P.NO = #{projectNo}
+            """)
+    List<ProjectMemberVo> getAttachPeopleList(String projectNo);
 }

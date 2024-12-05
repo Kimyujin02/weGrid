@@ -30,45 +30,52 @@
             <div class="project-info">
                  <!-- 공백 -->
                  <div class="edit-icon">
-                    <a href="/project/edit?projectNo=${vo.projectNo}"><i class="fas fa-edit" style="color:#666;"></i></a>
+                    <a href="/project/edit?projectNo=${map.project.projectNo}"><i class="fas fa-edit" style="color:#666;"></i></a>
                 </div>
                 <table class="project-table" id="project-tb">
                     <thead>
                         <tr style="border-top: 1px solid #797979ab;">
 
                             <!-- 프로젝트 번호를 hidden 필드로 추가 -->
-                            <input type="hidden" name="projectNo" value="${vo.projectNo}">
+                            <input type="hidden" name="projectNo" value="${map.project.projectNo}">
                             <th>프로젝트 명</th>
-                            <td>${vo.projectName}</td>
+                            <td>${map.project.projectName}</td>
                             <th>담당 PM</th>
-                            <td>${vo.pmName}</td>
+                            <td>${map.project.pmName}</td>
                             <th>고객사 담당자</th>
-                            <td>${vo.managerName}</td>
+                            <td>${map.project.managerName}</td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <th>고객사</th>
-                            <td>${vo.clientName}</td>
+                            <td>${map.project.clientName}</td>
                             <th>고객 등급</th>
-                            <td>${vo.rankName}</td>
+                            <td>${map.project.rankName}</td>
                             <th>고객사 연락처</th>
-                            <td>${vo.managerPhone}</td>
+                            <td>${map.project.managerPhone}</td>
                         </tr>
                         <tr>
                             <th>진행 현황</th>
-                            <td value="${statusVo.no}">${statusVo.name}</td>
+                            <td>
+                                <c:choose>
+                                <c:when test="${map.project.statusNo == 1}"><span class="status-ready ">준비</span></c:when>
+                                <c:when test="${map.project.statusNo == 2}"><span class="status-ongoing">진행</span></c:when>
+                                <c:when test="${map.project.statusNo == 3}"><span class="status-completed">완료</span></c:when>
+                                <c:when test="${map.project.statusNo == 4}"><span class="status-canceled">철회</span></c:when>
+                                </c:choose>
+                            </td>
                                 
                             <th>예산</th>
-                            <td>₩ ${vo.budget}</td>
+                            <td>₩ ${map.project.budget}</td>
                             <th>프로젝트 기간</th>
-                            <td><p id="project-dates" data-start="${vo.startDate}" data-end="${vo.endDate}">
-                                ${vo.startDate} ~ ${vo.endDate}</p>
+                            <td><p id="project-dates" data-start="${map.project.startDate}" data-end="${map.project.endDate}">
+                                ${map.project.startDate} ~ ${map.project.endDate}</p>
                             </td>
                         </tr>
                         <tr>
                             <th>내용</th>
-                            <td colspan="5">${vo.description}</td>
+                            <td colspan="5">${map.project.description}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -84,10 +91,10 @@
                 <div class="sidebar">
                
                     <div class="sidebar">
-                        <a href="/project/people?projectNo=${vo.projectNo}&pno=${vo.projectNo}" class="sidebar-btn active" id="btn1">
+                        <a href="/project/people?projectNo=${map.project.projectNo}&pno=${vo.projectNo}" class="sidebar-btn active" id="btn1">
                             <i class="fas fa-user-friends"></i> 
                         </a>
-                        <a href="/project/attach?projectNo=${vo.projectNo}&pno=${vo.projectNo}" class="sidebar-btn" id="btn2">
+                        <a href="/project/attach?projectNo=${map.project.projectNo}&pno=${vo.projectNo}" class="sidebar-btn" id="btn2">
                             <i class="fas fa-paperclip"></i>
                         </a>
                     </div>
@@ -112,10 +119,10 @@
                                 <th>이름</th>
                                 <th>사원 ID</th>
                                 <th>소속부서</th>
-                                <th>담당업무</th>
+                                <!-- <th>담당업무</th> -->
                                 <th>이메일</th>
-                                <!-- <th>시작일</th>
-                                <th>종료일</th> -->
+                                <th>시작일</th>
+                                <th>종료일</th>
                             </tr>
                         </thead>
                   
@@ -124,11 +131,11 @@
                                 <tr class="list-middle">
                                     <td>${vo.empName}</td>
                                     <td>${vo.empNum}</td>
-                                    <td>${vo.deptName}</td>
                                     <td>${vo.deptNo}</td>
+                                    <!-- <td>${vo.deptName}</td> -->
                                     <td>${vo.email}</td>
-                                    <!-- <td>${vo.startDate}</td>
-                                    <td>${vo.endDate}</td> -->
+                                    <td>${vo.startDate}</td>
+                                    <td>${vo.endDate}</td>
                                 </tr>
                             </c:forEach>
                             
