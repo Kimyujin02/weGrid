@@ -50,9 +50,9 @@ public interface BoardMapper {
 
 
 
-    List<BoardVo> getBoardVoList(PageVo pvo, String searchType, String searchValue);
+    List<BoardVo> getBoardVoList(PageVo pvo, String searchType, String searchTitleValue, String searchContentValue);
 
-    int getBoardCnt(String searchType, String searchValue);
+    int getBoardCnt(String searchType, String searchTitleValue, String searchContentValue);
 
 
 

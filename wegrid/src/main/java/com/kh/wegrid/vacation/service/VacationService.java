@@ -40,7 +40,6 @@ public class VacationService {
         return mapper.getSelectPersonalCntInfo(mno);
     }
 
-
 //    public int updateVacation(VacationVo vo) {
 //        return mapper.updateVacation(vo);
 //    }
