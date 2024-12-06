@@ -62,8 +62,8 @@
             </div>
             <!-- 버튼 섹션 -->
             <div class="user-actions">
-                <button class="action-btn">마이페이지</button>
-                <button class="action-btn logout-btn">로그아웃</button>
+                <button class="action-btn" onclick="location.href='/mypage/home'">마이페이지</button>
+                <button class="action-btn logout-btn" onclick="location.href='/member/logout'">로그아웃</button>
             </div>
         </div>
     </div>

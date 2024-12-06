@@ -67,7 +67,7 @@
                 <div class="line"></div>
                 <div class="readonly-input">
                     <div>주소</div>
-                    <input type="text" readonly value="${memberVo.postAddress}${memberVo.roadAddress}${memberVo.detailAddress}">
+                    <input type="text" readonly value="${memberVo.postAddress}, ${memberVo.roadAddress} ${memberVo.detailAddress}">
                 </div>
                 <!-- div 9개 -->
             </div>
@@ -75,12 +75,58 @@
             <!-- 버튼칸 -->
             <div class="btn-area">
                 <div></div>
-                <button class="btn btn-primary">정보 수정</button>
+                <button class="btn btn-primary changeInfo" onclick="location.href='/mypage/edit'">정보 수정</button>
                 <button class="btn btn-primary changePwd">비밀번호 변경</button>
             </div>
             
         </div>
+
+        <!-- 모달 -->
+        <div class="modal fade" id="changePwdModal" tabindex="-1" aria-labelledby="changePwdLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="changePwdLabel">비밀번호 변경</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <form id="changePwdForm" action="/mypage/changePwd" method="post">
+                    <div class="mb-3">
+                    <label for="currentPwd" class="form-label">현재 비밀번호</label>
+                    <input type="password" class="form-control" id="currentPwd" name="pwd" placeholder="현재 비밀번호 입력" required>
+                    </div>
+                    <div class="mb-3">
+                    <label for="newPwd" class="form-label">새 비밀번호</label>
+                    <input type="password" class="form-control" id="newPwd" name="newPwd" placeholder="새 비밀번호 입력" required>
+                    </div>
+                    <div class="mb-3">
+                    <label for="confirmPwd" class="form-label">새 비밀번호 확인</label>
+                    <input type="password" class="form-control" id="confirmPwd" name="confirmPwd" placeholder="새 비밀번호 확인" required>
+                    </div>
+                </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" form="changePwdForm">변경하기</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                </div>
+            </div>
+            </div>
+        </div>
     </main>
+
+
+    <c:if test="${not empty changeMsg}">
+        <script type="text/javascript">
+            alert("${changeMsg}");
+        </script>
+    </c:if>
+
+    <c:if test="${not empty changeXoMsg}">
+        <script type="text/javascript">
+            alert("${changeXoMsg}");
+        </script>
+    </c:if>
+
 
 </body>
 </html>

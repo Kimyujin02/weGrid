@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,13 +26,13 @@ public class MypageController {
 
     private final MypageService service;
 
+    // 마이페이지 홈
     @GetMapping("home")
-    public String home(Model model, HttpSession session) {
+    public String home(Model model, HttpSession session, RedirectAttributes redirectAttributes) {
         MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
         // 로그인된 사용자가 없을 때 처리
         if (loginMemberVo == null) {
-            session.removeAttribute("errorMessage");
-            session.setAttribute("errorMessage", "로그인 정보가 없습니다.");
+            redirectAttributes.addFlashAttribute("errorMessage", "로그인 정보가 없습니다.");
             return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
         }
 
@@ -84,9 +85,53 @@ public class MypageController {
         return response;
     }
 
+
+    // 비밀번호 변경
+    @PostMapping("changePwd")
+    public String changePwd(String pwd, String newPwd, String confirmPwd, HttpSession session, RedirectAttributes redirectAttributes) {
+//        System.out.println("pwd = " + pwd);
+//        System.out.println("newPwd = " + newPwd);
+//        System.out.println("confirmPwd = " + confirmPwd);
+
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        String eno = loginMemberVo.getNo();
+        String prevPwd = loginMemberVo.getPwd();
+
+        String changeMsg = service.changePwd(prevPwd, pwd, newPwd, confirmPwd, eno);
+        redirectAttributes.addFlashAttribute("changeMsg", changeMsg);
+
+        return "redirect:/mypage/home";
+    }
+
     @GetMapping("edit")
-    public String edit(){
+    public String edit(HttpSession session, Model model){
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        String eno = loginMemberVo.getNo();
+
+        MemberVo vo = service.getInfo(eno);
+        model.addAttribute("vo", vo);
+
         return "mypage/edit";
+    }
+
+
+    @PostMapping("edit")
+    public String edit(MemberVo vo, HttpSession session, RedirectAttributes redirectAttributes){
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        String eno = loginMemberVo.getNo();
+
+        System.out.println("vo = " + vo);
+        int result = service.editInfo(eno, vo);
+
+        if (result > 0) {
+            redirectAttributes.addFlashAttribute("changeXoMsg", "변경 성공!");
+        } else if (result == 0) {
+            redirectAttributes.addFlashAttribute("changeXoMsg", "변경된 정보가 없습니다.");
+        } else {
+            redirectAttributes.addFlashAttribute("changeXoMsg", "변경 실패...");
+        }
+
+        return "redirect:/mypage/home";
     }
 
 }

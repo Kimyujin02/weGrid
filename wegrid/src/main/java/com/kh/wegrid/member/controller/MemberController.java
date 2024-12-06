@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("member")
@@ -65,6 +66,15 @@ public class MemberController {
 
         session.setAttribute("loginMemberVo", loginMemberVo);
         return "redirect:/project/card";
+    }
+
+    // 로그아웃
+    @GetMapping("logout")
+    public String logout(HttpSession session, RedirectAttributes redirectAttributes) {
+        session.removeAttribute("loginMemberVo");
+        redirectAttributes.addFlashAttribute("logoutMsg", "로그아웃 성공!");
+
+        return "redirect:/member/login";
     }
 
     // 관리자 로그인 (화면)

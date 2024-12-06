@@ -125,7 +125,7 @@
                                 <div class="btn-area">
                                     <div><input type="hidden" name="cno" value="${param.cno}"></div>
                                     <div><input type="hidden" name="hno" value="${param.hno}"></div>
-                                    <button type="submit" onclick="checkPermission('<%= loginMemberNo %>', '<%= writerNo %>')">수정</button>
+                                    <button type="submit" onclick="checkPermission(loginMemberNo, '${hvo.writerNo}' )">수정</button>
                                     <button onclick="location.href='/crm/history?cno=${param.cno}'">취소</button>
                                     <div></div>
                                 </div>
@@ -138,6 +138,15 @@
 
         </div>
     </main>
+
+    <% 
+        // 로그인한 사원 정보 가져오기
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        String loginMemberNo = (loginMemberVo != null) ? String.valueOf(loginMemberVo.getNo()) : "null";
+    %>
+    <script>
+        var loginMemberNo = '<%= loginMemberNo %>';
+    </script>
 
 </body>
 </html>
