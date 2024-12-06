@@ -8,4 +8,5 @@ public class JobInfoVo {
     private String name;
     private String vacCnt;
     private String delYn;
+    private String jobName;
 }

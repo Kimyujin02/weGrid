@@ -11,4 +11,5 @@ public class DepartMentVo {
     private String name;
     private String delYn;
 
+    private String deptName;
 }

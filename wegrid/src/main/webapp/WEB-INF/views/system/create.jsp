@@ -167,17 +167,17 @@
 
                             <!-- departMentVoList를 순회하여 옵션 생성 -->
                             <select id="deptName" name="deptNo">
-                            <c:forEach var="departMentVo" items="${departMentVoList}">
-                                <option value="${departMentVo.code}">${departMentVo.name}</option>
-                            </c:forEach>
+                                <c:forEach var="departMentVo" items="${departMentVoList}">
+                                    <option value="${departMentVo.code}">${departMentVo.name}</option>
+                                </c:forEach>
                             </select>
                             
                         </div>
 
                         <label for="position">직급</label>
                             <div class="filter-controls">
+                                
                                 <select id="job" name="jobNo">
-                                    <!-- jobInfoList를 순회하여 옵션 생성 -->
                                     <c:forEach var="JobInfoVo" items="${jobInfoVoList}">
                                         <option value="${JobInfoVo.no}">${JobInfoVo.name}</option>
                                     </c:forEach>
@@ -186,9 +186,9 @@
                         <br>
                         <label for="authority">권한</label>
                         <div class="filter-controls">
-                            <select id="authority">
-                                <option>관리자</option>
-                                <option>일반 사원</option>
+                            <select id="idManager" name="isManager">
+                                <option value="Y">관리자</option>
+                                <option value="N">일반 사원</option>
                             </select>
                         </div>
                         

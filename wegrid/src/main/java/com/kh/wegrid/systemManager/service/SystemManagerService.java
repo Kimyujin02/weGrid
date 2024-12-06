@@ -1,9 +1,11 @@
 package com.kh.wegrid.systemManager.service;
 
 import com.kh.wegrid.member.vo.MemberVo;
-import com.kh.wegrid.systemManager.mapper.SystemManergerMapper;
+import com.kh.wegrid.project.vo.EmployeeVo;
+import com.kh.wegrid.systemManager.mapper.SystemManagerMapper;
 import com.kh.wegrid.systemManager.vo.DepartMentVo;
 import com.kh.wegrid.systemManager.vo.JobInfoVo;
+import com.kh.wegrid.util.page.PageVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,10 +17,11 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 @Transactional
-public class SystemManagerSevice {
+public class SystemManagerService {
 
-    private final SystemManergerMapper mapper;
+    private final SystemManagerMapper mapper;
 
+    // 계정 생성
     public int create(MemberVo vo) {
         return mapper.create(vo);
     }
@@ -29,5 +32,18 @@ public class SystemManagerSevice {
 
     public List<DepartMentVo> getDepartmentVoList() {
         return mapper.getDepartmentVoList();
+    }
+
+    // 목록 조회
+    public List<EmployeeVo> getEmployeeVoList(PageVo pvo, String searchValue) {
+        String str = "";
+        if(searchValue != null && searchValue.length() > 0){
+            str = "AND TITLE LIKE '%" + searchValue + "%'";
+        }
+        return mapper.getEmployeeVoList(pvo, str);
+    }
+
+    public int getSystemCnt() {
+        return mapper.getSystemCnt();
     }
 }
