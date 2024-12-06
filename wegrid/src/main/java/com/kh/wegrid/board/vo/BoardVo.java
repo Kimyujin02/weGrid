@@ -7,6 +7,7 @@ public class BoardVo {
 
     private String no;
     private String writerNo;
+    private String name;
     private String deptNo;
     private String title;
     private String content;

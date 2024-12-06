@@ -21,31 +21,52 @@ public class VacationController {
     private final VacationService service;
 
     @GetMapping("menu")
-    public String menu(Model model , String mno) {
+    public String menu(HttpSession session, Model model, String mno) {
+
+        if(session.getAttribute("loginMemberVo") == null){
+            return "redirect:/member/login";
+        }
 
         List<VacationVo1> selectAllVacationList = service.getSelectAllVacationList();
         List<VacationVo2> selectPersonalCnt = service.getSelectPersonalCnt();
         List<VacationVo3> selectPersonalCntInfo = service.getSelectPersonalCntInfo(mno);
 
         int totalUsed = 0;
-        for (VacationVo3 vo3 : selectPersonalCntInfo) {
-            totalUsed += Integer.parseInt(vo3.getUsedVacation());
+        if (selectPersonalCntInfo != null && !selectPersonalCntInfo.isEmpty()) {
+            for (VacationVo3 vo3 : selectPersonalCntInfo) {
+                totalUsed += Integer.parseInt(vo3.getUsedVacation());
+            }
+
+            model.addAttribute("name", selectPersonalCntInfo.get(0).getName());
+            model.addAttribute("vacCnt", selectPersonalCntInfo.get(0).getVacCnt());
+        } else {
+            model.addAttribute("name", "N/A");
+            model.addAttribute("vacCnt", 0);
         }
 
         model.addAttribute("selectAllVacationList", selectAllVacationList);
         model.addAttribute("selectPersonalCnt", selectPersonalCnt);
         model.addAttribute("totalUsed", totalUsed);
-        model.addAttribute("name", selectPersonalCntInfo.get(0).getName());
-        model.addAttribute("vacCnt", selectPersonalCntInfo.get(0).getVacCnt());
 
         return "vacation/menu";
     }
 
+
     @PostMapping("menu")
-    public String menuInsert (Model model, VacationVo vo) {
+    public String menuInsert (HttpSession session, Model model, VacationVo vo) {
+
+//        vo.setWriterNo(loginMemberVo.getNo());
+//        vo.setDeptNo(loginMemberVo.getDeptNo());
+
+        if(session.getAttribute("loginMemberVo") == null){
+            return "redirect:/member/login";
+        }
+
+
+
         int insertNewVacation = service.insertNewVacation(vo);
 
-        int updateVacation = service.updateVacation(vo);
+//        int updateVacation = service.updateVacation(vo);
 
         return "redirect:/vacation/menu";
 

@@ -256,3 +256,8 @@ border: 0;
 background-color: #d3d3d3;
 color: black;
 }
+
+.table tbody tr:hover{
+    background-color: lightgray !important;
+    cursor: pointer !important;
+}
