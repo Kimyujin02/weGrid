@@ -1,7 +1,8 @@
-package com.kh.wegrid.myPage.controller;
+package com.kh.wegrid.mypage.controller;
 
 import com.kh.wegrid.member.vo.MemberVo;
-import com.kh.wegrid.myPage.service.MyPageService;
+
+import com.kh.wegrid.mypage.service.MypageService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +21,9 @@ import java.util.UUID;
 @Slf4j
 @RequestMapping("mypage")
 @RequiredArgsConstructor
-public class MyPageController {
+public class MypageController {
 
-    private final MyPageService service;
+    private final MypageService service;
 
     @GetMapping("home")
     public String home(Model model, HttpSession session) {

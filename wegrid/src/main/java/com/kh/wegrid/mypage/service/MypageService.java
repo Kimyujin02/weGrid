@@ -1,7 +1,7 @@
-package com.kh.wegrid.myPage.service;
+package com.kh.wegrid.mypage.service;
 
 import com.kh.wegrid.member.vo.MemberVo;
-import com.kh.wegrid.myPage.mapper.MyPageMapper;
+import com.kh.wegrid.mypage.mapper.MypageMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @RequiredArgsConstructor
 @Transactional
-public class MyPageService {
+public class MypageService {
 
-    private final MyPageMapper mapper;
+    private final MypageMapper mapper;
 
     public MemberVo getInfo(String eno) {
         return mapper.getInfo(eno);
