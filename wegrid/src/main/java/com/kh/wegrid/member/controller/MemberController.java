@@ -94,7 +94,7 @@ public class MemberController {
             return "redirect:/member/admin";
         }
         session.setAttribute("loginAdminVo", loginAdminVo);
-        return "redirect:/system/list";
+        return "redirect:/system/account/list";
     }
 
 }

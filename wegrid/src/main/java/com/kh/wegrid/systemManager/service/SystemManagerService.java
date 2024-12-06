@@ -61,7 +61,13 @@ public class SystemManagerService {
     }
 
 
-    public int accountEdit(MemberVo vo, String no) {
-        return mapper.accountEdit(vo, no);
+    public int accountEdit(MemberVo vo) {
+        return mapper.accountEdit(vo);
     }
+
+    public int resetPassword(String no, String newPassword) {
+        // 비밀번호 초기화 쿼리 실행 (예: MyBatis, JPA, JDBC 등)
+        return mapper.updatePassword(no, newPassword); // 실제 update 쿼리 실행
+    }
+
 }

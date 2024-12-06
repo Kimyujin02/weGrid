@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.wegrid.systemManager.mapper.SystemManagerMapper">
+
+    <update id="accountEdit">
+        UPDATE EMPLOYEE
+        SET
+        <if test="name != null">
+        NAME = #{name}
+        </if>
+
+        <if test="id != null">
+        , ID = #{id}
+        </if>
+
+        <if test="email != null">
+        , EMAIL = #{email}
+        </if>
+
+        <if test="phone != null">
+        , PHONE = #{phone}
+        </if>
+
+        <if test="postAddress != null">
+        , POST_ADDRESS = #{postAddress}
+        </if>
+
+        <if test="roadAddress != null">
+        , ROAD_ADDRESS = #{roadAddress}
+        </if>
+
+        <if test="detailAddress != null">
+        , DETAIL_ADDRESS = #{detailAddress}
+        </if>
+
+        <if test="empNum != null">
+        , EMP_NUM = #{empNum}
+        </if>
+
+        <if test="deptNo != null ">
+        , DEPT_NO = #{deptNo}
+        </if>
+
+        <if test="jobNo">
+        , JOB_NO = #{jobNo}
+        </if>
+
+        WHERE NO = #{no}
+        AND DEL_YN = 'N'
+
+
+    </update>
+
+</mapper>

@@ -136,6 +136,7 @@ public interface SystemManagerMapper {
                 J.NAME AS JOB_NAME,        -- 직급 이름
                 E.IS_MANAGER,
                 TO_CHAR(E.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE,
+                E.IS_LOCKED,
                 E.DEL_YN
             FROM EMPLOYEE E
             LEFT JOIN DEPARTMENT D
@@ -147,23 +148,16 @@ public interface SystemManagerMapper {
             """)
     MemberVo getMemberVo(String no);
 
+
+    int accountEdit(MemberVo vo);
+
+    // 비밀번호 초기화
     @Update("""
             UPDATE EMPLOYEE
-                SET
-                     NAME = #{vo.name}
-                    , ID = #{vo.id}
-                    , EMAIL = #{vo.email}
-                    , PHONE = #{vo.phone}
-                    , POST_ADDRESS = #{vo.postAddress}
-                    , ROAD_ADDRESS = #{vo.roadAddress}
-                    , DETAIL_ADDRESS = #{vo.detailAddress}
-                    , EMP_NUM = #{vo.empNum}
-                    , DEPT_NO = #{vo.deptNo}
-                    , JOB_NO = #{vo.jobNo}
-                WHERE NO = #{no}
-                AND DEL_YN = 'N'
+             SET PWD = #{newPassword}
+             WHERE NO = #{no}
             """)
-    int accountEdit(MemberVo vo, String no);
+    int updatePassword(String no, String newPassword);
 }
 
 

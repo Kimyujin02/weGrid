@@ -28,4 +28,7 @@ public class MemberVo {
     private int failedAttempts;
     private String isLocked;
 
+    private String newPassword;
+    private String userId;
+
 }
