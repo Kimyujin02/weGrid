@@ -19,7 +19,10 @@
 #table-area{
     justify-items: center;
 }
-
+#title-area > div:nth-child(2) > h2 {
+    color:  rgba(23, 72, 128, 1);  
+    margin-bottom: 0px;
+}
 
 #table{
     margin: 0;

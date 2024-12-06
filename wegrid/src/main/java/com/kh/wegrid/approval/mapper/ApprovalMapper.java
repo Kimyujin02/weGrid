@@ -43,6 +43,7 @@ public interface ApprovalMapper {
                 NO
                 , EMP_NO        
                 , M_LINE
+                , STATUS_NO
                 , M_STATUS
                 , L_LINE
                 , TITLE
@@ -53,6 +54,7 @@ public interface ApprovalMapper {
                 SEQ_APPROVAL.NEXTVAL
                 , #{writerNo}
                 , #{mline}
+                , #{statusNo}
                 , #{mstatus}
                 , #{lline}
                 , #{title}

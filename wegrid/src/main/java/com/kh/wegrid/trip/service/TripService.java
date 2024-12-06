@@ -20,14 +20,7 @@ public class TripService {
     private final TripMapper mapper;
 
     public int write(TripVo vo) {
-        int result = mapper.write(vo);
-
-        if(result == 1){
-            return result;
-        }else{
-            throw new IllegalStateException("출장등록 실패...");
-        }
-
+        return mapper.write(vo);
     }
 
     public List<TripVo> getTripVoList(PageVo pvo, String searchType, String searchValue) {

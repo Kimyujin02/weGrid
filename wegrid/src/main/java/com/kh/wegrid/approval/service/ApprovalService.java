@@ -54,13 +54,13 @@ public class ApprovalService {
     public int insertApproval(ApprovalVo avo , List<ApprovalAttachmentVo> attachmentVoList) {
         int result2 = 1;
         // 중간결재자가 존재 여부
-        if(avo.getMline() != null && avo.getMline() != ""){
-            avo.setMstatus("0");
-        }else{
+        if(avo.getMline() != null || avo.getMline() != ""){
             avo.setMstatus("1");
+            avo.setStatusNo("2");
+        }else{
+            avo.setMstatus("0");
         }
         int result1 = mapper.insertApproval(avo);
-
         if(attachmentVoList.size()>0){
             result2 = mapper.insertApprovalAttachment(attachmentVoList);
         }
@@ -78,9 +78,10 @@ public class ApprovalService {
 
     public int deleteApproval(String no) {
 //        int result2 = 1;
+        int result2 = mapper.deleteApprovalAttach(no);
+
         int result1 = mapper.deleteApproval(no);
 
-        int result2 = mapper.deleteApprovalAttach(no);
         return result1;
     }
 

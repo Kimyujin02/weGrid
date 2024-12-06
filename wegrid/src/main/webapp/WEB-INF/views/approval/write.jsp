@@ -62,19 +62,19 @@
                             <div id="lineBtnDiv">
                                 <div>
                                     <div>프로필</div>
-                                    <div>기안자이름</div>
+                                    <div>${loginMemberVo.name}</div>
                                 </div>
                                 <div>
                                     <div>
-                                        <button id="approvalMiddleBtn" onclick="return handleApproval('middle');">
-                                            중간결재자이름
+                                        <button id="approvalMiddleBtn" class="approvalBtn" onclick="return handleApproval('middle');">
+                                            +
                                         </button>
                                     </div>
                                 </div>
                                 <div>
                                     <div>
-                                        <button id="approvalLastBtn" name="lline" onclick="return handleApproval('last');">
-                                            최종결재자이름
+                                        <button id="approvalLastBtn" class="approvalBtn" name="lline" onclick="return handleApproval('last');">
+                                            +
                                         </button>
                                     </div>
                                     
