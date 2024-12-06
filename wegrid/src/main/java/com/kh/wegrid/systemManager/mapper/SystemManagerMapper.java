@@ -8,6 +8,7 @@ import com.kh.wegrid.util.page.PageVo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -20,15 +21,14 @@ public interface SystemManagerMapper {
                 NO
                 ,NAME
                 ,ID
+                ,DEPT_NO
                 ,EMAIL
                 ,PHONE
                 ,POST_ADDRESS
                 ,ROAD_ADDRESS
                 ,DETAIL_ADDRESS
-                ,ENROLL_DATE
                 ,EMP_NUM
                 ,JOB_NO
-                ,DEPT_NO
                 ,IS_MANAGER
             )
             VALUES
@@ -36,15 +36,14 @@ public interface SystemManagerMapper {
                  SEQ_EMPLOYEE.NEXTVAL
                 , #{name}
                 , #{id}
+                , #{deptNo}
                 , #{email}
                 , #{phone}
                 , #{postAddress}
                 , #{roadAddress}
                 , #{detailAddress}
-                , SYSDATE
                 , #{empNum}
                 , #{jobNo}
-                , #{deptNo}
                 , #{isManager}
             )
             """)
@@ -52,8 +51,8 @@ public interface SystemManagerMapper {
 
 
     @Select("""
-           SELECT *
-           FROM JOB_INFO
+        SELECT *
+        FROM JOB_INFO
            """)
     List<JobInfoVo> getJobInfoVoList();
 
@@ -78,7 +77,7 @@ public interface SystemManagerMapper {
                 D.NAME AS DEPT_NAME,  -- 부서 이름
                 J.NAME AS JOB_NAME,        -- 직급 이름
                 E.IS_MANAGER,
-                TO_CHAR(E.ENROLL_DATE, 'YYYY-MM-DD'),
+                TO_CHAR(E.ENROLL_DATE, 'YYYY-MM-DD')  AS ENROLL_DATE,
                 E.DEL_YN
             FROM EMPLOYEE E
             LEFT JOIN DEPARTMENT D
@@ -95,13 +94,76 @@ public interface SystemManagerMapper {
             WHERE DEL_YN = 'N'
             """)
     int getSystemCnt();
+
+    @Select("""
+             SELECT
+                E.NO,
+                E.NAME,
+                E.ID,
+                E.EMAIL,
+                E.PHONE,
+                E.POST_ADDRESS,
+                E.ROAD_ADDRESS,
+                E.DETAIL_ADDRESS,
+                E.EMP_NUM,
+                D.NAME AS DEPT_NAME,  -- 부서 이름
+                J.NAME AS JOB_NAME,        -- 직급 이름
+                E.IS_MANAGER,
+                TO_CHAR(E.ENROLL_DATE, 'YYYY-MM-DD')  AS ENROLL_DATE,
+                E.DEL_YN
+            FROM EMPLOYEE E
+            LEFT JOIN DEPARTMENT D
+                ON E.DEPT_NO = D.CODE  -- 부서 번호 조인
+            LEFT JOIN JOB_INFO J
+                ON E.JOB_NO = J.NO    -- 직급 번호 조인
+            ORDER BY E.DEL_YN ASC
+            """)
+    List<MemberVo> getMemberVoList(PageVo pvo, String str);
+
+
+    @Select("""
+            SELECT
+                E.NO,
+                E.NAME,
+                E.ID,
+                E.EMAIL,
+                E.PHONE,
+                E.POST_ADDRESS,
+                E.ROAD_ADDRESS,
+                E.DETAIL_ADDRESS,
+                E.EMP_NUM,
+                D.NAME AS DEPT_NAME,  -- 부서 이름
+                J.NAME AS JOB_NAME,        -- 직급 이름
+                E.IS_MANAGER,
+                TO_CHAR(E.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE,
+                E.DEL_YN
+            FROM EMPLOYEE E
+            LEFT JOIN DEPARTMENT D
+                ON E.DEPT_NO = D.CODE  -- 부서 번호 조인
+            LEFT JOIN JOB_INFO J
+                ON E.JOB_NO = J.NO    -- 직급 번호 조인
+                WHERE E.NO = #{no}
+            ORDER BY E.DEL_YN ASC
+            """)
+    MemberVo getMemberVo(String no);
+
+    @Update("""
+            UPDATE EMPLOYEE
+                SET
+                     NAME = #{vo.name}
+                    , ID = #{vo.id}
+                    , EMAIL = #{vo.email}
+                    , PHONE = #{vo.phone}
+                    , POST_ADDRESS = #{vo.postAddress}
+                    , ROAD_ADDRESS = #{vo.roadAddress}
+                    , DETAIL_ADDRESS = #{vo.detailAddress}
+                    , EMP_NUM = #{vo.empNum}
+                    , DEPT_NO = #{vo.deptNo}
+                    , JOB_NO = #{vo.jobNo}
+                WHERE NO = #{no}
+                AND DEL_YN = 'N'
+            """)
+    int accountEdit(MemberVo vo, String no);
 }
 
 
-//SELECT NO
-//FROM JOB_INFO
-//WHERE NAME = #{name}
-
-//SELECT CODE
-//FROM DEPARTMENT
-//WHERE NAME = #{name}

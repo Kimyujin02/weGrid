@@ -34,16 +34,16 @@
                 
                 <div class="filter-controls">
                     <!-- 부서명 필터링 값 -->
-                    <select name="departmentNo">
-                        <c:foreach var="deptVo" items="${DepartmentVoList}">
-                            <option value="${deptVo.code}">${deptVo.name}</option>
-                        </c:foreach>
+                    <select id="deptName" name="deptNo">
+                        <c:forEach var="departMentVo" items="${departMentVoList}">
+                            <option value="${departMentVo.code}">${departMentVo.name}</option>
+                        </c:forEach>
                     </select>
                      
                     <!-- 직급명 필터링 값 -->
-                    <select name="jobInfoVo">
-                        <c:forEach items="${JobInfoVoList}" var="jobVo">
-                            <option value="${jobVo.no}">${jobVo.name}</option>
+                    <select id="job" name="jobNo">
+                        <c:forEach var="JobInfoVo" items="${jobInfoVoList}">
+                            <option value="${JobInfoVo.no}">${JobInfoVo.name}</option>
                         </c:forEach>
                     </select>
                 </div>
@@ -75,82 +75,28 @@
                     </thead>
               
                     <tbody >
-                        <tr class="list-middle">
-                            <c:forEach items="${empVoList}" var="vo">
+                        <c:forEach items="${empVoList}" var="vo">
+                            <tr class="list-middle">
                                 <input type="hidden" value="${vo.no}">
                                 <td>${vo.id}</td>
                                 <td>${vo.name}</td>
-                                <td>${vo.empNo}</td>
+                                <td>${vo.empNum}</td>
                                 <td>${vo.deptName}</td>
                                 <td>${vo.jobName}</td>
                                 <td>${vo.enrollDate}</td>
-                                <td>${isManager}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${vo.isManager == 'Y'}">매니저</c:when>
+                                        <c:otherwise>일반 사원</c:otherwise>
+                                    </c:choose>
+                                </td>
                                 <td><button type="button" class="btn btn-primary" id="edit-btn" onclick="location.href='/system/edit?no=${vo.no}'">정보수정</button></td>
-                                <td>${delYn}</td>
+                                <td>${vo.delYn}</td>
                                 <td class="checkbox-td"><input type="checkbox" name="del"></td>
-                            </c:forEach>
-                           
                         </tr>
-                        <tr class="list-middle">
-                            <td>kh1234@gamil.com</td>
-                            <td>홍길동</td>
-                            <td>kh123456</td>
-                            <td>영업 1팀</td>
-                            <td>부장</td>
-                            <td>2024.11.26</td>
-                            <td>매니저</td>
-                            <td></td>
-                            <td>Y</td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>kh1234@gamil.com</td>
-                            <td>홍길동</td>
-                            <td>kh123456</td>
-                            <td>영업 1팀</td>
-                            <td>부장</td>
-                            <td>2024.11.26</td>
-                            <td>매니저</td>
-                            <td><button type="button" class="btn btn-primary" id="edit-btn">정보수정</button></td>
-                            <td>Y</td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>kh1234@gamil.com</td>
-                            <td>홍길동</td>
-                            <td>kh123456</td>
-                            <td>영업 1팀</td>
-                            <td>부장</td>
-                            <td>2024.11.26</td>
-                            <td>매니저</td>
-                            <td><button type="button" class="btn btn-primary" id="edit-btn">정보수정</button></td>
-                            <td>Y</td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>kh1234@gamil.com</td>
-                            <td>홍길동</td>
-                            <td>kh123456</td>
-                            <td>영업 1팀</td>
-                            <td>부장</td>
-                            <td>2024.11.26</td>
-                            <td>매니저</td>
-                            <td><button type="button" class="btn btn-primary" id="edit-btn">정보수정</button></td>
-                            <td>Y</td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <tr class="list-middle">
-                            <td>kh1234@gamil.com</td>
-                            <td>홍길동</td>
-                            <td>kh123456</td>
-                            <td>영업 1팀</td>
-                            <td>부장</td>
-                            <td>2024.11.26</td>
-                            <td>매니저</td>
-                            <td><button type="button" class="btn btn-primary" id="edit-btn">정보수정</button></td>
-                            <td>Y</td>
-                            <td><input type="checkbox"></td>
-                        </tr>
+                        </c:forEach>
+                       
+                       
                         <tr class="list-middle">
                             <!-- tbody안쪽은 js사용해서 동적으로 채워줌   -->
                             <td>kh1234@gamil.com</td>
@@ -216,7 +162,6 @@
                             <td>Y</td>
                             <td><input type="checkbox"></td>
                         </tr>
-                        
                        
                     </tbody>
                     
@@ -227,13 +172,13 @@
             </div>
                 <div class="page">
                     <c:if test="${pvo.startPage != 1}">
-                <a href="/notice/list?pno=${pvo.startPage-1}&searchValue=${searchValue}"><i class="fas fa-caret-left fa-lg" style="color: #174880;"></i></a>
+                <a href="/system/account/list?pno=${pvo.startPage-1}&searchValue=${searchValue}"><i class="fas fa-caret-left fa-lg" style="color: #174880;"></i></a>
                 </c:if>
                 <c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i" step="1">
-                    <a href="/notice/list?pno=${i}&searchValue=${searchValue}">${i}</a>
+                    <a href="/system/account/list?pno=${i}&searchValue=${searchValue}">${i}</a>
                 </c:forEach>
                 <c:if test="${pvo.endPage != pvo.maxPage}">
-                    <a href="/notice/list?pno=${pvo.endPage+1}&searchValue=${searchValue}"><i class="fas fa-caret-right fa-lg" style="color: #174880;"></i></a>
+                    <a href="/system/account/list?pno=${pvo.endPage+1}&searchValue=${searchValue}"><i class="fas fa-caret-right fa-lg" style="color: #174880;"></i></a>
                 </c:if>
                 </div>
         

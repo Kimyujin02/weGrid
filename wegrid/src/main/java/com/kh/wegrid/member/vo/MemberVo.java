@@ -10,6 +10,7 @@ public class MemberVo {
     private String deptName;
     private String jobName;
     private String jobNo;
+    private String empNo;
     private String empNum;
     private String id;
     private String pwd;
