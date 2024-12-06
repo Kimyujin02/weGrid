@@ -75,14 +75,14 @@ public class SystemManagerController {
     //목록 삭제 처리
     @DeleteMapping("delete")
     @ResponseBody
-    public String delete(String empNoArr){
-//        List<String> employeeNoList = objectMapper.readValue(empNoArr, List.class);
-//        int result = service.delete(employeeNoList);
-//        if(result == 0){
-//            return "bad";
-//        }
-//        return "good";
-    }
+//    public String delete(String empNoArr){
+////        List<String> employeeNoList = objectMapper.readValue(empNoArr, List.class);
+////        int result = service.delete(employeeNoList);
+////        if(result == 0){
+////            return "bad";
+////        }
+////        return "good";
+//    }
 
     // 시스템 관리자 상세 조회 화면
     @GetMapping("detail")

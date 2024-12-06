@@ -1,7 +1,7 @@
-package com.kh.wegrid.mypage.controller;
+package com.kh.wegrid.myPage.controller;
 
 import com.kh.wegrid.member.vo.MemberVo;
-import com.kh.wegrid.mypage.service.MypageService;
+import com.kh.wegrid.myPage.service.MyPageService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -21,9 +20,9 @@ import java.util.UUID;
 @Slf4j
 @RequestMapping("mypage")
 @RequiredArgsConstructor
-public class MypageController {
+public class MyPageController {
 
-    private final MypageService service;
+    private final MyPageService service;
 
     @GetMapping("home")
     public String home(Model model, HttpSession session) {
