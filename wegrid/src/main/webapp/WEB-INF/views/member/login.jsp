@@ -13,11 +13,7 @@
 
 </head>
 <body>
-    <script>
-        <c:if test="${not empty loginFailed}">
-            alert("${loginFailed}");
-        </c:if>
-    </script>
+
 
     <div class="top1"></div>
 
@@ -60,6 +56,18 @@
     <c:if test="${not empty errorMessage}">
         <script type="text/javascript">
             alert("${errorMessage}");
+        </script>
+    </c:if>
+
+    <c:if test="${not empty loginFailed}">
+        <script>
+            alert("${loginFailed}");
+        </script>
+    </c:if>
+
+    <c:if test="${not empty logoutMsg}">
+        <script type="text/javascript">
+            alert("${logoutMsg}");
         </script>
     </c:if>
 

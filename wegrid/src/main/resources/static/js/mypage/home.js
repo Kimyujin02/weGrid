@@ -22,3 +22,28 @@ function uploadImage(event) {
         .catch(error => console.error('Error:', error));
     }
 }
+
+
+// 이벤트 리스너로 모달 열기
+document.querySelector('.changePwd').addEventListener('click', function () {
+    const changePwdModal = new bootstrap.Modal(document.getElementById('changePwdModal'));
+    changePwdModal.show();
+});
+
+// // 비밀번호 검증 로직
+// document.getElementById('changePwdForm').addEventListener('submit', function (event) {
+//     event.preventDefault();
+  
+//     const currentPwd = document.getElementById('currentPwd').value;
+//     const newPwd = document.getElementById('newPwd').value;
+//     const confirmPwd = document.getElementById('confirmPwd').value;
+  
+//     if (newPwd !== confirmPwd) {
+//       alert('새 비밀번호가 일치하지 않습니다.');
+//       return;
+//     }
+  
+//     // 서버로 비밀번호 변경 요청 보내기
+//     console.log('비밀번호 변경 요청:', { currentPwd, newPwd });
+//     alert('비밀번호가 성공적으로 변경되었습니다.');
+// });

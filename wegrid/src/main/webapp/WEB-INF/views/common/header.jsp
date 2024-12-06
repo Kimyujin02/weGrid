@@ -11,6 +11,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script defer src="/js/common/header.js"></script>
 
+<script>
+  <c:if test="${not empty alertMsg}">
+      alert('${sessionScope.alertMsg}');
+  </c:if>
+  <c:remove var="alertMsg" scope="session" />
+</script>
+
     <!-- Header -->
     <header>
         <div class="logo_top"></div>
@@ -55,8 +62,8 @@
             </div>
             <!-- 버튼 섹션 -->
             <div class="user-actions">
-                <button class="action-btn">마이페이지</button>
-                <button class="action-btn logout-btn">로그아웃</button>
+                <button class="action-btn" onclick="location.href='/mypage/home'">마이페이지</button>
+                <button class="action-btn logout-btn" onclick="location.href='/member/logout'">로그아웃</button>
             </div>
         </div>
     </div>

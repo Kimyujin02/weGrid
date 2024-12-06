@@ -1,122 +1,174 @@
+/* ----------------------
+----------layout---------
+------------------------- */
 
-.title{
-    margin-top: 20px;
-    margin-left: 40px;
-    font-size: 1.8rem;
-    font-weight: 450;
-    color: #174880;
-    margin-bottom: 10px;
-}
-
-.line-box{
-    margin: auto;
-    margin-top: 10px;
-    width: 95%;
-    border: 0.5px solid #C0C0C0;
-}
-
-.form-container{
+.content-area {
     display: grid;
-    align-items: center;
-    column-gap: 20px;
-    width: 90%;
-    margin: auto;
-    margin-top: 70px;
-    margin-left: 15%;
+    width: 100%;
+    height: 100%;
+    grid-template-rows: 100px 0fr 100px 420px 120px;
+    
 }
 
-form label {
-    display: block;
-    margin-bottom: 5px;
+.title-area {
+    padding-left: 50px;
+    justify-self: start;
+    align-self: center;
+    color: #174880;
+}
+
+.title-text {
+    margin-bottom: 0;
+}
+
+.line_1 {
+    display: grid;
+    height: 2px;
+    background-color: #C0C0C0;
+    color: #C0C0C0;
+    width: 1400px;
+    place-self: center center;
+}
+
+.input-area {
+    display: grid;
+    grid-template-rows: 70px 0fr 70px 0fr 70px 0fr 70px 0fr 140px;
+}
+
+.line_2 {
+    display: grid;
+
+    height: 1px;
+    background-color: #C0C0C0;
+    color: #C0C0C0;
+    width: 1000px;
+    place-self: center center;
+    margin-left: 50px;
+}
+
+.info-input {
+    display: grid;
+    grid-template-columns: 400px 980px;
+    column-gap: 60px;
+}
+
+.info-input div {
+    align-self: center;
+    justify-self: end;
     font-weight: bold;
-    color: #555;
 }
 
-form input,
-form select {
-    width: 80%;
-    height: 35px;
-    margin-bottom: 15px;
-    padding: 5px;
-    border: 1px solid #C0C0C0;
-    border-radius: 5px;
-    box-sizing: border-box;
-
-}
-
-form input{
-    background-color: #F4F4F4;
-    box-shadow:inset 3px 3px 5px 1px rgba(98, 97, 97, 0.3);
-}
-
-
-
-.address-fields {
-    display: flex;
-    gap: 20px;
-}
-
-.address-fields input {
-    flex: 3;
-}
-
-
-/* 부서명 행 스타일 */
-.department-row {
-    display: flex;
-    gap: 10px; 
-}
-
-.department-row input {
-     width: 55%; /*input 태그의 너비를 더 넓게 설정 */
-}
-
-
-.address-fields button {
-    flex: 1;
+.info-input input {
+    width: 700px;
     height: 30px;
-    background-color: #174880;
-    color: white;
-    border: none;
+    align-self: center;
+    justify-self: start;
+
+    background-color: #F4F4F4;
+    border: 1px solid #CFCFCF;
     border-radius: 5px;
-    cursor: pointer;
+    box-shadow: inset 2px 2px 4px 0px rgba(0, 0, 0, 0.2); /* 안쪽 그림자 */
 }
 
-.button-group {
-    margin-top: 40px;
-    margin-right: 20%;
-    text-align: center;
-    align-items: center center;
+/* ----------------------
+----------address--------
+------------------------- */
+
+.client-address {
+    display: grid;
+    grid-template-columns: 400px 400px 580px;
+    grid-template-rows: 1.2fr 1fr 1fr;
+    column-gap: 60px;
 }
 
-.sample6_postcode{
-    width: 60%;
+.address-btn {
+    display: grid;
+}
+
+.address-btn > .btn.btn-primary {
+    display: grid !important;
+    width: 100px !important;
+    height: 30px !important;
+    align-content: center !important;
+    align-self: center !important;
+}
+
+.text-address {
+    display: grid;
+    align-self: center;
+    justify-self: end;
+    font-weight: bold;
+}
+
+.address-input_1 {
+    align-self: center;
+    justify-self: start;
+}
+.address-input_2 {
+    align-self: center;
+    justify-self: start;
+    grid-column: span 2;
+}
+.address-input_3 {
+    grid-column: span 2;
+    justify-self: start;
+    align-self: start;
 }
 
 
-/* 우편번호 찾기 버튼 스타일 */
-.search-button {
-    padding: 7px 12px; /* 버튼 패딩 축소 */
-    border: none;
-    background-color: #2661A5;
-    color: white;
-    font-size: 14px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.address-input_1 > input {
+    width: 400px;
+    height: 30px;
+    background-color: #F4F4F4;
+    border: 1px solid #CFCFCF;
+    border-radius: 5px;
+    box-shadow: inset 2px 2px 30px 0px rgba(0, 0, 0, 0.3); /* 안쪽 그림자 */
 }
 
-#edit-btn{
-    background-color: #2661A5;
-    border: transparent;
-    /* margin-right: 30px; */
+.address-input_2 > input {
+    width: 700px;
+    height: 30px;
+    background-color: #F4F4F4;
+    border: 1px solid #CFCFCF;
+    border-radius: 5px;
+    box-shadow: inset 2px 2px 30px 0px rgba(0, 0, 0, 0.3); /* 안쪽 그림자 */
 }
 
-#delete-btn{
-    background-color: gray;
-    border: transparent;
+.address-input_3 > input {
+    width: 700px;
+    height: 30px;
+    background-color: #F4F4F4;
+    border: 1px solid #CFCFCF;
+    border-radius: 5px;
+    box-shadow: inset 2px 2px 4px 0px rgba(0, 0, 0, 0.2); /* 안쪽 그림자 */
 }
 
-.search-button:hover {
-    background-color: #0056b3;
+.btn-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 40px;
+}
+
+.btn-area .enroll-btn {
+    display: grid;
+    justify-self: end;
+    align-self: center;
+}
+
+.btn-area .cancel-btn {
+    display: grid;
+    justify-self: start;
+    align-self: center;
+}
+
+.btn-area .enroll-btn button {
+    width: 150px !important;
+    height: 35px !important;
+}
+
+.btn-area .cancel-btn button {
+    width: 150px !important;
+    height: 35px !important;
+    background-color: gray !important;
+    border: none !important;
 }

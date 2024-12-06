@@ -11,6 +11,7 @@ public interface MypageMapper {
     @Select("""
             SELECT
                 ID
+                , NAME
                 , EMAIL
                 , PHONE
                 , POST_ADDRESS
@@ -33,4 +34,30 @@ public interface MypageMapper {
                 NO = #{eno}
             """)
     void updateProfileImage(String eno, String imagePath);
+
+    @Update("""
+            UPDATE
+                EMPLOYEE
+            SET
+                PWD = #{newPwd}
+            WHERE
+                NO = #{eno}
+            """)
+    void changePwd(String newPwd, String eno);
+
+    @Update("""
+            UPDATE
+                EMPLOYEE
+            SET
+                NAME = #{vo.name}
+                , ID = #{vo.id}
+                , EMAIL = #{vo.email}
+                , PHONE = #{vo.phone}
+                , POST_ADDRESS = #{vo.postAddress}
+                , ROAD_ADDRESS = #{vo.roadAddress}
+                , DETAIL_ADDRESS = #{vo.detailAddress}
+            WHERE
+                NO = #{eno}
+            """)
+    int editInfo(String eno, MemberVo vo);
 }

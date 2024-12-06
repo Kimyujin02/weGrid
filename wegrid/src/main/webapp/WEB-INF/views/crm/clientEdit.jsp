@@ -135,7 +135,7 @@
 
     <!-- 카카오 우편번호 서비스 기능 구현 -->
     <script>
-        window.onload = function() {
+        document.addEventListener('DOMContentLoaded', function() {
             if (typeof daum !== 'undefined') {
                 // 우편번호 버튼 클릭 시
                 document.getElementById("postalCodeBtn").onclick = function() {
@@ -163,8 +163,7 @@
             } else {
                 console.error('Daum Postcode API가 로드되지 않았습니다.');
             }
-        };
-
+        });
     </script>
 
 </body>

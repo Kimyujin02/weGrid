@@ -11,32 +11,35 @@ public interface MemberMapper {
 
     @Select("""
             SELECT
-                NO
-                , DEPT_NO
-                , JOB_NO
-                , EMP_NUM
-                , ID
-                , PWD
-                , NAME
-                , PHONE
-                , EMAIL
-                , POST_ADDRESS
-                , ROAD_ADDRESS
-                , DETAIL_ADDRESS
-                , ENROLL_DATE
-                , MODIFY_DATE
-                , IS_MANAGER
-                , DEL_YN
-                , PROFILE
-                , FAILED_ATTEMPTS
-                , IS_LOCKED
+                E.NO
+                , E.DEPT_NO
+                , E.JOB_NO
+                , E.EMP_NUM
+                , E.ID
+                , E.PWD
+                , E.NAME
+                , E.PHONE
+                , E.EMAIL
+                , E.POST_ADDRESS
+                , E.ROAD_ADDRESS
+                , E.DETAIL_ADDRESS
+                , E.ENROLL_DATE
+                , E.MODIFY_DATE
+                , E.IS_MANAGER
+                , E.DEL_YN
+                , E.PROFILE
+                , E.FAILED_ATTEMPTS
+                , E.IS_LOCKED
+                , D.NAME AS DEPT_NAME
             FROM
-                EMPLOYEE
+                EMPLOYEE E
+            JOIN
+                DEPARTMENT D ON ( E.DEPT_NO = D.CODE )
             WHERE
-                ID = #{id}
-                AND PWD = #{pwd}
-                AND DEL_YN = 'N'
-                AND IS_LOCKED = 'N'
+                E.ID = #{id}
+                AND E.PWD = #{pwd}
+                AND E.DEL_YN = 'N'
+                AND E.IS_LOCKED = 'N'
             """)
     MemberVo login(MemberVo vo);
 

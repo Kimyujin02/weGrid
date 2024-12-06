@@ -18,6 +18,9 @@
 
     <!-- 카카오 우편번호 서비스 스크립트 추가 (최신 경로) -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <!-- <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
+    <!-- <script src="https://t1.daumcdn.net/mapjsapi/postcode/js/postcode.v2.js"></script> -->
+
 </head>
 <body>
 
@@ -131,7 +134,7 @@
 
     <!-- 카카오 우편번호 서비스 기능 구현 -->
     <script>
-        window.onload = function() {
+        document.addEventListener('DOMContentLoaded', function() {
             if (typeof daum !== 'undefined') {
                 // 우편번호 버튼 클릭 시
                 document.getElementById("postalCodeBtn").onclick = function() {
@@ -159,8 +162,7 @@
             } else {
                 console.error('Daum Postcode API가 로드되지 않았습니다.');
             }
-        };
-
+        });
     </script>
 
 </body>
