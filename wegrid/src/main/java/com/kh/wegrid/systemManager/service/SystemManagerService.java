@@ -46,4 +46,22 @@ public class SystemManagerService {
     public int getSystemCnt() {
         return mapper.getSystemCnt();
     }
+
+    public List<MemberVo> getMemberVoList(PageVo pvo, String searchValue) {
+        String str = "";
+        if(searchValue != null && searchValue.length() > 0){
+            str = "AND TITLE LIKE '%" + searchValue + "%'";
+        }
+        return mapper.getMemberVoList(pvo, str);
+    }
+
+
+    public MemberVo getMemberVo(String no) {
+        return mapper.getMemberVo(no);
+    }
+
+
+    public int accountEdit(MemberVo vo, String no) {
+        return mapper.accountEdit(vo, no);
+    }
 }

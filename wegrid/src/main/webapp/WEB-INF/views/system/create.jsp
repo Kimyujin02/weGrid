@@ -31,11 +31,11 @@
             <!-- 기본 개인 정보 -->
             <div class="left-panel">
                 <h3 class="sub-title">기본 개인 정보</h3>
-                
+                    <input type="hidden" name="no">
                     <label for="name">이름</label>
                     <input type="text" id="name" name="name"><br>
-                    <label for="id">아이디</label>
-                    <input type="text" id="id" name="id"><br>
+                    <label for="idd">아이디</label>
+                    <input type="text" id="idd" name="id"><br>
                     <label for="email">이메일</label>
                     <input type="email" id="email" name="email"><br>
                     <label for="phone">연락처</label>
@@ -161,7 +161,7 @@
                             <input 
                                 type="text" 
                                 id="department-name" 
-                                name="deptNo" 
+                                
                                 value="${departMentVoList[0].name}" 
                             />
 
@@ -197,8 +197,8 @@
             </div>
             
             <div class="button-group">
-                <button type="submit" class="btn btn-primary" id="create-btn" onclick="location.href='/system/account/list'">등록하기</button>
-                <button type="button" class="btn btn-primary" id="delete-btn">삭제</button>
+                <button type="submit" class="btn btn-primary" id="create-btn">등록</button>
+                <button type="button" class="btn btn-primary" id="delete-btn" onclick="location.href='/system/account/list'">취소</button>
             </div>
         </div>
     </form>
