@@ -124,14 +124,17 @@ textarea:focus{
 
 #lineBtnDiv{
     display: grid;
-    grid-template: 1fr / 1fr 1fr 1fr;
+    grid-template: 1fr /1fr 1fr 1fr;
 }
 #lineBtnDiv div {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
+#attachInputTag{
+    padding-left: 5%;
+    padding-top: 4.8%;
+}
 
 
 
@@ -360,10 +363,19 @@ td{
 }
 
 .approvalaaa{
-    width: 120px;
+    width: 80px;
     height: 30px;
     background-color: white;
     border: none;
     font-size: 1.1rem;
+}
+.dept-areaa{
+    font-size: 14px;
+    font-weight: 400;
+    color: gray;
+}
+.name-areaa{
+    font-size: 1.1rem;
+    font-weight: 600;
 }
 

@@ -27,6 +27,7 @@
             <div id="title-area"><h2>출장 상세조회</h2></div>
             <div></div>
             <div id="detail-area">
+                <div></div>
                 <div>
                     <div>출장 상세 내용</div>
                     <div>${tripVo.content}</div>
@@ -66,17 +67,31 @@
                         <div></div>
                     </div>
                     <div id="t-area">
-                        <div id="updateBtnDiv"><button type="button" 
-                            class="btn btn-primary" 
-                            id="updateBtn"
-                            onclick="openTripModal();" 
-                            >수정하기
-                        </button></div>
-                        <div id="deleteBtnDiv"><button type="button" 
-                            class="btn btn-primary" 
-                            id="deleteBtn" 
-                            >삭제하기
-                        </button></div>
+                        <div id="updateBtnDiv">
+                            <c:if test="${loginMemberVo.no == tripVo.writerNo}">
+                                <button type="button" 
+                                class="btn btn-primary" 
+                                id="updateBtn"
+                                onclick="openTripModal();" 
+                                >수정하기
+                            </button>
+                        </c:if>
+                        </div>
+                        <div id="deleteBtnDiv">
+                            <c:if test="${loginMemberVo.no == tripVo.writerNo}">
+
+                                <form action="/trip/delete" method="post">
+                                    <input type="hidden" name="no" value="${tripVo.no}">
+                                    <button  
+                                    class="btn btn-primary" 
+                                    id="deleteBtn"
+                                    onclick="window.confirm('삭제 하시겠습니까?')" 
+                                    >삭제하기
+                                </button>
+                            </form>
+                        </c:if>
+                        </div>
+                    
                     </div>
                     <div></div>
                     <div id="q-area">
@@ -139,7 +154,7 @@
                           <input type="text" id="sample6_address" placeholder="주소" class="longInput" value="${tripVo.roadAddress}" readonly="readonly" name="roadAddress">
                           <input type="text" id="sample6_detailAddress" placeholder="상세주소" class="longInput" value="${tripVo.detailAddress}" name="detailAddress">
                           <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="longInput">
-                          <input type="hidden" name="aaaaaaaaaaaa" id="address">
+                          <input type="hidden" name="aaaaaaaaaaaa" id="address" value="${tripVo.typeNo}">
                           
                       </div>
                       
@@ -153,11 +168,11 @@
                       <div><label>제목</label></div>
                       <div id="titleDiv"><input type="text" placeholder="제목" class="longInput" name="title" value="${tripVo.title}"></div>
                       <div><label>내용</label></div>
-                      <div><textarea placeholder="내용" name="content" value="${tripVo.content}"></textarea></div>
+                      <div><textarea placeholder="내용" name="content">${tripVo.content}</textarea></div>
                   </div>
               </div>
               <div class="tripModal-footer">
-                  <button class="submit-btn" type="submit">수정</button>
+                  <button class="submit-btn" type="submit" onclick="window.confirm('수정하시겠습니까?')">수정</button>
               </div>
           </div>
       </form>

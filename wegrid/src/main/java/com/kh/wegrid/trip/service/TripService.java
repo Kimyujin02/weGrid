@@ -42,11 +42,16 @@ public class TripService {
         }else {
             throw new IllegalStateException("수정 실패...");
         }
+//        return mapper.edit(vo);
 
 
     }
 
     public List<typeVo> getTypeList() {
         return mapper.getTypeList();
+    }
+
+    public int delete(String no) {
+        return mapper.delete(no);
     }
 }

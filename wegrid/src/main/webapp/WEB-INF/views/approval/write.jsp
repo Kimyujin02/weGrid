@@ -50,7 +50,7 @@
                                 <div><h4 class="subtitle-color">첨부파일</h4></div>
                                 <div></div>
                             </div>
-                            <div><input type="file" name="approvalAttachment" multiple></div>
+                            <div><input type="file" id="attachInputTag" name="approvalAttachment" multiple></div>
                         </div>
                         <div></div>
                         <div id="line-area">
@@ -61,11 +61,12 @@
                             </div>
                             <div id="lineBtnDiv">
                                 <div>
-                                    <div>프로필</div>
-                                    <div>${loginMemberVo.name}</div>
+                                    <span class="dept-areaa">${loginMemberVo.deptName}</span>
+                                    <span class="name-areaa">${loginMemberVo.name}</span>
                                 </div>
                                 <div>
                                     <div>
+                                        <span id="middleDept" class="dept-areaa"></span>
                                         <button id="approvalMiddleBtn" class="approvalBtn" onclick="return handleApproval('middle');">
                                             +
                                         </button>
@@ -73,6 +74,7 @@
                                 </div>
                                 <div>
                                     <div>
+                                        <span id="lastDept" class="dept-areaa"></span>
                                         <button id="approvalLastBtn" class="approvalBtn" name="lline" onclick="return handleApproval('last');">
                                             +
                                         </button>
