@@ -25,13 +25,83 @@ main {
 
 
 .list-box {
-    display: flex;
-    
+    display: grid;
+
+    grid-template-rows: 1fr 4.1fr 0.7fr;
+
     width: 95%;
     height: 95%;
 
-    border: 1px solid black;
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0.3, 0.3, 0.3, 0.3); /* 오른쪽 아래로 그림자 */
     background-color: white;
+}
+
+.title-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    /* padding-top: 5px; */
+    padding-left: 25px;
+    padding-right: 25px;
+
+    color: #174880;
+}
+.title-area h3 {
+    margin: 0;
+    vertical-align: middle;
+}
+
+.list-area {
+    margin-left: 30px;
+    margin-right: 30px;
+
+    overflow: auto;
+
+    border: 1px solid black;
+}
+
+table{
+
+    border: 1px solid black;
+}
+
+thead {
+    height: 35px;
+
+    background-color: #174880;
+    color: white;
+
+    text-align: center;
+}
+
+.bottom-area {
+    background-color: #174880;
+    height: 10px;
+}
+
+thead > tr > :nth-child(1){
+    width: 173px;
+}
+thead > tr > :nth-child(2){
+    width: 120px;
+}
+thead > tr > :nth-child(3){
+    width: 120px;
+}
+
+.addBtn {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+    background-color: #174880;
+    color: white;
+
+    font-size: large;
+    font-weight: 900;
+
+    text-align: center;
+    vertical-align: middle;
 }

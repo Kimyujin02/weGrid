@@ -1,11 +1,13 @@
 package com.kh.wegrid.systemPreference.controller;
 
 import com.kh.wegrid.crm.vo.ClientRankVo;
+import com.kh.wegrid.member.vo.AdminVo;
 import com.kh.wegrid.systemManager.vo.DepartMentVo;
 import com.kh.wegrid.systemManager.vo.JobInfoVo;
 import com.kh.wegrid.trip.vo.typeVo;
 import com.kh.wegrid.systemPreference.service.SystemPreferenceService;
 import com.kh.wegrid.vacation.vo.VacationTypeVo;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -25,7 +27,13 @@ public class SystemPreferenceController {
 
     // 환경설정 화면으로 이동
     @GetMapping("list")
-    public String list(Model model){
+    public String list(Model model, HttpSession session){
+
+        AdminVo loginAdminVo = (AdminVo) session.getAttribute("loginAdminVo");
+        if(loginAdminVo == null){
+            session.setAttribute("alertMsg","옳바르지 않은 접근 입니다. 관리자 로그인화면으로 이동합니다.");
+            return "redirect:/member/admin";
+        }
 
         List<ClientRankVo> clientRankList = service.getClientRankList();
         List<typeVo> tripTypeList = service.getTripTypeList();

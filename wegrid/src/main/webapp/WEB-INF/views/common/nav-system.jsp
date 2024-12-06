@@ -8,7 +8,7 @@
 <!-- Nav -->
 <nav>
     <div class="active-boc">
-        <label onclick="location.href='/system/list'" class="navLabel">
+        <label onclick="location.href='/system/account/list'" class="navLabel">
             <div class="icon-boc">
               <i class="fas fa-user-plus fa-2x"></i>
             </div>
@@ -16,12 +16,12 @@
         </label>
     </div>
     <div class="active-boc">
-        <label onclick="location.href='/system/preference/list'" class="navLabel">
+        <label onclick="location.href='/systemPreference/list'" class="navLabel">
             <div class="icon-boc">
                 <!-- <i class="fa-solid fa-gear fa-spin fa-2x"></i> -->
-                <!-- <i class="far fa-wrench fa-2x"></i> -->
-                <i class="fas fa-screwdriver-wrench fa-2x"></i>
-                <!-- <i class="fas fa-gear fa-2x"></i> -->
+                <!-- <i class="fas fa-wrench fa-2x"></i> -->
+                <!-- <i class="fas fa-screwdriver-wrench fa-2x"></i> -->
+                <i class="fas fa-cog fa-2x"></i>
             </div>
             <div class="name-boc">환경설정</div>
         </label>

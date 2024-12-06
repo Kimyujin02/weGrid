@@ -90,11 +90,12 @@ public class MemberController {
         AdminVo loginAdminVo = service.adminLogin(vo);
 
         if(loginAdminVo == null) {
-            model.addAttribute("adminLoginFailed", "아이디 또는 비밀번호를 확인하세요.");
+//            model.addAttribute("adminLoginFailed", "아이디 또는 비밀번호를 확인하세요.");
+            session.setAttribute("alertMsg","아이디 또는 비밀번호를 확인하세요.");
             return "redirect:/member/admin";
         }
         session.setAttribute("loginAdminVo", loginAdminVo);
-        return "redirect:/system/list";
+        return "redirect:/system/account/list";
     }
 
 }

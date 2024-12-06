@@ -14,9 +14,10 @@
 </head>
 <body>
     <script>
-        <c:if test="${not empty adminLoginFailed}">
-            alert("${adminLoginFailed}");
+        <c:if test="${not empty alertMsg}">
+            alert('${sessionScope.alertMsg}');
         </c:if>
+        <c:remove var="alertMsg" scope="session" />
     </script>
 
 
@@ -39,7 +40,7 @@
                 
                 <div class="pwd-text">
                     PW&nbsp; :&nbsp;
-                    <input class="pwd-input" type="text" name="pwd">
+                    <input class="pwd-input" type="password" name="pwd">
                 </div>
             </div>
 
