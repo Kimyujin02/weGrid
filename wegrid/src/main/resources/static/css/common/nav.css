@@ -6,7 +6,7 @@ nav {
     /* padding: 30px;
     gap: 30px; */
     display: grid;
-    grid-template-rows: 80px 80px 80px 80px 80px 80px 80px 80px 40px 40px 1fr;
+    grid-template-rows: repeat(9 , 75px) 40px 1fr;
     /* flex-direction: column; */
 }
 

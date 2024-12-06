@@ -53,7 +53,7 @@
         </label>
     </div>
     <div class="active-boc">
-        <label  onclick="location.href='/project/card'" class="navLabel">
+        <label  onclick="location.href='/notice/list'" class="navLabel">
             <div class="icon-boc">
                 <i class="fas fa-bullhorn fa-2x"></i>
             </div>
@@ -61,11 +61,19 @@
         </label>
     </div>
     <div class="active-boc">
-        <label  onclick="location.href='/project/card'" class="navLabel">
+        <label  onclick="location.href='/board/list'" class="navLabel">
             <div class="icon-boc">
                 <i class="far fa-clipboard fa-2x"></i>
             </div>
             <div class="name-boc">게시판</div>
+        </label>
+    </div>
+    <div class="active-boc">
+        <label  onclick="location.href='/familyEvent/list'" class="navLabel">
+            <div class="icon-boc">
+                <i class="fas fa-bullhorn fa-2x"></i>
+            </div>
+            <div class="name-boc">경조사게시판</div>
         </label>
     </div>
     <div class="active-boc">
@@ -78,6 +86,6 @@
     </div>
     <label class="navLabel" onclick="location.href='/approval/submitList'"><div id="submitListt">결재 상신함</div></label>
     <label class="navLabel" onclick="location.href='/approval/receiveList'"><div id="receiveListt">결재 수신함</div></label>
-    <div></div>
+    
 
 </nav>

@@ -123,4 +123,12 @@ public interface TripMapper {
             FROM TRIP_TYPE
             """)
     List<typeVo> getTypeList();
+
+    @Update("""
+            UPDATE BUSINESS_TRIP
+                SET
+                    DEL_YN = 'Y'
+            WHERE NO = #{no}
+            """)
+    int delete(String no);
 }

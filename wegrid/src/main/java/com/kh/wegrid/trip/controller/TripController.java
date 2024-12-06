@@ -84,14 +84,33 @@ public class TripController {
 
 
     @PostMapping("edit")
-    public String edit(TripVo vo , Model model){
+    public String edit(TripVo vo , Model model , HttpSession session){
 
         TripVo tvo = service.edit(vo);
         String firstTwoAddress = tvo.getRoadAddress().substring(0, 2);
         tvo.setFirstTwoAddress(firstTwoAddress);
         model.addAttribute("tripVo" , tvo);
 
-        return "trip/detail";
+//        int result = service.edit(vo);
+
+        if(tvo != null){
+            session.setAttribute("alertMsg" , "출장 수정 완료!");
+        }
+        return "redirect:/trip/list";
+    }
+
+    @PostMapping("delete")
+    public String delete(String no , HttpSession session){
+
+        int result = service.delete(no);
+
+        if(result == 1){
+            session.setAttribute("alertMsg" , "출장 삭제 완료");
+        }else {
+            throw new IllegalStateException("출장 삭제 실패...");
+        }
+
+        return "redirect:/trip/list";
     }
 
 

@@ -13,11 +13,13 @@ function openEmpSearchModal(){
     document.querySelector("#searchTag").value = "";
 }
 
+
+
 // 모달 닫기
 function closeEmpSearchModal(name , no , dept) {
-    const approvalName = dept +" " + " " + name;
     setApprovalNo(no);
-    setApprovalName(approvalName);
+    setApprovalName(name);
+    setApprovalDept(dept);
     document.querySelector("#empSearchModal").style.display = "none";
 }
 
@@ -37,6 +39,20 @@ function setApprovalName(name){
     }
 }
 
+//결재자 네임값 설정
+function setApprovalDept(dept){
+    const middleDept = document.querySelector("#middleDept");
+    const lastDept = document.querySelector("#lastDept");
+
+    if(approvalStep === "middle"){
+        middleDept.innerText = dept;
+   
+    }else if(approvalStep === "last"){
+        lastDept.innerText = dept;
+       
+    }
+}
+
 //히든 태그에 결재자 정보 설정 //중간 또는 최종
 function setApprovalNo(no){
     if(approvalStep === "middle"){
@@ -45,6 +61,8 @@ function setApprovalNo(no){
         document.querySelector("#approvalLast").value = no;
     }
 }
+
+
 
 //모달창에서 tr 클릭했을 때 동작하는 핸들러 설정
 const tbodyTag = document.querySelector("#empSearchModalTable tbody");
