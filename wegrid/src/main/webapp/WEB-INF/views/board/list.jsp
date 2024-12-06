@@ -28,21 +28,39 @@
                 </div>
                 <div class="head-bottom">
                     <div class="head-bottom-align">
-                        <button class="register-btn">작성하기</button>
+                        <form action="/board/insert" method="get">
+                            <button class="register-btn">작성하기</button>
+                        </form>
+
                         <div class="history-controls">
-                        <div class="filter-controls">
-                        <select>
-                            <option>올해</option>
-                            <option>이번달</option>
-                            <option>1주일</option>
-                            <option>3일</option>
-                            <option>1일</option>
-                            <option>전체기간</option>
-                        </select>
-                        <input type="text" placeholder="검색어 입력" />
-                        <button class="search-btn">🔍</button>
-                    </div>
-                </div>
+                            <form action="/board/list?pno=1" onsubmit="return submitSearchForm();">
+                                <div class="filter-controls">
+                                    <select class="filter-title-content" onchange="handleSearchType(this);">
+                                        <option value="title">제목</option>
+                                        <option value="content">내용</option>
+                                    </select>
+
+                                    <select class="filter-date" name="searchValue" disabled>
+                                        <option value="year">올해</option>
+                                        <option value="month">이번달</option>
+                                        <option value="week">1주일</option>
+                                        <option value="tday">3일</option>
+                                        <option value="day">1일</option>
+                                        <option value="all">전체기간</option>
+                                    </select>
+
+                                    <input type="text" name="searchValue" placeholder="검색어 입력" />
+                                    <button class="search-btn" value="검색">🔍</button>
+                                </div>
+                            </form>
+                        </div>
+
+
+
+
+
+
+
             </div>
             <div class="main-bottom">
                     <div class="bottom-top">
@@ -62,128 +80,17 @@
                                     </tr>
                                 </thead>
 
-                                <tbody >
-                                    <tr class="list-middle">
-                                        <!-- tbody안쪽은 js사용해서 동적으로 채워줌 -->
-                                        <td>1</td>
-                                        <td>제목이야야야야</td>
-                                        <td>홍길동</td>
-                                        <td>2024-11-21</td>
-                                        <td>31</td>
-                                    </tr>
-                                    <tr class="list-middle">
-                                        <!-- tbody안쪽은 js사용해서 동적으로 채워줌 -->
-                                        <td>1</td>
-                                        <td>제목이야야야야</td>
-                                        <td>홍길동</td>
-                                        <td>2024-11-21</td>
-                                        <td>31</td>
-                                    </tr>
-                                    <tr class="list-middle">
-                                        <!-- tbody안쪽은 js사용해서 동적으로 채워줌 -->
-                                        <td>1</td>
-                                        <td>제목이야야야야</td>
-                                        <td>홍길동</td>
-                                        <td>2024-11-21</td>
-                                        <td>31</td>
-                                    </tr>
-                                    <tr class="list-middle">
-                                        <!-- tbody안쪽은 js사용해서 동적으로 채워줌 -->
-                                        <td>1</td>
-                                        <td>제목이야야야야</td>
-                                        <td>홍길동</td>
-                                        <td>2024-11-21</td>
-                                        <td>31</td>
-                                    </tr>
-                                    <tr class="list-middle">
-                                        <!-- tbody안쪽은 js사용해서 동적으로 채워줌 -->
-                                        <td>1</td>
-                                        <td>제목이야야야야</td>
-                                        <td>홍길동</td>
-                                        <td>2024-11-21</td>
-                                        <td>31</td>
-                                    </tr>
-                                    <tr class="list-middle">
-                                        <!-- tbody안쪽은 js사용해서 동적으로 채워줌 -->
-                                        <td>1</td>
-                                        <td>제목이야야야야</td>
-                                        <td>홍길동</td>
-                                        <td>2024-11-21</td>
-                                        <td>31</td>
-                                    </tr>
-                                    <tr class="list-middle">
-                                        <!-- tbody안쪽은 js사용해서 동적으로 채워줌 -->
-                                        <td>1</td>
-                                        <td>제목이야야야야</td>
-                                        <td>홍길동</td>
-                                        <td>2024-11-21</td>
-                                        <td>31</td>
-                                    </tr>
-                                    <tr class="list-middle">
-                                        <!-- tbody안쪽은 js사용해서 동적으로 채워줌 -->
-                                        <td>1</td>
-                                        <td>제목이야야야야</td>
-                                        <td>홍길동</td>
-                                        <td>2024-11-21</td>
-                                        <td>31</td>
-                                    </tr>
-                                    <tr class="list-middle">
-                                        <!-- tbody안쪽은 js사용해서 동적으로 채워줌 -->
-                                        <td>1</td>
-                                        <td>제목이야야야야</td>
-                                        <td>홍길동</td>
-                                        <td>2024-11-21</td>
-                                        <td>31</td>
-                                    </tr>
-                                    <tr class="list-middle">
-                                        <!-- tbody안쪽은 js사용해서 동적으로 채워줌 -->
-                                        <td>1</td>
-                                        <td>제목이야야야야</td>
-                                        <td>홍길동</td>
-                                        <td>2024-11-21</td>
-                                        <td>31</td>
-                                    </tr>
-                                    <tr class="list-middle">
-                                        <!-- tbody안쪽은 js사용해서 동적으로 채워줌 -->
-                                        <td>1</td>
-                                        <td>제목이야야야야</td>
-                                        <td>홍길동</td>
-                                        <td>2024-11-21</td>
-                                        <td>31</td>
-                                    </tr>
-                                    <tr class="list-middle">
-                                        <!-- tbody안쪽은 js사용해서 동적으로 채워줌 -->
-                                        <td>1</td>
-                                        <td>제목이야야야야</td>
-                                        <td>홍길동</td>
-                                        <td>2024-11-21</td>
-                                        <td>31</td>
-                                    </tr>
-                                    <tr class="list-middle">
-                                        <!-- tbody안쪽은 js사용해서 동적으로 채워줌 -->
-                                        <td>1</td>
-                                        <td>제목이야야야야</td>
-                                        <td>홍길동</td>
-                                        <td>2024-11-21</td>
-                                        <td>31</td>
-                                    </tr>
-                                    <tr class="list-middle">
-                                        <!-- tbody안쪽은 js사용해서 동적으로 채워줌 -->
-                                        <td>1</td>
-                                        <td>제목이야야야야</td>
-                                        <td>홍길동</td>
-                                        <td>2024-11-21</td>
-                                        <td>31</td>
-                                    </tr>
-                                    <tr class="list-middle">
-                                        <!-- tbody안쪽은 js사용해서 동적으로 채워줌 -->
-                                        <td>1</td>
-                                        <td>제목이야야야야</td>
-                                        <td>홍길동</td>
-                                        <td>2024-11-21</td>
-                                        <td>31</td>
-                                    </tr>
 
+                                <tbody>
+                                    <c:forEach items="${selectAllBoardList}" var="x" >
+                                        <tr class="list-middle">
+                                            <td>${x.no}</td>
+                                            <td>${x.title}</td>
+                                            <td>${x.name}</td>
+                                            <td>${x.enrollDate}</td>
+                                            <td>${x.viewCnt}</td>
+                                        </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                             <div class="bottom-line"></div>

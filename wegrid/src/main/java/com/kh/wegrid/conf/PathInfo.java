@@ -7,7 +7,7 @@ import java.io.File;
 @Component
 public class PathInfo {
 
-    private final String staticPath = "D:" + File.separator
+    private final String staticPath = "C:" + File.separator
             + "SemiPrjTeam2" + File.separator
             + "wegrid" + File.separator
             + "src" + File.separator
@@ -23,6 +23,16 @@ public class PathInfo {
 //        return path;
 //
 //    }
+
+    public String getBoardAttachmentPath(){
+        String path = staticPath
+                + "file" + File.separator
+                + "board" + File.separator
+                + "attachment" + File.separator;
+        return path;
+
+    }
+
 
     public String getApprovalAttachmentPath(){
         String path = staticPath

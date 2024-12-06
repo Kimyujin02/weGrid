@@ -21,3 +21,11 @@ function preview(evt){
 }
 
 
+//function submitSearchForm(){
+//
+//    const statusFilter = document.querySelector("#approval-status").value;
+//
+//    submitApprovalList(statusFilter);
+//
+//    return false; // 기본 이벤트 막을 수 있음
+//};

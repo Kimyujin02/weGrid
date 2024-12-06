@@ -68,7 +68,7 @@ public interface VacationMapper {
         VALUES
         (
             SEQ_VACATION.NEXTVAL
-            , '3'
+            , #{empNo}
             , #{vacTypeNo}
             , #{startDate}
             , #{endDate}
@@ -106,5 +106,5 @@ public interface VacationMapper {
     List<VacationVo3> getSelectPersonalCntInfo(String mno);
 
 
-    int updateVacation(VacationVo vo);
+//    int updateVacation(VacationVo vo);
 }

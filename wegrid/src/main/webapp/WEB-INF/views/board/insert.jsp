@@ -33,9 +33,8 @@
             </div>
 
             <div class="main-main">
-                <form action="/board/intsert" method="post" enctype="multipart/form-data">
+                <form action="/board/insert" method="post" enctype="multipart/form-data">
                     <div class="board-title">
-                    </form>
                         <input class="title" type="text" name="title" placeholder="제목을 입력하세요(65자 이내)" maxlength="64">
                         </input>
                     </div>
@@ -56,7 +55,7 @@
                     </div>
 
                     <div class="board-btns">
-                        <button class="btn-insert" type="submit">작성하기</button>
+                        <button class="btn-insert">작성하기</button>
                         <button class="btn-cancel" type="submit">취소</button>
                     </div>
                 </form>

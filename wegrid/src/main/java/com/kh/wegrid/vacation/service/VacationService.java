@@ -41,7 +41,7 @@ public class VacationService {
     }
 
 
-    public int updateVacation(VacationVo vo) {
-        return mapper.updateVacation(vo);
-    }
+//    public int updateVacation(VacationVo vo) {
+//        return mapper.updateVacation(vo);
+//    }
 }
