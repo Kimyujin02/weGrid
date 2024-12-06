@@ -162,6 +162,8 @@ public interface ProjectMapper {
                 M.NO
                 ,M.PROJECT_NO
                 ,M.EMP_NO
+                ,TO_CHAR(M.START_DATE,'YYYY-MM-DD HH24:mi') AS START_DATE
+                ,TO_CHAR(M.END_DATE,'YYYY-MM-DD HH24:mi') AS END_DATE
                 ,M.DEL_YN
                 ,E.NAME  AS EMP_NAME
                 ,E.EMAIL
@@ -268,11 +270,11 @@ public interface ProjectMapper {
                 SEQ_PROJECT_MEMBER.NEXTVAL
                 ,SEQ_PROJECT.CURRVAL
                 ,#{empNo}
-                ,SYSDATE
-                ,NULL
+                ,#{startDate}
+                ,#{endDate}
             )
             """)
-    int addMember(ProjectMemberVo pmVo);
+    int addMember(String empNo,String startDate, String endDate);
 
     // 사원 삭제하기 UPDATE
     @Update("""

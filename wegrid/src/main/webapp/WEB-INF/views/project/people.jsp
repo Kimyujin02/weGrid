@@ -30,7 +30,7 @@
             <div class="project-info">
                  <!-- 공백 -->
                  <div class="edit-icon">
-                    <a href="/project/edit?projectNo=${map.project.projectNo}"><i class="fas fa-edit" style="color:#666;"></i></a>
+                    <a href="/project/edit?projectNo=${map.project.projectNo}&pno=1"><i class="fas fa-edit" style="color:#666;"></i></a>
                 </div>
                 <table class="project-table" id="project-tb">
                     <thead>
@@ -91,10 +91,10 @@
                 <div class="sidebar">
                
                     <div class="sidebar">
-                        <a href="/project/people?projectNo=${map.project.projectNo}&pno=${vo.projectNo}" class="sidebar-btn active" id="btn1">
+                        <a href="/project/people?projectNo=${map.project.projectNo}&pno=1" class="sidebar-btn active" id="btn1">
                             <i class="fas fa-user-friends"></i> 
                         </a>
-                        <a href="/project/attach?projectNo=${map.project.projectNo}&pno=${vo.projectNo}" class="sidebar-btn" id="btn2">
+                        <a href="/project/attach?projectNo=${map.project.projectNo}&pno=1" class="sidebar-btn" id="btn2">
                             <i class="fas fa-paperclip"></i>
                         </a>
                     </div>

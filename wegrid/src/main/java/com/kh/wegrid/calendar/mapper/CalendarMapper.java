@@ -83,8 +83,8 @@ public interface CalendarMapper {
                 , 'N' AS IS_EDITABLE
                 , P.PROJECT_NAME AS TITLE
                 , P.DESCRIPTION AS CONTENT
-                , PM.START_DATE
-                , PM.END_DATE
+                , TO_CHAR(PM.START_DATE,'YYYY-MM-DD HH24:mi') AS START_DATE
+                , TO_CHAR(PM.END_DATE,'YYYY-MM-DD HH24:mi') AS END_DATE
             FROM PROJECT_MEMBER PM
             JOIN PROJECT P ON(PM.PROJECT_NO = P.NO)
             JOIN EMPLOYEE E ON (PM.EMP_NO = E.NO)
@@ -100,8 +100,8 @@ public interface CalendarMapper {
                 , 'N' AS IS_EDITABLE
                 , P.PROJECT_NAME AS TITLE
                 , P.DESCRIPTION AS CONTENT
-                , P.START_DATE
-                , P.END_DATE
+                , TO_CHAR(P.START_DATE,'YYYY-MM-DD HH24:mi') AS START_DATE
+                , TO_CHAR(P.END_DATE,'YYYY-MM-DD HH24:mi') AS END_DATE
             FROM PROJECT P
             JOIN EMPLOYEE E ON (P.EMP_NO = E.NO)
             WHERE P.NO = #{no}
