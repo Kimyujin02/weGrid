@@ -68,26 +68,16 @@
             <div class="name-boc">게시판</div>
         </label>
     </div>
-    <!-- 결재는 js로 합시다 -->
-    <div class="test">
-        <label  onclick="ff01();" class="navLabel">
+    <div class="active-boc">
+        <label  onclick="toggleList();" class="navLabel">
             <div class="icon-boc">
                 <i class="fas fa-file-signature fa-2x"></i>
             </div>
-            <div class="approvalMenuList">결재</div>
-            <ul>
-                <li>결재 상신함</li>
-                <li>결재 수신함</li>
-            </ul>
+            <div class="name-boc">결재</div>
         </label>
-            
-        <!-- <div class="detail-menu">결재 수신</div>
-        <div class="detail-menu">결재 상신</div> -->
+    </div>
+    <label class="navLabel" onclick="location.href='/approval/submitList'"><div id="submitListt">결재 상신함</div></label>
+    <label class="navLabel" onclick="location.href='/approval/receiveList'"><div id="receiveListt">결재 수신함</div></label>
+    <div></div>
 
-    </div>
-    <div>
-      
-            
-  
-    </div>
 </nav>

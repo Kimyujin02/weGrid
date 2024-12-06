@@ -11,6 +11,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script defer src="/js/common/header.js"></script>
 
+<script>
+    <c:if test="${not empty alertMsg}">
+        alert('${sessionScope.alertMsg}');
+    </c:if>
+    <c:remove var="alertMsg" scope="session" />
+</script>
+
     <!-- Header -->
     <header>
         <div class="logo_top"></div>

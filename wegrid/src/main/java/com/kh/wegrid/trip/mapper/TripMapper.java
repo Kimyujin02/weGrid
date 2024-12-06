@@ -26,12 +26,12 @@ public interface TripMapper {
                 , CONTENT
                 , START_DATE
                 , END_DATE
-                , CLIENTo
+                , CLIENT
             )
             VALUES
             (
                 SEQ_BUSINESS_TRIP.NEXTVAL
-                , '1'
+                , #{writerNo}
                 , #{typeNo}
                 , #{postAddress}
                 , #{roadAddress}

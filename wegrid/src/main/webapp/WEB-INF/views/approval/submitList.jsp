@@ -25,7 +25,7 @@
         <div id="main-area">
             <div id="title-area">
                 <div></div>
-                <div><h2>결재상신</h2></div>
+                <div><h2>결재상신함</h2></div>
                 <div></div>
             </div>
             <div id="menu-box">

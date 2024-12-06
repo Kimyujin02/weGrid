@@ -14,18 +14,26 @@ function openEmpSearchModal(){
 }
 
 // 모달 닫기
-function closeEmpSearchModal(name , no) {
+function closeEmpSearchModal(name , no , dept) {
+    const approvalName = dept +" " + " " + name;
     setApprovalNo(no);
-    setApprovalName(name);
+    setApprovalName(approvalName);
     document.querySelector("#empSearchModal").style.display = "none";
 }
 
 //결재자 네임값 설정
 function setApprovalName(name){
+    const middleBtn = document.querySelector("#approvalMiddleBtn");
+    const lastBtn = document.querySelector("#approvalLastBtn");
+
     if(approvalStep === "middle"){
-        document.querySelector("#approvalMiddleBtn").innerText = name;
+        middleBtn.innerText = name;
+        middleBtn.removeAttribute("class" , "approvalBtn");
+        middleBtn.setAttribute("class" , "approvalaaa");
     }else if(approvalStep === "last"){
-        document.querySelector("#approvalLastBtn").innerText = name;
+        lastBtn.innerText = name;
+        lastBtn.removeAttribute("class" , "approvalBtn");
+        lastBtn.setAttribute("class" , "approvalaaa");
     }
 }
 
@@ -45,7 +53,8 @@ tbodyTag.addEventListener("click" , function(evt){
     const trTag = evt.target;
     const no = trTag.parentNode.children[0].innerText;
     const name = trTag.parentNode.children[3].innerText;
-    closeEmpSearchModal(name , no);
+    const dept = trTag.parentNode.children[1].innerText;
+    closeEmpSearchModal(name , no , dept);
 });
 
 // 드래그를 위한 변수 선언
@@ -203,5 +212,8 @@ function paintPageArea(pvo){
     }
 
 }
+
+
+
 
 

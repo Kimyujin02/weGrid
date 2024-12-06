@@ -1,6 +1,7 @@
 // 모달 열기
 function openTripModal() {
     document.getElementById("tripModal").style.display = "block";
+    fqes();
 }
 
 // 모달 닫기
@@ -236,3 +237,36 @@ document.addEventListener("DOMContentLoaded", function(){
         endDateInput.min = startDateInput.value; // 종료 날짜 최소값 = 시작 날짜
     });
 });
+
+// const submitBtnTag = document.querySelector(".submit-btn");
+// const shortInputList = document.querySelectorAll(".shortInput");
+// const longInputList = document.querySelectorAll(".longInputList");
+// submitBtnTag.addEventListener("click" , function(){
+//     for(const inp of shortInputList){
+//         console.log(inp);
+//         if(inp.value == null){
+//             alert("모든 항목을 채워주세요")
+//             return;
+//         }
+//     }
+//     for(const inp of longInputList){
+//         console.log(inp);
+//         if(inp.value == null){
+//             alert("모든 항목을 채워주세요")
+//             return;
+//         }
+//     }
+    
+//     window.confirm("출장등록 하시겠습니까?");
+// });
+const radioValue = document.querySelectorAll("input[type=radio]");
+
+function fqes(){
+    for(const vo of radioValue){
+        if(vo.value == "1"){
+            vo.checked=true;
+            console.log(vo);
+        }
+    }
+}
+
