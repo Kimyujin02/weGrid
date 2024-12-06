@@ -21,7 +21,7 @@
 <body>
 
    <%@ include file="/WEB-INF/views/common/header.jsp" %>
-   <%@ include file="/WEB-INF/views/common/nav.jsp" %>
+   <%@ include file="/WEB-INF/views/common/nav-system.jsp" %>
 
     <!-- Main -->
     <main>

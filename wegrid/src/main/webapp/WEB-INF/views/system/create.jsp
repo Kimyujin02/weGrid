@@ -19,7 +19,7 @@
     </head>
 <body>
     <%@ include file="/WEB-INF/views/common/header.jsp" %>
-    <%@ include file="/WEB-INF/views/common/nav.jsp" %>
+    <%@ include file="/WEB-INF/views/common/nav-system.jsp" %>
 
     <main>
     <form action="/system/create" name="personal-info" method="post">
@@ -197,7 +197,7 @@
             </div>
             
             <div class="button-group">
-                <button type="submit" class="btn btn-primary" id="create-btn" onclick="location.href='/system/list'">등록하기</button>
+                <button type="submit" class="btn btn-primary" id="create-btn" onclick="location.href='/system/account/list'">등록하기</button>
                 <button type="button" class="btn btn-primary" id="delete-btn">삭제</button>
             </div>
         </div>

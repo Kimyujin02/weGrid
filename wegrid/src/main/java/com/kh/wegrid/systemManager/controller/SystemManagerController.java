@@ -31,24 +31,29 @@ public class SystemManagerController {
 
         model.addAttribute("jobInfoVoList", jobInfoVoList); // JSP로 데이터 전달
         model.addAttribute("departMentVoList", departMentVoList);
+//        System.out.println("departMentVoList = " + departMentVoList);
+//        System.out.println("jobInfoVoList = " + jobInfoVoList);
+
         return "system/create";
     }
 
     // 계정 생성 요청
     @PostMapping("create")
     public String create(MemberVo vo) {
+        System.out.println("vo = " + vo);
         int result = service.create(vo);
 
+        
         if (result != 1) {
             new IllegalStateException("[ERROR] - 계정 생성 중 오류 발생");
 //            return "redirect:/common/error";
         } 
         
-            return "redirect:/system/list";
+            return "redirect:/system/account/list";
     }
 
     // 시스템 관리자 목록 조회 화면(+검색이 될까...?)
-    @GetMapping("list")
+    @GetMapping("/account/list")
     public String list(Model model
             ,@RequestParam(name = "pno" , required = false, defaultValue = "1") int currentPage
             ,String searchValue)
@@ -69,7 +74,7 @@ public class SystemManagerController {
         model.addAttribute("pvo", pvo);
         model.addAttribute("searchValue", searchValue);
 
-        return "system/list";
+        return "system/account/list";
     }
 
     //목록 삭제 처리

@@ -52,16 +52,14 @@ public interface SystemManagerMapper {
 
 
     @Select("""
-           SELECT NO
+           SELECT *
            FROM JOB_INFO
-           WHERE NAME = #{name};
            """)
     List<JobInfoVo> getJobInfoVoList();
 
     @Select("""
-            SELECT CODE
+            SELECT *
             FROM DEPARTMENT
-            WHERE NAME = #{name};
             """)
     List<DepartMentVo> getDepartmentVoList();
 
@@ -80,7 +78,7 @@ public interface SystemManagerMapper {
                 D.NAME AS DEPT_NAME,  -- 부서 이름
                 J.NAME AS JOB_NAME,        -- 직급 이름
                 E.IS_MANAGER,
-                TO_CHAR(E.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE,
+                TO_CHAR(E.ENROLL_DATE, 'YYYY-MM-DD'),
                 E.DEL_YN
             FROM EMPLOYEE E
             LEFT JOIN DEPARTMENT D
@@ -98,3 +96,12 @@ public interface SystemManagerMapper {
             """)
     int getSystemCnt();
 }
+
+
+//SELECT NO
+//FROM JOB_INFO
+//WHERE NAME = #{name}
+
+//SELECT CODE
+//FROM DEPARTMENT
+//WHERE NAME = #{name}
