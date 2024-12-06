@@ -7,6 +7,7 @@ public class VacationVo {
 
     private String no;
     private String empNo;
+    private String deptNo;
     private String vacTypeNo;
     private String startDate;
     private String endDate;

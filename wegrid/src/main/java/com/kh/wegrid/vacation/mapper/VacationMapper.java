@@ -38,6 +38,7 @@ public interface VacationMapper {
     @Select("""
             SELECT
                 D.NAME AS dept_name
+                , V.NO
                 , VT.NAME AS vac_type_name
                 , E.NAME
                 , TO_CHAR(V.START_DATE, 'YYYY-MM-DD') AS START_DATE
@@ -51,6 +52,7 @@ public interface VacationMapper {
             JOIN DEPARTMENT D ON ( D.CODE = E.DEPT_NO )
             JOIN VACATION_TYPE VT ON ( VT.NO = V.V_TYPE_NO )
             WHERE E.DEL_YN = 'N'
+            ORDER BY V.NO DESC
             """)
     List<VacationVo1> getSelectAllVacationList();
 
@@ -107,4 +109,5 @@ public interface VacationMapper {
 
 
 //    int updateVacation(VacationVo vo);
+
 }
