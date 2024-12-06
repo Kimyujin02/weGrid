@@ -44,11 +44,11 @@
             </defs>
           </svg>
           </div>
-          <div id="profile-area"><img src="/css/common/user-solid.svg"
+          <div id="profile-area"><img src="${loginMemberVo.profile}"
             class="abc" 
             onclick="openModal()">
           </div>
-        <div class="name_box">홍길동</div>
+        <div class="name_box" style="font-size: 18px; font-weight: bold;">${loginMemberVo.name}</div>
         <!-- 모달 -->
    <div id="userModal" class="modal">
     <div class="modal-content">
@@ -58,7 +58,7 @@
         <div class="modal-body">
             <!-- 이미지 섹션 -->
             <div class="user-image">
-                <img src="/css/common/user-solid.svg" alt="사용자 이미지">
+                <img src="${loginMemberVo.profile}" alt="사용자 이미지">
             </div>
             <!-- 버튼 섹션 -->
             <div class="user-actions">
