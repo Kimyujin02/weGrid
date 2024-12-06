@@ -11,8 +11,8 @@ function addCloseModal() {
 }
 
 // 사원 선택 시 동작
-function selectEmployee(name) {
-    alert(`${name}님이 선택되었습니다.`);  // 알림 표시
+function selectEmployee(employee) {
+    alert(`${employee.name}님이 선택되었습니다.`);  // 알림 표시
 
     // 사원 정보를 추가하는 부분
     const personnelList = document.getElementById('personnelList');
@@ -23,7 +23,8 @@ function selectEmployee(name) {
 
     // 사원 정보와 삭제 버튼
     personDiv.innerHTML = `
-        <span>${name}</span>
+        <span>${employee.name}</span>
+        <input type="hidden" name="addMemberNo" value=${employee.no}>
         <button class="remove-btn" onclick="removeEmployee(this)">삭제</button>
     `;
 
@@ -54,7 +55,7 @@ function searchEmployee(name) {
                 const liTag = document.createElement("li");              
                 liTag.innerText = employee.name;
             
-                liTag.setAttribute("onclick", `selectEmployee("${employee.name}");`);
+                liTag.onclick = function(){selectEmployee(employee);}
 
                 resultsContainer.appendChild(liTag);
             });

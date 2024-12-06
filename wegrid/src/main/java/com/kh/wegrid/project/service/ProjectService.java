@@ -26,9 +26,17 @@ public class ProjectService {
 
 
     // 프로젝트 생성
-    public int create(ProjectVo vo , ProjectMemberVo pmVo) {
+    public int create(ProjectVo vo , List<String> addMemberNo) {
+
         int result1 = mapper.create(vo);
-        int result2 = mapper.addMember(pmVo);
+
+        int result2 = 1;
+        for(int i=0; i<addMemberNo.size(); i++){
+            result2 = mapper.addMember(addMemberNo.get(i),vo.getStartDate(), vo.getEndDate());
+            if(result2 != 1){
+                break;
+            }
+        }
 
 
         if(result1 * result2 < 1){
@@ -40,22 +48,22 @@ public class ProjectService {
 
 
     // 프로젝트 수정
-    public int edit(ProjectVo vo, String projectNo, ProjectMemberVo pmVo) {
-        int result1 = mapper.edit(vo, projectNo);
-        int result2 = mapper.addMember(pmVo);
-        int result3 = mapper.removeMember(pmVo);
-
-        if (result1 != 1) {
-            throw new IllegalStateException("ERROR- 프로젝트 정보 수정 중 에러 발생함");
-        }
-
-        if (result3 < 0) { // 예시: 성공적으로 삭제된 멤버 수가 0일 경우 오류 처리
-            throw new IllegalStateException("ERROR- 멤버 삭제 중 에러 발생함");
-        }
-
-        
-        return result1*result2*result3;
-    }
+//    public int edit(ProjectVo vo, String projectNo, ProjectMemberVo pmVo) {
+//        int result1 = mapper.edit(vo, projectNo);
+//        int result2 = mapper.addMember(pmVo);
+//        int result3 = mapper.removeMember(pmVo);
+//
+//        if (result1 != 1) {
+//            throw new IllegalStateException("ERROR- 프로젝트 정보 수정 중 에러 발생함");
+//        }
+//
+//        if (result3 < 0) { // 예시: 성공적으로 삭제된 멤버 수가 0일 경우 오류 처리
+//            throw new IllegalStateException("ERROR- 멤버 삭제 중 에러 발생함");
+//        }
+//
+//
+//        return result1*result2*result3;
+//    }
 
 
     // 사원 검색

@@ -71,7 +71,7 @@
                             <tr >
                                 
                                
-                                <td> <a href="/project/people?projectNo=${vo.projectNo}&pno=${vo.projectNo}">${vo.projectName}</a></td>
+                                <td> <a href="/project/people?projectNo=${vo.projectNo}&pno=1">${vo.projectName}</a></td>
                                 <td>${vo.pmName}</td>
                                 <td>${vo.clientName}</td>
                                 <td>${vo.managerName}</td>

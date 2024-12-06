@@ -31,7 +31,8 @@ function showEventDetail(evt) {
             if(vo.kindNo != null) {
                 addKindInfo(vo);
             }
-            document.querySelector("#calendar-content-view").innerHTML=vo.content;
+            // document.querySelector("#calendar-content-view").innerHTML=vo.content;
+            addContent(vo);
             activateModalFooter(vo,loginInfo);
              
         
@@ -149,5 +150,30 @@ function deleteSchedule(){
         }
 
     })
+
+}
+
+// 일정 내용 추가
+function addContent(vo) {
+
+    const contentTag = document.querySelector("#calendar-content-view");
+    contentTag.innerHTML = null;
+
+    if(vo.typeNo == 3){     
+        const aTag = document.createElement("a");
+        aTag.href="/project/people?projectNo="+vo.no+"&pno=1";
+        aTag.textContent = "프로젝트 바로가기 >>";
+        
+        const brTag = document.createElement("br");
+
+        const textNode = document.createTextNode(vo.content);
+
+        contentTag.appendChild(aTag);
+        contentTag.appendChild(brTag);
+        contentTag.appendChild(textNode);
+    }   
+    else{
+        contentTag.innerHTML = vo.content;
+    }
 
 }
