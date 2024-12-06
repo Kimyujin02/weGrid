@@ -18,14 +18,17 @@ function openWriteModal(date) {
     dd = dd < 10 ? '0' + dd.toString() : dd.toString();
 
     // 입력창 기본 날짜 설정
-    const todayDate = yyyy + "-" + mm + "-" + dd + "T00:00"; // 클릭할 날짜 값을 input 태그 형식에 맞게 00시로 변환
+    // const todayDate = yyyy + "-" + mm + "-" + dd + "T00:00"; // 클릭할 날짜 값을 input 태그 형식에 맞게 00시로 변환
     const startDateTag = document.querySelector("#calendar-start-date");
-    startDateTag.value=todayDate;
+    startDateTag.value = yyyy + "-" + mm + "-" + dd + "T00:00"; // 클릭할 날짜 값을 input 태그 형식에 맞게 00시로 변환
     const endDateTag = document.querySelector("#calendar-end-date");
-    endDateTag.value=todayDate;
+    endDateTag.value = yyyy + "-" + mm + "-" + dd + "T12:00"; // 클릭할 날짜 값을 input 태그 형식에 맞게 00시로 변환
 
     // 모달창에 항목 정보 추가
     loadTypeInfo();
+
+    // 모달창에 일정종류 정보 추가
+    loadKindInfo();
 
     // 모달 창 띄우기
     $("#writeModal").modal("show");
@@ -58,36 +61,41 @@ function loadTypeInfo(){
 // 일정종류 정보 작성 모달창에 추가
 function loadKindInfo(){
 
-    const selectTag = document.querySelector(".kind-area");
-    const colorTag = document.querySelector("#writeModal input[name=color]");
+    const selectTag = document.querySelector("#writeModal .kind-area");
 
-    for (let i = 1; i < typeInfo.length; i++) {
-        const optionTag = document.createElement("option");
-        optionTag.value = typeInfo[i].no;
-        optionTag.innerText = typeInfo[i].name;
-        if(i==1){
-            optionTag.setAttribute("selected","selected");
-            colorTag.value=typeInfo[1].color;
-        }
-        selectTag.appendChild(optionTag);
+    for (let i = 0; i < kindInfo.length; i++) {
+        const boxTag = document.createElement("div");
+        boxTag.className = "kindBox";
+
+        const labelTag = document.createElement("label");
+        labelTag.htmlFor = "kind"+(i+1);
+        labelTag.className = "col-form-label";
+        labelTag.innerText = kindInfo[i].name;
+
+        const radioTag = document.createElement("input");
+        radioTag.type = "radio";
+        radioTag.id = "kind"+(i+1);
+        radioTag.name = "kindNo";
+        radioTag.value = kindInfo[i].no;
+
+        boxTag.appendChild(labelTag);
+        boxTag.appendChild(radioTag);
+        selectTag.appendChild(boxTag);
     }
     
-    selectTag.addEventListener("change", function(evt){
-        colorTag.value=typeInfo[evt.target.value].color;
-    })
 }
 
-
-// 캘린더 항목 선택란 초기화
+// 캘린더 항목, 일정종류 선택란 초기화
 const writeModal = document.querySelector("#writeModal");
 writeModal.addEventListener("hide.bs.modal", function(){
     const selectTag = document.querySelector("#calendar-type");
     if(selectTag.firstElementChild != null){
         selectTag.innerHTML = null;
     }
-    // if(document.querySelector("#calendar-kindName-view") != null){
-    //     document.querySelector("#calendar-kindName-view").remove();
-    // }
+    const kindAreaTag = document.querySelector("#writeModal .kind-area");
+    if(kindAreaTag.firstElementChild != null){
+        kindAreaTag.innerHTML = null;
+    }
 });
 
 // 서버에 일정정보 추가
@@ -131,8 +139,6 @@ function insertToDB(){
     return false; 
 
 }
-
-
 
 
    // 추가 버튼 클릭 시

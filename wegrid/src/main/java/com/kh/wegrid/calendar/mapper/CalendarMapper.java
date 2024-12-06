@@ -14,25 +14,40 @@ import java.util.List;
 @Mapper
 public interface CalendarMapper {
 
-    // 항목 별 이벤트 호출
-//    @Select("""
-//            SELECT
-//                C.NO AS ID
-//                , C.TYPE_NO
-//                , C.TITLE
-//                , TO_CHAR(C.START_DATE,'YYYY-MM-DD HH24:mi') AS "START"
-//                , TO_CHAR(C.END_DATE,'YYYY-MM-DD HH24:mi') AS END
-//                , C.COLOR
-//            FROM CALENDAR C
-//            JOIN EMPLOYEE E ON (C.WRITER_NO = E.NO)
-//            JOIN CALENDAR_TYPE CT ON (C.TYPE_NO = CT.NO)
-//            WHERE CT.TYPE = #{type}
-//            AND TO_CHAR(C.START_DATE,'YYYY-MM') LIKE '${date}%'
-//            ORDER BY C.START_DATE
-//            """)
+    // 항목 별 이벤트 호출 (개인, 부서)
     List<EventVo> loadEvent(String date, String type , int typeNo, String writerNo);
 
-    // 일정 상세정보 조회
+    // 항목 별 이벤트 호출 (프로젝트)
+    @Select("""
+            SELECT
+                PM.PROJECT_NO AS ID
+                , #{typeNo} AS TYPE_NO
+                , P.PROJECT_NAME AS TITLE
+                , TO_CHAR(PM.START_DATE,'YYYY-MM-DD HH24:mi') AS "START"
+                , TO_CHAR(PM.END_DATE,'YYYY-MM-DD HH24:mi') AS END
+                , (SELECT CT.COLOR FROM CALENDAR_TYPE CT WHERE CT.NO = #{typeNo}) AS COLOR
+            FROM PROJECT_MEMBER PM
+            JOIN PROJECT P ON(PM.PROJECT_NO = P.NO)
+            JOIN EMPLOYEE E ON (PM.EMP_NO = E.NO)
+            WHERE PM.EMP_NO = #{writerNo}
+            AND TO_CHAR(PM.START_DATE,'YYYY-MM') LIKE '${date}%'
+            AND PM.DEL_YN = 'N'
+            UNION ALL
+            SELECT
+                P.NO
+                , #{typeNo} AS TYPE_NO
+                , P.PROJECT_NAME AS TITLE
+                , TO_CHAR(P.START_DATE,'YYYY-MM-DD HH24:mi') AS "START"
+                , TO_CHAR(P.END_DATE,'YYYY-MM-DD HH24:mi') AS END
+                , (SELECT CT.COLOR FROM CALENDAR_TYPE CT WHERE CT.NO = #{typeNo}) AS COLOR
+            FROM PROJECT P
+            JOIN EMPLOYEE E ON (P.EMP_NO = E.NO)
+            WHERE P.EMP_NO = #{writerNo}
+            AND TO_CHAR(P.START_DATE,'YYYY-MM') LIKE '${date}%'
+            """)
+    List<EventVo> loadProjectEvent(String date, String type , int typeNo, String writerNo);
+
+    // 일정 상세정보 조회(개인,부서)
     @Select("""
             SELECT
                 C.NO
@@ -57,6 +72,42 @@ public interface CalendarMapper {
             AND C.DEL_YN = 'N'
             """)
     CalendarVo getScheduleByNo(String no);
+
+    // 일정 상세정보 조회(프로젝트)
+    @Select("""
+            SELECT
+                PM.PROJECT_NO AS NO
+                , PM.EMP_NO AS WRITER_NO
+                , E.NAME AS WRITER_NAME
+                , 3 AS TYPE_NO
+                , 'N' AS IS_EDITABLE
+                , P.PROJECT_NAME AS TITLE
+                , P.DESCRIPTION AS CONTENT
+                , PM.START_DATE
+                , PM.END_DATE
+            FROM PROJECT_MEMBER PM
+            JOIN PROJECT P ON(PM.PROJECT_NO = P.NO)
+            JOIN EMPLOYEE E ON (PM.EMP_NO = E.NO)
+            WHERE PM.PROJECT_NO = #{no}
+            AND PM.DEL_YN = 'N'
+            AND PM.EMP_NO = #{writerNo}
+            UNION ALL
+            SELECT
+                P.NO
+                , P.EMP_NO AS WRITER_NO
+                , E.NAME AS WRITER_NAME
+                , 3 AS TYPE_NO
+                , 'N' AS IS_EDITABLE
+                , P.PROJECT_NAME AS TITLE
+                , P.DESCRIPTION AS CONTENT
+                , P.START_DATE
+                , P.END_DATE
+            FROM PROJECT P
+            JOIN EMPLOYEE E ON (P.EMP_NO = E.NO)
+            WHERE P.NO = #{no}
+            AND P.EMP_NO = #{writerNo}
+            """)
+    CalendarVo getProjectScheduleByNo(String no,String writerNo);
 
     // 신규 일정 추가
     @Insert("""
@@ -95,8 +146,8 @@ public interface CalendarMapper {
                 , KIND_NO = #{kindNo}
                 , TITLE = #{title}
                 , CONTENT = #{content}
-                , START_DATE = #{startDate}
-                , END_DATE = #{endDate}
+                , START_DATE = TO_DATE(#{startDate},'YYYY-MM-DD HH24:mi:SS')
+                , END_DATE = TO_DATE(#{endDate},'YYYY-MM-DD HH24:mi:SS')
                 , COLOR = UPPER(#{color})
             WHERE NO = #{no}
             AND WRITER_NO = #{writerNo}

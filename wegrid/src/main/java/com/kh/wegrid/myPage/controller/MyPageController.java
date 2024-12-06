@@ -1,4 +1,4 @@
-package com.kh.wegrid.mypage.controller;
+package com.kh.wegrid.myPage.controller;
 
 import com.kh.wegrid.member.vo.MemberVo;
 import com.kh.wegrid.mypage.service.MypageService;
@@ -21,7 +21,7 @@ import java.util.UUID;
 @Slf4j
 @RequestMapping("mypage")
 @RequiredArgsConstructor
-public class MypageController {
+public class MyPageController {
 
     private final MypageService service;
 

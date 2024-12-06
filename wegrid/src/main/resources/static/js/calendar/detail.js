@@ -1,45 +1,40 @@
 
 // 상세정보 모달 실행
 function showEventDetail(evt) {
-    
+
     $.ajax({
         url: "/calendar/detail",
         data :{
             no : evt.event.id
         },
-        success:function(vo){
+        success:function(map){
+            console.log("통신 성공");        
+            const vo = map.vo;
+            const loginInfo = map.loginInfo;
 
-            console.log("통신 성공");
-            console.log("vo",vo);
             document.querySelector("input[name=scheduleNo]").value=vo.no;
-            document.querySelector("#calendar-typName-view").innerText=vo.typeName;
-            document.querySelector("#calendar-typName-view").setAttribute("no",vo.typeNo);
-            document.querySelector("#calendar-color-view").style.backgroundColor=vo.color;
-            document.querySelector("#calendar-title-view").innerText=vo.title;
-            if(vo.typeNo != 1){
-                addWriterInfo(vo);
+            if(vo.typeName == null){
+                document.querySelector("#calendar-typName-view").innerText=typeInfo[vo.typeNo].name;
+            }else{
+                document.querySelector("#calendar-typName-view").innerText=vo.typeName;
             }
+            document.querySelector("#calendar-typName-view").setAttribute("no",vo.typeNo);
+            if(vo.color == null) {
+                document.querySelector("#calendar-color-view").style.backgroundColor=typeInfo[vo.typeNo].color;
+            }else{
+                document.querySelector("#calendar-color-view").style.backgroundColor=vo.color;
+            }
+            document.querySelector("#calendar-title-view").innerText=vo.title;
+            addWriterInfo(vo);
             document.querySelector("#calendar-start-Date-view").innerText=vo.startDate;
             document.querySelector("#calendar-end-Date-view").innerText=vo.endDate;
-            if(vo.kindNo != null){
-
-                if(document.querySelector("#kindName-view") == null){
-                    const areaTag = document.querySelector("#kindName-view-area");
-                    
-                    const kindTag = document.createElement("div");
-                    kindTag.setAttribute("id","calendar-kindName-view");
-                    kindTag.setAttribute("class","calendar-detail-view-box");
-                    kindTag.innerText=vo.kindName;
-    
-                    areaTag.appendChild(kindTag);
-                }
+            if(vo.kindNo != null) {
+                addKindInfo(vo);
             }
             document.querySelector("#calendar-content-view").innerHTML=vo.content;
-            document.querySelector("input[name=isEditable]").value=vo.isEditable;
-
-            // 수정 시 해당 정보를 가져가도록 버튼에 onclick 함수 적용
-            document.querySelector("#toEditBtn").onclick = function(){openEditModal(vo)}
-
+            activateModalFooter(vo,loginInfo);
+             
+        
             // 모달 창 띄우기
             $("#detailModal").modal("show");
         },
@@ -52,14 +47,10 @@ function showEventDetail(evt) {
 
 }
 
-// 일정 종류 모달창에 추가
-function addWriterInfo(vo){
-    if(document.querySelector("#kindName-view-area div") != null){
-        return;
-    }
-
+// 일정 종류 상세조회 모달창에 추가
+function addKindInfo(vo){
     const areaTag = document.querySelector("#kindName-view-area");
-                    
+
     const kindTag = document.createElement("div");
     kindTag.setAttribute("id","calendar-kindName-view");
     kindTag.setAttribute("class","calendar-detail-view-box");
@@ -68,36 +59,62 @@ function addWriterInfo(vo){
     areaTag.appendChild(kindTag);
 }
 
-
 // 작성자 정보 상세조회 모달창에 추가
 function addWriterInfo(vo){
-    if(document.querySelector("#detailModal .writer-area div") != null){
-        return;
-    }
-    const areaTag = document.querySelector("#detailModal .writer-area");
-    
-    const writerTag = document.createElement("div");
-    writerTag.setAttribute("id","calendar-writerName-view");
-    writerTag.setAttribute("class","calendar-detail-view-box");
-    writerTag.innerText=vo.writerName;
-    areaTag.appendChild(writerTag);
 
-    const brTag = document.createElement("br");
-    areaTag.appendChild(brTag);
-    
-    areaTag.classList.remove("hidden-area");
+    const areaTag = document.querySelector("#detailModal .writer-area");
+    if(vo.typeNo == 1){
+        const classNameList = areaTag.className;
+        if(!classNameList.includes("hidden-area")){
+            areaTag.classList.add("hidden-area");
+        }
+    }
+    else{
+        document.querySelector("#calendar-writerName-view").innerText=vo.writerName;
+        document.querySelector("#detailModal .writer-area").classList.remove("hidden-area");
+    }
+
 }
 
-// 작성자 정보, 일정 종류 다시 숨기기
+// 수정, 삭제 버튼 추가
+function activateModalFooter(vo,loginInfo){
+    
+    if(vo.isEditable == 'Y' && loginInfo.no == vo.writerNo){
+        const footerTag = document.querySelector("#detailModal .modal-footer");
+        
+        const btn1Tag = document.createElement("button");
+        btn1Tag.type = "button";
+        btn1Tag.className = "btn btn-primary";
+        btn1Tag.innerText = "수정";
+        
+        const btn2Tag = document.createElement("button");
+        btn2Tag.type = "button";
+        btn2Tag.className = "btn btn-secondary";
+        btn2Tag.innerText = "삭제";
+        
+        footerTag.appendChild(document.createElement("hr"));
+        footerTag.appendChild(btn1Tag);
+        footerTag.appendChild(btn2Tag);
+
+        footerTag.classList.remove(".hidden-area");
+
+        btn1Tag.onclick = function(){openEditModal(vo)};
+        btn2Tag.onclick = function(){deleteSchedule()};
+    }
+    
+}
+
+// 일정 종류 다시 숨기기
 const detailModal = document.querySelector("#detailModal");
 detailModal.addEventListener("hide.bs.modal", function(){
-    if(document.querySelector("#calendar-writerName-view") != null){
-        document.querySelector("#detailModal .writer-area").classList.add("hidden-area");
-        document.querySelector("#calendar-writerName-view").remove();
-    }
     if(document.querySelector("#calendar-kindName-view") != null){
         document.querySelector("#calendar-kindName-view").remove();
     }
+
+    const footerTag = document.querySelector("#detailModal .modal-footer");
+
+    footerTag.innerHTML = null;
+    footerTag.classList.add(".hidden-area");
 });
 
 // 일정 삭제

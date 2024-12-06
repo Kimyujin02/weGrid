@@ -2,48 +2,39 @@
 // 일정 수정 모달 실행
 function openEditModal(vo){
 
+    loadTypeInfoEdit(vo);
     document.querySelector("input[name=no]").value=vo.no;
     document.querySelector("#calendar-title-edit").value=vo.title;
-    if(vo.typeNo != 1){
-        addWriterInfoEdit(vo);
-    }
+    addWriterInfoEdit(vo);
     document.querySelector("#calendar-start-date-edit").value=(vo.startDate).replace(" ","T");
     document.querySelector("#calendar-end-date-edit").value=(vo.endDate).replace(" ","T");
-
+    loadKindInfoEdit(vo);
     document.querySelector("#calendar-content-edit").value=vo.content;
 
-    // 모달 창 띄우기
-    $("#editModal").modal("show");
-    // 
+    // 상세조회 모달 창 닫기
     $("#detailModal").modal("hide");
+    // 수정 모달 창 띄우기
+    $("#editModal").modal("show");
 
 }
 
-// 캘린더 항목 정보 모달창에 추가
-function loadTypeInfoEdit(){
+// 캘린더 항목 정보 수정 모달창에 추가
+function loadTypeInfoEdit(vo){
 
-    const nowTypeNo = document.querySelector("#calendar-typName-view").getAttribute("no");
     const selectTag = document.querySelector("#calendar-type-edit");
+    const colorTag = document.querySelector("#editModal input[name=color]");
 
-    if( selectTag.firstElementChild == null){
-                
-        for (let i = 1; i < typeInfo.length; i++) {
-            const optionTag = document.createElement("option");
-            optionTag.value = typeInfo[i].no;
-            optionTag.innerText = typeInfo[i].name;
-            // if(i==0){
-            //     optionTag.setAttribute("selected","selected");
-            // }
-            selectTag.appendChild(optionTag);
+    for (let i = 1; i < 3; i++) {
+        const optionTag = document.createElement("option");
+        optionTag.value = typeInfo[i].no;
+        optionTag.innerText = typeInfo[i].name;
+        if(vo.typeNo == typeInfo[i].no){
+            optionTag.setAttribute("selected",true);
+            colorTag.value=vo.color;
         }
-
-    }else{
-        selectTag.firstElementChild.setAttribute("selected","selected");
+        selectTag.appendChild(optionTag);
     }
     
-    let colorTag = document.querySelector("input[name=color]");
-    colorTag.value=typeInfo[1].color;
-
     selectTag.addEventListener("change", function(evt){
         colorTag.value=typeInfo[evt.target.value].color;
     })
@@ -52,37 +43,70 @@ function loadTypeInfoEdit(){
 
 // 작성자 정보 수정 모달창에 추가
 function addWriterInfoEdit(vo){
-    if(document.querySelector("#editModal .writer-area div") != null){
-        return;
-    }
     const areaTag = document.querySelector("#editModal .writer-area");
-    
-    const writerTag = document.createElement("div");
-    writerTag.setAttribute("id","calendar-writerName-edit");
-    writerTag.setAttribute("class","calendar-detail-view-box");
-    writerTag.innerText=vo.writerName;
-    areaTag.appendChild(writerTag);
-
-    const brTag = document.createElement("br");
-    areaTag.appendChild(brTag);
-    
-    areaTag.classList.remove("hidden-area");
+    if(vo.typeNo == 1){
+        const classNameList = areaTag.className;
+        if(!classNameList.includes("hidden-area")){
+            areaTag.classList.add("hidden-area");
+        }
+    }
+    else{
+        document.querySelector("#calendar-writerName-edit").value=vo.writerName;
+        document.querySelector("#editModal .writer-area").classList.remove("hidden-area");
+    }
 }
 
+// 일정종류 정보 수정 모달창에 추가
+function loadKindInfoEdit(vo){
+
+    const selectTag = document.querySelector("#editModal .kind-area");
+
+    for (let i = 0; i < kindInfo.length; i++) {
+        const boxTag = document.createElement("div");
+        boxTag.className = "kindBox";
+
+        const labelTag = document.createElement("label");
+        labelTag.htmlFor = "kind"+(i+1);
+        labelTag.className = "col-form-label";
+        labelTag.innerText = kindInfo[i].name;
+
+        const radioTag = document.createElement("input");
+        radioTag.type = "radio";
+        radioTag.id = "kind"+(i+1);
+        radioTag.name = "kindNo";
+        radioTag.value = kindInfo[i].no;
+        if(vo.kindNo != null && vo.kindNo == kindInfo[i].no){
+            radioTag.setAttribute("checked",true);
+        }
+
+        boxTag.appendChild(labelTag);
+        boxTag.appendChild(radioTag);
+        selectTag.appendChild(boxTag);
+    }
+    
+}
+
+// 일정 종류 다시 숨기기
+const editModal = document.querySelector("#editModal");
+editModal.addEventListener("hide.bs.modal", function(){
+    document.querySelector("#calendar-type").innerHTML = null;
+    document.querySelector("#editModal .kind-area").innerHTML = null;
+});
 
 // 서버에 수정한 일정정보 전달
 function editAtDB(){
 
     // 입력할 데이터 수집
     const formData = $("#editForm").serialize();
-
+    console.log("formData",formData);
     // 저장할 월 정보 수집
     const date = document.querySelector("#calendar-start-date-edit").value;
+    console.log("date",date);
     const calcDate = calculateDate(new Date(date.replace("T"," ")));
-    
+    console.log("calcDate",calcDate);
     // 저장할 캘린더 항목 정보 수집
     const typeNo = document.querySelector("#calendar-type-edit").value;
-
+    console.log("typeNo",typeNo);
     // 서버에 데이터 전달
     $.ajax({
         url: "/calendar/edit",

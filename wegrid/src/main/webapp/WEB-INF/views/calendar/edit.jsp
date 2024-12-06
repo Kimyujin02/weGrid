@@ -7,7 +7,7 @@
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
-            <form action="" onsubmit="return editAtDB();">
+            <form action="" id="editForm" onsubmit="return editAtDB();">
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalLabel">일정 수정</h4>
                 <input type="hidden" name="no">
@@ -28,10 +28,16 @@
                         <input type="text" class="form-control" id="calendar-title-edit" name="title">
                     </div>
                     <br>
+                    <div class="writer-area hidden-area">
+                        <label class="col-form-label">작성자</label>
+                        <br>
+                        <input type="text" id="calendar-writerName-edit" disabled>
+                        <br>
+                    </div>
                     <div class="date-area">
                         <div class="date-label-area">
-                            <label for="calendar-start-date-edit" class="col-form-label">종료일</label>
-                            <label for="calendar-end-date-edit" class="col-form-label">종료일</label>
+                            <label for="calendar-start-date-edit" class="col-form-label">시작</label>
+                            <label for="calendar-end-date-edit" class="col-form-label">종료</label>
                         </div>
                         <div class="date-input-area">
                             <input type="datetime-local" class="form-control" id="calendar-start-date-edit" name="startDate">
@@ -41,22 +47,7 @@
                     <br>
                     <label class="col-form-label">일정 종류</label>
                     <div class="kind-area">
-                        <div class="kindBox">
-                            <label for="kindNo1">교육</label>
-                            <input type="radio" id="typeNo1" name="typeNo" value="1">
-                        </div>
-                        <div class="kindBox">
-                            <label for="kindNo2">업무</label>
-                            <input type="radio" id="typeNo2" name="typeNo" value="2">
-                        </div>
-                        <div class="kindBox">
-                            <label for="kindNo3">행사</label>
-                            <input type="radio" id="typeNo3" name="typeNo" value="3">
-                        </div>
-                        <div class="kindBox">
-                            <label for="kindNo4">기타</label>
-                            <input type="radio" id="typeNo4" name="typeNo" value="4">
-                        </div>
+                        
                     </div>
                     <br>
                     <div class="content-area">
@@ -67,7 +58,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" id="editSchedule">완료</button>
+                <button type="submit" class="btn btn-primary" id="editSchedule">완료</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
             </div>
             </form>

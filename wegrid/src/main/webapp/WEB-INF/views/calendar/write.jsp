@@ -40,22 +40,7 @@
                     <br>
                     <label class="col-form-label">일정 종류</label>
                     <div class="kind-area">
-                        <div class="kindBox">
-                            <label for="kindNo1">교육</label>
-                            <input type="radio" id="kindNo1" name="kindNo" value="1">
-                        </div>
-                        <div class="kindBox">
-                            <label for="kindNo2">업무</label>
-                            <input type="radio" id="kindNo2" name="kindNo" value="2">
-                        </div>
-                        <div class="kindBox">
-                            <label for="kindNo3">행사</label>
-                            <input type="radio" id="kindNo3" name="kindNo" value="3">
-                        </div>
-                        <div class="kindBox">
-                            <label for="kindNo4">기타</label>
-                            <input type="radio" id="kindNo4" name="kindNo" value="4">
-                        </div>
+                        
                     </div>
                     <br>
                     <div class="content-area">

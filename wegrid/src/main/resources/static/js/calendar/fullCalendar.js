@@ -43,7 +43,15 @@ function addEventToCalendar(calcDate,typeNo1,typeNo2){
     const typeName = typeInfo[i].type;
     const itemName = calcDate+"-"+typeName;
     
-    if(mainCalendar.getEventSourceById(itemName) == null){
+    if(calcDate==0){
+      for(let i = 0; i < localStorage.length; i++){
+        const storageName = localStorage.key(i);
+        if(storageName.includes(typeName)){
+          mainCalendar.addEventSource(JSON.parse(localStorage.getItem(storageName)));
+        }
+      }
+    }
+    else if(mainCalendar.getEventSourceById(itemName) == null){
       
       // local 저장소에서 해당 일정정보 이미 존재하는지 확인
       let localData = localStorage.getItem(itemName);
@@ -53,8 +61,11 @@ function addEventToCalendar(calcDate,typeNo1,typeNo2){
         localData = loadEvents(calcDate,typeName,typeInfo[i].no,itemName);
       }
       
-      // 캘린더에 일정정보 추가
-      mainCalendar.addEventSource(JSON.parse(localData));
+      const typeClassName = document.querySelector("#"+typeName).className;
+      if(typeClassName.includes("selected-calendar")){
+        // 캘린더에 일정정보 추가
+        mainCalendar.addEventSource(JSON.parse(localData));
+      }
       
     }
     
@@ -74,8 +85,8 @@ function removeEventSource(typeNo,date){
     (mainCalendar.getEventSourceById(eventId)).remove();
   }
   else{
-    const evtList = mainCalendar.getEventSources();
-    for(let i=evtList.size()-1; i>=0; i--){
+    const evtList = mainCalendar.getEventSources();    
+    for(let i=evtList.length-1; i>=0; i--){
       const eventId = evtList[i].id;
       if(eventId.includes(typeName)){
         (mainCalendar.getEventSourceById(eventId)).remove();
@@ -160,6 +171,7 @@ function loadCalendar() {
   getCalendarInfo();
 
   // 개인일정 제외한 local 저장소 초기화
+  deleteLocalStorage(1);
   deleteLocalStorage(2);
   deleteLocalStorage(3);
 
