@@ -26,12 +26,12 @@ public interface TripMapper {
                 , CONTENT
                 , START_DATE
                 , END_DATE
-                , CLIENTo
+                , CLIENT
             )
             VALUES
             (
                 SEQ_BUSINESS_TRIP.NEXTVAL
-                , '1'
+                , #{writerNo}
                 , #{typeNo}
                 , #{postAddress}
                 , #{roadAddress}
@@ -123,4 +123,12 @@ public interface TripMapper {
             FROM TRIP_TYPE
             """)
     List<typeVo> getTypeList();
+
+    @Update("""
+            UPDATE BUSINESS_TRIP
+                SET
+                    DEL_YN = 'Y'
+            WHERE NO = #{no}
+            """)
+    int delete(String no);
 }

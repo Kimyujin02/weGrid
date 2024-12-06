@@ -1,5 +1,6 @@
 package com.kh.wegrid.vacation.controller;
 
+import com.kh.wegrid.member.vo.MemberVo;
 import com.kh.wegrid.vacation.service.VacationService;
 import com.kh.wegrid.vacation.vo.*;
 import jakarta.servlet.http.HttpSession;
@@ -55,14 +56,13 @@ public class VacationController {
     @PostMapping("menu")
     public String menuInsert (HttpSession session, Model model, VacationVo vo) {
 
-//        vo.setWriterNo(loginMemberVo.getNo());
-//        vo.setDeptNo(loginMemberVo.getDeptNo());
 
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
         if(session.getAttribute("loginMemberVo") == null){
             return "redirect:/member/login";
         }
-
-
+        vo.setEmpNo(loginMemberVo.getNo());
+        vo.setDeptNo(loginMemberVo.getDeptNo());
 
         int insertNewVacation = service.insertNewVacation(vo);
 

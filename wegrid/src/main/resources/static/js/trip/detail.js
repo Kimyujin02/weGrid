@@ -1,11 +1,13 @@
 // 모달 열기
 function openTripModal() {
     document.getElementById("tripModal").style.display = "block";
+    fqes();
 }
 
 // 모달 닫기
 function closeTripModal() {
     document.getElementById("tripModal").style.display = "none";
+    location.reload(true);
 }
 
 
@@ -99,3 +101,16 @@ document.addEventListener("DOMContentLoaded", function(){
         endDateInput.min = startDateInput.value; // 종료 날짜 최소값 = 시작 날짜
     });
 });
+
+const tripType = document.querySelector("input[name=aaaaaaaaaaaa]").value
+
+const radioValue = document.querySelectorAll("input[type=radio]");
+
+function fqes(){
+    for(const vo of radioValue){
+        if(vo.value == tripType){
+            vo.checked=true;
+            console.log(vo);
+        }
+    }
+}

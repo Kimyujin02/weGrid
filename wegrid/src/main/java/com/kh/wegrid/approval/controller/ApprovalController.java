@@ -12,12 +12,18 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -62,6 +68,7 @@ public class ApprovalController {
 
         MemberVo loginMemverVo = (MemberVo) session.getAttribute("loginMemberVo");
         avo.setWriterNo(loginMemverVo.getNo());
+        System.out.println("avo = " + avo);
 
 
         int result = service.insertApproval(avo , attachmentVoList);
@@ -122,7 +129,6 @@ public class ApprovalController {
         map.put("a" , receiveApprovalVoList);
         map.put("b" , pvo);
 
-        System.out.println("map = " + map);
 
 
         return map;
@@ -137,6 +143,28 @@ public class ApprovalController {
         model.addAttribute("avo" , avo);
 
         return "approval/detail";
+    }
+
+    @GetMapping("/download")
+    @ResponseBody
+    public ResponseEntity<Resource> downloadFile(@RequestParam String changeName) {
+        try {
+            // 파일 경로 생성
+            Path filePath = Paths.get(path).resolve(changeName).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+
+            // 파일이 존재하고 읽을 수 있는지 확인
+            if (resource.exists() && resource.isReadable()) {
+                // 응답 헤더 설정: 파일 이름을 원본 이름으로 설정
+                return ResponseEntity.ok()
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                        .body(resource);
+            } else {
+                return ResponseEntity.notFound().build(); // 파일이 없으면 404 반환
+            }
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build(); // 에러 발생 시 500 반환
+        }
     }
 
     @GetMapping("emp/list/data")

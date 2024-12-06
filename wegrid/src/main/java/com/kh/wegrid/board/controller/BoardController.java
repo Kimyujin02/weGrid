@@ -49,17 +49,29 @@ public class BoardController {
     // 게시글 목록 조회 (데이터)
     @GetMapping("list/data")
     @ResponseBody
-    public HashMap getBoardVoList(@RequestParam(name = "pno" , defaultValue = "1", required = false) int currentPage, String searchType, String searchValue){
-        int listCount = service.getBoardCnt(searchType, searchValue);
+    public HashMap getBoardVoList(HttpSession session,@RequestParam(name = "pno" , defaultValue = "1", required = false) int currentPage, String searchType, String searchTitleValue, String searchContentValue){
+        System.out.println("검색 시작");
+        
+        // 로그인 여부 체크
+        if (session.getAttribute("loginMemberVo") == null) {
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("message", "로그인이 필요합니다.");
+            return map; // 로그인 안 되어 있으면 로그인 요청 메시지 반환
+        }
+
+        int listCount = service.getBoardCnt(searchType, searchTitleValue, searchContentValue);
         int pageLimit = 5;
         int boardLimit = 10;
         PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
 
-        List<BoardVo> boardVoList = service.getBoardVoList(pvo, searchType, searchValue);
+        List<BoardVo> boardVoList = service.getBoardVoList(pvo, searchType, searchTitleValue, searchContentValue);
 
         HashMap map = new HashMap();
         map.put("a", boardVoList);
         map.put("b", pvo);
+
+        System.out.println("map = " + map);
+        System.out.println("검색 완료");
         return map;
     }
 

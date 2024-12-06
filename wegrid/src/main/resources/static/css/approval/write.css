@@ -124,14 +124,17 @@ textarea:focus{
 
 #lineBtnDiv{
     display: grid;
-    grid-template: 1fr / 1fr 1fr 1fr;
+    grid-template: 1fr /1fr 1fr 1fr;
 }
 #lineBtnDiv div {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
+#attachInputTag{
+    padding-left: 5%;
+    padding-top: 4.8%;
+}
 
 
 
@@ -277,7 +280,7 @@ form {
 }
 #empSearchModalTable{
     width: 550px;
-    height: 350px;
+    /* height: 350px; */
 
     margin: 0;
     border-radius: 5px;
@@ -316,7 +319,7 @@ form {
 .list-middle{
     border-bottom: 1px solid gray;
     font-size: 14px;
-   
+    height: 30px;
 }
 
 .page {
@@ -348,3 +351,31 @@ td{
    margin: auto;
    margin-bottom: 10px;
 }
+
+
+.approvalBtn{
+    width: 42px;
+    height: 42px;
+    border: 0.1px solid rgb(221, 220, 220);
+    border-radius: 45px;
+    font-size: bold;
+    background-color: rgb(232, 230, 230);
+}
+
+.approvalaaa{
+    width: 80px;
+    height: 30px;
+    background-color: white;
+    border: none;
+    font-size: 1.1rem;
+}
+.dept-areaa{
+    font-size: 14px;
+    font-weight: 400;
+    color: gray;
+}
+.name-areaa{
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+

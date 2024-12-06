@@ -153,3 +153,11 @@
 form{
     display: contents;
 }  
+#approvalLine-area{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+.att-boc{
+    height: 25px;
+    font-size: 12px;
+}

@@ -60,7 +60,13 @@
                                 <div><h4 class="subtitle-color">결재선</h4></div>
                                 <div></div>
                                 <div></div>
-                                <div>결재선 들어가는곳</div>
+                                <div id="approvalLine-area">
+                                    <div>${avo.writerName}</div>
+                                    <c:if test="${avo.mline != null && avo.mline != ''}">
+                                        <div>${avo.mlineName}</div>
+                                    </c:if>
+                                    <div>${avo.llineName}</div>
+                                </div>
                                 <div></div>
                             </div>
                             <div></div>
@@ -72,12 +78,18 @@
                             <div><h4 class="subtitle-color">첨부파일</h4></div>
                             <div></div>
                             <div></div>
-                            <div>첨부파일실제</div>
+                            <div>
+                                <c:forEach var="file" items="${attVoList}">
+                                    <div>
+                                        <a href="/approval/download?changeName=${file.changeName}">${file.originName}</a>
+                                    </div>
+                                </c:forEach>
+                            </div>
                             <div></div>
                         </div>
                         <div id="button-area">
                             <div></div>
-                            <c:if test="${loginMemberVo.no == avo.mline}">
+                            <c:if test="${loginMemberVo.no == avo.mline && avo.statusNo != '4'}">
                                 <form action="/approval/mline/allow" method="post">
                                     <input type="hidden" name="no" value="${avo.no}">
                                     <input type="hidden" name="mline" value="${avo.mline}">
@@ -89,7 +101,7 @@
                                     <div id="companionBtnDiv"><button type="submit" class="btn btn-primary" id="companion-btn">결재 반려</button></div>
                                 </form>
                             </c:if>
-                            <c:if test="${loginMemberVo.no == avo.lline}">
+                            <c:if test="${loginMemberVo.no == avo.lline && avo.statusNo != '4'}">
                                 <form action="/approval/lline/allow" method="post">
                                     <input type="hidden" name="no" value="${avo.no}">
                                     <input type="hidden" name="line" value="${avo.lline}">

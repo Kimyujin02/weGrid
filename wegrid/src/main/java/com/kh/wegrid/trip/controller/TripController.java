@@ -1,5 +1,6 @@
 package com.kh.wegrid.trip.controller;
 
+import com.kh.wegrid.member.vo.MemberVo;
 import com.kh.wegrid.trip.service.TripService;
 import com.kh.wegrid.trip.vo.TripVo;
 import com.kh.wegrid.trip.vo.typeVo;
@@ -24,11 +25,19 @@ public class TripController {
 
     @PostMapping("write")
     public String write(TripVo vo , HttpSession session){
-
-        System.out.println("vo = " + vo);
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        vo.setWriterNo(loginMemberVo.getNo());
         int result = service.write(vo);
 
-        return "redirect:/trip/list";
+        if(result == 1){
+            session.setAttribute("alertMsg" , "출장등록 성공");
+            return "redirect:/trip/list";
+        }else{
+            session.setAttribute("alertMsg" , "출장등록 실패..");
+            return "redirect:/trip/list";
+        }
+
+
     }
 
     @GetMapping("list")
@@ -75,14 +84,33 @@ public class TripController {
 
 
     @PostMapping("edit")
-    public String edit(TripVo vo , Model model){
+    public String edit(TripVo vo , Model model , HttpSession session){
 
         TripVo tvo = service.edit(vo);
         String firstTwoAddress = tvo.getRoadAddress().substring(0, 2);
         tvo.setFirstTwoAddress(firstTwoAddress);
         model.addAttribute("tripVo" , tvo);
 
-        return "trip/detail";
+//        int result = service.edit(vo);
+
+        if(tvo != null){
+            session.setAttribute("alertMsg" , "출장 수정 완료!");
+        }
+        return "redirect:/trip/list";
+    }
+
+    @PostMapping("delete")
+    public String delete(String no , HttpSession session){
+
+        int result = service.delete(no);
+
+        if(result == 1){
+            session.setAttribute("alertMsg" , "출장 삭제 완료");
+        }else {
+            throw new IllegalStateException("출장 삭제 실패...");
+        }
+
+        return "redirect:/trip/list";
     }
 
 

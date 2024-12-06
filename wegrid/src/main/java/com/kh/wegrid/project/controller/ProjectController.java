@@ -85,10 +85,14 @@ public class ProjectController {
 
     // 신규 프로젝트 생성 호출(요청처리)
     @PostMapping("create")
-    public String create( ProjectVo vo, ProjectMemberVo pmVo){
-
+    public String create( ProjectVo vo, @RequestParam(value = "addMemberNo")List<String> addMemberNo){
+        System.out.println("vo = " + vo);
+        System.out.println("addMemberNo = " + addMemberNo);
+        for (int i=0; i<addMemberNo.size(); i++) {
+            System.out.println("addMemberNo[i] = " + addMemberNo.get(i));
+        }
         // 서비스 호출
-        int result = service.create(vo , pmVo);    //플젝 생성
+        int result = service.create(vo , addMemberNo);    //플젝 생성
 
         // 결과 처리
         if(result > 0){
@@ -111,25 +115,25 @@ public class ProjectController {
 
 
     //프로젝트 수정
-    @PostMapping("edit") // 정보 수정, 멤버 추가, 삭제
-    public String edit(ProjectVo vo, String projectNo, ProjectMemberVo pmVo){
-        System.out.println("ProjectController.edit ~~~~~~~~~~~~~~~~~~~~~~");
-
-        int result = service.edit(vo, projectNo, pmVo);
-
-        System.out.println("ProjectVo: " + vo);
-        System.out.println("ProjectMemberVo: " + pmVo);
-        System.out.println("ProjectNo: " + projectNo);
-
-
-        // 결과 처리
-        if(result > 0){
-            return "redirect:/project/people";
-        }else{
-            return "redirect:/error";
-        }
-
-    }
+//    @PostMapping("edit") // 정보 수정, 멤버 추가, 삭제
+//    public String edit(ProjectVo vo, String projectNo, ProjectMemberVo pmVo){
+//        System.out.println("ProjectController.edit ~~~~~~~~~~~~~~~~~~~~~~");
+//
+//        int result = service.edit(vo, projectNo, pmVo);
+//
+//        System.out.println("ProjectVo: " + vo);
+//        System.out.println("ProjectMemberVo: " + pmVo);
+//        System.out.println("ProjectNo: " + projectNo);
+//
+//
+//        // 결과 처리
+//        if(result > 0){
+//            return "redirect:/project/people";
+//        }else{
+//            return "redirect:/error";
+//        }
+//
+//    }
 
 
     

@@ -19,4 +19,5 @@ public class ProjectMemberVo {
     private String empNum;
     private String email;
     private String deptNo;
+
 }

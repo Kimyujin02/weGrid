@@ -12,10 +12,10 @@
 <script defer src="/js/common/header.js"></script>
 
 <script>
-  <c:if test="${not empty alertMsg}">
-      alert('${sessionScope.alertMsg}');
-  </c:if>
-  <c:remove var="alertMsg" scope="session" />
+    <c:if test="${not empty alertMsg}">
+        alert('${sessionScope.alertMsg}');
+    </c:if>
+    <c:remove var="alertMsg" scope="session" />
 </script>
 
     <!-- Header -->

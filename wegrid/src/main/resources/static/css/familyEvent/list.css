@@ -1,0 +1,180 @@
+#main-area{
+    display: grid;
+    grid-template: 80px 79px 455px 12px 114px / 1fr;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 1500px;
+    height: 740px;
+    margin-top: 0px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 50px;
+    box-shadow: 0px 0px 10px rgba(0.3, 0.3, 0.3, 0.3); /* 오른쪽 아래로 그림자 */
+}
+#menu-box{
+    display: grid;
+    grid-template: 1fr / 100px 117px 570px 119px 119px 384px 91px;
+}
+#table-area{
+    justify-items: center;
+    align-items: start;
+}
+
+#bootbtn{
+    color: white;
+    background-color: #174880;
+    width: 117px;
+    height: 36px;
+    justify-self: center;
+}
+
+
+.page {
+    text-align: center;
+    margin-top: 20px;
+}
+    
+.page a {
+display: inline-block; 
+text-decoration: none;
+color: rgba(23, 72, 128, 1);
+margin: 0 10px; /* 링크 간 간격 조정 */
+font-size: 16px;
+font-weight: bold;
+}
+
+
+#table{
+    margin: 0;
+    /* height: 100%; */
+    /* height: 6.2%; */
+    width: 1340px;
+    border-radius: 5px;
+    border-collapse: collapse;
+    border-top : none;
+    text-align: center;
+}
+#table tr{
+    height: 28px;
+}
+.list-top{
+    border-bottom: 1px solid #d3d3d3 ;
+    height: 35px;
+    font-size: 16px;
+    background-color: rgba(23, 72, 128, 1);
+    color: white;
+}
+
+.body{
+    text-align: center;
+}
+.list-middle{
+    border-bottom: 1px solid gray;
+    font-size: 14px;
+}
+
+.page {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.page a {
+    display: inline-block; 
+    text-decoration: none;
+    color: rgba(23, 72, 128, 1);
+    margin: 0 10px; /* 링크 간 간격 조정 */
+    font-size: 16px;
+    font-weight: bold;
+}
+
+td{
+    font-weight: 300;
+}
+
+.bottom-line{
+    width: 1340px;
+    height: 8px;
+    background-color: rgba(23, 72, 128, 1);
+   margin: auto;
+   margin-bottom: 10px;
+}
+#iwannagohome{
+    display: flex;
+    align-items: center;
+}
+#type-boc{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#type-boc > select{ 
+    height: 34px;
+    width: 80px;
+}
+#search-boc{
+    width: 370px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+}
+#searchTag{
+    width: 310px;
+    height: 38px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    flex-grow: 1;
+    margin-left: 5px;
+}
+#searchBtn{
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+    color: #666;
+    margin-left: 0px;
+    border: none;
+    background-color: white;
+}
+#searchBtn > i {
+    color: rgba(23, 72, 128, 1);;
+}
+#title-area{
+    display: flex;
+    align-items: center;
+}
+#title-area > h2 {
+    color:  rgba(23, 72, 128, 1);
+    margin-left: 29px;
+    margin-bottom: 0px;
+}
+#btn-area{
+    display: flex;
+    align-items: center;
+}
+
+#titleDiv{
+    display: flex;
+    align-items: center;
+}
+form {
+   
+    display: contents; /* 자식 요소의 레이아웃을 그대로 유지 */
+}
+
+#table tbody tr:hover{
+    background-color: lightgray;
+    cursor: pointer;
+}
+#leftPageBtn{
+    color: #174880
+}
+#rightPageBtn{
+    color: #174880
+}
+
+

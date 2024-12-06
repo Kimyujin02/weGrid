@@ -13,19 +13,43 @@ function openEmpSearchModal(){
     document.querySelector("#searchTag").value = "";
 }
 
+
+
 // 모달 닫기
-function closeEmpSearchModal(name , no) {
+function closeEmpSearchModal(name , no , dept) {
     setApprovalNo(no);
     setApprovalName(name);
+    setApprovalDept(dept);
     document.querySelector("#empSearchModal").style.display = "none";
 }
 
 //결재자 네임값 설정
 function setApprovalName(name){
+    const middleBtn = document.querySelector("#approvalMiddleBtn");
+    const lastBtn = document.querySelector("#approvalLastBtn");
+
     if(approvalStep === "middle"){
-        document.querySelector("#approvalMiddleBtn").innerText = name;
+        middleBtn.innerText = name;
+        middleBtn.removeAttribute("class" , "approvalBtn");
+        middleBtn.setAttribute("class" , "approvalaaa");
     }else if(approvalStep === "last"){
-        document.querySelector("#approvalLastBtn").innerText = name;
+        lastBtn.innerText = name;
+        lastBtn.removeAttribute("class" , "approvalBtn");
+        lastBtn.setAttribute("class" , "approvalaaa");
+    }
+}
+
+//결재자 네임값 설정
+function setApprovalDept(dept){
+    const middleDept = document.querySelector("#middleDept");
+    const lastDept = document.querySelector("#lastDept");
+
+    if(approvalStep === "middle"){
+        middleDept.innerText = dept;
+   
+    }else if(approvalStep === "last"){
+        lastDept.innerText = dept;
+       
     }
 }
 
@@ -38,6 +62,8 @@ function setApprovalNo(no){
     }
 }
 
+
+
 //모달창에서 tr 클릭했을 때 동작하는 핸들러 설정
 const tbodyTag = document.querySelector("#empSearchModalTable tbody");
 tbodyTag.addEventListener("click" , function(evt){
@@ -45,7 +71,8 @@ tbodyTag.addEventListener("click" , function(evt){
     const trTag = evt.target;
     const no = trTag.parentNode.children[0].innerText;
     const name = trTag.parentNode.children[3].innerText;
-    closeEmpSearchModal(name , no);
+    const dept = trTag.parentNode.children[1].innerText;
+    closeEmpSearchModal(name , no , dept);
 });
 
 // 드래그를 위한 변수 선언
@@ -203,5 +230,8 @@ function paintPageArea(pvo){
     }
 
 }
+
+
+
 
 

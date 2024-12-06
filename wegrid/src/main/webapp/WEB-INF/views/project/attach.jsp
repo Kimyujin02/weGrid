@@ -31,7 +31,7 @@
                 <div class="project-info">
                      <!-- 공백 -->
                 <div class="edit-icon">
-                    <a href="/project/edit?projectNo=${map.project.projectNo}&pno=${vo.projectNo}"><i class="fas fa-edit" style="color:#666;"></i></a>
+                    <a href="/project/edit?projectNo=${map.project.projectNo}&pno=1"><i class="fas fa-edit" style="color:#666;"></i></a>
                 </div>
                 <table class="project-table">
                     <thead>
@@ -87,10 +87,10 @@
                 <!-- 3)참여인원 목록 -->
                 <div class="people-info">
                     <div class="sidebar">
-                        <a href="/project/people?projectNo=${map.project.projectNo}&pno=${vo.projectNo}" class="sidebar-btn " id="btn1">
+                        <a href="/project/people?projectNo=${map.project.projectNo}&pno=1" class="sidebar-btn " id="btn1">
                             <i class="fas fa-user-friends"></i> 
                         </a>
-                        <a href="/project/attach" class="sidebar-btn active" id="btn2">
+                        <a href="/project/attach?projectNo=${map.project.projectNo}&pno=1" class="sidebar-btn active" id="btn2">
                             <i class="fas fa-paperclip"></i>
                         </a>
                     </div>

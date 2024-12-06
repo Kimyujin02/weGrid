@@ -19,18 +19,18 @@
         , B.TITLE
         , B.CONTENT
         , B.WRITER_NO
-        , B.HIT
-        , B.CREATE_DATE
+        , B.VIEW_CNT
+        , B.ENROLL_DATE
         , B.DEL_YN
-        , M.NICK AS WRITER_NICK
+        , E.NAME AS NAME
         FROM BOARD B
-        JOIN MEMBER M ON( B.WRITER_NO = M.NO )
+        JOIN EMPLOYEE E ON( B.WRITER_NO = E.NO )
         WHERE B.DEL_YN = 'N'
         <if test="searchType == 'title'">
-            AND TITLE LIKE '%${searchValue}%'
+            AND TITLE LIKE '%${searchTitleValue}%'
         </if>
         <if test="searchType == 'content'">
-            AND CONTENT LIKE '%${searchValue}%'
+            AND CONTENT LIKE '%${searchContentValue}%'
         </if>
         ORDER BY B.NO DESC
         OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
@@ -41,10 +41,10 @@
         FROM BOARD
         WHERE DEL_YN ='N'
         <if test="searchType == 'title'">
-            AND TITLE LIKE '%${searchValue}%'
+            AND TITLE LIKE '%${searchTitleValue}%'
         </if>
         <if test="searchType == 'content'">
-            AND TITLE CONTENT '%${searchValue}%'
+            AND CONTENT LIKE '%${searchContentValue}%'
         </if>
     </select>
 

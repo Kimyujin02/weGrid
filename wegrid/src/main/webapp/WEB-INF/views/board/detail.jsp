@@ -20,6 +20,32 @@
    <%@ include file="/WEB-INF/views/common/header.jsp" %>
    <%@ include file="/WEB-INF/views/common/nav.jsp" %>
 
+
+
+
+    <div id="board-area">
+        <div id="title-area">${vo.title}</div>
+        <div>${vo.writerNick}</div>
+        <div>${vo.createDate}</div>
+        <div>${vo.categoryName}</div>
+        <div>${vo.hit}</div>
+        <div id="content-area">${vo.content}</div>
+        <div class="board-img-area">
+            <c:forEach items="${attachmentVoList}" var="attachVo">
+                <img src="/img/board/attachment/${attachVo.changeName}" alt="${attachVo.originName}" width="100px" height="100px">
+            </c:forEach>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
     <!-- Main -->
     <main>
         <div class="main-content">
@@ -29,10 +55,18 @@
             <div class="board-detail">
                 <div class="content">
 
-                    <div class="content-btns">
-                        <button class="btn-edit">수정하기</button>
-                        <button class="btn-delete">삭제하기</button>
-                    </div>
+
+
+
+
+
+
+                    <c:if test="${loginMemberVo.no == vo.writerNo}">        <%-- 로그인정보 == 작성자일때 --%>
+                        <div class="content-btns" tp>
+                            <button class="btn-edit" onclick="location.href='/board/del?bno=${vo.no}'">수정하기</button>
+                            <button class="btn-delete" onclick="location.href='/board/del?bno=${vo.no}'">삭제하기</button>
+                        </div>
+                    </c:if>
 
                     <div class="content-shortcut">
                         <div><h1 class="shortcut-title">제목~~~~~</h1></div>
@@ -55,14 +89,7 @@
 
                     <div class="content-detail">
                         <p>
-                            awkeahkwjekawjheklahawk
-                            awkeahkwjekawjheklahawk
-                            awkeahkwjekawjheklahawk
-                            awkeahkwjekawjheklahawk
-                            awkeahkwjekawjheklahawk
-                            awkeahkwjekawjheklahawk
-                            awkeahkwjekawjheklahawk
-                            awkeahkwjekawjheklahawkawkeahkwjekawjheklahawkawkeahkwjekawjheklahawkawkeahkwjekawjheklahawkawkeahkwjekawjheklahawkawkeahkwjekawjheklahawk
+                            내용임
                         </p>
                     </div>
 
@@ -93,6 +120,9 @@
                                     <div class="reply-delete">삭제하기</div>
                                 </div>
                             </div>
+
+
+
 
                         </div>
                     </div> <!--content-reply -->

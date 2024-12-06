@@ -153,7 +153,7 @@
                     </div>
                 </div>
                 <div class="tripModal-footer">
-                    <button class="submit-btn" type="submit">등록</button>
+                    <button class="submit-btn" type="submit" onclick="window.confirm('출장등록을 하시겠습니까?')">등록</button>
                 </div>
             </div>
         </form>
@@ -161,6 +161,7 @@
     
 </body>
 </html>
+
 
 
 

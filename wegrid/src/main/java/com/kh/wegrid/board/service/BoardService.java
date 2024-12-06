@@ -37,13 +37,17 @@ public class BoardService {
 
 
     //게시판 페이징
-    public List<BoardVo> getBoardVoList(PageVo pvo, String searchType, String searchValue) {
-        return mapper.getBoardVoList(pvo, searchType, searchValue);
+    public List<BoardVo> getBoardVoList(PageVo pvo, String searchType, String searchTitleValue, String searchContentValue) {
+        return mapper.getBoardVoList(pvo, searchType, searchTitleValue, searchContentValue);
     }
 
     //게시판 검색
-    public int getBoardCnt(String searchType, String searchValue) {
-        return mapper.getBoardCnt(searchType, searchValue);
+    public int getBoardCnt(String searchType, String searchTitleValue, String searchContentValue) {
+        return mapper.getBoardCnt(searchType, searchTitleValue, searchContentValue);
     }
+
+
+
+
 
 }

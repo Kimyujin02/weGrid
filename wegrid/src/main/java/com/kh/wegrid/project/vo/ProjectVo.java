@@ -23,4 +23,6 @@ public class ProjectVo {
     private String managerEmail;
     private int projectMemberCount;
     private String rankName;
+
+
 }

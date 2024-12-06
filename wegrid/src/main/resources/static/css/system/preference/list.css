@@ -1,11 +1,37 @@
+main {
+    grid-area: main;
+    background-color: #d1dce8; /* 연한 회색 */
+    padding: 0px;
+}
+
 .main-content {
     display: grid;
     grid-template-columns:  1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    
+    place-items: center center;
+
+    width: 1500px;
+    height: 740px;
+    margin-top: 0px;
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 50px;
+
+    background-color: transparent;
+    /* border: 1px solid #ddd; */
+    /* border-radius: 5px; */
+    /* box-shadow: 0px 0px 10px rgba(0.3, 0.3, 0.3, 0.3); 오른쪽 아래로 그림자 */
 }
 
-.main-content div {
+
+.list-box {
     display: flex;
+    
+    width: 95%;
+    height: 95%;
+
     border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0.3, 0.3, 0.3, 0.3); /* 오른쪽 아래로 그림자 */
+    background-color: white;
 }
