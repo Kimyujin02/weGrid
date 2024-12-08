@@ -49,17 +49,17 @@
                 </div>
 
                 <form class="search-box" method="get">
-                    <input type="text" name="" placeholder="검색">
+                    <input type="text" name="searchValue" placeholder="사원 이름 검색" value="${searchValue}">
                     <i class="fas fa-search"></i>
                 </form>
     
-                    <button type="button" class="btn btn-primary" id="delete-btn" onclick="deleteList();">일괄삭제</button>
+                    <button type="button" class="btn btn-primary" id="delete-btn" onclick="deleteNotice()">일괄삭제</button>
             </div>
             
 
             <div id="account-list">
                 <table class="table">
-                    <thead class="list-head" id="abc">
+                    <thead class="list-head">
                         <tr>
                             <th>ID</th>
                             <th>사원명</th>
@@ -70,13 +70,13 @@
                             <th>권한</th>
                             <th>정보수정</th>
                             <th>사용여부</th>
-                            <th><input type="checkbox" onclick="handleCheckbox(this);">삭제</th>
+                            <th>삭제<input type="checkbox" onclick="handleCheckbox(this);"></th>
                         </tr>
                     </thead>
               
                     <tbody >
                         <c:forEach items="${empVoList}" var="vo">
-                            <tr class="list-middle">
+                            <tr class="list-middle" data-no="${vo.no}">
                                 <input type="hidden" value="${vo.no}">
                                 <td>${vo.id}</td>
                                 <td>${vo.name}</td>
@@ -97,72 +97,6 @@
                         </c:forEach>
                        
                        
-                        <tr class="list-middle">
-                            <!-- tbody안쪽은 js사용해서 동적으로 채워줌   -->
-                            <td>kh1234@gamil.com</td>
-                            <td>홍길동</td>
-                            <td>kh123456</td>
-                            <td>영업 1팀</td>
-                            <td>부장</td>
-                            <td>2024.11.26</td>
-                            <td>매니저</td>
-                            <td><button type="button" class="btn btn-primary" id="edit-btn">정보수정</button></td>
-                            <td>Y</td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <tr class="list-middle">
-                            <!-- tbody안쪽은 js사용해서 동적으로 채워줌   -->
-                            <td>kh1234@gamil.com</td>
-                            <td>홍길동</td>
-                            <td>kh123456</td>
-                            <td>영업 1팀</td>
-                            <td>부장</td>
-                            <td>2024.11.26</td>
-                            <td>매니저</td>
-                            <td><button type="button" class="btn btn-primary" id="edit-btn">정보수정</button></td>
-                            <td>Y</td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <tr class="list-middle">
-                            <!-- tbody안쪽은 js사용해서 동적으로 채워줌   -->
-                            <td>kh1234@gamil.com</td>
-                            <td>홍길동</td>
-                            <td>kh123456</td>
-                            <td>영업 1팀</td>
-                            <td>부장</td>
-                            <td>2024.11.26</td>
-                            <td>매니저</td>
-                            <td><button type="button" class="btn btn-primary" id="edit-btn">정보수정</button></td>
-                            <td>Y</td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <tr class="list-middle">
-                            <!-- tbody안쪽은 js사용해서 동적으로 채워줌   -->
-                            <td>kh1234@gamil.com</td>
-                            <td>홍길동</td>
-                            <td>kh123456</td>
-                            <td>영업 1팀</td>
-                            <td>부장</td>
-                            <td>2024.11.26</td>
-                            <td>매니저</td>
-                            <td><button type="button" class="btn btn-primary" id="edit-btn">정보수정</button></td>
-                            <td>Y</td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                        <tr class="list-middle">
-                            <!-- tbody안쪽은 js사용해서 동적으로 채워줌   -->
-                            <td>kh1234@gamil.com</td>
-                            <td>홍길동</td>
-                            <td>kh123456</td>
-                            <td>영업 1팀</td>
-                            <td>부장</td>
-                            <td>2024.11.26</td>
-                            <td>매니저</td>
-                            <td><button type="button" class="btn btn-primary" id="edit-btn">정보수정</button></td>
-                            <td>Y</td>
-                            <td><input type="checkbox"></td>
-                        </tr>
-                       
                     </tbody>
                     
                 </table>
@@ -170,17 +104,17 @@
                 <div class="bottom-line"></div>
                 
             </div>
-                <div class="page">
-                    <c:if test="${pvo.startPage != 1}">
-                <a href="/system/account/list?pno=${pvo.startPage-1}&searchValue=${searchValue}"><i class="fas fa-caret-left fa-lg" style="color: #174880;"></i></a>
+            <div class="page">
+                <c:if test="${pvo.startPage != 1}">
+                    <a href="/system/account/list?pno=${pvo.startPage-1}&searchValue=${searchValue}">이전</a>
                 </c:if>
                 <c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i" step="1">
                     <a href="/system/account/list?pno=${i}&searchValue=${searchValue}">${i}</a>
                 </c:forEach>
                 <c:if test="${pvo.endPage != pvo.maxPage}">
-                    <a href="/system/account/list?pno=${pvo.endPage+1}&searchValue=${searchValue}"><i class="fas fa-caret-right fa-lg" style="color: #174880;"></i></a>
+                    <a href="/system/account/list?pno=${pvo.endPage+1}&searchValue=${searchValue}">다음</a>
                 </c:if>
-                </div>
+        </div>
         
             </div>
     </main>

@@ -5,10 +5,7 @@ import com.kh.wegrid.project.vo.EmployeeVo;
 import com.kh.wegrid.systemManager.vo.DepartMentVo;
 import com.kh.wegrid.systemManager.vo.JobInfoVo;
 import com.kh.wegrid.util.page.PageVo;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -27,6 +24,7 @@ public interface SystemManagerMapper {
                 ,POST_ADDRESS
                 ,ROAD_ADDRESS
                 ,DETAIL_ADDRESS
+                ,ENROLL_DATE
                 ,EMP_NUM
                 ,JOB_NO
                 ,IS_MANAGER
@@ -42,6 +40,7 @@ public interface SystemManagerMapper {
                 , #{postAddress}
                 , #{roadAddress}
                 , #{detailAddress}
+                , SYSDATE
                 , #{empNum}
                 , #{jobNo}
                 , #{isManager}
@@ -92,8 +91,9 @@ public interface SystemManagerMapper {
             SELECT COUNT(*)
             FROM EMPLOYEE
             WHERE DEL_YN = 'N'
+            AND NAME LIKE '%' || #{searchValue} || '%'
             """)
-    int getSystemCnt();
+    int getSystemCnt(String searchValue);
 
     @Select("""
              SELECT
@@ -117,6 +117,7 @@ public interface SystemManagerMapper {
             LEFT JOIN JOB_INFO J
                 ON E.JOB_NO = J.NO    -- 직급 번호 조인
             ORDER BY E.DEL_YN ASC
+            OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
             """)
     List<MemberVo> getMemberVoList(PageVo pvo, String str);
 
@@ -153,11 +154,27 @@ public interface SystemManagerMapper {
 
     // 비밀번호 초기화
     @Update("""
+    UPDATE EMPLOYEE
+    SET PWD = #{newPassword}
+    WHERE NO = #{no}
+    """)
+    int updatePassword(@Param("no") String no, @Param("newPassword") String newPassword);
+
+
+    @Update("""
             UPDATE EMPLOYEE
-             SET PWD = #{newPassword}
-             WHERE NO = #{no}
+            SET DEL_YN = 'N'
+            WHERE NO = #{NO}
             """)
-    int updatePassword(String no, String newPassword);
+    int accountDelete(String no);
+
+//    @Update("""
+//            UPDATE EMPLOYEE
+//                SET
+//                    DEL_YN = 'Y'
+//                WHERE NO IN (${x})
+//            """)
+    int delete(@Param("accountArr") List<String> accountArr);
 }
 
 

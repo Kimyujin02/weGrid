@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="/css/system/detail.css">
 
 <script defer src="/js/common/main.js"></script>
+<script defer src="/js/system/detail.js"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -31,24 +32,28 @@
             <div class="form-container">
             <!-- 기본 개인 정보 -->
             <div class="left-panel">
-                <h3 class="sub-title">기본 개인 정보</h3>
-                <form action="" name="personal-info" method="post">
+                <form action="/system/detail" method="get">
+                    <!-- 계정 정보 수정 불가 -->
+                    <input type="hidden" name="no" value="${vo.no}">
                     <label for="name">이름</label>
-                    <input type="text" id="name"><br>
+                    <input type="text" id="name" name="name" value="${vo.name}" readonly><br>
+                    
                     <label for="id">아이디</label>
-                    <input type="text" id="id"><br>
+                    <input type="text" id="id" name="id" value="${vo.id}" readonly><br>
+                    
                     <label for="email">이메일</label>
-                    <input type="email" id="email"><br>
+                    <input type="email" id="email" name="email" value="${vo.email}" readonly><br>
+                    
                     <label for="phone">연락처</label>
-                    <input type="text" id="phone"><br><br>
-                </form>
-                <!-- 주소 입력 필드 -->
-                <input type="text" id="sample2_postcode" placeholder="우편번호" style="width: 30%; background-color: #EBEBEB; border: 1px solid #C0C0C0;">
-                <input type="button" class="search-button"  onclick="sample2_execDaumPostcode()" value="우편번호 찾기" ><br>
-                <input type="text" id="sample2_address" placeholder="주소" style="width: 80%; margin: 5px 0px 5px 0px; background-color: #EBEBEB; border: 1px solid #C0C0C0;"><br>
-                <input type="text" id="sample2_detailAddress" placeholder="상세주소" style="background-color: #EBEBEB; border: 1px solid #C0C0C0;">
-                <input type="text" id="sample2_extraAddress" placeholder="참고항목" style="background-color: #EBEBEB; border: 1px solid #C0C0C0;">
-                   
+                    <input type="text" id="phone" name="phone" value="${vo.phone}" readonly><br><br>
+                    
+                    <!-- 주소 입력 필드 (수정 불가) -->
+                     <label>주소</label>
+                    <input type="text" id="sample2_postcode" placeholder="우편번호" name="postAddress" value="${vo.postAddress}" readonly>
+                    <input type="text" id="sample2_address" placeholder="주소" name="roadAddress" value="${vo.roadAddress}" readonly><br>
+                    <input type="text" id="sample2_detailAddress" placeholder="상세주소" name="detailAddress" value="${vo.detailAddress}" readonly>
+                    <input type="text" id="sample2_extraAddress" placeholder="참고항목" value="${vo.detailAddress}" readonly>
+        
                 
                 <!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
                 <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
@@ -149,54 +154,42 @@
                  <!-- 가운데 구분선 -->
                 <div class="divider"></div>
 
-                <!-- 사원 정보 -->
-                <div class="right-panel">
-                    <h3 class="sub-title">사원 정보</h3>
-                    <form action="" name="employee-info" method="post">
+             <!-- 오른쪽 패널 -->
+    <div id="right-panel">
+        <h3 class="sub-title">사원 정보</h3>
+        <form>
+            <label for="employee-no">사번</label>
+            <input type="text" id="employee-no" name="empNum" value="${vo.empNum}" readonly><br>
 
-                        <label for="employee-no">사번</label>
-                        <input type="text" id="employee-no"><br>
-
-                        <label for="department">부서명</label>
-                       
-                        <div class="department-row">
-                            <input type="text" id="department-name"> 
-                            <div class="filter-controls">
-                                <select id="department">
-                                    <option>경영지원</option>
-                                    <option>개발팀</option>
-                                    <option>영업팀</option>
-                                </select>
-                                <br>
-                            </div>
-                        </div>
-                       
-                        <label for="position">직급</label>
-                        <div class="filter-controls">
-                        <select id="position">
-                            <option>전체</option>
-                            <option>관리자</option>
-                            <option>일반 사원</option>
-                        </select>
-                        <br>
-                    </div>
-                        <label for="authority">권한</label>
-                        <div class="filter-controls">
-                        <select id="authority">
-                            <option>관리자</option>
-                            <option>일반 사원</option>
-                        </select>
-                    </div>
-                    </form>
-
-                    
-                </div>
+            <label for="department">부서명</label>
+            <div class="department-row">
+                <input type="text" id="department-name" value="${vo.deptName}" readonly>
             </div>
 
+            <label for="position">직급</label>
+            <div>
+                <input type="text" id="jobName" value="${vo.jobName}" readonly>
+            </div>
+           
+
+            <label for="authority">권한</label>
+            <div>
+                <input type="text" name="isManager" value="${vo.isManager}" readonly>
+            </div>
+            <!-- <div class="filter-controls" >
+                <select id="authority" name="isManager" readonly>
+                    <option value="Y">관리자</option> 
+                    <option value="N">일반 사원</option>
+                </select>
+            </div> -->
+        </form>
+    </div>
+</div>
             <div class="button-group">
-                <button type="button" class="btn btn-primary" id="create-btn">등록하기</button>
-                <button type="button" class="btn btn-primary" id="delete-btn">삭제</button>
+                <button type="button" class="btn btn-primary" id="create-btn" onclick="location.href='/system/edit?no=${vo.no}'">수정하기</button>
+                <button type="button" class="btn btn-primary" id="delete-btn" onclick="location.href='/system/account/list'" data-no="${vo.no}" data-name="${vo.name}">삭제</button>
             </div>
+        </form>
         </div>
     </main>
 

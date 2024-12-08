@@ -54,4 +54,62 @@
 
     </update>
 
+<!--    <select id="getMemberVoList">-->
+<!--        SELECT-->
+<!--        E.NO,-->
+<!--        E.NAME,-->
+<!--        E.ID,-->
+<!--        E.EMAIL,-->
+<!--        E.PHONE,-->
+<!--        E.POST_ADDRESS,-->
+<!--        E.ROAD_ADDRESS,-->
+<!--        E.DETAIL_ADDRESS,-->
+<!--        E.EMP_NUM,-->
+<!--        D.NAME AS DEPT_NAME,-->
+<!--        J.NAME AS JOB_NAME,-->
+<!--        E.IS_MANAGER,-->
+<!--        TO_CHAR(E.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE,-->
+<!--        E.DEL_YN-->
+<!--        FROM EMPLOYEE E-->
+<!--        LEFT JOIN DEPARTMENT D-->
+<!--        ON E.DEPT_NO = D.CODE-->
+<!--        LEFT JOIN JOB_INFO J-->
+<!--        ON E.JOB_NO = J.NO-->
+<!--        <where>-->
+<!--            <if test="searchType == 'integration'">-->
+<!--                (-->
+<!--                E.NAME LIKE '%' || #{searchValue} || '%'-->
+<!--                OR E.EMAIL LIKE '%' || #{searchValue} || '%'-->
+<!--                OR E.PHONE LIKE '%' || #{searchValue} || '%'-->
+<!--                )-->
+<!--            </if>-->
+<!--            <if test="searchType == 'name'">-->
+<!--                E.NAME LIKE '%' || #{searchValue} || '%'-->
+<!--            </if>-->
+<!--            <if test="searchType == 'email'">-->
+<!--                E.EMAIL LIKE '%' || #{searchValue} || '%'-->
+<!--            </if>-->
+<!--            <if test="searchType == 'phone'">-->
+<!--                E.PHONE LIKE '%' || #{searchValue} || '%'-->
+<!--            </if>-->
+<!--        </where>-->
+<!--        ORDER BY E.DEL_YN ASC, E.ENROLL_DATE DESC-->
+<!--    </select>-->
+
+    <delete id="deleteMembers">
+        DELETE FROM EMPLOYEE
+        WHERE NO IN
+        <foreach item="no" collection="noList" open="(" separator="," close=")">
+            #{no}
+        </foreach>
+    </delete>
+
+    <update id="delete">
+        UPDATE EMPLOYEE
+        SET DEL_YN = 'Y'
+        WHERE NO IN
+        <foreach item="item" collection="accountArr" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </update>
 </mapper>

@@ -35,24 +35,20 @@ public class SystemManagerService {
     }
 
     // 목록 조회
-    public List<EmployeeVo> getEmployeeVoList(PageVo pvo, String searchValue) {
-        String str = "";
-        if(searchValue != null && searchValue.length() > 0){
-            str = "AND TITLE LIKE '%" + searchValue + "%'";
-        }
-        return mapper.getEmployeeVoList(pvo, str);
-    }
+//    public List<EmployeeVo> getEmployeeVoList(PageVo pvo, String searchValue) {
+//        String str = "";
+//        if(searchValue != null && searchValue.length() > 0){
+//            str = "AND TITLE LIKE '%" + searchValue + "%'";
+//        }
+//        return mapper.getEmployeeVoList(pvo, str);
+//    }
 
-    public int getSystemCnt() {
-        return mapper.getSystemCnt();
+    public int getSystemCnt(String searchValue) {
+        return mapper.getSystemCnt(searchValue);
     }
 
     public List<MemberVo> getMemberVoList(PageVo pvo, String searchValue) {
-        String str = "";
-        if(searchValue != null && searchValue.length() > 0){
-            str = "AND TITLE LIKE '%" + searchValue + "%'";
-        }
-        return mapper.getMemberVoList(pvo, str);
+        return mapper.getMemberVoList(pvo, searchValue);
     }
 
 
@@ -66,8 +62,17 @@ public class SystemManagerService {
     }
 
     public int resetPassword(String no, String newPassword) {
-        // 비밀번호 초기화 쿼리 실행 (예: MyBatis, JPA, JDBC 등)
-        return mapper.updatePassword(no, newPassword); // 실제 update 쿼리 실행
+        return mapper.updatePassword(no, newPassword);
     }
 
+    // 비밀번호 삭제하는 거임
+    public int accountDelete(String no) {
+        return mapper.accountDelete(no);
+    }
+
+    // 계정 자체 삭제
+
+    public int delete(List<String> accountArr) {
+        return mapper.delete(accountArr);
+    }
 }

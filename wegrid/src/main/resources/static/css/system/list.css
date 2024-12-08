@@ -164,3 +164,8 @@
     position: relative;
 }
 
+
+tbody.list-middle:hover{
+ background-color: rgb(205, 205, 205);
+}
+

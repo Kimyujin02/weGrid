@@ -1,6 +1,7 @@
 package com.kh.wegrid.systemManager.controller;
 
-import com.kh.wegrid.member.vo.AdminVo;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kh.wegrid.member.vo.MemberVo;
 import com.kh.wegrid.systemManager.service.SystemManagerService;
 import com.kh.wegrid.systemManager.vo.DepartMentVo;
@@ -23,6 +24,7 @@ import java.util.Map;
 @Slf4j
 public class SystemManagerController {
 
+    private final ObjectMapper objectMapper;
     private final SystemManagerService service;
 
 
@@ -35,8 +37,8 @@ public class SystemManagerController {
         model.addAttribute("jobInfoVoList", jobInfoVoList); // JSP로 데이터 전달
         model.addAttribute("departMentVoList", departMentVoList);
 
-//        System.out.println("departMentVoList = " + departMentVoList);
-//        System.out.println("jobInfoVoList = " + jobInfoVoList);
+       System.out.println("departMentVoList = " + departMentVoList);
+        System.out.println("jobInfoVoList = " + jobInfoVoList);
 
         return "system/create";
     }
@@ -44,7 +46,7 @@ public class SystemManagerController {
     // 계정 생성 요청
     @PostMapping("create")
     public String create(MemberVo vo) {
-//        System.out.println("vo = " + vo);
+        System.out.println("vo = " + vo);
         int result = service.create(vo);
 
         if (result != 1) {
@@ -61,48 +63,69 @@ public class SystemManagerController {
             ,@RequestParam(name = "pno" , required = false, defaultValue = "1") int currentPage
             ,String searchValue)
     {
-        AdminVo loginAdminVo = (AdminVo) session.getAttribute("loginAdminVo");
-        if(loginAdminVo == null){
-            session.setAttribute("alertMsg","옳바르지 않은 접근 입니다. 관리자 로그인화면으로 이동합니다.");
-            return "redirect:/member/admin";
-        }
+//        AdminVo loginAdminVo = (AdminVo) session.getAttribute("loginAdminVo");
+//        if(loginAdminVo == null){
+//            session.setAttribute("alertMsg","옳바르지 않은 접근 입니다. 관리자 로그인화면으로 이동합니다.");
+//            return "redirect:/member/admin";
+//        }
 
+        // 부서 및 직급 리스트 가져오기
         List<JobInfoVo> jobInfoVoList = service.getJobInfoVoList();
         List<DepartMentVo> departMentVoList = service.getDepartmentVoList();
-
         model.addAttribute("jobInfoVoList", jobInfoVoList); // JSP로 데이터 전달
         model.addAttribute("departMentVoList", departMentVoList);
 
-            int listCount = service.getSystemCnt();
-            int pageLimit = 5;
-            int boardLimit = 13;
+        // 검색어에 따라 총 데이터 개수 가져오기
+            int listCount = service.getSystemCnt(searchValue);
+            // 페이징 처리
+            int pageLimit = 5; // 한번에 보여질 페이지 번호 개수
+            int boardLimit = 11; // 한 페이지에서 보여질 데이터 개수
         PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
+
+        // 검색어와 페이징 조건으로 데이터 가져오기
         List<MemberVo> empVoList = service.getMemberVoList(pvo, searchValue);
         model.addAttribute("empVoList", empVoList);
-//        System.out.println("empVoList = " + empVoList);
         model.addAttribute("pvo", pvo);
-        model.addAttribute("searchValue", searchValue);
+        System.out.println("Paging Info: " + pvo);
+        model.addAttribute("searchValue", searchValue); // 검색어를 유지하기 위함
 
         return "system/account/list";
     }
 
-    //목록 삭제 처리
-    @DeleteMapping("delete")
-    @ResponseBody
-//    public String delete(String empNoArr){
-////        List<String> employeeNoList = objectMapper.readValue(empNoArr, List.class);
-////        int result = service.delete(employeeNoList);
-////        if(result == 0){
-////            return "bad";
-////        }
-////        return "good";
-//    }
+    //목록 삭제 처리(왜안돼 ㅇ웩)
+    public String delete(@RequestBody Map<String, List<String>> payload) {
+        List<String> accountArr = payload.get("accountArr");
+        System.out.println("accountArr: " + accountArr);
+        if (accountArr == null || accountArr.isEmpty()) {
+            return "bad"; // 데이터가 없으면 실패 처리
+        }
+
+        int result = service.delete(accountArr);
+        return result > 0 ? "good" : "bad"; // 삭제 성공 여부 반환
+    }
+
+
 
     // 시스템 관리자 상세 조회 화면
     @GetMapping("detail")
-    public String detail(){
+    public String detail(Model model, @RequestParam(required = false) String no) {
+        System.out.println("Received no: " + no); // 디버깅 로그
+        if (no == null || no.isEmpty()) {
+            System.out.println("No parameter is missing");
+            return "redirect:/error"; // 에러 페이지로 리다이렉트
+        }
+
+        MemberVo vo = service.getMemberVo(no);
+        if (vo == null) {
+            System.out.println("No member found with no = " + no);
+            return "redirect:/error"; // 데이터가 없으면 에러 처리
+        }
+
+        model.addAttribute("vo", vo);
+        System.out.println("Member data: " + vo);
         return "system/detail";
     }
+
 
     // 시스템 관리자 계정 수정 화면
     @GetMapping("edit")
@@ -138,24 +161,50 @@ public class SystemManagerController {
         return "redirect:/system/account/list";
     }
 
-    // 비밀번호 초기화
-    @PostMapping("system/resetPassword")
+    // 패스워드 초기화
+    @PostMapping("resetPassword")
     @ResponseBody
     public Map<String, Object> resetPassword(@RequestBody Map<String, String> request) {
         Map<String, Object> response = new HashMap<>();
+        System.out.println("Received no: " + request.get("no"));
+
         try {
             String no = request.get("no");
 
             // 고정된 비밀번호로 초기화 (예: "newpassword123")
-            String newPassword = "newpassword123";
-
+            String newPassword = "123456";
             // 비밀번호 초기화 처리
             int result = service.resetPassword(no, newPassword);
 
             if (result > 0) {
                 response.put("success", true);
+                response.put("newPassword", newPassword); // 클라이언트에 고정된 비밀번호 전달
             } else {
                 response.put("success", false);
+                response.put("message", "비밀번호 초기화에 실패했습니다.");
+            }
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("message", e.getMessage());
+        }
+        return response;
+    }
+
+    @PostMapping("/account/delete")
+    @ResponseBody
+    public Map<String, Object> deleteAccount(@RequestBody Map<String, String> request) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            String no = request.get("no");
+
+            // delYn을 N으로 업데이트
+            int result = service.accountDelete(no);
+
+            if (result > 0) {
+                response.put("success", true);
+            } else {
+                response.put("success", false);
+                response.put("message", "삭제할 데이터를 찾을 수 없습니다.");
             }
         } catch (Exception e) {
             response.put("success", false);

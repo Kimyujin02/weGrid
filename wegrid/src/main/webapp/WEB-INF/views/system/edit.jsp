@@ -49,7 +49,7 @@
                 <input type="button" class="search-button"  onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
                 <input type="text" id="sample2_address" placeholder="주소" style="width: 80%; margin: 5px 0px 5px 0px;" name="roadAddress" value="${vo.roadAddress}"><br>
                 <input type="text" id="sample2_detailAddress" placeholder="상세주소" name="detailAddress" value="${vo.detailAddress}">
-                <input type="text" id="sample2_extraAddress" placeholder="참고항목" name="detailAddress" value="${vo.detailAddress}">
+                <input type="text" id="sample2_extraAddress" placeholder="참고항목" name="extraAddress" value="${vo.extraAddress}">
                     
                 <!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
                 <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
@@ -161,7 +161,7 @@
                         <div class="department-row">
                             <input type="text" id="department-name" value="${vo.deptName}"> 
                             <div class="filter-controls">
-                                <select id="deptName" name="deptName">
+                                <select id="deptName" name="deptName" onchange="updateDepartmentName()">
                                     <c:forEach var="departMentVo" items="${departMentVoList}">
                                         <option value="${departMentVo.code}">${departMentVo.name}</option>
                                     </c:forEach>
@@ -189,7 +189,7 @@
                     </div>
                     <br>
                     
-                    <button type="button" class="btn btn-primary" id="pwd-reset">비밀번호 초기화</button>
+                    <button type="button" class="btn btn-primary" id="pwd-reset" value="${vo.no}">비밀번호 초기화</button>
                     
 
                     
@@ -198,7 +198,7 @@
 
             <div class="button-group">
                 <button type="submit" class="btn btn-primary" id="edit-btn">수정하기</button>
-                <button type="button" class="btn btn-primary" id="delete-btn" onclick="location.href='/system/account/list'">삭제</button>
+                <button type="button" class="btn btn-primary" id="cancle-btn" onclick="location.href='/system/account/list'" >취소</button>
             </div>
         </form>
         </div>

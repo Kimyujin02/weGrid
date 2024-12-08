@@ -41,9 +41,40 @@
 }
 
 /* 오른쪽 영역 */
-.right-panel {
+#right-panel {
     padding: 20px;
-    margin-left: 60px;
+    margin-left: 60px; /* 왼쪽에서 약간 띄움 */
+}
+
+/* 폼 내 라벨 스타일 */
+#right-panel form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* 입력 필드 스타일 */
+#right-panel form input,
+#right-panel form select {
+    width: 80%;
+    height: 35px;
+    margin-bottom: 15px;
+    padding: 5px;
+    border: 1px solid #C0C0C0;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #F9F9F9; /* 배경색 추가 */
+}
+
+/* 부서명 행 스타일 */
+.department-row {
+    display: flex;
+    gap: 10px;
+}
+
+#department-name {
+    flex: 1; /* 부서명 필드가 flexbox 내에서 늘어날 수 있도록 설정 */
 }
 
 form label {
@@ -154,4 +185,13 @@ form input{
 
 .search-button:hover {
     background-color: #0056b3;
+}
+
+
+#sample2_detailAddress{
+    width: 40%;
+}
+
+#sample2_extraAddress{
+    width: 39%;
 }
