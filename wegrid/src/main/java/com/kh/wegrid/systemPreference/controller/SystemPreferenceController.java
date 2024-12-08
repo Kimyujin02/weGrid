@@ -13,8 +13,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -48,6 +51,28 @@ public class SystemPreferenceController {
         model.addAttribute("vacationType",vacationTypeList);
 
         return "system/preference/list";
+
+    }
+
+    // 항목 정보 추가
+    @PostMapping("add")
+    @ResponseBody
+    public HashMap add(String type, String name){
+        System.out.println("type = " + type);
+        System.out.println("name = " + name);
+
+        HashMap map = new HashMap();
+        switch (type){
+            case "clientRank" : map = service.addClientRank(name); break;
+        }
+
+        return map;
+    }
+
+
+    @PostMapping("edit")
+    public void edit(String itemName, String no, String editInfo){
+
 
     }
 

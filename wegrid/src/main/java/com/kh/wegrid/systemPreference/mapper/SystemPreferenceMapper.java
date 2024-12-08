@@ -18,8 +18,17 @@ public interface SystemPreferenceMapper {
                 NO
                 , NAME
             FROM CLIENT_RANK
+            ORDER BY NO
             """)
     List<ClientRankVo> getClientRankList();
+    @Select("""
+            SELECT
+                NO
+                , NAME
+            FROM CLIENT_RANK
+            WHERE NO = (SELECT (LAST_NUMBER-1) FROM USER_SEQUENCES WHERE SEQUENCE_NAME = 'SEQ_CLIENT_RANK')
+            """)
+    ClientRankVo getClientRankByNo();
 
     // 출장 유형 정보 조회
     @Select("""
@@ -27,6 +36,7 @@ public interface SystemPreferenceMapper {
                 NO
                 , NAME
             FROM TRIP_TYPE
+            ORDER BY NO
             """)
     List<typeVo> getTripTypeList();
 
@@ -49,15 +59,17 @@ public interface SystemPreferenceMapper {
                 , NAME
                 , VAC_CNT
             FROM JOB_INFO
+            ORDER BY NO
             """)
     List<JobInfoVo> getJobInfoList();
 
-    // 휴가 항목 조회
+    // 휴가 유형 정보 조회
     @Select("""
             SELECT
                 NO
                 , NAME
             FROM VACATION_TYPE
+            ORDER BY NO
             """)
     List<VacationTypeVo> getVacationTypeList();
 

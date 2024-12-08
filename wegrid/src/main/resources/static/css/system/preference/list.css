@@ -29,8 +29,11 @@ main {
 
     grid-template-rows: 1fr 4.1fr 0.7fr;
 
-    width: 95%;
-    height: 95%;
+    /* width: 95%;
+    height: 95%; */
+
+    width: 475px;
+    height: 350px;
 
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0.3, 0.3, 0.3, 0.3); /* 오른쪽 아래로 그림자 */
@@ -53,47 +56,9 @@ main {
     vertical-align: middle;
 }
 
-.list-area {
-    margin-left: 30px;
-    margin-right: 30px;
-
-    overflow: auto;
-
-    border: 1px solid black;
-}
-
-table{
-
-    border: 1px solid black;
-}
-
-thead {
-    height: 35px;
-
-    background-color: #174880;
-    color: white;
-
-    text-align: center;
-}
-
-.bottom-area {
-    background-color: #174880;
-    height: 10px;
-}
-
-thead > tr > :nth-child(1){
-    width: 173px;
-}
-thead > tr > :nth-child(2){
-    width: 120px;
-}
-thead > tr > :nth-child(3){
-    width: 120px;
-}
-
 .addBtn {
-    width: 40px;
-    height: 40px;
+    width: 37px;
+    height: 37px;
 
     border-radius: 50%;
     background-color: #174880;
@@ -104,4 +69,71 @@ thead > tr > :nth-child(3){
 
     text-align: center;
     vertical-align: middle;
+}
+
+.list-area {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+
+.table-line {
+    display: flex;
+    width: 100%;
+}
+
+.table-header {
+    height: 37px;
+
+    background-color: #174880;
+    color: white;
+
+    text-align: center;
+    align-content: center;
+
+    font-weight: 800;
+}
+
+.table-body {
+    height: 210px;
+    overflow: auto;
+}
+.table-content {
+    height: 35px;
+    text-align: center;
+    align-content: center;
+    border-bottom: 1px solid #d1dce8;
+}
+
+
+.table-line > :nth-child(1){
+    width: 40%;
+}
+.table-line > :nth-child(2){
+
+    width: 30%;
+}
+.table-line > :nth-child(3){
+
+    width: 30%;
+}
+
+
+.bottom-area {
+    margin-left: 30px;
+    margin-right: 30px;
+
+    height: 10px;
+
+    background-color: #174880;
+}
+
+.table-body::-webkit-scrollbar {
+    display: none;
+}
+
+.btn-primary.editItem, .btn-secondary.deleteItem {
+    --bs-btn-padding-y: 0rem;
+    --bs-btn-padding-x: 0.75rem;
+    --bs-btn-font-size: 1rem;
 }
