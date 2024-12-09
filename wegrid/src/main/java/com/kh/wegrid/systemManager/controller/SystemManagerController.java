@@ -72,11 +72,12 @@ public class SystemManagerController {
             RedirectAttributes redirectAttributes
     ) {
 
-        AdminVo loginAdminVo = (AdminVo) session.getAttribute("loginAdminVo");
         // 로그인된 사용자가 없을 때 처리
-        if (loginAdminVo == null) {
-            redirectAttributes.addFlashAttribute("errorMessage", "로그인 정보가 없습니다.");
-            return "redirect:/member/adminLogin"; // 로그인 페이지로 리다이렉트
+        AdminVo loginAdminVo = (AdminVo) session.getAttribute("loginAdminVo");
+        if(loginAdminVo == null){
+            session.setAttribute("alertMsg","옳바르지 않은 접근 입니다. 관리자 로그인화면으로 이동합니다.");
+            return "redirect:/member/adminLogin";
+
         }
 
         // 1. 부서 및 직급 리스트 가져오기
