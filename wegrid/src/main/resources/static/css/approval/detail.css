@@ -175,4 +175,16 @@ form{
     width: 40px;
     border-radius: 45px;
 }
-
+.realFinalFix{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.realFinalFixx{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #174880;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
