@@ -52,7 +52,6 @@ public class CrmController {
         PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
 
         List<ClientVo> clientVoList = service.getClientVoList(pvo, statusNo, rankCode, searchType, searchValue);
-        System.out.println("clientVoList = " + clientVoList);
         List<ClientRankVo> clientRankVoList = service.getClientRankVoList();
         List<ClientStatusVo> clientStatusVoList = service.getClientStatusVoList();
 
@@ -75,8 +74,6 @@ public class CrmController {
             , String statusNo
             , String rankCode
     ) {
-        System.out.println("statusNo = " + statusNo);
-        System.out.println("rankCode = " + rankCode);
         int listCount = service.getFilteredClientCnt(statusNo, rankCode);
         int pageLimit = 5;
         int boardLimit = 15;
@@ -143,7 +140,6 @@ public class CrmController {
     @PostMapping("enroll")
     public String enroll(ClientVo vo) {
         int result = service.enrollClient(vo);
-        System.out.println(result);
         return "redirect:/crm/list";
     }
 
@@ -172,7 +168,6 @@ public class CrmController {
     @PostMapping("edit")
     public String edit(ClientVo vo) {
         int result = service.editClient(vo);
-        System.out.println(result);
         return "redirect:/crm/list";
     }
 
