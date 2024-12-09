@@ -28,8 +28,11 @@ function writeReply(boardNo){
 
 //댓 불러와
 function loadReply(){
-    //현재 공지사항 번호 얻기
-    const noticeNo = document.querySelector("#reply-list-area").getAttribute("boardNo");
+    //현재 게시글 번호 얻기
+    const boardNo = document.querySelector("#boardNo").value;
+    console.log("boardNo" , boardNo);
+    
+
 
     //비동기 통신 (ajax)를 이용해 데이터 받기
     $.ajax({
@@ -38,10 +41,10 @@ function loadReply(){
         data : {
             boardNo
         },
-        success : function(x){
+        success : function(replyVoList){
             console.log("통신 성공 !");
-            console.log("댓글 리스트 : " , x);
-            PaintReplyList(x);
+            console.log("댓글 리스트 : " , replyVoList);
+            PaintReplyList(replyVoList);
         },
         error : function(){
             console.log("통신 실패 !");
@@ -54,36 +57,36 @@ function loadReply(){
 
 
 //댓 리스트 그리기
-function PaintReplyList(voList){
-    const replyListArea = document.getElementById("reply-list-area");
+function PaintReplyList(replyVoList){
+    const replyListArea = document.querySelector("#reply-list-area");
     replyListArea.innerHTML = "";  // 기존 댓글 목록 초기화
 
-    replyList.forEach(reply => {
+    for (let i = 0; i < replyVoList.length; i++) {
+        const reply = replyVoList[i];
         const div = document.createElement("div");
         div.classList.add("reply-user");
-
+    
         div.innerHTML = `
-            <div class="reply-icon"></div> <!-- 프로필 아이콘 -->
+            <div class="reply-icon"></div> 
             <div class="reply-info">
-                <div>${reply.writerName}</div> <!-- 작성자 이름 -->
-                <div>${reply.deptName}</div> <!-- 부서명 -->
+                <div>${reply.writerName}</div> 
+                <div>${reply.deptName}</div> 
             </div>
-            <div class="reply-text">${reply.content}</div> <!-- 댓글 내용 -->
-
+            <div class="reply-text">${reply.content}</div>
+    
             <div class="reply-subinfo">
-                <div class="reply-date">${reply.date}</div> <!-- 댓글 작성일 -->
+                <div class="reply-date">${reply.enrollDate}</div>
                 <div class="reply-adjust">
                     <div class="reply-edit">수정하기</div>
                     <div class="reply-delete">삭제하기</div>
                 </div>
             </div>
         `;
-
-        replyListArea.appendChild(div);  // 새로운 댓글을 목록에 추가
+    
+        replyListArea.appendChild(div); // 새로운 댓글을 목록에 추가
     }
+    
 }
 
 loadReply();
-
-
 

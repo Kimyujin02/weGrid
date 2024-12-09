@@ -24,6 +24,7 @@
 
     <!-- Main -->
     <main>
+        <input type="hidden" id="boardNo" value="${vo.no}">
         <div class="main-content">
 
             <div></div>
@@ -77,15 +78,15 @@
                             </div>
                         </div>
 
-                        <form id="reply-form">
+                        <form id="reply-write-area">
                             <div class="reply-input-area">
-                                <textarea name="content" placeholder="댓글을 입력하세요..."></textarea>
-                                <button onclick="writeReply(${vo.no});">댓글 작성</button>
+                                <input name="content" placeholder="댓글을 입력하세요..." />
+                                <button type="button" onclick="writeReply(${vo.no});">댓글 작성</button>
                             </div>
                             <input type="hidden" name="bno" value="${boardNo}"> <!-- 해당 게시글 번호를 hidden input으로 전달 -->
                         </form>
 
-                        <div id="reply-list-area">
+                        <div id="reply-list-area" >
 
                         </div> <!-- 댓글 목록을 여기에 동적으로 추가할 예정 -->
 

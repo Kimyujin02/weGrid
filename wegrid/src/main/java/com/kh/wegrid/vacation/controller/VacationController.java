@@ -1,6 +1,8 @@
 package com.kh.wegrid.vacation.controller;
 
 import com.kh.wegrid.member.vo.MemberVo;
+import com.kh.wegrid.vacation.vo.DeptVo;
+import com.kh.wegrid.util.page.PageVo;
 import com.kh.wegrid.vacation.service.VacationService;
 import com.kh.wegrid.vacation.vo.*;
 import jakarta.servlet.http.HttpSession;
@@ -10,7 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Controller
@@ -22,20 +26,27 @@ public class VacationController {
     private final VacationService service;
 
     @GetMapping("menu")
-    public String menu(HttpSession session, Model model, @RequestParam(value = "mno", required = false) String mno, VacationVo vo) {
+    public String menu(HttpSession session, Model model, @RequestParam(value = "mno", required = false) String mno, VacationVo vo, @RequestParam(name = "pno", required = false, defaultValue = "1") int currentPage, String searchValue) {
 
         // 로그인 상태 확인
         MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
         if (loginMemberVo == null) {
             return "redirect:/member/login";
         }
+        mno = loginMemberVo.getNo();
 
-        // mno 파라미터가 없을 경우 세션에서 가져와 URL에 추가
-        if (mno == null || mno.isEmpty()) {
-            mno = loginMemberVo.getNo(); // 로그인 멤버의 사원 번호
-            return "redirect:/vacation/menu?mno=" + mno;
-        }
+        int listCount = service.getVacationCnt();
+        int pageLimit = 5;
+        int boardLimit = 10;
 
+        PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
+        List<VacationVo> voList = service.getVacationList(pvo, searchValue);
+        model.addAttribute("voList", voList);
+        model.addAttribute("pvo", pvo);
+        model.addAttribute("searchValue", searchValue);
+
+        System.out.println("voList = " + voList);
+        
         // VacationVo 설정
         vo.setEmpNo(loginMemberVo.getNo());
         vo.setDeptNo(loginMemberVo.getDeptNo());
@@ -44,6 +55,9 @@ public class VacationController {
         List<VacationVo1> selectAllVacationList = service.getSelectAllVacationList();
         List<VacationVo2> selectPersonalCnt = service.getSelectPersonalCnt();
         List<VacationVo3> selectPersonalCntInfo = service.getSelectPersonalCntInfo(mno);
+
+        List<DeptVo> deptVoList = service.getDeptVoList();
+        model.addAttribute("deptVoList", deptVoList);
 
         int totalUsed = 0;
         if (selectPersonalCntInfo != null && !selectPersonalCntInfo.isEmpty()) {
@@ -85,6 +99,15 @@ public class VacationController {
         return "redirect:/vacation/menu";
 
     }
+
+    @GetMapping("delete")
+    public String deleteVacation(Model model, String no ) {
+
+        int deleteVacationList = service.getDeleteVacationList(no);
+        model.addAttribute("deleteVacationList", deleteVacationList);
+        return "redirect:/vacation/menu";
+    }
+
 
 
 }

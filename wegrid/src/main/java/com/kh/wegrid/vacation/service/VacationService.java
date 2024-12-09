@@ -1,5 +1,7 @@
 package com.kh.wegrid.vacation.service;
 
+import com.kh.wegrid.vacation.vo.DeptVo;
+import com.kh.wegrid.util.page.PageVo;
 import com.kh.wegrid.vacation.mapper.VacationMapper;
 import com.kh.wegrid.vacation.vo.VacationVo;
 import com.kh.wegrid.vacation.vo.VacationVo1;
@@ -40,7 +42,23 @@ public class VacationService {
         return mapper.getSelectPersonalCntInfo(mno);
     }
 
-//    public int updateVacation(VacationVo vo) {
-//        return mapper.updateVacation(vo);
-//    }
+    public List<VacationVo> getVacationList(PageVo pvo, String searchValue) {
+        String str = "";
+        if(searchValue != null && searchValue.length() > 0){
+            str = "WHERE E.NAME LIKE '%" + searchValue + "%'";
+        }
+        return mapper.getVacationList(pvo, str);
+    }
+
+    public int getVacationCnt() {
+        return mapper.getVacationCnt();
+    }
+
+    public List<DeptVo> getDeptVoList() {
+        return mapper.getDeptVoList();
+    }
+
+    public int getDeleteVacationList(String no) {
+        return mapper.getDeleteVacationList(no);
+    }
 }

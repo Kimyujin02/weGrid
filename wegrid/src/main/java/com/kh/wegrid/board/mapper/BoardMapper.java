@@ -121,18 +121,20 @@ public interface BoardMapper {
 
     @Select("""
             SELECT
-                R.NO
-                ,R.CONTENT
-                ,R.BOARD_NO
-                ,R.WRITER_NO
-                ,R.ENROLL_DATE
-                ,R.DEL_YN
-                ,E.NAME
-            FROM REPLY R
-            JOIN EMPLOYEE E ON (R.WRITER_NO = E.NO)
-            JOIN BOARD B ON (B.WRITER_NO = E.NO)
-            WHERE R.BOARD_NO = #{boardNo}
-            AND R.DEL_YN = 'N'
+                            R.NO
+                            ,R.CONTENT
+                            ,R.BOARD_NO
+                            ,R.WRITER_NO
+                            ,R.ENROLL_DATE
+                            ,R.DEL_YN
+                            ,E.NAME AS WRITER_NAME
+                            ,D.NAME AS DEPT_NAME
+                        FROM REPLY R
+                        JOIN EMPLOYEE E ON (R.WRITER_NO = E.NO)
+                        JOIN BOARD B ON (B.WRITER_NO = E.NO)
+                        JOIN DEPARTMENT D ON D.CODE = E.DEPT_NO
+                        WHERE R.BOARD_NO = #{boardNo}
+                        AND R.DEL_YN = 'N'
             """)
     List<ReplyVo> getReplyList(String boardNo);
 
