@@ -62,29 +62,29 @@
                                 <div></div>
                                 <div></div>
                                 <div id="approvalLine-area">
-                                    <div>기안자</div>
-                                    <div>
+                                    <div class="realFinalFixx">기안자</div>
+                                    <div class="realFinalFix">
                                         <span><img src="${avo.writerProfile}" alt="" class="profileImgTag"></span>
-                                        <span class="dept-areaa">${avo.writerDept}</span>
-                                        <span class="name-areaa">${avo.writerName}</span>
+                                        &nbsp;<span class="dept-areaa">${avo.writerDept}</span>
+                                        &nbsp;<span class="name-areaa">${avo.writerName}</span>
                                     </div>
                                     <c:if test="${avo.mline != null && avo.mline != ''}">
-                                        <div>중간 결재자</div>
-                                        <div>
+                                        <div class="realFinalFixx">중간 결재자</div>
+                                        <div class="realFinalFix">
                                             <span><img src="${avo.mlineProfile}" alt="" class="profileImgTag"></span>
-                                            <span class="dept-areaa">${avo.mlineDept}</span>
-                                            <span class="name-areaa">${avo.mlineName}</span>
+                                            &nbsp;<span class="dept-areaa">${avo.mlineDept}</span>
+                                            &nbsp;<span class="name-areaa">${avo.mlineName}</span>
                                         </div>
                                     </c:if>
                                     <c:if test="${avo.mline == null || avo.mline == ''}">
                                         <div></div>
                                         <div></div>
                                     </c:if>
-                                    <div>최종 결재자</div>
-                                        <div>
+                                    <div class="realFinalFixx">최종 결재자</div>
+                                        <div class="realFinalFix">
                                             <span><img src="${avo.llineProfile}" alt="" class="profileImgTag"></span>
-                                            <span class="dept-areaa">${avo.llineDept}</span>
-                                            <span class="name-areaa">${avo.llineName}</span>
+                                            &nbsp;<span class="dept-areaa">${avo.llineDept}</span>
+                                            &nbsp;<span class="name-areaa">${avo.llineName}</span>
                                         </div>
                                 </div>
                                 <div></div>
