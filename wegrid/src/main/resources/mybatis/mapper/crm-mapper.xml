@@ -58,44 +58,6 @@
         OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
     </select>
 
-<!--    <select id="getFilteredClientVoList">-->
-<!--        SELECT-->
-<!--        C.NO-->
-<!--        , C.RANK_CODE-->
-<!--        , C.STATUS_NO-->
-<!--        , C.NAME-->
-<!--        , C.POST_ADDRESS-->
-<!--        , C.ROAD_ADDRESS-->
-<!--        , C.DETAIL_ADDRESS-->
-<!--        , C.PRESIDENT_NAME-->
-<!--        , C.PRESIDENT_PHONE-->
-<!--        , C.PRESIDENT_EMAIL-->
-<!--        , C.START_DATE-->
-<!--        , P.MANAGER_NAME-->
-<!--        , P.MANAGER_PHONE-->
-<!--        , CR.NAME AS RANK_NAME-->
-<!--        , CS.NAME AS STATUS_NAME-->
-<!--        FROM-->
-<!--        CLIENT C-->
-<!--        LEFT JOIN CLIENT_RANK CR ON ( C.RANK_CODE = CR.NO )-->
-<!--        LEFT JOIN CLIENT_STATUS CS ON ( C.STATUS_NO = CS.NO )-->
-<!--        LEFT JOIN PROJECT P ON ( C.NO = P.CLIENT_NO )-->
-<!--        <where>-->
-<!--            <if test="statusNo == '' and statusNo == null and rankCode != '' and rankCode != null">-->
-<!--                AND C.RANK_CODE = #{rankCode}-->
-<!--            </if>-->
-<!--            <if test="statusNo != '' and statusNo != null and rankCode == '' and rankCode == null">-->
-<!--                AND C.STATUS_NO = #{statusNo}-->
-<!--            </if>-->
-<!--            <if test="statusNo != null and statusNo != '' and rankCode != null and rankCode != ''">-->
-<!--                AND C.STATUS_NO = #{statusNo}-->
-<!--                AND C.RANK_CODE = #{rankCode}-->
-<!--            </if>-->
-<!--        </where>-->
-<!--        ORDER BY C.NO DESC-->
-<!--        OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY-->
-<!--    </select>-->
-
 
     <select id="getFilteredClientCnt">
         SELECT COUNT(*)

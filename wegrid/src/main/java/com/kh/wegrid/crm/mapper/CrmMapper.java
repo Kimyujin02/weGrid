@@ -54,7 +54,7 @@ public interface CrmMapper {
             )
             VALUES
             (
-                CLIENT_SEQ.NEXTVAL
+                SEQ_CLIENT.NEXTVAL
                 , #{rankCode}
                 , #{name}
                 , #{postAddress}
@@ -148,6 +148,7 @@ public interface CrmMapper {
                 ROAD_ADDRESS = #{roadAddress},
                 DETAIL_ADDRESS = #{detailAddress},
                 RANK_CODE = #{rankCode},
+                STATUS_NO = #{statusNo},
                 PRESIDENT_NAME = #{presidentName},
                 PRESIDENT_EMAIL = #{presidentEmail},
                 PRESIDENT_PHONE = #{presidentPhone}

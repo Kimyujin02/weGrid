@@ -1,38 +1,40 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // 모든 드롭다운 토글 버튼에 이벤트 리스너 추가
-  const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
-  
-  dropdownToggles.forEach((toggleButton) => {
-    toggleButton.addEventListener('click', function (e) {
-      e.stopPropagation(); // 이벤트 전파 중단 (다른 클릭 이벤트 방지)
-      const dropdown = this.parentElement; // 클릭한 버튼의 부모 드롭다운 찾기
-      
-      // 현재 드롭다운 활성화/비활성화
-      dropdown.classList.toggle('active');
-    });
-  });
+function paintPageArea(pvo, clientVoList, searchType, searchValue) {
+  const pagingArea = document.querySelector(".paging-area");
+  pagingArea.innerHTML = ""; // 기존 내용을 초기화
 
-  // 드롭다운 외부 클릭 시 닫기
-  document.addEventListener('click', function () {
-    document.querySelectorAll('.dropdown.active').forEach((dropdown) => {
-      dropdown.classList.remove('active');
-    });
-  });
+  // 이전 버튼
+  if (pvo.startPage > 1) {
+      const prevTag = document.createElement("a");
+      prevTag.setAttribute("href", `/crm/list?pno=${pvo.startPage - 1}&`);
+      prevTag.className = "previous";
+      prevTag.innerHTML = '<i class="fas fa-caret-left fa-lg" style="color: #174880;"></i>';
+      pagingArea.appendChild(prevTag);
+  }
 
-  // 드롭다운 메뉴 안의 모든 옵션에 대해서도 클릭 시 이벤트 전파 중단
-  const dropdownItems = document.querySelectorAll('.dropdown-menu label');
-  dropdownItems.forEach((item) => {
-    item.addEventListener('click', function (e) {
-      e.stopPropagation(); // 클릭 이벤트가 드롭다운 닫기로 전파되지 않도록 방지
-    });
-  });
-});
+  // 페이지 번호 버튼
+  for (let i = pvo.startPage; i <= pvo.endPage; i++) {
+      const pageTag = document.createElement("a");
+      pageTag.setAttribute("href", `/crm/list?pno=${i}`);
+      pageTag.className = i === pvo.currentPage ? "current" : "pageNum";
+      pageTag.innerText = i;
+      pagingArea.appendChild(pageTag);
+  }
 
+  // 다음 버튼
+  if (pvo.endPage < pvo.maxPage) {
+      const nextTag = document.createElement("a");
+      nextTag.setAttribute("href", `/crm/list?pno=${pvo.endPage + 1}`);
+      nextTag.className = "next";
+      nextTag.innerHTML = '<i class="fas fa-caret-right fa-lg" style="color: #174880;"></i>';
+      pagingArea.appendChild(nextTag);
+  }
+}
 
 
 
 function applyFilters(){
   const tbodyTag = document.querySelector("main table>tbody");
+  const maxRows = 15; // 테이블의 고정 행 수
 
   const url = new URL(location);
   let pno = url.searchParams.get("pno");
@@ -47,15 +49,6 @@ function applyFilters(){
 
   console.log(searchType);
   console.log(searchValue);
-
-  // "전체" 값이 선택되면 필터링에서 제외
-  // if (statusNo === "") {
-  //     statusNo = null;
-  // }
-  // if (rankCode === "") {
-  //     rankCode = null;
-  // }
-
   console.log('Selected Status:', statusNo);
   console.log('Selected Rank:', rankCode);
 
@@ -72,6 +65,8 @@ function applyFilters(){
       success : function(m){
           const clientVoList = m.a;
           const pvo = m.b;
+
+          paintPageArea(pvo);
 
           tbodyTag.innerHTML = "";
 
@@ -97,6 +92,23 @@ function applyFilters(){
               trTag.appendChild(tdTag04);
 
               tbodyTag.appendChild(trTag);
+          }
+
+          // 데이터가 부족한 경우 빈 행 추가
+          const rowsToAdd = maxRows - clientVoList.length;
+          if (rowsToAdd > 0) {
+              for (let i = 0; i < rowsToAdd; i++) {
+                  const emptyTr = document.createElement("tr");
+                  emptyTr.className = "list-middle";
+
+                  for (let j = 0; j < 4; j++) {
+                      const emptyTd = document.createElement("td");
+                      emptyTd.innerText = "";
+                      emptyTr.appendChild(emptyTd);
+                  }
+
+                  tbodyTag.appendChild(emptyTr);
+              }
           }
 
       } ,
