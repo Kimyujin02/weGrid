@@ -38,17 +38,22 @@ public class SystemPreferenceController {
             return "redirect:/member/adminLogin";
         }
 
-        List<ClientRankVo> clientRankList = service.getClientRankList();
-        List<typeVo> tripTypeList = service.getTripTypeList();
-        List<DepartMentVo> departmentList = service.getDepartmentList();
-        List<JobInfoVo> jobInfoList = service.getJobInfoList();
-        List<VacationTypeVo> vacationTypeList = service.getVacationTypeList();
+        try{
 
-        model.addAttribute("clientRank",clientRankList);
-        model.addAttribute("tripType",tripTypeList);
-        model.addAttribute("department",departmentList);
-        model.addAttribute("jobInfo",jobInfoList);
-        model.addAttribute("vacationType",vacationTypeList);
+            List<ClientRankVo> clientRankList = service.getClientRankList();
+            List<typeVo> tripTypeList = service.getTripTypeList();
+            List<DepartMentVo> departmentList = service.getDepartmentList();
+            List<JobInfoVo> jobInfoList = service.getJobInfoList();
+            List<VacationTypeVo> vacationTypeList = service.getVacationTypeList();
+
+            model.addAttribute("clientRank",clientRankList);
+            model.addAttribute("tripType",tripTypeList);
+            model.addAttribute("department",departmentList);
+            model.addAttribute("jobInfo",jobInfoList);
+            model.addAttribute("vacationType",vacationTypeList);
+        }catch (Exception e){
+            throw new IllegalStateException("환경설정 항목 조회 중 오류 발생");
+        }
 
         return "system/preference/list";
 

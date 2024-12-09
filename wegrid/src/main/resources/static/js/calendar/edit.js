@@ -101,19 +101,25 @@ function editAtDB(){
     console.log("formData",formData);
     // 저장할 월 정보 수집
     const date = document.querySelector("#calendar-start-date-edit").value;
-    console.log("date",date);
     const calcDate = calculateDate(new Date(date.replace("T"," ")));
-    console.log("calcDate",calcDate);
+    const startDate = new Date(date.replace("T"," "));
+    const endDate = new Date((document.querySelector("#calendar-end-date-edit").value).replace("T"," "));
+    
+    if(endDate-startDate < 0){
+        alert("종료일이 시작일보다 빠릅니다. 날짜를 다시 확인해주세요.");
+        return false;
+    }
+
     // 저장할 캘린더 항목 정보 수집
     const typeNo = document.querySelector("#calendar-type-edit").value;
-    console.log("typeNo",typeNo);
+
     // 서버에 데이터 전달
     $.ajax({
         url: "/calendar/edit",
         method: "POST",
         data: formData,
         success: function(result){
-            if(result == 1){
+            if(result == "success"){
                 alert("일정 수정 완료!!");
                 console.log("로컬 비우기",typeNo,calcDate);  
                 deleteLocalStorage(typeNo,calcDate);

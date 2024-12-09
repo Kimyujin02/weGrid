@@ -19,11 +19,7 @@ function openAddModal(type){
 
         const template2 = document.getElementById("subInput");
         const clone2 = template2.content.cloneNode(true);
-        console.log("clone2",clone2);
-        console.log(clone2.querySelector("lablel"));
-        
 
-        
         divTag.appendChild(clone2);   
 
         if(type == "department"){
@@ -48,9 +44,19 @@ function addItem(){
 
     const type = document.querySelector(".addItemForm input[name=type]").value;
     const name = document.querySelector(".addItemForm input[name=itemName]").value;
+
+    if(name == null || name=="" || name==" "){
+        alert("추가할 항목명을 입력해주세요.");
+        return false;
+    }
+
     let sub = null;
     if(type == "department" || type == "jobInfo"){
         sub = document.querySelector(".addItemForm #subValue").value;
+        if(sub == null || sub =="" || sub ==" "){
+            alert("추가 정보를 입력해주세요.");
+            return false;
+        }   
     }
     
     $.ajax({
@@ -153,9 +159,12 @@ function editItem(){
     console.log("항목 수정 시작");
 
     const type = document.querySelector(".editItemForm input[name=type]").value;
-    const name = document.querySelector(".editItemForm input[name=itemName]").value;
     const no = document.querySelector(".editItemForm input[name=no]").value;
-    
+    const name = document.querySelector(".editItemForm input[name=itemName]").value;
+    if(name == null || name=="" || name==" "){
+        alert("수정할 항목명을 입력해주세요.");
+        return false;
+    }
     $.ajax({
         url: "/systemPreference/edit",
         method: "POST",
