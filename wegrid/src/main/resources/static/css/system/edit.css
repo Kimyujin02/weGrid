@@ -55,6 +55,44 @@
     margin-left: 60px;
 }
 
+#employeeInfo{
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+#employeeSub{
+    width: 80%;
+    height: 35px;
+    margin-bottom: 15px;
+    padding: 5px;
+    border: 1px solid #C0C0C0;
+    border-radius: 5px;
+    box-sizing: border-box;
+
+}
+
+#department-name{
+    height: 35px;
+    margin-bottom: 15px;
+    padding: 5px;
+    border: 1px solid #C0C0C0;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+
+#deptName{
+    width: 80%;
+    height: 35px;
+    margin-bottom: 15px;
+    padding: 5px;
+    border: 1px solid #C0C0C0;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
 form label {
     display: block;
     margin-bottom: 5px;
@@ -126,6 +164,7 @@ form input{
 
 /* 우편번호 찾기 버튼 스타일 */
 .search-button {
+    width: 30%;
     padding: 7px 12px; /* 버튼 패딩 축소 */
     border: none;
     background-color: #2661A5;
@@ -141,7 +180,7 @@ form input{
     border: transparent;
 }
 
-#delete-btn{
+#cancle-btn{
     background-color: gray; 
     border: transparent;
 }
@@ -155,4 +194,10 @@ form input{
     background-color: #0056b3;
 }
 
+#sample2_detailAddress{
+    width: 40%;
+}
 
+#sample2_extraAddress{
+    width: 39%;
+}

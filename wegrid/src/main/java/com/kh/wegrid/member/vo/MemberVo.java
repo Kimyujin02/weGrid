@@ -20,6 +20,7 @@ public class MemberVo {
     private String postAddress;
     private String roadAddress;
     private String detailAddress;
+    private String extraAddress;
     private String enrollDate;
     private String modifyDate;
     private String isManager;
@@ -27,5 +28,8 @@ public class MemberVo {
     private String profile;
     private int failedAttempts;
     private String isLocked;
+
+    private String newPassword;
+    private String userId;
 
 }

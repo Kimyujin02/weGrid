@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class JobInfoVo {
     private String no;
+    private String deptNo;
     private String name;
     private String vacCnt;
     private String delYn;

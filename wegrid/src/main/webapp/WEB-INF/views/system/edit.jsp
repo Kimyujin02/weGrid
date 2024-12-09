@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="/css/system/edit.css">
 
 <script defer src="/js/common/main.js"></script>
+<script defer src="/js/system/edit.js"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/hung1001/font-awesome-pro@4cac1a6/css/all.css" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -33,22 +34,22 @@
             <div class="left-panel">
                 <h3 class="sub-title">기본 개인 정보</h3>
                 <form action="/system/edit" name="personal-info" method="post">
-                    <input type="hidden" value="${vo.no}">
+                    <input type="hidden" name="no" value="${vo.no}">
                     <label for="name">이름</label>
-                    <input type="text" id="name" value="${vo.name}"><br>
+                    <input type="text" id="name" name="name" value="${vo.name}"><br>
                     <label for="id">아이디</label>
-                    <input type="text" id="id" value="${vo.id}"><br>
+                    <input type="text" id="id" name="id" value="${vo.id}"><br>
                     <label for="email">이메일</label>
-                    <input type="email" id="email" value="${vo.email}"><br>
+                    <input type="email" id="email" name="email" value="${vo.email}"><br>
                     <label for="phone">연락처</label>
-                    <input type="text" id="phone" value="${vo.phone}"><br><br>
+                    <input type="text" id="phone" name="phone" value="${vo.phone}"><br><br>
                 
                 <!-- 주소 입력 필드 -->
-                <input type="text" id="sample2_postcode" placeholder="우편번호" style="width: 30%;" value="${vo.postAddress}">
+                <input type="text" id="sample2_postcode" placeholder="우편번호" style="width: 30%;" name="postAddress" value="${vo.postAddress}">
                 <input type="button" class="search-button"  onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
-                <input type="text" id="sample2_address" placeholder="주소" style="width: 80%; margin: 5px 0px 5px 0px;" value="${vo.roadAddress}"><br>
-                <input type="text" id="sample2_detailAddress" placeholder="상세주소" value="${vo.detailAddress}">
-                <input type="text" id="sample2_extraAddress" placeholder="참고항목" value="${vo.detailAddress}">
+                <input type="text" id="sample2_address" placeholder="주소" style="width: 80%; margin: 5px 0px 5px 0px;" name="roadAddress" value="${vo.roadAddress}"><br>
+                <input type="text" id="sample2_detailAddress" placeholder="상세주소" name="detailAddress" value="${vo.detailAddress}">
+                <input type="text" id="sample2_extraAddress" placeholder="참고항목" name="extraAddress" value="${vo.extraAddress}">
                     
                 <!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
                 <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
@@ -152,15 +153,18 @@
                 <!-- 사원 정보 -->
                 <div class="right-panel">
                     <h3 class="sub-title">사원 정보</h3>
-                        <label for="employee-no">사번</label>
-                        <input type="text" id="employee-no" value="${vo.empNum}"><br>
+                        <label for="employee-no" id="employeeInfo">사번</label>
+                        <input type="text" id="employeeSub" name="empNum" value="${vo.empNum}"
+                        style=" background-color: #F4F4F4;
+                        box-shadow:inset 3px 3px 5px 1px rgba(98, 97, 97, 0.3);"><br>
 
-                        <label for="department">부서명</label>
-                       
+                        <label for="department" id="employeeInfo">부서명</label>
                         <div class="department-row">
-                            <input type="text" id="department-name" value="${vo.deptName}"> 
+                            <input type="text" id="department-name" value="${vo.deptName}" 
+                            style=" background-color: #F4F4F4;
+                                box-shadow:inset 3px 3px 5px 1px rgba(98, 97, 97, 0.3);"> 
                             <div class="filter-controls">
-                                <select id="deptName" name="deptName">
+                                <select id="deptName" name="deptName" onchange="updateDepartmentName()">
                                     <c:forEach var="departMentVo" items="${departMentVoList}">
                                         <option value="${departMentVo.code}">${departMentVo.name}</option>
                                     </c:forEach>
@@ -170,25 +174,25 @@
                             </div>
                         </div>
                        
-                        <label for="position">직급</label>
+                        <label for="position" id="employeeInfo">직급</label>
                         <div class="filter-controls">
-                            <select id="job" name="jobNo">
+                            <select name="jobNo" id="employeeSub">
                                 <c:forEach var="JobInfoVo" items="${jobInfoVoList}">
                                     <option value="${JobInfoVo.no}">${JobInfoVo.name}</option>
                                 </c:forEach>
                             </select>
                         <br>
                     </div>
-                        <label for="authority">권한</label>
+                        <label for="authority" id="employeeInfo">권한</label>
                         <div class="filter-controls">
-                        <select id="authority">
+                        <select id="employeeSub" name="isManager">
                             <option value="Y">관리자</option>
                             <option value="N">일반 사원</option>
                         </select>
                     </div>
                     <br>
                     
-                    <button type="button" class="btn btn-primary" id="pwd-reset">비밀번호 초기화</button>
+                    <button type="button" class="btn btn-primary" id="pwd-reset" value="${vo.no}">비밀번호 초기화</button>
                     
 
                     
@@ -197,7 +201,7 @@
 
             <div class="button-group">
                 <button type="submit" class="btn btn-primary" id="edit-btn">수정하기</button>
-                <button type="button" class="btn btn-primary" id="delete-btn" onclick="location.href='/system/account/list'">삭제</button>
+                <button type="button" class="btn btn-primary" id="cancle-btn" onclick="location.href='/system/account/list'" >취소</button>
             </div>
         </form>
         </div>

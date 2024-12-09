@@ -97,6 +97,7 @@ public class MemberController {
         session.removeAttribute("loginMemberVo");
         session.setAttribute("loginAdminVo", loginAdminVo);
         return "redirect:/system/account/list";
+
     }
 
     @GetMapping("adminLogout")
