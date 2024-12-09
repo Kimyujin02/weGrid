@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -47,28 +48,28 @@
                     <form class="search-box" action="/crm/list" method="get">
 
                         <select name="statusNo" class="form-select" aria-label="Default select example" onchange="applyFilters()">
-                            <option name="statusNo" value="" selected>전체 진행도</option>
+                            <option name="statusNo" value="" selected>전체</option>
                             <c:forEach items="${clientStatusVoList}" var="clientStatusVo">
                                 <option name="statusNo" value="${clientStatusVo.no}">${clientStatusVo.name}</option>
                             </c:forEach>
                         </select>
 
                         <select name="rankCode" class="form-select" aria-label="Default select example" onchange="applyFilters()">
-                            <option name="rankCode" value="" selected>전체 등급</option>
+                            <option name="rankCode" value="" selected>전체</option>
                             <c:forEach items="${clientRankVoList}" var="clientRankVo">
                                 <option name="rankCode" value="${clientRankVo.no}">${clientRankVo.name}</option>
                             </c:forEach>
                         </select>
               
 
-                        <select class="searchType" name="searchType">
+                        <select class="form-select searchType" name="searchType" aria-label="Search Type">
                             <option value="integration">통합</option>
                             <option value="client">고객사</option>
                             <option value="managerName">고객사 담당자명</option>
                             <option value="managerPhone">담당자 연락처</option>
                         </select>
 
-                        <input type="text" class="searchValue" name="searchValue" placeholder="검색">
+                        <input id="searchInput" type="text" class="searchValue" name="searchValue" placeholder="검색">
                         <button class="form-submit" type="submit" onclick="applyFilters()">
                             <i class="fas fa-search"></i>
                         </button>
@@ -97,7 +98,7 @@
                                     <td>${vo.no}</td>
                                     <td class="linked-name"><a href='/crm/detail?cno=${vo.no}&pno=1'>${vo.name}</a></td>
                                     <td>${vo.rankName}</td>
-                                    <td>${vo.startDate}</td>
+                                    <td>${fn:substring(vo.startDate, 0, 10)}</td>
                                 </tr>
                             </c:forEach>
                         </tbody>

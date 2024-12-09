@@ -64,7 +64,7 @@
 
 .search-area {
     display: grid;
-    grid-template-columns: 1fr 1fr 3.5fr;
+    /* grid-template-columns: 1fr 1fr 3.5fr; */
     align-content: end;
     padding-bottom: 15px;
 
@@ -72,7 +72,7 @@
 
 .search-box {
     display: grid;
-    grid-template-columns: 150px 200px 20px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.2fr;
     gap: 5px;
     align-items: center;
     justify-items: end;
@@ -86,11 +86,11 @@
 }
 
 #searchInput {
-    width: 250px;
+    width: 230px !important;
     height: 30px;
 
     border: 1px solid #ccc;
-    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1); /* 요소 내부로 그림자 */
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .form-submit {

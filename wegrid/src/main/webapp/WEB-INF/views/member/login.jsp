@@ -51,7 +51,7 @@
 
 
 
-        <a class="password-find" href="/member/find.jsp">비밀번호 찾기</a>
+        <div></div>
     </div>
 
     <div class="top2"></div>

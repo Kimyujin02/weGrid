@@ -75,7 +75,7 @@
                     <form class="search-box" method="post" action="/crm/history">
 
                         <input type="hidden" name="cno" value="${param.cno}">
-                        <input id="searchValue" type="text" name="searchValue" placeholder="검색">
+                        <input id="searchInput" type="text" name="searchValue" placeholder="검색">
                         <button type="submit" class="form-submit">
                             <i class="fas fa-search"></i>
                         </button>

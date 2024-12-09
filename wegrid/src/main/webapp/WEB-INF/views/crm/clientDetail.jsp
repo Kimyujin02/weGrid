@@ -65,7 +65,8 @@
                     <div class="prjTab"><button onclick="location.href='/crm/project?cno=${param.cno}'">프로젝트</button></div>
                     <div class="hisTab"><button onclick="location.href='/crm/history?cno=${param.cno}'">히스토리</button></div>
                     <div></div>
-                    <div class="dropdown" id="drop">
+                    <div></div>
+                    <!-- <div class="dropdown" id="drop">
                         <button class="dropdown-toggle">진행 현황 &nbsp;</button>
                         <div class="dropdown-menu">
                           <div class="option-list">
@@ -74,7 +75,7 @@
                             <label><input type="checkbox" value="완료" />완료</label>
                           </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div></div>
                     <form class="search-box" method="get" action="/crm/detail">
 
