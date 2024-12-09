@@ -35,7 +35,7 @@
         <if test="statusFilter != null and statusFilter != ''">
             AND A.STATUS_NO = #{statusFilter}
         </if>
-        ORDER BY A.ENROLL_DATE
+        ORDER BY A.ENROLL_DATE DESC
         OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
     </select>
 
@@ -91,7 +91,7 @@
         <if test="statusFilter != null and statusFilter != ''">
             AND A.STATUS_NO = #{statusFilter}
         </if>
-        ORDER BY A.ENROLL_DATE
+        ORDER BY A.ENROLL_DATE DESC
         OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
     </select>
 <!--    OR A.M_LINE IS NULL-->

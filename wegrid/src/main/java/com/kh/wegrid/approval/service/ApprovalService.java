@@ -55,11 +55,11 @@ public class ApprovalService {
         int result2 = 1;
         // 중간결재자가 존재 여부
         if(avo.getMline() != null && avo.getMline() != ""){
-            avo.setMstatus("0");
-            avo.setStatusNo("2");
-        }else{
             avo.setMstatus("1");
             avo.setStatusNo("1");
+        }else{
+            avo.setMstatus("0");
+            avo.setStatusNo("2");
         }
         int result1 = mapper.insertApproval(avo);
         if(attachmentVoList.size()>0){

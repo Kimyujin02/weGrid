@@ -170,4 +170,9 @@ form{
     font-size: 1.1rem;
     font-weight: 600;
 }
+.profileImgTag{
+    height: 40px;
+    width: 40px;
+    border-radius: 45px;
+}
 
