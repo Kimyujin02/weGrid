@@ -17,9 +17,11 @@ function openEmpSearchModal(){
 
 // 모달 닫기
 function closeEmpSearchModal(name , no , dept) {
-    setApprovalNo(no);
-    setApprovalName(name);
-    setApprovalDept(dept);
+    if(no != null && no != ""){
+        setApprovalNo(no);
+        setApprovalName(name);
+        setApprovalDept(dept);
+    }
     document.querySelector("#empSearchModal").style.display = "none";
 }
 
@@ -108,78 +110,77 @@ document.addEventListener("mouseup", () => {
     isDragging = false;
 });
 
-function openEmpSearch(pno , searchType , searchValue){
+function openEmpSearch(pno, searchType, searchValue) {
     const tbodyTag = document.querySelector("#empSearchModalTable tbody");
     const selectTag = document.querySelector("#dept-filter");
 
-    // const url = new URL(location);
-    // let pno = url.searchParams.get("pno");
-    if(pno == null){
+    if (pno == null) {
         pno = 1;
     }
+
+    const prevSelectedValue = selectTag.value; // 기존 선택 값 저장
+
     $.ajax({
-        
-        url : `/approval/emp/list/data?pno=${pno}` ,
-        data : {
-            searchType ,
-            searchValue ,
+        url: `/approval/emp/list/data?pno=${pno}`,
+        data: {
+            searchType,
+            searchValue,
         },
-       
-        success : function(m){
+        success: function (m) {
             const memberVoList = m.a;
             const pvo = m.b;
             const deptVoList = m.c;
             paintPageArea(pvo);
 
-            tbodyTag.innerHTML="";
-            selectTag.innerHTML="";
+            tbodyTag.innerHTML = "";
+            selectTag.innerHTML = "";
+
             const selectAll = document.createElement("option");
-            selectAll.setAttribute("value" , "");
-            selectAll.innerHTML="전체";
+            selectAll.setAttribute("value", "");
+            selectAll.innerHTML = "전체";
             selectTag.appendChild(selectAll);
-            
-            for(const vo of deptVoList){
+
+            for (const vo of deptVoList) {
                 const optionTag = document.createElement("option");
-                optionTag.setAttribute("value" , vo.code);
+                optionTag.setAttribute("value", vo.code);
                 optionTag.innerText = vo.name;
+
+                // 기존 선택값과 일치하면 선택 상태 유지
+                if (vo.code === prevSelectedValue) {
+                    optionTag.selected = true;
+                }
+
                 selectTag.appendChild(optionTag);
             }
-            
-            for(const vo of memberVoList){
+
+            for (const vo of memberVoList) {
                 const trTag = document.createElement("tr");
-                trTag.setAttribute("class" , "list-middle")
+                trTag.setAttribute("class", "list-middle");
                 const tdTag01 = document.createElement("td");
                 tdTag01.innerText = vo.no;
-                trTag.appendChild(tdTag01)
-    
+                trTag.appendChild(tdTag01);
+
                 const tdTag02 = document.createElement("td");
                 tdTag02.innerText = vo.deptName;
-                trTag.appendChild(tdTag02)
-    
+                trTag.appendChild(tdTag02);
+
                 const tdTag03 = document.createElement("td");
                 tdTag03.innerText = vo.jobName;
-                trTag.appendChild(tdTag03)
-    
+                trTag.appendChild(tdTag03);
+
                 const tdTag04 = document.createElement("td");
                 tdTag04.innerText = vo.name;
-                trTag.appendChild(tdTag04)
-    
-                
+                trTag.appendChild(tdTag04);
+
                 tbodyTag.appendChild(trTag);
-
             }
-
-           
-            
-            
         },
-        error : 
-        function(){
-            alert("출장 조회 실패")
+        error: function () {
+            alert("출장 조회 실패");
         },
-
     });
 }
+
  openEmpSearch();
 function submitSearchForm(pno){
     
@@ -231,7 +232,23 @@ function paintPageArea(pvo){
 
 }
 
+function cancle(){
+    // if (!window.confirm('결재등록을 취소하시겠습니까?')) {
+    //     event.preventDefault(); // 기본 동작 중단
+    // }
+    if(window.confirm('결재등록을 취소하시겠습니까?')){
+        location.href="/approval/submitList"
+    }else{
+        return false;
+    }
+   
+    
+}
 
-
-
+function confirmSubmission() {
+    if (!window.confirm('결재를 등록하시겠습니까?')) {
+      return false;
+    }
+    return
+}
 

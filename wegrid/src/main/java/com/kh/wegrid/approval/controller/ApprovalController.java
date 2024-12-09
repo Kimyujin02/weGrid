@@ -68,12 +68,13 @@ public class ApprovalController {
 
         MemberVo loginMemverVo = (MemberVo) session.getAttribute("loginMemberVo");
         avo.setWriterNo(loginMemverVo.getNo());
-        System.out.println("avo = " + avo);
+
 
 
         int result = service.insertApproval(avo , attachmentVoList);
 
         if(result>0){
+            session.setAttribute("alertMsg" , "결재등록이 완료되었습니다.");
             return "redirect:/approval/submitList";
         }else{
             return "redirect:/error";
@@ -141,6 +142,8 @@ public class ApprovalController {
 
         model.addAttribute("attVoList" , attachList);
         model.addAttribute("avo" , avo);
+        System.out.println("avo = " + avo);
+
 
         return "approval/detail";
     }
@@ -200,6 +203,7 @@ public class ApprovalController {
 
         return "approval/submitList";
     }
+
     @PostMapping("mline/allow")
     public String middelAllow(String no , HttpSession session){
 

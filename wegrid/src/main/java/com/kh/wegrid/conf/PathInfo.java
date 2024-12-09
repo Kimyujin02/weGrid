@@ -7,7 +7,7 @@ import java.io.File;
 @Component
 public class PathInfo {
 
-    private final String staticPath = "C:" + File.separator
+    private final String staticPath = "D:" + File.separator
             + "SemiPrjTeam2" + File.separator
             + "wegrid" + File.separator
             + "src" + File.separator

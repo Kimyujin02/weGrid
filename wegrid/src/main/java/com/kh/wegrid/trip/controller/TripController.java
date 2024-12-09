@@ -64,17 +64,47 @@ public class TripController {
         map.put("a" , tripVoList);
         map.put("b" , pvo);
 
-        System.out.println("pvo = " + pvo);
+
+        return map;
+    }
+
+    @GetMapping("endList/data")
+    @ResponseBody
+    public HashMap getEndTripVoList(@RequestParam(name = "pno"
+            , defaultValue = "1"
+            , required = false) int currentPage
+            , String searchType
+            , String searchValue ){
+
+        int listCount = service.getEndTripCnt(searchType , searchValue);
+        int pageLimit = 5;
+        int boardLimit = 15;
+        PageVo pvo = new PageVo(listCount , currentPage , pageLimit , boardLimit);
+        List<TripVo> tripVoList = service.getEndTripVoList(pvo , searchType , searchValue);
+        HashMap map = new HashMap();
+        map.put("a" , tripVoList);
+        map.put("b" , pvo);
+
+        System.out.println("map = " + map);
+        System.out.println("tripVoList = " + tripVoList);
+
 
         return map;
     }
     @GetMapping("detail")
-    public String detail(String tno , Model model){
+    public String detail(String tno , Model model , String preNo , String nextNo){
         TripVo vo = service.detail(tno);
         List<typeVo> typeVoList = service.getTypeList();
         model.addAttribute("typeVoList" , typeVoList);
 
         String firstTwoAddress = vo.getRoadAddress().substring(0, 2);
+
+        if(preNo != null && preNo != ""){
+            vo.setPreNo(preNo);
+        }
+        if(nextNo != null && nextNo != ""){
+            vo.setNextNo(nextNo);
+        }
 
         vo.setFirstTwoAddress(firstTwoAddress);
         model.addAttribute("tripVo" , vo);
