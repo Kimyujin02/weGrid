@@ -18,9 +18,6 @@
     <div class="active-boc">
         <label onclick="location.href='/systemPreference/list'" class="navLabel">
             <div class="icon-boc">
-                <!-- <i class="fa-solid fa-gear fa-spin fa-2x"></i> -->
-                <!-- <i class="fas fa-wrench fa-2x"></i> -->
-                <!-- <i class="fas fa-screwdriver-wrench fa-2x"></i> -->
                 <i class="fas fa-cog fa-2x"></i>
             </div>
             <div class="name-boc">환경설정</div>

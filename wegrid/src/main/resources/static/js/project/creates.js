@@ -68,7 +68,11 @@ function searchEmployee(name) {
 
 }
 
-
+// 사원 삭제 함수
+function removeEmployee(button) {
+    const personDiv = button.parentElement; // 버튼의 부모 요소 (사원 정보)
+    personDiv.remove(); // 해당 요소 삭제
+}
 
 ////////////////////////////////////////////////////////////////////////
 

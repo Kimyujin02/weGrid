@@ -94,6 +94,9 @@ input {
     height: 40px;
     
     border: none;
+
+    padding-left: 12px;
+    /* border-radius: 5px; */
 }
 
 a {

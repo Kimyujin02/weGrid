@@ -64,11 +64,14 @@ main {
     background-color: #174880;
     color: white;
 
-    font-size: large;
+    font-size: 25px;
     font-weight: 900;
 
     text-align: center;
-    vertical-align: middle;
+}
+
+.addBtn:hover {
+    cursor: pointer;
 }
 
 .list-area {

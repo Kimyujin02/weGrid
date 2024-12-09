@@ -35,7 +35,7 @@ public class SystemPreferenceController {
         AdminVo loginAdminVo = (AdminVo) session.getAttribute("loginAdminVo");
         if(loginAdminVo == null){
             session.setAttribute("alertMsg","옳바르지 않은 접근 입니다. 관리자 로그인화면으로 이동합니다.");
-            return "redirect:/member/admin";
+            return "redirect:/member/adminLogin";
         }
 
         List<ClientRankVo> clientRankList = service.getClientRankList();
@@ -57,25 +57,69 @@ public class SystemPreferenceController {
     // 항목 정보 추가
     @PostMapping("add")
     @ResponseBody
-    public HashMap add(String type, String name){
+    public HashMap add(String type, String name,String sub){
         System.out.println("type = " + type);
         System.out.println("name = " + name);
-
+        System.out.println("sub = " + sub);
         HashMap map = new HashMap();
         switch (type){
             case "clientRank" : map = service.addClientRank(name); break;
+            case "tripType" : map = service.addTripType(name); break;
+            case "department" : map = service.addDepartment(name,sub); break;
+            case "jobInfo" :
+                int vacCnt = Integer.parseInt(sub);
+                map = service.addJobInfo(name,vacCnt); break;
+            case "vacationType" : map = service.addVacationType(name); break;
+            default:break;
         }
 
         return map;
+
     }
 
-
+    // 항목 정보 수정
     @PostMapping("edit")
-    public void edit(String itemName, String no, String editInfo){
+    @ResponseBody
+    public int edit(String type, String no, String name){
+        System.out.println("type = " + type);
+        System.out.println("no = " + no);
+        System.out.println("name = " + name);
 
+        int result = 0;
+        switch (type){
+            case "clientRank" : result = service.editClientRank(no,name); break;
+            case "tripType" : result = service.editTripType(no,name); break;
+            case "department" : result = service.editDepartment(no,name); break;
+            case "jobInfo" : result = service.editJobInfo(no,name); break;
+            case "vacationType" : result = service.editVacationType(no,name); break;
+            case "vacCnt" :
+                int vacCnt = Integer.parseInt(name);
+                result = service.editVacationCnt(no,vacCnt); break;
+            default:break;
+        }
+
+        return result;
 
     }
 
+    // 항목 정보 삭제
+    @GetMapping("delete")
+    @ResponseBody
+    public int delete(String type, String no){
+        System.out.println("type = " + type);
+        System.out.println("no = " + no);
 
+        int result = 0;
+        switch (type){
+            case "clientRank" : result = service.deleteClientRank(no); break;
+            case "tripType" : result = service.deleteTripType(no); break;
+            case "department" : result = service.deleteDepartment(no); break;
+            case "jobInfo" : result = service.deleteJobInfo(no); break;
+            case "vacationType" : result = service.VacationType(no); break;
+            default:break;
+        }
+
+        return result;
+    }
 
 }

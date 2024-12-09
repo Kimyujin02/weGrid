@@ -50,7 +50,8 @@ function calculateDate(date,type){
     }
     calcDate= yy+"-"+mm;
 
-    return calcDate;
+    // return calcDate;
+    return yy;
 
 }
 

@@ -20,7 +20,6 @@
         <c:remove var="alertMsg" scope="session" />
     </script>
 
-
     <div class="top1"></div>
 
     <div class="login-menu">
