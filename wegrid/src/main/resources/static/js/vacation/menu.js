@@ -37,120 +37,126 @@ function linkUser() {
 
 
 
-//function insertNewVacation(){
-//    document.getElementById("vacationModal").style.display = "none";
-//
-//    const startDate = document.getElementById("startDate").value;
-//    const endDate = document.getElementById("endDate").value;
-//
-//    const selectedRadio = document.querySelector(".checkbox-group input[type=radio]:checked");
-//    const vacTypeNo = selectedRadio ? selectedRadio.value : null;
-//
-//    const content = document.getElementById("content").value;
-//
-//    $.ajax({
-//        url: '/vacation/menu',
-//        type: 'POST',  // HTTP 요청 방식 (POST 또는 GET)
-//        data: {
-//            startDate,
-//            endDate,
-//            vacTypeNo,
-//            content
-//        },
-//        success: function(response) {
-//            console.log('휴가 등록 성공:', response);
-//        },
-//        error: function(xhr, status, error) {
-//            console.error('휴가 등록 실패:', error);
-//        }
-//    });
+function loadBoardList(searchType, searchTitleValue, searchContentValue){
+    const tbodyTag = document.querySelector("table tbody");
 
-    // const vacTypeNo = document.querySelectorAll('.checkbox-group input[type="checkbox"]:checked');
-    // const startDate = document.querySelector(".startDate").value;
-//}
+        const url = new URL(location);
+    let pno = url.searchParams.get("pno");
+    if(pno == null){
+        pno = 1;
+    }
 
+    $.ajax({
+        url : `/board/data?pno=${pno}` ,
+        data : {
+            searchType,
+            searchTitleValue,
+            searchContentValue,
+        }, //키-밸류라 객체
+        // method :, 어차피 기본값이 GET
+        success: function (m) {
+            const vacationList = m.a;
+            const pvo = m.b;
+            paintPageArea(pvo);
 
+            tbodyTag.innerText = ""; // 기존 내용 초기화
 
+            for (const vo of vacationList) {
+                const trTag = document.createElement("tr");
 
+                // 부서 이름
+                const tdTag01 = document.createElement("td");
+                const aTag01 = document.createElement("a");
+                aTag01.setAttribute("href", `/vacation/detail?vno=${vo.no}`);
+                aTag01.innerText = vo.deptName;
+                tdTag01.appendChild(aTag01);
+                trTag.appendChild(tdTag01);
 
-//document.addEventListener('DOMContentLoaded', function () {
-//    // 버튼 클릭 이벤트 리스너
-//    document.getElementById('submitButton').addEventListener('click', function () {
-//        // 선택된 체크박스 가져오기
-//        const selectedCheckboxes = Array.from(
-//            document.querySelectorAll('.checkbox-group input[type="checkbox"]:checked')
-//        );
-//
-//        // 선택된 값 추출
-//        const selectedValues = selectedCheckboxes.map(checkbox => checkbox.value);
-//
-//        // 선택된 값 출력 (콘솔 확인용)
-//        console.log('선택된 항목:', selectedValues);
-//
-//        // 선택된 데이터를 처리 (예: 서버로 전송)
-//        if (selectedValues.length > 0) {
-//            processData(selectedValues);
-//        } else {
-//            alert('선택된 항목이 없습니다.');
-//        }
-//    });
-//});
-//
-//function processData(selectedValues) {
-//    // 데이터를 처리하는 함수 (예: AJAX로 서버에 전송)
-//    fetch('/vacation/process', {
-//        method: 'POST',
-//        headers: {
-//            'Content-Type': 'application/json',
-//        },
-//        body: JSON.stringify({ selectedVacationTypes: selectedValues }),
-//    })
-//        .then(response => response.json())
-//        .then(data => {
-//            console.log('서버 응답:', data);
-//            alert('처리가 완료되었습니다.');
-//        })
-//        .catch(error => {
-//            console.error('에러 발생:', error);
-//            alert('처리 중 문제가 발생했습니다.');
-//        });
-//}
-//
-//
-//
-//
-//
-//
-//
-//const fileTag = document.querySelector("input[name=f]");
-//fileTag.addEventListener("change", preview);
-//
-//function preview(evt){
-//    const previewArea = document.querySelector(".preview-area");
-//    previewArea.innerHTML = "";
-//    for(let i = 0; i < evt.target.files.length; ++i){
-//        const f = evt.target.files[i];
-//        const fr = new FileReader();    //파일 읽어들이기위한 객체
-//        fr.onload = function(evt){ //파라미터에 변수넣으면 이벤트를 가져옴 근데 변수명은 내 맘대로
-//            const dataUrl = evt.target.result;
-//            const imgTag = document.createElement("img");
-//            imgTag.setAttribute("src", dataUrl);
-//            imgTag.setAttribute("width", "100");
-//            imgTag.setAttribute("height", "100");
-//            previewArea.appendChild(imgTag);
-//        }
-//        fr.readAsDataURL(f);
-//    }
-//}
+                // 이름
+                const tdTag02 = document.createElement("td");
+                tdTag02.innerText = vo.name;
+                trTag.appendChild(tdTag02);
+
+                // 시작 날짜
+                const tdTag03 = document.createElement("td");
+                tdTag03.innerText = vo.startDate;
+                trTag.appendChild(tdTag03);
+
+                // 종료 날짜
+                const tdTag04 = document.createElement("td");
+                tdTag04.innerText = vo.endDate;
+                trTag.appendChild(tdTag04);
+
+                // 내용
+                const tdTag05 = document.createElement("td");
+                tdTag05.innerText = vo.content;
+                trTag.appendChild(tdTag05);
+
+                // 휴가 유형
+                const tdTag06 = document.createElement("td");
+                tdTag06.innerText = vo.vacTypeName;
+                trTag.appendChild(tdTag06);
+
+                // 사용 횟수
+                const tdTag07 = document.createElement("td");
+                tdTag07.innerText = vo.useCnt;
+                trTag.appendChild(tdTag07);
+
+                // 수정 버튼
+                const tdTag08 = document.createElement("td");
+                const editButton = document.createElement("button");
+                editButton.classList.add("edit");
+                editButton.innerText = "수정";
+                editButton.onclick = function () {
+                    openVacationModal();
+                };
+                tdTag08.appendChild(editButton);
+                trTag.appendChild(tdTag08);
+
+                // 삭제 버튼
+                const tdTag09 = document.createElement("td");
+                const deleteButton = document.createElement("button");
+                deleteButton.classList.add("delete");
+                deleteButton.innerText = "삭제";
+                deleteButton.onclick = function () {
+                    // 삭제 로직 작성
+                    console.log(`Delete vacation with id: ${vo.no}`);
+                };
+                tdTag09.appendChild(deleteButton);
+                trTag.appendChild(tdTag09);
+
+                // 행 추가
+                tbodyTag.appendChild(trTag);
+            }
+        } ,
+        fail : function(){
+            alert("게시글 목록조회 실패 (관리자에게 문의하세요)");
+        } ,
+    })
+
+}
+
+loadBoardList();
 
 
 
 
-// 모달 외부 클릭 시 닫기
-//window.onclick = function(event) {
-//    const modal = document.getElementById("vacationModal");
-//    if (event.target === modal) {
-//        modal.style.display = "none";
-//    }
-//};
+function submitSearchForm(){
+    const searchType = document.querySelector("select[name=searchType]").value; //제목인지 내용인지
+
+    const titleOrContentValue = document.querySelector("input[name=searchValue]").value;
+
+    let searchTitleValue = "";
+    let searchContentValue = "";
+    if(searchType == "title"){
+        searchTitleValue = titleOrContentValue;
+    }else{
+        searchContentValue = titleOrContentValue;
+    }
+
+    loadBoardList(searchType, searchTitleValue, searchContentValue);
+
+    //기본이벤트 막기
+    return false;
+}
 

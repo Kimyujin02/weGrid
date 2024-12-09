@@ -1,9 +1,11 @@
 package com.kh.wegrid.vacation.mapper;
 
+import com.kh.wegrid.vacation.vo.DeptVo;
+import com.kh.wegrid.util.page.PageVo;
 import com.kh.wegrid.vacation.vo.*;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -81,15 +83,14 @@ public interface VacationMapper {
     int insertNewVacation(VacationVo vo);
 
     @Select("""
-        SELECT
-            VT.NO AS vacType
-            , COALESCE(SUM(V.USE_CNT), 0) AS DayOfType
-        FROM VACATION V
-        JOIN EMPLOYEE E ON (E.NO = V.EMP_NO)
-        JOIN VACATION_TYPE VT ON (VT.NO = V.V_TYPE_NO)
-        WHERE E.NO = '3'
-        GROUP BY VT.NO
-        ORDER BY VT.NO
+            SELECT
+                VT.NO AS vacType,
+                COALESCE(SUM(V.USE_CNT), 0) AS DayOfType
+            FROM VACATION_TYPE VT
+            LEFT JOIN VACATION V ON (VT.NO = V.V_TYPE_NO)
+            LEFT JOIN EMPLOYEE E ON (E.NO = V.EMP_NO AND E.NO = '3')
+            GROUP BY VT.NO
+            ORDER BY VT.NO
         """)
     List<VacationVo2> getSelectPersonalCnt();
 
@@ -106,6 +107,47 @@ public interface VacationMapper {
         WHERE V.EMP_NO = #{mno}
         """)
     List<VacationVo3> getSelectPersonalCntInfo(String mno);
+
+
+
+
+    @Select("""
+            SELECT
+                V.NO
+                , V.EMP_NO
+                , V.V_TYPE_NO
+                , V.START_DATE
+                , V.END_DATE
+                , V.CONTENT
+                , V.USE_CNT
+                , D.NAME AS DEPT_NAME
+                , E.NAME AS NAME
+                FROM VACATION V
+                JOIN EMPLOYEE E ON( V.EMP_NO = E.NO )
+                JOIN DEPARTMENT D ON ( E.DEPT_NO = D.CODE )
+                ${str}
+            ORDER BY V.NO DESC
+            OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
+            """)
+    List<VacationVo> getVacationList(PageVo pvo, String str);
+
+    @Select("""
+            SELECT COUNT (*)
+            FROM VACATION
+            """)
+    int getVacationCnt();
+
+    @Select("""
+            SELECT *
+            FROM DEPARTMENT
+            """)
+    List<DeptVo> getDeptVoList();
+
+    @Delete("""
+        DELETE FROM VACATION
+        WHERE NO = #{no}
+            """)
+    int getDeleteVacationList(String no);
 
 
 //    int updateVacation(VacationVo vo);
