@@ -28,7 +28,17 @@ public class CalendarController {
 
     // 캘린더 화면으로 이동
     @GetMapping("mainCalendar")
-    public void mainCalender(){}
+    public String mainCalender(HttpSession session){
+        // 접속한 사원의 사번 정보 수집
+        MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
+        if(loginVo == null) {
+            session.setAttribute("alertMsg","옳바르지 않은 접근 입니다. 로그인화면으로 이동합니다.");
+            return "redirect:/member/login";
+        }
+
+        return "calendar/mainCalendar";
+
+    }
     
     // 이벤트 데이터 불러오기
     @GetMapping("load")
@@ -81,51 +91,77 @@ public class CalendarController {
     // 일정 추가
     @PostMapping("write")
     @ResponseBody
-    public int write(CalendarVo vo, HttpSession session){
+    public String write(CalendarVo vo, HttpSession session){
 
-        // 작성자의 사번 정보 수집
+        // 접속한 사원의 사번 정보 수집
         MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
+        if(loginVo == null) {
+            session.setAttribute("alertMsg","옳바르지 않은 접근 입니다. 로그인화면으로 이동합니다.");
+            return "redirect:/member/login";
+        }
         vo.setWriterNo(loginVo.getNo());
 
         // service 호출
         int result = service.write(vo);
-        
+
         // 결과 반환
-        return result;
+        if (result == 1){
+            return "success";
+        }else{
+            return "fail";
+        }
         
     }//write
 
     // 일정 수정
     @PostMapping("edit")
     @ResponseBody
-    public int edit(CalendarVo vo, HttpSession session){
+    public String edit(CalendarVo vo, HttpSession session){
 
         // 작성자의 사번 정보 수집
         MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
+        if(loginVo == null) {
+            session.setAttribute("alertMsg","옳바르지 않은 접근 입니다. 로그인화면으로 이동합니다.");
+            return "redirect:/member/login";
+        }
         vo.setWriterNo(loginVo.getNo());
 
         // service 호출
         int result = service.edit(vo);
 
         // 결과 반환
-        return result;
+        if (result == 1){
+            return "success";
+
+        }else{
+            return "fail";
+        }
 
     }//edit
 
     // 일정 삭제
     @GetMapping("delete")
     @ResponseBody
-    public int delete(String no, HttpSession session){
+    public String delete(String no, HttpSession session){
 
         // 접속한 사원의 사원정보 수집
         MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
+        if(loginVo == null) {
+            session.setAttribute("alertMsg","옳바르지 않은 접근 입니다. 로그인화면으로 이동합니다.");
+            return "redirect:/member/login";
+        }
         String writerNo = loginVo.getNo();
         
         // service 호출
         int result = service.delete(no , writerNo);
 
         // 결과 반환
-        return result;
+        if (result == 1){
+            return "success";
+
+        }else{
+            return "fail";
+        }
 
     }//delete
 

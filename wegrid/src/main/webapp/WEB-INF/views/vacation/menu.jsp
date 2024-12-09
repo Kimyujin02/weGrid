@@ -38,7 +38,7 @@
                         <th>등록 가능 잔여 휴가</th>
                     </tr>
                 </thead>
-          
+
                 <tbody >
                     <tr class="list-middle">
                         <!-- tbody안쪽은 js사용해서 동적으로 채워줌   -->
@@ -96,13 +96,22 @@
                 <span class="current-date">2024 11월</span>
                 <button class="arrow-btn">▶</button>
             </div>
+
+
+
             <div class="filter-controls">
-                <select>
-                    <option>부서명</option>
-                </select>
-                <input type="text" placeholder="검색어 입력" />
-                <button class="search-btn">🔍</button>
+                <form action="/vacation/menu">
+                    <input type="text" name="searchValue" value="${searchValue}" placeholder="검색할 제목 입력하셈">
+                    <input type="submit" value="검색">
+                </form>
             </div>
+
+
+
+
+
+
+
         </div>
             <table class="table">
                 <thead class="list-top">
@@ -119,7 +128,7 @@
                 </thead>
           
                 <tbody>
-                    <c:forEach items="${selectAllVacationList}" var="x">
+                    <c:forEach items="${voList}" var="x">
                         <tr class="user-history">
                             <td>${x.deptName}</td>
                             <td>${x.name}</td>
@@ -127,26 +136,30 @@
                             <td>${x.endDate}</td>
                             <td>${x.content}</td>
                             <td>${x.vacTypeName}</td>
-                            <td>${x.cnt}</td>
-                            <td><button class="edit" onclick="openVacationModal();">수정</button> <button class="delete">삭제</button></td>
+                            <td>${x.useCnt}</td>
+                            <form action="/vacation/delete?"><td><button type="button" class="edit" onclick="openVacationModal(); event.preventDefault();">수정</button><input type="hidden" name="no" value="${x.no}"><button type="submit" class="delete">삭제</button></form></td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
             <div class="bottom-line"></div>
 
-            <div class="page">
-                <!-- js에서 동적으로 버튼 만들어줌-->
-                <span><a href="#!"><i class="fas fa-angle-double-left fa-lg" style="color: #174880;"></i></a></span>
-                <span><a href="#!"><i class="fas fa-caret-left fa-lg" style="color: #174880;"></i></a></span>
-                <span><a href="#!">1</a></span>
-                <span><a href="#!">2</a></span>
-                <span><a href="#!">3</a></span>
-                <span><a href="#!">4</a></span>
-                <span><a href="#!">5</a></span>
-                <span><a href="#!"><i class="fas fa-caret-right fa-lg" style="color: #174880;"></i></a></span>
-                <span><a href="#!"><i class="fas fa-angle-double-right fa-lg" style="color: #174880;"></i></a></span>
+
+            <div class="page-area">
+                <div class="page">
+                    <c:if test="${pvo.startPage != 1}">
+                        <a href="/vacation/menu?pno=${pvo.startPage-1}&searchValue=${searchValue}">이전</a>
+                    </c:if>
+                    <c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i" step="1">
+                        <a href="/vacation/menu?pno=${i}&searchValue=${searchValue}">${i}</a>
+                    </c:forEach>
+                    <c:if test="${pvo.endPage != pvo.maxPage}">
+                        <a href="/vacation/menu?pno=${pvo.endPage+1}&searchValue=${searchValue}">다음</a>
+                    </c:if>
+                </div>
             </div>
+
+
 
         </div>
 

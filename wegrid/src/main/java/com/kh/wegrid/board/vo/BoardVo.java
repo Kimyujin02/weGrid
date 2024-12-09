@@ -17,4 +17,8 @@ public class BoardVo {
     private String noticeYn;
     private String delYn;
 
+    private String deptName;
+    private String jobName;
+    private String replyNo;
+
 }

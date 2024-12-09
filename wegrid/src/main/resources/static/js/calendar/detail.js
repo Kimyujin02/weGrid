@@ -35,7 +35,6 @@ function showEventDetail(evt) {
             addContent(vo);
             activateModalFooter(vo,loginInfo);
              
-        
             // 모달 창 띄우기
             $("#detailModal").modal("show");
         },
@@ -126,13 +125,17 @@ function deleteSchedule(){
     const typeNo = document.querySelector("#calendar-typName-view").getAttribute("no");
     const calcDate = calculateDate(new Date(document.querySelector("#calendar-start-Date-view").innerText));
 
+    if(!confirm("정말 삭제하시겠습니까?")){
+        return;
+    }
+
     $.ajax({
         url: "/calendar/delete",
         data:{
             no
         },
         success:function(result){        
-            if(result == 1){
+            if(result == "success"){
                 alert("일정 삭제 완료!!");
                 console.log("로컬 비우기",typeNo,calcDate);  
                 deleteLocalStorage(typeNo,calcDate);
@@ -142,7 +145,7 @@ function deleteSchedule(){
                 $('#detailModal').modal('hide');
             }
             else{
-                alert("신규 일정 등록 실패");
+                alert("일정 삭제 실패");
             }
         },
         error:function(){

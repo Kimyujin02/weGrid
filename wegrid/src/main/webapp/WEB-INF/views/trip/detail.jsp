@@ -95,22 +95,34 @@
                     </div>
                     <div></div>
                     <div id="q-area">
-                        <div><button type="button" 
+                        <div>
+                            <!-- <c:if test="${tripVo.preNo != null && tripVo.preNo != ''}">
+                                <button type="button" 
+                                class="btn btn-primary" 
+                                id="preBtn"
+                                onclick="location.href=`/trip/detail?tno=${tripVo.preNo}`" 
+                                >이전항목
+                                </button>
+                            </c:if> -->
+                    </div>
+                        <div>
+                            <button type="button" 
                             class="btn btn-primary" 
-                            id="preBtn"
-                            onclick="location.href=`/trip/detail?tno=${tripVo.no-1}`" 
-                            >이전항목
-                        </button></div>
-                        <div><button type="button" 
-                            class="btn btn-primary" 
-                            id="listBtn" 
+                            id="listBtn"
+                            onclick="location.href=`/trip/list`" 
                             >목록
-                        </button></div>
-                        <div id="nextBtnDiv"><button type="button" 
-                            class="btn btn-primary" 
-                            id="nextBtn" 
-                            >다음항목
-                        </button></div>
+                        </button>
+                    </div>
+                        <div id="nextBtnDiv">
+                            <!-- <c:if test="${tripVo.nextNo != null && tripVo.nextNo != ''}">
+                                <button type="button" 
+                                class="btn btn-primary" 
+                                id="nextBtn" 
+                                onclick="location.href=`/trip/detail?tno=${tripVo.nextNo}`" 
+                                >다음항목
+                                </button>
+                            </c:if> -->
+                    </div>
                     </div>
                 </div>
                 <div></div>

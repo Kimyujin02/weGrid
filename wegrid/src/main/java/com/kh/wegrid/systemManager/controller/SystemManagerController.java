@@ -77,6 +77,7 @@ public class SystemManagerController {
         if(loginAdminVo == null){
             session.setAttribute("alertMsg","옳바르지 않은 접근 입니다. 관리자 로그인화면으로 이동합니다.");
             return "redirect:/member/adminLogin";
+
         }
 
         // 1. 부서 및 직급 리스트 가져오기

@@ -94,24 +94,17 @@ input {
     height: 40px;
     
     border: none;
+
+    padding-left: 12px;
+    /* border-radius: 5px; */
 }
 
 
-.id-text {
+.id-text, .pwd-text {
     white-space: nowrap;
     font-size: 1.1rem;
     font-weight: bold;
     color: #D1DCE8;
-    place-content: center;
-    justify-self: right;
-}
-
-.pwd-text {
-    white-space: nowrap;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #D1DCE8;
-
     place-content: center;
     justify-self: right;
 }

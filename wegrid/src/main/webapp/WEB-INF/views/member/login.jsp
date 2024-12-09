@@ -13,7 +13,12 @@
 
 </head>
 <body>
-
+    <script>
+        <c:if test="${not empty alertMsg}">
+            alert('${sessionScope.alertMsg}');
+        </c:if>
+        <c:remove var="alertMsg" scope="session" />
+    </script>
 
     <div class="top1"></div>
 
@@ -46,7 +51,7 @@
 
 
 
-        <a class="password-find" href="/member/find.jsp">비밀번호 찾기</a>
+        <div></div>
     </div>
 
     <div class="top2"></div>

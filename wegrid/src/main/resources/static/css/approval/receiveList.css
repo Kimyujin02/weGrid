@@ -175,4 +175,7 @@ td{
 #approval-status > option > {
     text-align: center; 
 }
-
+#table tbody tr:hover{
+    background-color: lightgray;
+    cursor: pointer;
+}

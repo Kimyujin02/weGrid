@@ -291,7 +291,7 @@ form {
 
 
 #empSearchModalTable tbody tr:hover{
-    background-color: lightgray;
+    background-color: rgb(110, 107, 107);
     cursor: pointer;
 }
 #leftPageBtn{
@@ -368,6 +368,7 @@ td{
     background-color: white;
     border: none;
     font-size: 1.1rem;
+    font-weight: 600;
 }
 .dept-areaa{
     font-size: 14px;
@@ -379,3 +380,11 @@ td{
     font-weight: 600;
 }
 
+input:focus,
+        textarea:focus {
+            outline: none; 
+        }
+#aaavvv{
+    display: flex;
+    justify-content: center;
+}

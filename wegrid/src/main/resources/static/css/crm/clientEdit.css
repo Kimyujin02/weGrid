@@ -168,14 +168,30 @@
     font-weight: bold;
 
     padding-top: 30px;
-    padding-right: 175px;
+    padding-right: 95px;
 }
 
-.client-grade > select {
+.client-status {
+    justify-self: end;
+    font-weight: bold;
+
+    padding-top: 30px;
+    padding-left: 150px;
+}
+
+.select-grade {
     border: 1px solid #C0C0C0;
     border-radius: 5px;
 
-    width: 50px;
+    width: 70px;
+    height: 30px;
+}
+
+.select-status {
+    border: 1px solid #C0C0C0;
+    border-radius: 5px;
+
+    width: 70px;
     height: 30px;
 }
 
@@ -209,6 +225,11 @@ input {
 
 .cminfo-input > div > input {
     width: 300px;
+}
+
+.selectList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 

@@ -7,11 +7,20 @@
 
     <insert id="insertBoardAttachment">
         INSERT ALL
-        <foreach collection="attachmentVoList" item = "x">
-            INTO BOARD_ATTACHMENT (NO, BOARD_NO, ORIGIN_NAME, CHANGE_NAME) VALUES ((SELECT GET_BOARD_ATTACHMENT_NO FROM DUAL), SEQ_BOARD.CURRVAL, #{x.originName}, #{x.changeName})
+        <foreach collection="attachmentVoList" item="x">
+            <if test="x.originName != null">
+                INTO BOARD_ATTACHMENT (NO, BOARD_NO, ORIGIN_NAME, CHANGE_NAME)
+                VALUES (
+                (SELECT GET_BOARD_ATTACHMENT_NO FROM DUAL),
+                SEQ_BOARD.CURRVAL,
+                #{x.originName},
+                #{x.changeName}
+                )
+            </if>
         </foreach>
         SELECT 1 FROM DUAL
     </insert>
+
 
     <select id="getBoardVoList">
         SELECT
@@ -47,5 +56,14 @@
             AND CONTENT LIKE '%${searchContentValue}%'
         </if>
     </select>
+
+
+    <insert id="updateBoardAttachment">
+        INSERT ALL
+        <foreach collection="changeNameList" item = "x">
+            INTO BOARD_ATTACHMENT (NO,BOARD_NO,CHANGE_NAME) VALUES((SELECT GET_BOARD_ATTACHMENT_NO FROM DUAL), #{no}, #{x})
+        </foreach>
+        SELECT 1 FROM DUAL
+    </insert>
 
 </mapper>

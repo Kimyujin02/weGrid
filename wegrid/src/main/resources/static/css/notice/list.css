@@ -191,10 +191,12 @@ color: white;
     height: 12px !important;
 }
 .table tr td{
-    height: 12px !important;
-    padding: 0px !important;
+    height: 9px !important;
+    padding-top: 3px !important;
     margin: 0px !important;
     border: 0px !important;
+    border-bottom: 1px solid #BFBDBD !important;
+    text-align: center;
 }
 
 
@@ -238,11 +240,14 @@ font-weight: 300;
 }
 
 .bottom-line{
-width: 1340px;
-height: 8px;
-background-color: rgba(23, 72, 128, 1);
-margin: auto;
-margin-bottom: 10px;
+    width: 1340px;
+    height: 8px;
+    background-color: rgba(23, 72, 128, 1);
+    margin: auto;
+    margin-bottom: 10px;
+    position: absolute;
+    left: 80px;
+    top: 600px;
 }
 .edit, .delete{
 padding: 0px 5px 1px 5px;
@@ -255,4 +260,45 @@ border: 0;
 .delete{
 background-color: #d3d3d3;
 color: black;
+}
+
+.table tbody tr:hover{
+    background-color: lightgray !important;
+    cursor: pointer !important;
+}
+
+
+.table-form{
+    height: 400px;
+}
+
+
+.table-area{
+    background-color: white;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+.page{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page > a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: darkgray;
+    color: white;
+    text-decoration: none !important;
+}
+
+a {
+    text-decoration: none !important;
 }

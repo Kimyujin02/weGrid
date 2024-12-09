@@ -131,4 +131,8 @@ public interface TripMapper {
             WHERE NO = #{no}
             """)
     int delete(String no);
+
+    List<TripVo> getEndTripVoList(PageVo pvo, String searchType, String searchValue);
+
+    int getEndTripCnt(String searchType, String searchValue);
 }

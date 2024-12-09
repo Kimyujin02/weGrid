@@ -135,6 +135,8 @@ function paintPageArea(pvo){
 
 
 
+
+
 function loadTripList(searchType , searchValue){
     const tbodyTag = document.querySelector("#table>tbody");
 
@@ -204,13 +206,115 @@ function loadTripList(searchType , searchValue){
 
 loadTripList();
 
+function endTripList(searchType , searchValue){
+    const tbodyTag = document.querySelector("#table>tbody");
+
+    const url = new URL(location);
+    let pno = url.searchParams.get("pno");
+    if(pno == null){
+        pno = 1;
+    }
+    $.ajax({
+        
+        url : `/trip/endList/data?pno=${pno}` ,
+        data : {
+            searchType ,
+            searchValue ,
+        },
+       
+        success : function(m){
+            const tripVoList = m.a;
+            const pvo = m.b;
+            paintPageArea(pvo);
+
+            tbodyTag.innerHTML="";
+            
+            for(let vo of tripVoList){
+                const trTag = document.createElement("tr");
+                trTag.setAttribute("class" , "list-middle")
+                const tdTag01 = document.createElement("td");
+                tdTag01.innerText = vo.no;
+                trTag.appendChild(tdTag01)
+    
+                const tdTag02 = document.createElement("td");
+                tdTag02.innerText = vo.title;
+                trTag.appendChild(tdTag02)
+    
+                const tdTag03 = document.createElement("td");
+                tdTag03.innerText = vo.startDate;
+                trTag.appendChild(tdTag03)
+    
+                const tdTag04 = document.createElement("td");
+                tdTag04.innerText = vo.endDate;
+                trTag.appendChild(tdTag04)
+    
+                const tdTag05 = document.createElement("td");
+                tdTag05.innerText = vo.writerName;
+                trTag.appendChild(tdTag05)
+                
+                const tdTag06 = document.createElement("td");
+                tdTag06.innerText = vo.typeName;
+                trTag.appendChild(tdTag06)
+                
+                
+                tbodyTag.appendChild(trTag);
+
+            }
+            
+            
+        },
+        error : 
+        function(){
+            alert("출장 조회 실패")
+        },
+
+    });
+
+}
+
 const tbodyTag = document.querySelector("#table>tbody");
 
-tbodyTag.addEventListener("click" , function(evt){
-    if(evt.target.tagName != "TD"){return;}
-    const no = evt.target.parentNode.children[0].innerText;
-    location.href=`/trip/detail?tno=${no}`;
+// tbodyTag.addEventListener("click" , function(evt){
+//     if(evt.target.tagName != "TD"){return;}
+//     const no = evt.target.parentNode.children[0].innerText;
+//     console.log( evt.target.parentNode.parentNode);
+//     location.href=`/trip/detail?tno=${no}`;
+// });
+
+tbodyTag.addEventListener("click", function(evt) {
+    if (evt.target.tagName != "TD") { return; }
+    
+    // 현재 클릭된 tr 태그
+    const currentTr = evt.target.parentNode;
+    const currentNo = currentTr.children[0].innerText;
+    let nextNo = "";
+    let previousNo = "";
+    console.log("현재 tr의 첫 번째 td 값:", currentNo);
+
+    // 이전 tr 태그
+    const previousTr = currentTr.previousElementSibling;
+    if (previousTr) {
+        previousNo = previousTr.children[0].innerText;
+        console.log("이전 tr의 첫 번째 td 값:", previousNo);
+    } else {
+        
+        console.log("이전 tr이 존재하지 않습니다.");
+    }
+
+    // 다음 tr 태그
+    const nextTr = currentTr.nextElementSibling;
+    if (nextTr) {
+        nextNo = nextTr.children[0].innerText;
+        console.log("다음 tr의 첫 번째 td 값:", nextNo);
+    } else {
+        
+        console.log("다음 tr이 존재하지 않습니다.");
+    }
+
+    // 현재 tr의 값으로 이동
+    location.href = `/trip/detail?tno=${currentNo}&preNo=${previousNo}&nextNo=${nextNo}`;
 });
+
 
 
 
@@ -227,7 +331,7 @@ function submitSearchForm(){
 document.addEventListener("DOMContentLoaded", function(){
     const today = new Date().toISOString().split("T")[0]; // 현재 날짜
     const startDateInput = document.querySelector("input[name=startDate]");
-    const endDateInput = document.querySelector("input[name=endDate]");
+    const endDateInput = document.querySelector("input[name=endDate]");  
 
     
     startDateInput.min = today;
@@ -252,3 +356,12 @@ function fqes(){
     }
 }
 
+const buttons = document.querySelectorAll('.fil-btn-z');
+
+buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        button.classList.add('active');
+    });
+});

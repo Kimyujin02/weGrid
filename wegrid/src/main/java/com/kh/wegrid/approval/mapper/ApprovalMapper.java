@@ -67,27 +67,35 @@ public interface ApprovalMapper {
     int insertApprovalAttachment(List<ApprovalAttachmentVo> attachmentVoList);
 
     @Select("""
-      SELECT
-           A.NO,
-           A.EMP_NO          AS WRITER_NO,
-           E.NAME            AS WRITER_NAME,
-           D.NAME            AS WRITER_DEPT,
-           A.L_LINE,
-           L.NAME            AS L_LINE_NAME,
-           A.M_LINE,
-           COALESCE(M.NAME, '미지정') AS M_LINE_NAME,
-           A.STATUS_NO,
-           S.NAME            AS STATUS_NAME,
-           A.TITLE,
-           A.CONTENT,
-           TO_CHAR(A.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE
-      FROM APPROVAL A
-      JOIN EMPLOYEE E ON ( E.NO = A.EMP_NO )
-      JOIN APPROVAL_STATUS S  ON ( S.NO = A.STATUS_NO )
-      JOIN EMPLOYEE L ON ( L.NO = A.L_LINE )
-      JOIN EMPLOYEE M ON ( M.NO = COALESCE(A.M_LINE, -1) )
-      JOIN DEPARTMENT D ON ( D.CODE = E.DEPT_NO )
-      WHERE A.NO = #{ano}
+    SELECT
+         A.NO,
+         A.EMP_NO          AS WRITER_NO,
+         E.NAME            AS WRITER_NAME,
+         E.PROFILE         AS WRITER_PROFILE,
+         D.NAME            AS WRITER_DEPT,
+         A.L_LINE,
+         L.NAME            AS L_LINE_NAME,
+         L.PROFILE         AS L_LINE_PROFILE,
+         LD.NAME           AS L_LINE_DEPT,
+         A.M_LINE,
+         A.M_STATUS,
+         COALESCE(M.NAME, '미지정') AS M_LINE_NAME,
+         COALESCE(MD.NAME, '미지정') AS M_LINE_DEPT,
+         COALESCE(M.PROFILE, '미지정') AS M_LINE_PROFILE,
+         A.STATUS_NO,
+         S.NAME            AS STATUS_NAME,
+         A.TITLE,
+         A.CONTENT,
+         TO_CHAR(A.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE
+    FROM APPROVAL A
+    JOIN EMPLOYEE E ON (E.NO = A.EMP_NO)
+    JOIN APPROVAL_STATUS S ON (S.NO = A.STATUS_NO)
+    JOIN EMPLOYEE L ON (L.NO = A.L_LINE)
+    JOIN DEPARTMENT LD ON (LD.CODE = L.DEPT_NO)
+    LEFT JOIN EMPLOYEE M ON (M.NO = A.M_LINE) 
+    LEFT JOIN DEPARTMENT MD ON (MD.CODE = M.DEPT_NO) 
+    JOIN DEPARTMENT D ON (D.CODE = E.DEPT_NO)
+    WHERE A.NO = #{ano}
       """)
     ApprovalVo approvalDetail(String ano);
 
@@ -129,7 +137,7 @@ public interface ApprovalMapper {
     @Update("""
             UPDATE APPROVAL
                 SET
-                    STATUS_NO = '3'
+                    STATUS_NO = '4'
                     , M_STATUS = '4'
             WHERE NO = #{no}
             """)

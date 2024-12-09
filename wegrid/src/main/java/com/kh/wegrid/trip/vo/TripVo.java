@@ -23,5 +23,8 @@ public class TripVo {
     private String client;
     private String clientName;
     private String delYn;
+    private String preNo;
+    private String nextNo;
+
 
 }

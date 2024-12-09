@@ -155,9 +155,24 @@ form{
 }  
 #approvalLine-area{
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 40px 1fr 40px 1fr  40px 1fr;
 }
 .att-boc{
     height: 25px;
     font-size: 12px;
 }
+.dept-areaa{
+    font-size: 14px;
+    font-weight: 400;
+    color: gray;
+}
+.name-areaa{
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.profileImgTag{
+    height: 40px;
+    width: 40px;
+    border-radius: 45px;
+}
+

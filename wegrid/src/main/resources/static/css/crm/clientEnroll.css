@@ -168,14 +168,14 @@
     font-weight: bold;
 
     padding-top: 30px;
-    padding-right: 175px;
+    padding-right: 185px;
 }
 
-.client-grade > select {
+.select-grade {
     border: 1px solid #C0C0C0;
     border-radius: 5px;
 
-    width: 50px;
+    width: 70px;
     height: 30px;
 }
 

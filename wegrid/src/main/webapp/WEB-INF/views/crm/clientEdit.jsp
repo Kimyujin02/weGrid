@@ -71,20 +71,39 @@
                     </div>
                     
                     <div class="cinfo_line"></div>
-                    <div class="client-grade">
-                        등급 &nbsp; 
-                        <label>
-                            <select class="select-grade" name="rankCode">
-                                <c:forEach items="${clientRankVoList}" var="clientRankVo">
-                                    <option 
-                                        value="${clientRankVo.no}" 
-                                        <c:if test="${vo.rankCode == clientRankVo.no}">selected</c:if>
-                                    >
-                                    ${clientRankVo.name}</option>
-                                </c:forEach>
-                            </select>
-                        </label>
+                    
+                    <div class="selectList">
+                        <div class="client-status">
+                            진행도 &nbsp; 
+                            <label>
+                                <select class="select-status" name="statusNo">
+                                    <c:forEach items="${clientStatusVoList}" var="clientStatusVo">
+                                        <option 
+                                            value="${clientStatusVo.no}" 
+                                            <c:if test="${vo.statusNo == clientStatusVo.no}">selected</c:if>
+                                        >
+                                        ${clientStatusVo.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </label>
+                        </div>
+    
+                        <div class="client-grade">
+                            등급 &nbsp; 
+                            <label>
+                                <select class="select-grade" name="rankCode">
+                                    <c:forEach items="${clientRankVoList}" var="clientRankVo">
+                                        <option 
+                                            value="${clientRankVo.no}" 
+                                            <c:if test="${vo.rankCode == clientRankVo.no}">selected</c:if>
+                                        >
+                                        ${clientRankVo.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </label>
+                        </div>
                     </div>
+
                 </div>
 
                 <div class="line_2"></div>

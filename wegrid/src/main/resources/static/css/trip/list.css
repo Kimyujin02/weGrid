@@ -14,7 +14,7 @@
 }
 #menu-box{
     display: grid;
-    grid-template: 1fr / 100px 117px 570px 119px 119px 384px 91px;
+    grid-template: 1fr / 100px 85px 85px 117px 380px 119px 404px 1fr 85px;
 }
 #table-area{
     justify-items: center;
@@ -339,3 +339,41 @@ form {
     visibility: hidden;
 }
 
+/* .fil-btn-z{
+    background-color: lightblue;
+    border: 1px solid #174880;
+    border-bottom: none;
+    color: white;
+    font-weight: 600;
+    height: 35px;
+    width: 75px;
+}
+.fil-btn-z.action{
+    background-color: #2b3d7d;
+} */
+
+.fil-btn-div{
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.fil-btn-z {
+    background-color: lightblue;
+    border: 1px solid #174880;
+    border-bottom: none;
+    color: white;
+    font-weight: 600;
+    height: 35px;
+    width: 75px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.fil-btn-z:hover {
+    background-color: #174880;
+}
+
+.fil-btn-z.active {
+    background-color: #174880;
+}

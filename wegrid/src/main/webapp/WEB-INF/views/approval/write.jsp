@@ -61,8 +61,8 @@
                             </div>
                             <div id="lineBtnDiv">
                                 <div>
-                                    <span class="dept-areaa">${loginMemberVo.deptName}</span>
-                                    <span class="name-areaa">${loginMemberVo.name}</span>
+                                    <span class="dept-areaa">${loginMemberVo.deptName} </span>
+                                    &nbsp;&nbsp;<span class="name-areaa"> ${loginMemberVo.name}</span>
                                 </div>
                                 <div>
                                     <div>
@@ -83,9 +83,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="submitBtnDiv"><button type="submit" class="btn btn-primary" id="submit-btn">등록</button></div>
+                        <div id="submitBtnDiv"><button type="submit" class="btn btn-primary" id="submit-btn"
+                            onclick="return confirmSubmission()"
+                            >등록</button></div>
                         <div></div>
-                        <div id="cancleBtnDiv"><button type="button" class="btn btn-primary" id="cancle-btn">취소</button></div>
+                        <div id="cancleBtnDiv"><button type="button" class="btn btn-primary" id="cancle-btn"
+                            onclick="return cancle();"
+                            >취소</button></div>
                     </div>
                 </form>
                 </div>
@@ -105,7 +109,7 @@
                 
                     <div id="type-boc"> 
                         <select name="searchType" id="dept-filter" value="" onchange="submitSearchForm();">
-                            
+                            <!-- <option value="">전체</option> -->
                         </select>
                     </div>
                         <div id="iwannagohome">
@@ -120,7 +124,7 @@
                            
                         </div>
             </div>
-            <div class="empSearchModal-body">
+            <div class="empSearchModal-body" id="aaavvv">
                 <table id="empSearchModalTable">
                     <thead id="empSearchModalThead">
                         <tr>

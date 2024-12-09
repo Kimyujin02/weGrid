@@ -1,10 +1,12 @@
 const tbodyTag = document.querySelector(".table>tbody");
 
 tbodyTag.addEventListener("click" , function(evt){
-    if(evt.target.tagName != "TD"){return;}
-    const no = evt.target.parentNode.children[1].innerText;
+    if(evt.target.tagName !== "TD"){return;}
+    const no = evt.target.parentNode.children[0].innerText;
     location.href=`/board/detail?bno=${no}`;
 });
+
+
 
 //----------------------------
 
@@ -65,7 +67,7 @@ function loadBoardList(searchType, searchTitleValue, searchContentValue){
         data : {
             searchType,
             searchTitleValue,
-            searchContentValue
+            searchContentValue,
         }, //키-밸류라 객체
         // method :, 어차피 기본값이 GET
         success : function(m){

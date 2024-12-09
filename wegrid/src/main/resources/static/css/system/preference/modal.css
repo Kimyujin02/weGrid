@@ -1,0 +1,23 @@
+.modal-header {
+    justify-content: center;
+
+    color: #174880;
+}
+
+.modal-title {
+    font-size: 1.75rem;
+    font-weight: 900;
+}
+
+.modal-body {
+    text-align: center;
+}
+
+#beforeName {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.modal-footer {
+    justify-content: center !important;
+}

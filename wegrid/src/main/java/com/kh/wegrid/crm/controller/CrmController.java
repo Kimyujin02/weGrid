@@ -32,16 +32,26 @@ public class CrmController {
     public String list(
             Model model
             ,@RequestParam(name = "pno" , required = false, defaultValue = "1") int currentPage
+            ,String statusNo
+            ,String rankCode
             ,String searchType
             ,String searchValue
+            ,HttpSession session
+            ,RedirectAttributes redirectAttributes
     ){
-        int listCount = service.getClientCnt();
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        if (loginMemberVo == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "로그인 정보가 없습니다.");
+            return "redirect:/member/login";
+        }
+
+        int listCount = service.getClientCnt(statusNo, rankCode, searchType, searchValue);
 
         int pageLimit = 5;
         int boardLimit = 15;
         PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
 
-        List<ClientVo> clientVoList = service.getClientVoList(pvo, searchType, searchValue);
+        List<ClientVo> clientVoList = service.getClientVoList(pvo, statusNo, rankCode, searchType, searchValue);
         List<ClientRankVo> clientRankVoList = service.getClientRankVoList();
         List<ClientStatusVo> clientStatusVoList = service.getClientStatusVoList();
 
@@ -54,9 +64,39 @@ public class CrmController {
         return "crm/clientList";
     }
 
+    // 목록 조회 필터링
+    @GetMapping("list/filtered")
+    @ResponseBody
+    public HashMap listFiltered(
+            @RequestParam(name = "pno" , defaultValue = "1" , required = false) int currentPage
+            , String searchType
+            , String searchValue
+            , String statusNo
+            , String rankCode
+    ) {
+        int listCount = service.getFilteredClientCnt(statusNo, rankCode);
+        int pageLimit = 5;
+        int boardLimit = 15;
+        PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
+
+        List<ClientVo> clientVoList = service.getClientVoList(pvo, statusNo, rankCode, searchType, searchValue);
+
+        HashMap map = new HashMap();
+        map.put("a" , clientVoList);
+        map.put("b" , pvo);
+
+        return map;
+    }
+
     // 고객사 상세 정보
     @GetMapping("detail")
-    private String detail(String cno, Model model) {
+    private String detail(String cno, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        // 로그인된 사용자가 없을 때 처리
+        if (loginMemberVo == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "로그인 정보가 없습니다.");
+            return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+        }
         ClientVo vo = service.getClientDetail(cno);
         model.addAttribute("vo" , vo);
         return "crm/clientDetail";
@@ -85,7 +125,12 @@ public class CrmController {
 
     // 고객사 등록 (화면)
     @GetMapping("enroll")
-    public String enroll(Model model) {
+    public String enroll(Model model, RedirectAttributes redirectAttributes, HttpSession session) {
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        if (loginMemberVo == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "로그인 정보가 없습니다.");
+            return "redirect:/member/login";
+        }
         List<ClientRankVo> clientRankVoList = service.getClientRankVoList();
         model.addAttribute("clientRankVoList", clientRankVoList);
         return "crm/clientEnroll";
@@ -95,16 +140,23 @@ public class CrmController {
     @PostMapping("enroll")
     public String enroll(ClientVo vo) {
         int result = service.enrollClient(vo);
-        System.out.println(result);
         return "redirect:/crm/list";
     }
 
     // 고객사 정보 수정 (화면)
     @GetMapping("edit")
-    public String editClient(String cno, Model model) {
+    public String editClient(String cno, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        if (loginMemberVo == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "로그인 정보가 없습니다.");
+            return "redirect:/member/login";
+        }
 
         List<ClientRankVo> clientRankVoList = service.getClientRankVoList();
         model.addAttribute("clientRankVoList", clientRankVoList);
+
+        List<ClientStatusVo> clientStatusVoList = service.getClientStatusVoList();
+        model.addAttribute("clientStatusVoList", clientStatusVoList);
 
         ClientVo vo = service.getClientDetail(cno);
         model.addAttribute("vo", vo);
@@ -116,13 +168,17 @@ public class CrmController {
     @PostMapping("edit")
     public String edit(ClientVo vo) {
         int result = service.editClient(vo);
-        System.out.println(result);
         return "redirect:/crm/list";
     }
 
     // 고객사 히스토리 탭 (화면)
     @GetMapping("history")
-    private String history(String cno, Model model) {
+    private String history(String cno, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        if (loginMemberVo == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "로그인 정보가 없습니다.");
+            return "redirect:/member/login";
+        }
         ClientVo vo = service.getClientDetail(cno);
         model.addAttribute("vo" , vo);
         return "crm/clientHistory";
@@ -156,10 +212,9 @@ public class CrmController {
         ClientVo vo = service.getClientDetail(cno);
 
         MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
-        // 로그인된 사용자가 없을 때 처리
         if (loginMemberVo == null) {
             redirectAttributes.addFlashAttribute("errorMessage", "로그인 정보가 없습니다.");
-            return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+            return "redirect:/member/login";
         }
 
         model.addAttribute("vo" , vo);
@@ -199,7 +254,13 @@ public class CrmController {
 
     // 고객사 히스토리 수정 (화면)
     @GetMapping("history/edit")
-    private String historyEdit(String cno, String hno, Model model) {
+    private String historyEdit(String cno, String hno, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        if (loginMemberVo == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "로그인 정보가 없습니다.");
+            return "redirect:/member/login";
+        }
+
         ClientVo vo = service.getClientDetail(cno);
         ClientHistoryVo hvo = service.getHistoryDetail(hno);
 
@@ -246,7 +307,12 @@ public class CrmController {
 
     // 고객사 히스토리 상세조회
     @GetMapping("history/detail")
-    private String historyDetail(String cno, String hno, Model model) {
+    private String historyDetail(String cno, String hno, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        if (loginMemberVo == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "로그인 정보가 없습니다.");
+            return "redirect:/member/login";
+        }
         ClientVo vo = service.getClientDetail(cno);
         ClientHistoryVo hvo = service.getHistoryDetail(hno);
 

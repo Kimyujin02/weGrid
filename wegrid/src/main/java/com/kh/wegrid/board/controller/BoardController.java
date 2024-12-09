@@ -4,6 +4,7 @@ import com.kh.wegrid.board.service.BoardService;
 import com.kh.wegrid.board.vo.BoardAttachmentVo;
 import com.kh.wegrid.board.vo.BoardVo;
 import com.kh.wegrid.member.vo.MemberVo;
+import com.kh.wegrid.member.vo.ReplyVo;
 import com.kh.wegrid.util.FileUploader;
 import com.kh.wegrid.util.page.PageVo;
 import jakarta.servlet.http.HttpSession;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,8 +52,7 @@ public class BoardController {
     @GetMapping("list/data")
     @ResponseBody
     public HashMap getBoardVoList(HttpSession session,@RequestParam(name = "pno" , defaultValue = "1", required = false) int currentPage, String searchType, String searchTitleValue, String searchContentValue){
-        System.out.println("검색 시작");
-        
+
         // 로그인 여부 체크
         if (session.getAttribute("loginMemberVo") == null) {
             HashMap<String, Object> map = new HashMap<>();
@@ -69,10 +70,8 @@ public class BoardController {
         HashMap map = new HashMap();
         map.put("a", boardVoList);
         map.put("b", pvo);
-
-        System.out.println("map = " + map);
-        System.out.println("검색 완료");
         return map;
+
     }
 
 
@@ -133,13 +132,95 @@ public class BoardController {
 
 
     @GetMapping("detail")
-    public String detail(){
+    public String detail(HttpSession session, Model model, String bno){
+
+        if(session.getAttribute("loginMemberVo") == null){
+            return "redirect:/member/login";
+        }
+
+        BoardVo vo = service.getBoard(bno);
+        List<BoardAttachmentVo> attachmentVoList = service.getAttachmentVoList(bno);
+        model.addAttribute("vo", vo);
+        model.addAttribute("attachmentVoList", attachmentVoList);
+
         return "board/detail";
     }
 
+
+    @PostMapping("reply/write")
+    @ResponseBody
+    public int replyWrite(ReplyVo vo, HttpSession session){
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        vo.setWriterNo(loginMemberVo.getNo());
+        int result = service.replyWrite(vo);
+        return result;
+    }
+
+    //댓글 리스트 응답
+    @GetMapping("reply/list")
+    @ResponseBody
+    public List<ReplyVo> getReplyList(String boardNo){
+        List<ReplyVo> replyVoList = service.getReplyList(boardNo);
+        return replyVoList;
+    }
+
+    //게시글 수정
     @GetMapping("edit")
-    public String edit(){
-        return "board/edit";
+    public void edit(Model model, String bno){
+        BoardVo vo = service.getBoard(bno);
+        List<BoardAttachmentVo> attachmentVoList = service.getAttachmentVoList(bno);
+        model.addAttribute("vo", vo);
+        model.addAttribute("attachmentVoList", attachmentVoList);
+    }
+
+    //게시글 수정
+    @PostMapping("edit")
+    public String edit(BoardVo vo, HttpSession session, @RequestParam(name = "f") List<MultipartFile> fileList) throws IOException {
+
+        List<String> changeNameList = new ArrayList<>();
+        for (MultipartFile f : fileList) {
+            if (f.isEmpty()) {break;}
+            String changeName = FileUploader.save(f, path);
+            changeNameList.add(changeName);
+        }
+
+        service.update(vo, changeNameList);
+        session.setAttribute("alertMsg", "게시글 수정 성공!");
+        return "redirect:/board/list";
+    }
+
+
+
+    @PostMapping("attachment/del")
+    @ResponseBody
+    public int delAttachment(String ano, String fileName){
+        log.info("======삭제되는 파일 정보======");
+        log.info("ano = " + ano);
+        log.info("fileName = " + fileName);
+
+        // 첨부파일 삭제
+        int result = service.delAttachment(ano);
+
+        // 파일 삭제 (파일 시스템에서)
+        File file = new File(path + fileName);
+        if (file.exists()) {
+            file.delete();
+        }
+
+        return result;
+    }
+
+    //게시글 삭제
+    @GetMapping("del")
+    public String del(String bno, HttpSession session){
+        int result = service.del(bno);
+
+        if (result != 1) {
+            throw new IllegalStateException("게시글 삭제 실패");
+        }
+
+        session.setAttribute("alertMsg",    "게시글 삭제 성공");
+        return "redirect:/board/list";
     }
 
 }

@@ -32,25 +32,21 @@
             <div id="title-area"><h2>출장 항목</h2></div>
             <div id="menu-box">
                 <div></div>
-                <div id="btn-area"><button type="button" 
-                    class="btn btn-primary" 
-                    id="bootbtn" 
-                    onclick="openTripModal();">등록하기
-                </button>
-            </div>
-            <div></div>
-            <div></div>
-            <form  onsubmit="return submitSearchForm();">
-            <div id="type-boc"> 
-                <select name="searchType" id="trip-filter" >
-                <option value="all">전체</option>
-                <option value="content">내용</option>
-                <option value="title">제목</option>
-                <option value="writerName">작성자</option>
-                <option value="no">번호</option>
-                <option value="client">고객사</option>
-            </select>
-            </div>
+                <div class="fil-btn-div"><button class="fil-btn-z" onclick="loadTripList();">출장목록</button></div>
+                <div class="fil-btn-div"><button class="fil-btn-z" onclick="endTripList();">완료출장</button></div>
+                <div></div>
+                <div></div>
+                <form  onsubmit="return submitSearchForm();">
+                    <div id="type-boc"> 
+                        <select name="searchType" id="trip-filter" >
+                            <option value="all">전체</option>
+                            <option value="content">내용</option>
+                            <option value="title">제목</option>
+                            <option value="writerName">작성자</option>
+                            <option value="no">번호</option>
+                            <option value="client">고객사</option>
+                        </select>
+                    </div>
                 <div id="iwannagohome">
                     <div  id="search-boc">
                         <input type="text" name="searchValue" placeholder="검색" id="searchTag">
@@ -61,6 +57,14 @@
                         </span>
                     </div>
                     </form>
+               
+                </div>
+                <div id="btn-area">
+                    <button type="button" 
+                    class="btn btn-primary" 
+                    id="bootbtn" 
+                    onclick="openTripModal();">등록하기
+                    </button>
                 </div>
                 
                 <div></div>

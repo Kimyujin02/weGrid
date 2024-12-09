@@ -5,22 +5,6 @@
 
 <mapper namespace="com.kh.wegrid.crm.mapper.CrmMapper">
 
-<!--    &lt;!&ndash; 전체 데이터 개수 &ndash;&gt;-->
-<!--    <select id="getClientCnt" resultType="int">-->
-<!--        SELECT COUNT(*)-->
-<!--        FROM clients-->
-<!--        WHERE 1 = 1-->
-<!--        <if test="status != null and status != ''">-->
-<!--            AND status = #{status}-->
-<!--        </if>-->
-<!--        <if test="grade != null and grade != ''">-->
-<!--            AND grade = #{grade}-->
-<!--        </if>-->
-<!--        <if test="searchType != null and searchValue != null">-->
-<!--            AND ${searchType} LIKE CONCAT('%', #{searchValue}, '%')-->
-<!--        </if>-->
-<!--    </select>-->
-
     <select id="getClientVoList">
         SELECT
         C.NO
@@ -58,48 +42,73 @@
             <if test="searchType == 'managerPhone'">
                 P.MANAGER_PHONE LIKE '%${searchValue}%'
             </if>
+
+            <if test="(statusNo == '' or statusNo == null) and (rankCode != '' and rankCode != null)">
+                AND C.RANK_CODE = #{rankCode}
+            </if>
+            <if test="(statusNo != '' and statusNo != null) and (rankCode == '' or rankCode == null)">
+                AND C.STATUS_NO = #{statusNo}
+            </if>
+            <if test="statusNo != null and statusNo != '' and rankCode != null and rankCode != ''">
+                AND C.STATUS_NO = #{statusNo}
+                AND C.RANK_CODE = #{rankCode}
+            </if>
         </where>
         ORDER BY C.NO DESC
         OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
     </select>
 
-    <select id="getHisVoList">
-        SELECT
-        C.NO,
-        C.RANK_CODE,
-        CR.NAME AS RANK_NAME,
-        C.STATUS_NO,
-        CS.NAME AS STATUS_NAME,
-        C.NAME,
-        C.POST_ADDRESS,
-        C.ROAD_ADDRESS,
-        C.DETAIL_ADDRESS,
-        C.PRESIDENT_NAME,
-        C.PRESIDENT_PHONE,
-        C.PRESIDENT_EMAIL,
-        CH.NO AS HISTORY_NO,
-        CH.WRITER_NO,
-        E.NAME AS EMPLOYEE_NAME,
-        CH.ENROLL_DATE AS HIS_ENROLL_DATE,
-        CH.INQUIRY,
-        CH.REPLY,
-        P.NO AS PROJECT_NO,
-        P.PROJECT_NAME,
-        P.START_DATE,
-        P.END_DATE,
-        PS.NAME AS PROJECT_STATUS_NAME
+
+    <select id="getFilteredClientCnt">
+        SELECT COUNT(*)
+        FROM CLIENT C
+        <where>
+            <if test="(statusNo == '' or statusNo == null) and (rankCode != '' and rankCode != null)">
+                AND C.RANK_CODE = #{rankCode}
+            </if>
+            <if test="(statusNo != '' and statusNo != null) and (rankCode == '' or rankCode == null)">
+                AND C.STATUS_NO = #{statusNo}
+            </if>
+            <if test="statusNo != null and statusNo != '' and rankCode != null and rankCode != ''">
+                AND C.STATUS_NO = #{statusNo}
+                AND C.RANK_CODE = #{rankCode}
+            </if>
+        </where>
+    </select>
+
+    <select id="getClientCnt">
+        SELECT COUNT(*)
         FROM
         CLIENT C
         LEFT JOIN CLIENT_RANK CR ON ( C.RANK_CODE = CR.NO )
         LEFT JOIN CLIENT_STATUS CS ON ( C.STATUS_NO = CS.NO )
-        LEFT JOIN CLIENT_HISTORY CH ON ( C.NO = CH.CLIENT_NO )
         LEFT JOIN PROJECT P ON ( C.NO = P.CLIENT_NO )
-        LEFT JOIN PROJECT_STATUS PS ON ( P.STATUS_NO = PS.NO )
-        LEFT JOIN EMPLOYEE E ON ( CH.WRITER_NO = E.NO )
-        WHERE
-        C.NO = #{cno}
-        <!--        AND CH.INQUIRY LIKE '%' || #{searchValue} || '%'-->
-        ORDER BY HISTORY_NO DESC
+        <where>
+            <if test="statusNo == '' and statusNo == null and rankCode != '' and rankCode != null">
+                AND C.RANK_CODE = #{rankCode}
+            </if>
+            <if test="statusNo != '' and statusNo != null and rankCode == '' and rankCode == null">
+                AND C.STATUS_NO = #{statusNo}
+            </if>
+            <if test="statusNo != null and statusNo != '' and rankCode != null and rankCode != ''">
+                AND C.STATUS_NO = #{statusNo}
+                AND C.RANK_CODE = #{rankCode}
+            </if>
+            <if test="searchType == 'integration'">
+                AND ( C.NAME LIKE '%${searchValue}%'
+                OR P.MANAGER_NAME LIKE '%${searchValue}%'
+                OR P.MANAGER_PHONE LIKE '%${searchValue}%' )
+            </if>
+            <if test="searchType == 'client'">
+                C.NAME LIKE '%${searchValue}%'
+            </if>
+            <if test="searchType == 'managerName'">
+                P.MANAGER_NAME LIKE '%${searchValue}%'
+            </if>
+            <if test="searchType == 'managerPhone'">
+                P.MANAGER_PHONE LIKE '%${searchValue}%'
+            </if>
+        </where>
     </select>
 
 
