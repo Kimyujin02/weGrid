@@ -54,7 +54,8 @@
                                 <img src="/img/notice/attachment/${attachVo.changeName}" alt="${attachVo.originName}" width="100px" height="100px" onclick="delAttach(${attachVo.no}, '/img/notice/attachment/${attachVo.changeName}', this);">
                                 <!-- 여기에서 this는 이미지 태그를 말함(이벤트) -->
                             </c:forEach>
-                            <input type="file" name="f" multiple> <!-- enctype -->
+                            <!-- enctype -->
+                            <!-- <input type="file" name="f" multiple>  -->
                             <div class="preview-area">
 
                             </div>
@@ -62,7 +63,7 @@
                     </div>
                     <div class="notice-btns">
                         <input type="submit" value="수정하기" class="btn-insert">
-                        <button class="btn-cancel">취소</button>
+                        <button type="button" class="btn-cancel" onclick="location.href=`/notice/detail?nno=${vo.no}`">취소</button>
                     </div>
                 </div>
             </form>
