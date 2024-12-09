@@ -38,7 +38,7 @@
                         <th>등록 가능 잔여 휴가</th>
                     </tr>
                 </thead>
-          
+
                 <tbody >
                     <tr class="list-middle">
                         <!-- tbody안쪽은 js사용해서 동적으로 채워줌   -->

@@ -13,37 +13,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script defer src="/js/common/main.js"></script>
+<script defer src="/js/board/detail.js"></script>
 
 </head>
 <body>
 
    <%@ include file="/WEB-INF/views/common/header.jsp" %>
    <%@ include file="/WEB-INF/views/common/nav.jsp" %>
-
-
-
-
-    <div id="board-area">
-        <div id="title-area">${vo.title}</div>
-        <div>${vo.writerNick}</div>
-        <div>${vo.createDate}</div>
-        <div>${vo.categoryName}</div>
-        <div>${vo.hit}</div>
-        <div id="content-area">${vo.content}</div>
-        <div class="board-img-area">
-            <c:forEach items="${attachmentVoList}" var="attachVo">
-                <img src="/img/board/attachment/${attachVo.changeName}" alt="${attachVo.originName}" width="100px" height="100px">
-            </c:forEach>
-        </div>
-    </div>
-
-
-
-
-
-
-
-
 
 
     <!-- Main -->
@@ -56,32 +32,27 @@
                 <div class="content">
 
 
-
-
-
-
-
                     <c:if test="${loginMemberVo.no == vo.writerNo}">        <%-- 로그인정보 == 작성자일때 --%>
                         <div class="content-btns" tp>
-                            <button class="btn-edit" onclick="location.href='/board/del?bno=${vo.no}'">수정하기</button>
+                            <button class="btn-edit" onclick="location.href='/board/edit?bno=${vo.no}'">수정하기</button>
                             <button class="btn-delete" onclick="location.href='/board/del?bno=${vo.no}'">삭제하기</button>
                         </div>
                     </c:if>
 
                     <div class="content-shortcut">
-                        <div><h1 class="shortcut-title">제목~~~~~</h1></div>
+                        <div><h1 class="shortcut-title">${vo.title}</h1></div>
 
                         <div class="shortcut-user">
                             <div class="user-propic"></div> <!-- 프로필 사진 -->
                             <div class="user-detail">
                                 <!-- 사용자 상세 정보 -->
                                 <div class="user-info">
-                                    <div>홍길동</div>
-                                    <div>영업지원1팀</div>
+                                    <div>${vo.name} ${vo.jobName}</div>
+                                    <div>${vo.deptName}</div>
                                 </div>
                                 <div class="board-info">
-                                    <div>2024-11-27-16:13:56</div>
-                                    <div>조회수 : 1</div>
+                                    <div>${vo.enrollDate}</div>
+                                    <div>조회수 : ${vo.viewCnt}</div>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +60,7 @@
 
                     <div class="content-detail">
                         <p>
-                            내용임
+                            ${vo.content}
                         </p>
                     </div>
 
@@ -101,49 +72,47 @@
                                 <div><i class="fas fa-redo-alt"></i></div>
                             </div>
                             <div class="filter-right">
-                                <div>댓글 9 </div>
+                                <div>댓글 <span id="reply-count">${replyList.size()}</span></div>
                                 <i class="far fa-comment-dots"></i>
                             </div>
                         </div>
-                        <div class="reply-user">
-                            <div class="reply-icon"></div>
-                            <div class="reply-info">
-                                <div>홍길동</div>
-                                <div>영업지원1팀</div>
+
+                        <form id="reply-form">
+                            <div class="reply-input-area">
+                                <textarea name="content" placeholder="댓글을 입력하세요..."></textarea>
+                                <button onclick="writeReply(${vo.no});">댓글 작성</button>
                             </div>
-                            <div class="reply-text">코멘트코멘트코멘트코멘트코멘트코멘트코멘트코멘트코멘트코멘트코멘트코멘트코멘트</div>
+                            <input type="hidden" name="bno" value="${boardNo}"> <!-- 해당 게시글 번호를 hidden input으로 전달 -->
+                        </form>
 
-                            <div class="reply-subinfo">
-                                <div class="reply-date">하루전</div>
-                                <div class="reply-adjust">
-                                    <div class="reply-edit">수정하기</div>
-                                    <div class="reply-delete">삭제하기</div>
-                                </div>
-                            </div>
+                        <div id="reply-list-area">
 
-
-
-
-                        </div>
-                    </div> <!--content-reply -->
+                        </div> <!-- 댓글 목록을 여기에 동적으로 추가할 예정 -->
 
                 </div>
-                <div class="attach">
-                    <div class="attach-icon">
-                        <i class="fas fa-save"></i> 첨부파일
-                    </div> <!--attach-icon -->
-                    <div class="attach-info">
-                        <table class="table">
-                            <tbody >
-                                <tr class="list-middle">
-                                    <!-- tbody안쪽은 js사용해서 동적으로 채워줌 -->
-                                    <td>1dddddddddddddddddddddddd.png</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div> <!--attach-info -->
-                </div>  <!--attach -->
+
             </div>
+            <div class="attach">
+                <div class="attach-icon">
+                    <i class="fas fa-save"></i> 첨부파일
+                </div> <!--attach-icon -->
+                <div class="attach-info">
+                    <table class="table">
+                        <tbody >
+                            <c:forEach items="${attachmentVoList}" var="x" >
+                            <!-- tbody안쪽은 js사용해서 동적으로 채워줌 -->
+                                <tr class="list-middle">
+                                    <td>
+                                        <a href="/download?fileName=${x.changeName}" download>
+                                            ${x.originName}
+                                        </a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div> <!--attach-info -->
+            </div>  <!--attach -->
     </main>
 
 </body>

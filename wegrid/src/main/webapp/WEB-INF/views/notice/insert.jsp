@@ -29,30 +29,33 @@
             </div>
 
             <div class="main-main">
-                <div class="notice-title">
-                    <input class="title" type="text" name="title" placeholder="[공지] 제목을 입력하세요(65자 이내)" maxlength="64">
-                    </input>
-                </div>
-                <div class="notice-content">
-                    <textarea class="content" name="content" placeholder="내용을 입력하세요(500자 이내)" maxlength="500"></textarea>
-                </div>
-
-                <div class="notice-attach">
-                    <div class="line-title">첨부파일</div>
-                    <div class="line-divider"></div>
-                    <div class="inner">
-                        <button class="file-button" onclick="document.getElementById('input').click()">파일 선택</button>
-                        <input type="file" id="input" style="display: none;">
-                        <div class="info-text">또는 파일을 여기로 드래그 하세요.</div>
+                <form action="/notice/insert" method="post" enctype="multipart/form-data">
+                    <div class="notice-title">
+                        <input class="title" type="text" name="title" placeholder="[공지] 제목을 입력하세요(65자 이내)" maxlength="64">
+                        </input>
                     </div>
-                </div>
+                    <div class="notice-content">
+                        <textarea class="content" name="content" placeholder="내용을 입력하세요(500자 이내)" maxlength="2000"></textarea>
+                    </div>
 
-                <div class="notice-btns">
-                    <button class="btn-insert">작성하기</button>
-                    <button class="btn-cancel">취소</button>
-                </div>
+                    <div class="notice-attach">
+                        <div class="line-title">첨부파일</div>
+                        <div class="line-divider"></div>
+                        <div class="inner">
+                            <input class="file-button" type="file" name="f" multiple>
+                            <div class="info-text">또는 파일을 여기로 드래그 하세요.
 
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="notice-btns">
+                        <input type="submit" class="btn-insert" value="작성하기">
+                        <input type="submit" class="btn-cancel" value="취소하기">
+                    </div>
+                </form>
             </div>
+
         </div>
     </main>
 

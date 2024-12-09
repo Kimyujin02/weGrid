@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kh.wegrid.notice.mapper.NoticeMapper">
+
+    <select id="getNoticeCnt">
+        SELECT COUNT(NO)
+        FROM NOTICE
+        WHERE DEL_YN ='N'
+        <if test="searchType == 'title'">
+            AND TITLE LIKE '%${searchTitleValue}%'
+        </if>
+        <if test="searchType == 'content'">
+            AND CONTENT LIKE '%${searchContentValue}%'
+        </if>
+    </select>
+
+    <select id="getNoticeVoList">
+        SELECT
+        N.NO
+        , N.TITLE
+        , N.CONTENT
+        , N.WRITER_NO
+        , N.VIEW_CNT
+        , N.ENROLL_DATE
+        , N.DEL_YN
+        , E.NAME AS NAME
+        FROM NOTICE N
+        JOIN EMPLOYEE E ON( N.WRITER_NO = E.NO )
+        WHERE N.DEL_YN = 'N'
+        <if test="searchType == 'title'">
+            AND TITLE LIKE '%${searchTitleValue}%'
+        </if>
+        <if test="searchType == 'content'">
+            AND CONTENT LIKE '%${searchContentValue}%'
+        </if>
+        ORDER BY N.NO DESC
+        OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
+    </select>
+
+    <insert id="insertNoticeAttachment">
+        INSERT ALL
+        <foreach collection="attachmentVoList" item="x">
+            <if test="x.originName != null">
+                INTO NOTICE_ATTACHMENT (NO, NOTICE_NO, ORIGIN_NAME, CHANGE_NAME)
+                VALUES (
+                (SELECT GET_NOTICE_ATTACHMENT_NO FROM DUAL),
+                SEQ_NOTICE.CURRVAL,
+                #{x.originName},
+                #{x.changeName}
+                )
+            </if>
+        </foreach>
+        SELECT 1 FROM DUAL
+    </insert>
+
+    <insert id="updateNoticeAttachment">
+        INSERT ALL
+        <foreach collection="changeNameList" item = "x">
+            INTO NOTICE_ATTACHMENT (NO,NOTICE_NO,CHANGE_NAME) VALUES((SELECT GET_NOTICE_ATTACHMENT_NO FROM DUAL), #{no}, #{x})
+        </foreach>
+        SELECT 1 FROM DUAL
+    </insert>
+
+</mapper>
