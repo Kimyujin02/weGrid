@@ -2,6 +2,7 @@ package com.kh.wegrid.systemManager.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kh.wegrid.member.vo.AdminVo;
 import com.kh.wegrid.member.vo.MemberVo;
 import com.kh.wegrid.systemManager.service.SystemManagerService;
 import com.kh.wegrid.systemManager.vo.DepartMentVo;
@@ -71,11 +72,11 @@ public class SystemManagerController {
             RedirectAttributes redirectAttributes
     ) {
 
-        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        AdminVo loginAdminVo = (AdminVo) session.getAttribute("loginAdminVo");
         // 로그인된 사용자가 없을 때 처리
-        if (loginMemberVo == null) {
+        if (loginAdminVo == null) {
             redirectAttributes.addFlashAttribute("errorMessage", "로그인 정보가 없습니다.");
-            return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+            return "redirect:/member/adminLogin"; // 로그인 페이지로 리다이렉트
         }
 
         // 1. 부서 및 직급 리스트 가져오기
