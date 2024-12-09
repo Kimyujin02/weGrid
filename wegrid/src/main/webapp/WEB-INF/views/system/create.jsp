@@ -47,7 +47,7 @@
                     <input type="button" class="search-button"  onclick="sample2_execDaumPostcode()" value="우편번호 찾기"><br>
                     <input type="text" name="roadAddress" id="sample2_address" placeholder="주소" style="width: 80%; margin: 5px 0px 5px 0px;"><br>
                     <input type="text" name="detailAddress" id="sample2_detailAddress" placeholder="상세주소">
-                    <input type="text" name="detailAddress" id="sample2_extraAddress" placeholder="참고항목">
+                    <input type="text" name="extraAddress" id="sample2_extraAddress" placeholder="참고항목">
 
                 <!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
                 <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
@@ -156,23 +156,22 @@
                         <input type="text" id="employee-no" name="empNum"><br>
 
                         <label for="department">부서명</label>
-                        <div class="department-row">
-                            <!-- 기본 직급 표시하는 입력 필드 -->
-                            <input 
-                                type="text" 
-                                id="department-name" 
-                                
-                                value="${departMentVoList[0].name}" 
+                    <div class="department-row">
+                        <!-- 기본 직급 표시하는 입력 필드 -->
+                        <input 
+                            type="text" 
+                            id="department-name" 
+                          
                             />
-
-                            <!-- departMentVoList를 순회하여 옵션 생성 -->
-                            <select id="deptName" name="deptNo">
-                                <c:forEach var="departMentVo" items="${departMentVoList}">
-                                    <option value="${departMentVo.code}">${departMentVo.name}</option>
-                                </c:forEach>
-                            </select>
                             
-                        </div>
+                            <!-- value="${departMentVoList[0].name}"  -->
+                        <!-- departMentVoList를 순회하여 옵션 생성 -->
+                        <select id="deptName" name="deptNo" onchange="updateDepartmentName(this)">
+                            <c:forEach var="departMentVo" items="${departMentVoList}">
+                                <option value="${departMentVo.code}">${departMentVo.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
 
                         <label for="position">직급</label>
                             <div class="filter-controls">

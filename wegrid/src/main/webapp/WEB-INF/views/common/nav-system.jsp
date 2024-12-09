@@ -8,7 +8,7 @@
 <!-- Nav -->
 <nav>
     <div class="active-boc">
-        <label onclick="location.href='/system/list'" class="navLabel">
+        <label onclick="location.href='/system/account/list'" class="navLabel">
             <div class="icon-boc">
               <i class="fas fa-user-plus fa-2x"></i>
             </div>

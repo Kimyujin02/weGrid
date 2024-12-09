@@ -1,7 +1,6 @@
 package com.kh.wegrid.systemManager.service;
 
 import com.kh.wegrid.member.vo.MemberVo;
-import com.kh.wegrid.project.vo.EmployeeVo;
 import com.kh.wegrid.systemManager.mapper.SystemManagerMapper;
 import com.kh.wegrid.systemManager.vo.DepartMentVo;
 import com.kh.wegrid.systemManager.vo.JobInfoVo;
@@ -35,24 +34,19 @@ public class SystemManagerService {
     }
 
     // 목록 조회
-    public List<EmployeeVo> getEmployeeVoList(PageVo pvo, String searchValue) {
-        String str = "";
-        if(searchValue != null && searchValue.length() > 0){
-            str = "AND TITLE LIKE '%" + searchValue + "%'";
-        }
-        return mapper.getEmployeeVoList(pvo, str);
-    }
+//    public List<EmployeeVo> getEmployeeVoList(PageVo pvo, String searchValue) {
+//        String str = "";
+//        if(searchValue != null && searchValue.length() > 0){
+//            str = "AND TITLE LIKE '%" + searchValue + "%'";
+//        }
+//        return mapper.getEmployeeVoList(pvo, str);
+//    }
 
-    public int getSystemCnt() {
-        return mapper.getSystemCnt();
+    public int getSystemCnt(String searchValue, String jobNo, String value) {
+        return mapper.getSystemCnt(searchValue, jobNo, value);
     }
-
-    public List<MemberVo> getMemberVoList(PageVo pvo, String searchValue) {
-        String str = "";
-        if(searchValue != null && searchValue.length() > 0){
-            str = "AND TITLE LIKE '%" + searchValue + "%'";
-        }
-        return mapper.getMemberVoList(pvo, str);
+    public List<MemberVo> getMemberVoList(PageVo pvo, String deptNo,  String jobNo, String searchValue) {
+        return mapper.getMemberVoList(pvo, deptNo, jobNo, searchValue);
     }
 
 
@@ -61,7 +55,22 @@ public class SystemManagerService {
     }
 
 
-    public int accountEdit(MemberVo vo, String no) {
-        return mapper.accountEdit(vo, no);
+    public int accountEdit(MemberVo vo) {
+        return mapper.accountEdit(vo);
+    }
+
+    public int resetPassword(String no, String newPassword) {
+        return mapper.updatePassword(no, newPassword);
+    }
+
+    // 비밀번호 삭제하는 거임
+    public int accountDelete(String no) {
+        return mapper.accountDelete(no);
+    }
+
+    // 계정 자체 삭제
+
+    public int delete(List<String> accountArr) {
+        return mapper.delete(accountArr);
     }
 }

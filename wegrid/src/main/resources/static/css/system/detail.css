@@ -41,9 +41,28 @@
 }
 
 /* 오른쪽 영역 */
-.right-panel {
+#right-panel {
     padding: 20px;
-    margin-left: 60px;
+    margin-left: 60px; /* 왼쪽에서 약간 띄움 */
+}
+
+#employeeInfo{
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+#employeeSub{
+    width: 80%;
+    height: 35px;
+    margin-bottom: 15px;
+    padding: 5px;
+    border: 1px solid #C0C0C0;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #EBEBEB;
+
 }
 
 form label {
@@ -154,4 +173,13 @@ form input{
 
 .search-button:hover {
     background-color: #0056b3;
+}
+
+
+#sample2_detailAddress{
+    width: 40%;
+}
+
+#sample2_extraAddress{
+    width: 39%;
 }

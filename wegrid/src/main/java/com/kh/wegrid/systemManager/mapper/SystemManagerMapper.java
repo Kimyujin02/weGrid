@@ -5,10 +5,7 @@ import com.kh.wegrid.project.vo.EmployeeVo;
 import com.kh.wegrid.systemManager.vo.DepartMentVo;
 import com.kh.wegrid.systemManager.vo.JobInfoVo;
 import com.kh.wegrid.util.page.PageVo;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -27,6 +24,7 @@ public interface SystemManagerMapper {
                 ,POST_ADDRESS
                 ,ROAD_ADDRESS
                 ,DETAIL_ADDRESS
+                ,ENROLL_DATE
                 ,EMP_NUM
                 ,JOB_NO
                 ,IS_MANAGER
@@ -42,6 +40,7 @@ public interface SystemManagerMapper {
                 , #{postAddress}
                 , #{roadAddress}
                 , #{detailAddress}
+                , SYSDATE
                 , #{empNum}
                 , #{jobNo}
                 , #{isManager}
@@ -53,7 +52,7 @@ public interface SystemManagerMapper {
     @Select("""
         SELECT *
         FROM JOB_INFO
-           """)
+        """)
     List<JobInfoVo> getJobInfoVoList();
 
     @Select("""
@@ -88,37 +87,10 @@ public interface SystemManagerMapper {
             """)
     List<EmployeeVo> getEmployeeVoList(PageVo pvo, String str);
 
-    @Select("""
-            SELECT COUNT(*)
-            FROM EMPLOYEE
-            WHERE DEL_YN = 'N'
-            """)
-    int getSystemCnt();
+    int getSystemCnt(String searchValue, String jobNo, String value);
 
-    @Select("""
-             SELECT
-                E.NO,
-                E.NAME,
-                E.ID,
-                E.EMAIL,
-                E.PHONE,
-                E.POST_ADDRESS,
-                E.ROAD_ADDRESS,
-                E.DETAIL_ADDRESS,
-                E.EMP_NUM,
-                D.NAME AS DEPT_NAME,  -- 부서 이름
-                J.NAME AS JOB_NAME,        -- 직급 이름
-                E.IS_MANAGER,
-                TO_CHAR(E.ENROLL_DATE, 'YYYY-MM-DD')  AS ENROLL_DATE,
-                E.DEL_YN
-            FROM EMPLOYEE E
-            LEFT JOIN DEPARTMENT D
-                ON E.DEPT_NO = D.CODE  -- 부서 번호 조인
-            LEFT JOIN JOB_INFO J
-                ON E.JOB_NO = J.NO    -- 직급 번호 조인
-            ORDER BY E.DEL_YN ASC
-            """)
-    List<MemberVo> getMemberVoList(PageVo pvo, String str);
+
+    List<MemberVo> getMemberVoList(PageVo pvo, String deptNo, String jobNo, String searchValue);
 
 
     @Select("""
@@ -136,6 +108,7 @@ public interface SystemManagerMapper {
                 J.NAME AS JOB_NAME,        -- 직급 이름
                 E.IS_MANAGER,
                 TO_CHAR(E.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE,
+                E.IS_LOCKED,
                 E.DEL_YN
             FROM EMPLOYEE E
             LEFT JOIN DEPARTMENT D
@@ -147,23 +120,27 @@ public interface SystemManagerMapper {
             """)
     MemberVo getMemberVo(String no);
 
+
+    int accountEdit(MemberVo vo);
+
+    // 비밀번호 초기화
+    @Update("""
+    UPDATE EMPLOYEE
+    SET PWD = #{newPassword}
+    WHERE NO = #{no}
+    """)
+    int updatePassword(@Param("no") String no, @Param("newPassword") String newPassword);
+
+
     @Update("""
             UPDATE EMPLOYEE
-                SET
-                     NAME = #{vo.name}
-                    , ID = #{vo.id}
-                    , EMAIL = #{vo.email}
-                    , PHONE = #{vo.phone}
-                    , POST_ADDRESS = #{vo.postAddress}
-                    , ROAD_ADDRESS = #{vo.roadAddress}
-                    , DETAIL_ADDRESS = #{vo.detailAddress}
-                    , EMP_NUM = #{vo.empNum}
-                    , DEPT_NO = #{vo.deptNo}
-                    , JOB_NO = #{vo.jobNo}
-                WHERE NO = #{no}
-                AND DEL_YN = 'N'
+            SET DEL_YN = 'Y'
+            WHERE NO = #{NO}
             """)
-    int accountEdit(MemberVo vo, String no);
+    int accountDelete(String no);
+
+
+    int delete(@Param("accountArr") List<String> accountArr);
 }
 
 
