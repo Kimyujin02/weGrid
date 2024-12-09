@@ -16,13 +16,9 @@ import java.util.List;
 @Mapper
 public interface CrmMapper {
 
-    List<ClientVo> getClientVoList(PageVo pvo, String searchType, String searchValue);
+    List<ClientVo> getClientVoList(PageVo pvo, String statusNo, String rankCode, String searchType, String searchValue);
 
-    @Select("""
-            SELECT COUNT(*)
-            FROM CLIENT
-            """)
-    int getClientCnt();
+    int getClientCnt(String statusNo, String rankCode, String searchType, String searchValue);
 
     @Select("""
             SELECT
@@ -240,4 +236,9 @@ public interface CrmMapper {
             """)
     int editHistory(ClientHistoryVo vo, String hno, String cno, String eno);
 
+    int getFilteredClientCnt(String statusNo, String rankCode);
+
+    List<ClientVo> getFilteredClientVoList(PageVo pvo, String statusNo, String rankCode);
+
+//    List<ClientVo> getClientVoList(PageVo pvo, String searchType, String searchValue);
 }

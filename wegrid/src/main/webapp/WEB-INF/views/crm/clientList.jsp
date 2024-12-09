@@ -43,49 +43,23 @@
                 </div>
 
                 <div class="search-area">
-                    <!-- 진행 여부 필터 -->
-                    <div class="dropdown">
-                        <button class="dropdown-toggle">진행 여부 &nbsp;</button>
-                        <div class="dropdown-menu">
-                            <div class="option-list">
-                                <!-- '전체' 선택 추가 -->
-                                <label>
-                                    <input type="radio" name="status" value="" <c:if test="${status == null || status == ''}">checked</c:if> />
-                                    &nbsp;&nbsp;전체
-                                </label>
-                                
-                                <c:forEach items="${clientStatusVoList}" var="clientStatusVo">
-                                    <label>
-                                        <input type="radio" name="status" value="${clientStatusVo.no}" <c:if test="${status == clientStatusVo.no}">checked</c:if> />
-                                        &nbsp;&nbsp;${clientStatusVo.name}
-                                    </label>
-                                </c:forEach>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- 등급 필터 -->
-                    <div class="dropdown">
-                        <button class="dropdown-toggle">등급 필터 &nbsp;</button>
-                        <div class="dropdown-menu">
-                            <div class="option-list">
-                                <!-- '전체' 선택 추가 -->
-                                <label>
-                                    <input type="radio" name="grade" value="" <c:if test="${grade == null || grade == ''}">checked</c:if> />
-                                    &nbsp;&nbsp;전체
-                                </label>
+                    <form class="search-box" action="/crm/list" method="get">
 
-                                <c:forEach items="${clientRankVoList}" var="clientRankVo">
-                                    <label>
-                                        <input type="radio" name="grade" value="${clientRankVo.name}" <c:if test="${grade == clientRankVo.name}">checked</c:if> />
-                                        &nbsp;&nbsp;${clientRankVo.name}
-                                    </label>
-                                </c:forEach>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <form class="search-box" action="/crm/list">
+                        <select name="statusNo" class="form-select" aria-label="Default select example" onchange="applyFilters()">
+                            <option name="statusNo" value="" selected>전체 진행도</option>
+                            <c:forEach items="${clientStatusVoList}" var="clientStatusVo">
+                                <option name="statusNo" value="${clientStatusVo.no}">${clientStatusVo.name}</option>
+                            </c:forEach>
+                        </select>
+
+                        <select name="rankCode" class="form-select" aria-label="Default select example" onchange="applyFilters()">
+                            <option name="rankCode" value="" selected>전체 등급</option>
+                            <c:forEach items="${clientRankVoList}" var="clientRankVo">
+                                <option name="rankCode" value="${clientRankVo.no}">${clientRankVo.name}</option>
+                            </c:forEach>
+                        </select>
+              
 
                         <select class="searchType" name="searchType">
                             <option value="integration">통합</option>
@@ -95,7 +69,7 @@
                         </select>
 
                         <input type="text" class="searchValue" name="searchValue" placeholder="검색">
-                        <button class="form-submit" type="submit">
+                        <button class="form-submit" type="submit" onclick="applyFilters()">
                             <i class="fas fa-search"></i>
                         </button>
                     

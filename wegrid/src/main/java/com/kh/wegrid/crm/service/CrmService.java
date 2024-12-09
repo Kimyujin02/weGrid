@@ -22,12 +22,12 @@ public class CrmService {
 
     private final CrmMapper mapper;
 
-    public List<ClientVo> getClientVoList(PageVo pvo, String searchType, String searchValue) {
-        return mapper.getClientVoList(pvo, searchType, searchValue);
+    public List<ClientVo> getClientVoList(PageVo pvo, String statusNo, String rankCode, String searchType, String searchValue) {
+        return mapper.getClientVoList(pvo, statusNo, rankCode, searchType, searchValue);
     }
 
-    public int getClientCnt() {
-        return mapper.getClientCnt();
+    public int getClientCnt(String statusNo, String rankCode, String searchType, String searchValue) {
+        return mapper.getClientCnt(statusNo, rankCode, searchType, searchValue);
     }
 
     public List<ClientRankVo> getClientRankVoList() {
@@ -92,4 +92,15 @@ public class CrmService {
     public int editHistory(ClientHistoryVo vo, String hno, String cno, String eno) {
         return mapper.editHistory(vo, hno, cno, eno);
     }
+
+    // 필터링 카운트
+    public int getFilteredClientCnt(String statusNo, String rankCode) {
+        return mapper.getFilteredClientCnt(statusNo, rankCode);
+    }
+
+    // 필터링
+    public List<ClientVo> getFilteredClientVoList(PageVo pvo, String statusNo, String rankCode) {
+        return mapper.getFilteredClientVoList(pvo, statusNo, rankCode);
+    }
+
 }

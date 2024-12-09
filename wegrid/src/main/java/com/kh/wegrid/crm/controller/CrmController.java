@@ -32,16 +32,19 @@ public class CrmController {
     public String list(
             Model model
             ,@RequestParam(name = "pno" , required = false, defaultValue = "1") int currentPage
+            ,String statusNo
+            ,String rankCode
             ,String searchType
             ,String searchValue
     ){
-        int listCount = service.getClientCnt();
+        int listCount = service.getClientCnt(statusNo, rankCode, searchType, searchValue);
 
         int pageLimit = 5;
         int boardLimit = 15;
         PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
 
-        List<ClientVo> clientVoList = service.getClientVoList(pvo, searchType, searchValue);
+        List<ClientVo> clientVoList = service.getClientVoList(pvo, statusNo, rankCode, searchType, searchValue);
+        System.out.println("clientVoList = " + clientVoList);
         List<ClientRankVo> clientRankVoList = service.getClientRankVoList();
         List<ClientStatusVo> clientStatusVoList = service.getClientStatusVoList();
 
@@ -52,6 +55,32 @@ public class CrmController {
         model.addAttribute("searchType", searchType);
         model.addAttribute("searchValue", searchValue);
         return "crm/clientList";
+    }
+
+    // 목록 조회 필터링
+    @GetMapping("list/filtered")
+    @ResponseBody
+    public HashMap listFiltered(
+            @RequestParam(name = "pno" , defaultValue = "1" , required = false) int currentPage
+            , String searchType
+            , String searchValue
+            , String statusNo
+            , String rankCode
+    ) {
+        System.out.println("statusNo = " + statusNo);
+        System.out.println("rankCode = " + rankCode);
+        int listCount = service.getFilteredClientCnt(statusNo, rankCode);
+        int pageLimit = 5;
+        int boardLimit = 15;
+        PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
+
+        List<ClientVo> clientVoList = service.getClientVoList(pvo, statusNo, rankCode, searchType, searchValue);
+
+        HashMap map = new HashMap();
+        map.put("a" , clientVoList);
+        map.put("b" , pvo);
+
+        return map;
     }
 
     // 고객사 상세 정보
