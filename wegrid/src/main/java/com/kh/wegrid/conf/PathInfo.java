@@ -33,6 +33,14 @@ public class PathInfo {
 
     }
 
+    public String getNoticeAttachmentPath(){
+        String path = staticPath
+                + "file" + File.separator
+                + "notice" + File.separator
+                + "attachment" + File.separator;
+        return path;
+
+    }
 
     public String getApprovalAttachmentPath(){
         String path = staticPath

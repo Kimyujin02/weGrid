@@ -3,7 +3,7 @@ const tbodyTag = document.querySelector(".table>tbody");
 tbodyTag.addEventListener("click" , function(evt){
     if(evt.target.tagName !== "TD"){return;}
     const no = evt.target.parentNode.children[0].innerText;
-    location.href=`/board/detail?bno=${no}`;
+    location.href=`/notice/detail?nno=${no}`;
 });
 
 
@@ -20,7 +20,7 @@ function paintPageArea(pvo){
         const spanTag = document.createElement("span");
         iTag.setAttribute("class" , "fas fa-caret-left fa-lg");
         iTag.setAttribute("id" , "leftPageBtn")
-        aTag.setAttribute("href" , `/board/list?pno=${pvo.startPage-1}`);
+        aTag.setAttribute("href" , `/notice/list?pno=${pvo.startPage-1}`);
         aTag.appendChild(iTag);
         spanTag.appendChild(aTag);
         pageArea.appendChild(spanTag);
@@ -29,7 +29,7 @@ function paintPageArea(pvo){
     for( let i = pvo.startPage ; i <= pvo.endPage ; i++ ){
         const aTag = document.createElement("a");
         const spanTag = document.createElement("span");
-        aTag.setAttribute("href" , `/board/list?pno=${i}`);
+        aTag.setAttribute("href" , `/notice/list?pno=${i}`);
         aTag.innerText = i;
         spanTag.appendChild(aTag);
         pageArea.appendChild(spanTag);
@@ -42,7 +42,7 @@ function paintPageArea(pvo){
         const spanTag = document.createElement("span");
         iTag.setAttribute("class" , "fas fa-caret-right fa-lg");
         iTag.setAttribute("id" , "rightPageBtn");
-        aTag.setAttribute("href" , `/board/list?pno=${pvo.endPage+1}`);
+        aTag.setAttribute("href" , `/notice/list?pno=${pvo.endPage+1}`);
         aTag.appendChild(iTag);
         spanTag.appendChild(aTag);
         pageArea.appendChild(spanTag);
@@ -63,7 +63,7 @@ function loadBoardList(searchType, searchTitleValue, searchContentValue){
     }
 
     $.ajax({
-        url : `/board/list/data?pno=${pno}` ,
+        url : `/notice/list/data?pno=${pno}` ,
         data : {
             searchType,
             searchTitleValue,
@@ -85,7 +85,7 @@ function loadBoardList(searchType, searchTitleValue, searchContentValue){
                 const tdTag01 = document.createElement('td');
 
                 tdTag01.appendChild(aTag01);
-                aTag01.setAttribute("href", `/board/detail?bno=${vo.no}`);
+                aTag01.setAttribute("href", `/notice/detail?nno=${vo.no}`);
                 aTag01.innerText = vo.no;
                 trTag.appendChild(tdTag01);
 

@@ -25,7 +25,7 @@
         <div class="main-content">
             <div class="main-head">
                 <div class="head-top">
-                    <h1 class="section-title">개발1팀 게시판</h1>
+                    <h1 class="section-title">게시판</h1>
                 </div>
                 <div class="head-bottom">
                     <div class="head-bottom-align">
@@ -56,7 +56,7 @@
                     </div>
                     <div class="bottom-bottom">
 
-
+                        <div class="table-form">
 
                             <table class="table">
                                 <thead class="list-top">
@@ -84,11 +84,12 @@
                             </table>
                             <div class="bottom-line"></div>
 
+                        </div>
+                        <div class="page">
+
+                        </div>
 
 
-                            <div class="page">
-
-                            </div>
                     </div>
                 </div>
             </div>

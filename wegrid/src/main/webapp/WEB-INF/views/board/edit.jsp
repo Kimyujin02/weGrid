@@ -12,6 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <script defer src="/js/common/main.js"></script>
+<script defer src="/js/board/edit.js"></script>
 
 </head>
 <body>
@@ -32,31 +33,51 @@
                 </div>
             </div>
 
-            <div class="main-main">
-                <div class="board-title">
-                    <input class="title" type="text" name="title" placeholder="제목을 입력하세요(65자 이내)" maxlength="64">
-                    </input>
-                </div>
-                <div class="board-content">
-                    <textarea class="content" name="content" placeholder="내용을 입력하세요(500자 이내)" maxlength="500"></textarea>
-                </div>
 
-                <div class="board-attach">
-                    <div class="line-title">첨부파일</div>
-                    <div class="line-divider"></div>
-                    <div class="inner">
-                        <button class="file-button" onclick="document.getElementById('input').click()">파일 선택</button>
-                        <input type="file" id="input" style="display: none;">
-                        <div class="info-text">또는 파일을 여기로 드래그 하세요.</div>
+            <form action="/board/edit" method="post" enctype="multipart/form-data">
+                <div class="main-main">
+                    <div class="board-title">
+                        <input type="hidden" name="no" value="${vo.no}">
+                        <input class="title" type="text" name="title" placeholder="제목을 입력하세요(65자 이내)" maxlength="64"  value="${vo.title}">
+                        </input>
                     </div>
-                </div>
+                    <div class="board-content">
+                        <textarea class="content" name="content" placeholder="내용을 입력하세요(500자 이내)" maxlength="2000">
+                            ${vo.content}
+                        </textarea>
+                    </div>
 
-                <div class="board-btns">
-                    <button class="btn-insert">작성하기</button>
-                    <button class="btn-cancel">취소</button>
-                </div>
+                    <div class="board-attach">
+                        <div class="line-title">첨부파일</div>
+                        <div class="line-divider"></div>
+                        <div class="inner">
+                            <input class="file-button" type="file" name="f" multiple>
+                            <div class="info-text">또는 파일을 여기로 드래그 하세요.
 
-            </div>
+                            </div>
+                        </div>
+                        <div class="board-img-area">
+                            <c:forEach items="${attachmentVoList}" var="attachVo">
+                                <img src="/img/board/attachment/${attachVo.changeName}" alt="${attachVo.originName}" width="100px" height="100px" onclick="delAttach(${attachVo.no}, '/img/board/attachment/${attachVo.changeName}', this);">
+                                <!-- 여기에서 this는 이미지 태그를 말함(이벤트) -->
+                            </c:forEach>
+
+                            <input type="file" name="f" multiple> <!-- enctype -->
+                            <div class="preview-area">
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="board-btns">
+                        <input type="submit" value="수정하기" class="btn-insert">
+                        <button class="btn-cancel">취소</button>
+                    </div>
+
+                </div>
+            </form>
         </div>
     </main>
 

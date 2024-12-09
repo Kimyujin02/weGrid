@@ -88,7 +88,7 @@ main {
 }
 
 .shortcut-title1 {
-    position: absolute;
+    position: relative;
     width: 74px;
     height: 20px;
     text-align: left;
