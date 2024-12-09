@@ -104,36 +104,43 @@ public class ProjectController {
 
     //프로젝트 정보 수정 화면 / update
     @GetMapping("edit")
-    public String edit(Model model, String projectNo,PageVo pvo){
+    public String edit(Model model, String projectNo){
         HashMap map = service.projectDetail(projectNo);
-        List<ProjectMemberVo> voList = service.getPeopleList(pvo, projectNo); // projectNo를 넘겨줌
+        List<ProjectMemberVo> voList = service.getPeopleList(projectNo); // projectNo를 넘겨줌
 
-        model.addAttribute("map", map); // 정보를 담아 jsp 화면에 넘겨주기 위한 것
+        List<StatusVo> statusList = (List<StatusVo>) map.get("statusList");
+        ProjectVo vo = (ProjectVo) map.get("project");
+
+        model.addAttribute("statusList", statusList); // 정보를 담아 jsp 화면에 넘겨주기 위한 것
         model.addAttribute("voList", voList);
+        model.addAttribute("vo", vo);
+
+//        System.out.println("map = " + map);
+//        System.out.println("voList = " + voList);
         return "project/edit";
     }
 
 
     //프로젝트 수정
-//    @PostMapping("edit") // 정보 수정, 멤버 추가, 삭제
-//    public String edit(ProjectVo vo, String projectNo, ProjectMemberVo pmVo){
-//        System.out.println("ProjectController.edit ~~~~~~~~~~~~~~~~~~~~~~");
-//
-//        int result = service.edit(vo, projectNo, pmVo);
-//
-//        System.out.println("ProjectVo: " + vo);
-//        System.out.println("ProjectMemberVo: " + pmVo);
-//        System.out.println("ProjectNo: " + projectNo);
-//
-//
-//        // 결과 처리
-//        if(result > 0){
-//            return "redirect:/project/people";
-//        }else{
-//            return "redirect:/error";
-//        }
-//
-//    }
+    @PostMapping("edit") // 정보 수정, 멤버 추가, 삭제
+    public String edit(ProjectVo vo, String projectNo, ProjectMemberVo pmVo){
+        System.out.println("ProjectController.edit ~~~~~~~~~~~~~~~~~~~~~~");
+
+        int result = service.edit(vo, projectNo, pmVo);
+
+        System.out.println("ProjectVo: " + vo);
+        System.out.println("ProjectMemberVo: " + pmVo);
+        System.out.println("ProjectNo: " + projectNo);
+
+
+        // 결과 처리
+        if(result > 0){
+            return "redirect:/project/people";
+        }else{
+            return "redirect:/error";
+        }
+
+    }
 
 
     
@@ -148,7 +155,7 @@ public class ProjectController {
         HashMap map = service.projectDetail(projectNo);
         model.addAttribute("map", map);
 
-        System.out.println("map = " + map);
+//        System.out.println("map = " + map);
         
         // 페이징 처리
         int listCount = service.getMemberCnt();
@@ -159,7 +166,7 @@ public class ProjectController {
 
         System.out.println("pvo = " + pvo);
 
-        List<ProjectMemberVo> voList = service.getPeopleList(pvo, projectNo); // projectNo를 넘겨줌
+        List<ProjectMemberVo> voList = service.getPeopleList(projectNo); // projectNo를 넘겨줌
         model.addAttribute("voList", voList);
         model.addAttribute("pvo", pvo);
         System.out.println("voList = " + voList);

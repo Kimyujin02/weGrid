@@ -224,8 +224,8 @@
 /* 준비 */
 .status-ready{
     background-color: #4E83EB; 
-    display: inline;
-    width: 80px;
+    display: block;
+    width: 70px;
     height: 25px;
     margin: auto;
     border-radius: 10px;
@@ -236,8 +236,8 @@
 /* 진행 */
 .status-ongoing {
     background-color: #EB4E4E;
-    display: inline;
-    width: 80px;
+    display: block;
+    width: 70px;
     height: 25px;
     margin: auto;
     border-radius: 10px;
@@ -248,8 +248,8 @@
 /* 완료 */
 .status-completed {
     background-color: #12C557; 
-    display: inline;
-    width: 80px;
+    display: block;
+    width: 70px;
     height: 25px;
     margin: auto;
     border-radius: 10px;
@@ -260,8 +260,8 @@
 /* 철회 */
 .status-canceled {
     background-color: #a625e2;
-    display: inline;
-    width: 80px;
+    display: block;
+    width: 70px;
     height: 25px;
     margin: auto;
     border-radius: 10px;
