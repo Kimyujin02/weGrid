@@ -63,7 +63,7 @@ public class MemberController {
 
         // 로그인 성공 시 실패 횟수 초기화
         service.resetFailedAttempts(vo.getId());
-
+        session.removeAttribute("loginAdminVo");
         session.setAttribute("loginMemberVo", loginMemberVo);
         return "redirect:/project/card";
     }
@@ -78,23 +78,33 @@ public class MemberController {
     }
 
     // 관리자 로그인 (화면)
-    @GetMapping("admin")
-    public String admin(){
+    @GetMapping("adminLogin")
+    public String adminLogin(){
         return "member/adminLogin";
     }
 
     // 관리자 로그인
-    @PostMapping("admin")
-    public String admin(AdminVo vo, HttpSession session, Model model){
+    @PostMapping("adminLogin")
+    public String adminLogin(AdminVo vo, HttpSession session, Model model){
 
         AdminVo loginAdminVo = service.adminLogin(vo);
 
         if(loginAdminVo == null) {
-            model.addAttribute("adminLoginFailed", "아이디 또는 비밀번호를 확인하세요.");
-            return "redirect:/member/admin";
+            session.setAttribute("alertMsg","아이디 또는 비밀번호를 확인하세요.");
+            return "redirect:/member/adminLogin";
         }
+
+        session.removeAttribute("loginMemberVo");
         session.setAttribute("loginAdminVo", loginAdminVo);
         return "redirect:/system/account/list";
+
+    }
+
+    @GetMapping("adminLogout")
+    public String adminLogout(HttpSession session, RedirectAttributes redirectAttributes) {
+        session.removeAttribute("loginAdminVo");
+        redirectAttributes.addFlashAttribute("logoutMsg", "로그아웃 성공!");
+        return "redirect:/member/adminLogin";
     }
 
 }

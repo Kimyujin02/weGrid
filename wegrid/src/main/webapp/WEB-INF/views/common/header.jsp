@@ -44,11 +44,22 @@
             </defs>
           </svg>
           </div>
-          <div id="profile-area"><img src="/css/common/user-solid.svg"
-            class="abc" 
-            onclick="openModal()">
+          <div id="profile-area">
+              <c:choose>
+                <c:when test="${loginMemberVo != null}">
+                    <img src="${loginMemberVo.profile}" class="abc" onclick="openModal()">
+                </c:when>
+                <c:otherwise>
+                    <img src="/css/common/user-solid.svg" class="abc" onclick="openModal()">
+                </c:otherwise>
+              </c:choose>            
           </div>
-        <div class="name_box">홍길동</div>
+          <c:if test="${loginMemberVo != null}">
+              <div class="name_box">${loginMemberVo.name}</div>
+          </c:if>
+          <c:if test="${loginAdminVo != null}">
+              <div class="name_box">${loginAdminVo.nick}</div>
+          </c:if>
         <!-- 모달 -->
    <div id="userModal" class="modal">
     <div class="modal-content">
@@ -58,12 +69,26 @@
         <div class="modal-body">
             <!-- 이미지 섹션 -->
             <div class="user-image">
-                <img src="/css/common/user-solid.svg" alt="사용자 이미지">
+                <c:choose>
+                    <c:when test="${loginMemberVo != null}">
+                        <img src="${loginMemberVo.profile}">
+                    </c:when>
+                    <c:otherwise>
+                        <img src="/css/common/user-solid.svg" alt="사용자 이미지">
+                    </c:otherwise>
+                  </c:choose> 
             </div>
             <!-- 버튼 섹션 -->
             <div class="user-actions">
-                <button class="action-btn" onclick="location.href='/mypage/home'">마이페이지</button>
-                <button class="action-btn logout-btn" onclick="location.href='/member/logout'">로그아웃</button>
+                <c:choose>
+                    <c:when test="${loginMemberVo != null}">
+                        <button class="action-btn" onclick="location.href='/mypage/home'">마이페이지<button>
+                        <button class="action-btn logout-btn" onclick="location.href='/member/logout'">로그아웃</button>
+                    </c:when>
+                    <c:otherwise>
+                        <button class="action-btn logout-btn" onclick="location.href='/member/adminLogout'">로그아웃</button>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </div>
     </div>

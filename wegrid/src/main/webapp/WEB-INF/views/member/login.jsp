@@ -13,7 +13,12 @@
 
 </head>
 <body>
-
+    <script>
+        <c:if test="${not empty alertMsg}">
+            alert('${sessionScope.alertMsg}');
+        </c:if>
+        <c:remove var="alertMsg" scope="session" />
+    </script>
 
     <div class="top1"></div>
 

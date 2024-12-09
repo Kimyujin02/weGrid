@@ -47,7 +47,7 @@
                     <div class="line_2"></div>
                     <div class="info-input">
                         <div>아이디</div>
-                        <input type="text" name="id" value="${vo.id}">
+                        <input type="text" name="id" value="${vo.id}" readonly>
                     </div>
                     <div class="line_2"></div>
                     <div class="info-input">

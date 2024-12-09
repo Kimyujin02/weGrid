@@ -28,7 +28,17 @@ public class CalendarController {
 
     // 캘린더 화면으로 이동
     @GetMapping("mainCalendar")
-    public void mainCalender(){}
+    public String mainCalender(HttpSession session){
+        // 접속한 사원의 사번 정보 수집
+        MemberVo loginVo = (MemberVo)session.getAttribute("loginMemberVo");
+        if(loginVo == null) {
+            session.setAttribute("alertMsg","옳바르지 않은 접근 입니다. 로그인화면으로 이동합니다.");
+            return "redirect:/member/login";
+        }
+
+        return "calendar/mainCalendar";
+
+    }
     
     // 이벤트 데이터 불러오기
     @GetMapping("load")

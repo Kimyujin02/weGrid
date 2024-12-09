@@ -36,7 +36,8 @@
         <if test="typeNo == 3">
 
         </if>
-            AND TO_CHAR(C.START_DATE,'YYYY-MM') LIKE '${date}%'
+<!--            AND TO_CHAR(C.START_DATE,'YYYY-MM') LIKE '${date}%'-->
+            AND TO_CHAR(C.START_DATE,'YYYY') LIKE '${date}%'
             AND C.DEL_YN = 'N'
         ORDER BY C.START_DATE
     </select>
