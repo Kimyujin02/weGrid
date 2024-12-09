@@ -38,11 +38,11 @@
                     <div class="place"></div>
 
                     <!-- 프로젝트 정보 입력 공간 -->
-                     <form action="/project/edit" method="post">
+                     <form action="/project/edit" method="get">
                         <div class="req-content">
                             <div class="left-panel">
                                 <br>
-                                        <!-- <input type="hidden" name="no" value="${vo.no}"> -->
+                                        <input type="hidden" name="no" value="${vo.no}">
                                 <div>
                                     <label for="project-name">프로젝트 명</label>
                                     <input type="text" id="project-name" value="${vo.projectName}">
@@ -62,7 +62,7 @@
                                     <label for="pm-name">진행도 </label>
                                     <div class="filter-controls">
                                         <select name="statusNo">
-                                            <c:forEach var="statusVo" items="${statusVoList}">
+                                            <c:forEach var="statusVo" items="${statusList}">
                                                 <option value="${statusVo.no}">${statusVo.name}</option>
                                             </c:forEach>
                                         </select>
@@ -115,14 +115,22 @@
                         <div class="personnel-list" id="personnelList">
                             <button class="add-btn" onclick="addOpenModal()">+</button>
                             <p class="plus">인원 추가하기</p>
-                            <!-- 여기에 동적으로 추가된 사원 정보가 표시됨 -->
+                            <div class="profile-info">
+                                <c:forEach items="${voList}" var="vo">
+                                    <img src="profile1.jpg" alt="사원" class="profile-img">
+                                    <span class="name">${vo.empName}</span>
+                                    <br>
+                                    <span class="role">${vo.deptNo}</span>
+                                    <hr>
+                                </c:forEach>
+                            </div>
                         </div>
                     </div>
     
                 <!-- 버튼 섹션 -->
                 <div id="section-button">
                     <button type="submit" class="btn btn-primary" id="create-btn">수정</button>
-                    <button type="button" class="btn btn-primary" id="delete-btn">취소</button>
+                    <button type="button" class="btn btn-primary" id="delete-btn" onclick="location.href='/project/people?projectNo=${vo.projectNo}&pno=1'">취소</button>
                 </div>
                      </form>
                    

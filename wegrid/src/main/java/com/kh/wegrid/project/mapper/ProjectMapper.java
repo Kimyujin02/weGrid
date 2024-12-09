@@ -177,7 +177,7 @@ public interface ProjectMapper {
             JOIN DEPARTMENT D ON D.CODE = E.DEPT_NO
             WHERE P.NO = #{projectNo}
             """)
-    List<ProjectMemberVo> getPeopleList(PageVo pvo, String projectNo);
+    List<ProjectMemberVo> getPeopleList(String projectNo);
 
 
     //프로젝트 참여 인원 리스트 카운트
@@ -253,7 +253,7 @@ public interface ProjectMapper {
                     , DESCRIPTION = #{description}
             WHERE NO = #{no}
             """)
-    int edit(ProjectVo vo, String projectNo);
+    int edit(ProjectVo vo, String projectNo, ProjectMemberVo pmVo);
 
     // 프로젝트 참여 멤버 추가하기(insert)
     @Insert("""

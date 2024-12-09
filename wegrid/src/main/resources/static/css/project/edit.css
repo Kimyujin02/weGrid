@@ -365,6 +365,7 @@ label{
     max-height: 200px;
     overflow-y: auto;
     z-index: 1000;
+    width: 291px;
 }
 
 /* //////////////////////////////////////////////////////////////////////////////////// */
@@ -382,7 +383,7 @@ label{
 .search-client {
     position: absolute;
     list-style: none;
-    margin-left: 57px;
+    margin-left: 58px;
     margin-top: -4px;
     padding: 0;
     background-color: white;
@@ -391,6 +392,7 @@ label{
     max-height: 200px;
     overflow-y: auto;
     z-index: 1000;
+    width: 292px;
 }
 
 .search-items{

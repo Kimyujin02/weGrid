@@ -88,8 +88,8 @@ public class ProjectService {
     }
 
 
-    public List<ProjectMemberVo> getPeopleList(PageVo pvo, String projectNo) {
-        return mapper.getPeopleList(pvo, projectNo);
+    public List<ProjectMemberVo> getPeopleList(String projectNo) {
+        return mapper.getPeopleList(projectNo);
     }
 
     public int getMemberCnt() {
@@ -101,6 +101,7 @@ public class ProjectService {
         List<StatusVo> statusVo = mapper.getStatusVoList();
 
         HashMap result = new HashMap<>();
+
         result.put("project", vo);
         result.put("statusList", statusVo);
 
@@ -120,5 +121,9 @@ public class ProjectService {
 
     public List<ProjectMemberVo> getAttachPeopleList(String projectNo) {
         return mapper.getAttachPeopleList(projectNo);
+    }
+
+    public int edit(ProjectVo vo, String projectNo, ProjectMemberVo pmVo) {
+        return mapper.edit(vo, projectNo, pmVo);
     }
 }

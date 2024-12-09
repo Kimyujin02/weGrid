@@ -14,6 +14,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
 import java.util.List;
@@ -66,8 +67,17 @@ public class SystemManagerController {
             @RequestParam(value = "deptNo", required = false) String deptNo,
             @RequestParam(value = "jobNo", required = false) String jobNo,
             @RequestParam(name = "pno", required = false, defaultValue = "1") int currentPage,
-            @RequestParam(value = "searchValue", required = false) String searchValue
+            @RequestParam(value = "searchValue", required = false) String searchValue,
+            RedirectAttributes redirectAttributes
     ) {
+
+        MemberVo loginMemberVo = (MemberVo) session.getAttribute("loginMemberVo");
+        // 로그인된 사용자가 없을 때 처리
+        if (loginMemberVo == null) {
+            redirectAttributes.addFlashAttribute("errorMessage", "로그인 정보가 없습니다.");
+            return "redirect:/member/login"; // 로그인 페이지로 리다이렉트
+        }
+
         // 1. 부서 및 직급 리스트 가져오기
         List<JobInfoVo> jobInfoVoList = service.getJobInfoVoList();
         List<DepartMentVo> departMentVoList = service.getDepartmentVoList();
