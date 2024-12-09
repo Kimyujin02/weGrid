@@ -52,7 +52,7 @@
                     <input type="text" id="sample2_postcode" placeholder="우편번호" name="postAddress" value="${vo.postAddress}" readonly>
                     <input type="text" id="sample2_address" placeholder="주소" name="roadAddress" value="${vo.roadAddress}" readonly><br>
                     <input type="text" id="sample2_detailAddress" placeholder="상세주소" name="detailAddress" value="${vo.detailAddress}" readonly>
-                    <input type="text" id="sample2_extraAddress" placeholder="참고항목" value="${vo.detailAddress}" readonly>
+                    <input type="text" id="sample2_extraAddress" placeholder="참고항목" name="extraAddress" value="${vo.extraAddress}" readonly>
         
                 
                 <!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
@@ -158,23 +158,23 @@
     <div id="right-panel">
         <h3 class="sub-title">사원 정보</h3>
         <form>
-            <label for="employee-no">사번</label>
-            <input type="text" id="employee-no" name="empNum" value="${vo.empNum}" readonly><br>
+            <label for="employee-no" id="employeeInfo">사번</label>
+            <input type="text" id="employeeSub" name="empNum" value="${vo.empNum}" readonly><br>
 
-            <label for="department">부서명</label>
+            <label for="department" id="employeeInfo">부서명</label>
             <div class="department-row">
-                <input type="text" id="department-name" value="${vo.deptName}" readonly>
+                <input type="text" id="employeeSub" value="${vo.deptName}" readonly>
             </div>
 
-            <label for="position">직급</label>
+            <label for="position" id="employeeInfo">직급</label>
             <div>
-                <input type="text" id="jobName" value="${vo.jobName}" readonly>
+                <input type="text" id="employeeSub" value="${vo.jobName}" readonly>
             </div>
            
 
-            <label for="authority">권한</label>
+            <label for="authority" id="employeeInfo">권한</label>
             <div>
-                <input type="text" name="isManager" value="${vo.isManager}" readonly>
+                <input type="text" id="employeeSub" name="isManager" value="${vo.isManager}" readonly>
             </div>
             <!-- <div class="filter-controls" >
                 <select id="authority" name="isManager" readonly>

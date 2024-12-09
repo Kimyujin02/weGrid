@@ -9,9 +9,16 @@ document.getElementById("create-btn").addEventListener("click", function (event)
     }
 });
 
+
     // 선택된 옵션을 input 필드에 업데이트하는 함수
+    // 선택된 옵션의 텍스트를 input 필드에 업데이트하는 함수
     function updateDepartmentName() {
         const select = document.getElementById('deptName'); // select 요소
         const input = document.getElementById('department-name'); // input 요소
-        input.value = select.value; // 선택된 옵션의 값을 input에 설정
+
+        // 선택된 옵션의 텍스트 가져오기
+        const selectedText = select.options[select.selectedIndex].text;
+
+        // input 필드에 선택된 텍스트 설정
+        input.value = selectedText;
     }

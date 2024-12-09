@@ -1,49 +1,68 @@
-function handleCheckbox(x){
-    //모든 체크박스 가져오기
+document.addEventListener('DOMContentLoaded', function () {
+    const rows = document.querySelectorAll('.list-middle');
+
+    rows.forEach(row => {
+        row.addEventListener('click', function (event) {
+            // 클릭한 대상이 버튼, 체크박스, 또는 exclude-click 클래스일 경우 실행 중단
+            if (
+                event.target.tagName === 'BUTTON' ||
+                event.target.type === 'checkbox' ||
+                event.target.closest('.exclude-click')
+            ) {
+                return; // 클릭 이벤트 전파 중단
+            }
+
+            const no = this.dataset.no; // 각 행의 data-no 속성에서 no 값 가져오기
+            window.location.href = `/system/detail?no=${no}`; // 상세조회 페이지로 이동
+        });
+    });
+});
+
+function handleCheckbox(x) {
+    // 모든 체크박스 가져오기
     const checkBoxArr = document.querySelectorAll(".checkbox-td > input[type=checkbox]");
 
-    //모든 체크박스 체크하기
-    for(let i = 0; i < checkBoxArr.length; ++i){
-        checkBoxArr[i].checked = x.checked;
-    }
+    // 모든 체크박스 체크하기
+    checkBoxArr.forEach(checkbox => {
+        checkbox.checked = x.checked;
+    });
 }
 
-function deleteNotice() {
-    // 1. 체크된 게시글 번호들 가져오기
-    const accountArr = []; // 선택된 값들을 저장할 배열
-    const checkBoxArr = document.querySelectorAll(".checkbox-td > input[type=checkbox]:checked");
-
-    // 체크된 체크박스에서 value 값을 가져오기
-    checkBoxArr.forEach((checkbox) => {
-        accountArr.push(checkbox.value); // 체크박스의 value 값 추가
-    });
-
-    // 선택된 값이 없을 경우 알림
-    if (accountArr.length === 0) {
-        alert("삭제할 항목을 선택하세요.");
-        return;
+function deleteAccount(){
+    //1. 체크된 게시글 번호들 가져오기
+    const accountArr = []; // 체크된 게시글 번호를 저장할 배열
+    const checkBoxArr = document.querySelectorAll(".checkbox-td > input[type=checkbox]");
+    for(const checkBox of checkBoxArr){
+        if(checkBox.checked == false){continue;} // 체크되지 않은 경우 건너뛰기
+        const accountNo = checkBox.parentNode.parentNode.children[0].value;
+        console.log("checkBox" , checkBox);
+        accountArr.push(accountNo); // 번호를 배열에 추가해줌
     }
 
-    // 2. 서버에 요청 보내기
-    $.ajax({
-        url: "/system/delete",
-        method: "DELETE",
-        data: JSON.stringify({ accountArr }), // JSON 데이터로 전송
-        contentType: "application/json", // 요청 데이터 형식 설정
-        success: function (response) {
-            console.log("응답: ", response);
-            if (response === "good") {
-                alert("삭제 성공!");
-            } else {
-                alert("삭제 실패...");
+    console.log("accountArr" , accountArr);
+    
+
+    //2. 서버한테 요청 보내기
+    $.ajax( {
+        url : "/system/delete" ,
+        method : "delete" ,
+        // contentType: "application/json", // JSON 형식으로 데이터 전송
+        data: {
+            accountArr : JSON.stringify(accountArr)
+        }, // 데이터를 객체로 감싸서 JSON 문자열로 변환
+        success : function(x){
+            console.log("통신 성공 !!!");
+            if(x == "good"){
+                alert("삭제 성공 !");
+            }else{
+                alert("삭제 실패 ...");
             }
             location.reload();
-        },
-        error: function () {
-            console.log("통신 실패...");
-            alert("삭제 중 오류가 발생했습니다.");
-        },
-    });
+        } ,
+        error : function(){
+            console.log("통신 실패 ...");
+        } ,
+    } );
 }
 
 
@@ -64,5 +83,35 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+
+
+// 필터링
+// 부서 변경 시 직급 필터링
+function updateJobOptions() {
+    const selectedDept = document.getElementById("deptName").value;
+    const jobSelect = document.getElementById("job");
+    const allJobOptions = [...jobSelect.options];
+
+    allJobOptions.forEach(option => {
+        option.style.display = "block";
+        if (selectedDept && option.dataset.deptNo && option.dataset.deptNo !== selectedDept) {
+            option.style.display = "none";
+        }
+    });
+  
+    applyFilters(); // 부서 변경 시 필터링 적용
+}
+
+// 필터링 적용
+function applyFilters() {
+    const deptNo = document.getElementById("deptName").value;
+    const jobNo = document.getElementById("job").value;
+    const url = `/system/account/list?deptNo=${deptNo}&jobNo=${jobNo}`;
+    window.location.href = url; // 필터링된 값으로 페이지 이동
+}
+
+
 
 

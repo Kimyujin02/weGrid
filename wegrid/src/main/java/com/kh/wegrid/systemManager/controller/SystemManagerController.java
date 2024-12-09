@@ -10,6 +10,7 @@ import com.kh.wegrid.util.page.PageVo;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,8 +38,8 @@ public class SystemManagerController {
         model.addAttribute("jobInfoVoList", jobInfoVoList); // JSP로 데이터 전달
         model.addAttribute("departMentVoList", departMentVoList);
 
-       System.out.println("departMentVoList = " + departMentVoList);
-        System.out.println("jobInfoVoList = " + jobInfoVoList);
+//       System.out.println("departMentVoList = " + departMentVoList);
+//        System.out.println("jobInfoVoList = " + jobInfoVoList);
 
         return "system/create";
     }
@@ -46,7 +47,7 @@ public class SystemManagerController {
     // 계정 생성 요청
     @PostMapping("create")
     public String create(MemberVo vo) {
-        System.out.println("vo = " + vo);
+//        System.out.println("vo = " + vo);
         int result = service.create(vo);
 
         if (result != 1) {
@@ -59,49 +60,53 @@ public class SystemManagerController {
 
     // 시스템 관리자 목록 조회 화면(+검색이 될까...?)
     @GetMapping("account/list")
-    public String list(Model model, HttpSession session
-            ,@RequestParam(name = "pno" , required = false, defaultValue = "1") int currentPage
-            ,String searchValue)
-    {
-//        AdminVo loginAdminVo = (AdminVo) session.getAttribute("loginAdminVo");
-//        if(loginAdminVo == null){
-//            session.setAttribute("alertMsg","옳바르지 않은 접근 입니다. 관리자 로그인화면으로 이동합니다.");
-//            return "redirect:/member/admin";
-//        }
-
-        // 부서 및 직급 리스트 가져오기
+    public String list(
+            Model model,
+            HttpSession session,
+            @RequestParam(value = "deptNo", required = false) String deptNo,
+            @RequestParam(value = "jobNo", required = false) String jobNo,
+            @RequestParam(name = "pno", required = false, defaultValue = "1") int currentPage,
+            @RequestParam(value = "searchValue", required = false) String searchValue
+    ) {
+        // 1. 부서 및 직급 리스트 가져오기
         List<JobInfoVo> jobInfoVoList = service.getJobInfoVoList();
         List<DepartMentVo> departMentVoList = service.getDepartmentVoList();
-        model.addAttribute("jobInfoVoList", jobInfoVoList); // JSP로 데이터 전달
+        model.addAttribute("jobInfoVoList", jobInfoVoList);
         model.addAttribute("departMentVoList", departMentVoList);
 
-        // 검색어에 따라 총 데이터 개수 가져오기
-            int listCount = service.getSystemCnt(searchValue);
-            // 페이징 처리
-            int pageLimit = 5; // 한번에 보여질 페이지 번호 개수
-            int boardLimit = 11; // 한 페이지에서 보여질 데이터 개수
+        // 2. 필터링 조건에 따른 총 데이터 개수 가져오기
+        int listCount = service.getSystemCnt(deptNo, jobNo, searchValue);
+
+        // 3. 페이징 처리
+        int pageLimit = 5; // 한 번에 보여질 페이지 번호 개수
+        int boardLimit = 11; // 한 페이지에서 보여질 데이터 개수
         PageVo pvo = new PageVo(listCount, currentPage, pageLimit, boardLimit);
 
-        // 검색어와 페이징 조건으로 데이터 가져오기
-        List<MemberVo> empVoList = service.getMemberVoList(pvo, searchValue);
+        // 4. 필터링 및 페이징 조건으로 데이터 가져오기
+        List<MemberVo> empVoList = service.getMemberVoList(pvo, deptNo, jobNo, searchValue);
         model.addAttribute("empVoList", empVoList);
         model.addAttribute("pvo", pvo);
-        System.out.println("Paging Info: " + pvo);
-        model.addAttribute("searchValue", searchValue); // 검색어를 유지하기 위함
+
+        // 5. 필터 및 검색어 유지
+        model.addAttribute("deptNo", deptNo);
+        model.addAttribute("jobNo", jobNo);
+        model.addAttribute("searchValue", searchValue);
 
         return "system/account/list";
     }
 
-    //목록 삭제 처리(왜안돼 ㅇ웩)
-    public String delete(@RequestBody Map<String, List<String>> payload) {
-        List<String> accountArr = payload.get("accountArr");
-        System.out.println("accountArr: " + accountArr);
-        if (accountArr == null || accountArr.isEmpty()) {
-            return "bad"; // 데이터가 없으면 실패 처리
-        }
 
-        int result = service.delete(accountArr);
-        return result > 0 ? "good" : "bad"; // 삭제 성공 여부 반환
+    //목록 삭제 처리(왜안돼 ㅇ웩)
+    @DeleteMapping("delete")
+    @ResponseBody
+    public String delete(String accountArr) throws JsonProcessingException {
+        System.out.println("accountArr = " + accountArr);
+        List<String> noticeNoList = objectMapper.readValue(accountArr , List.class);
+        int result = service.delete(noticeNoList);
+        if(result == 0){
+            return "bad";
+        }
+        return "good";
     }
 
 

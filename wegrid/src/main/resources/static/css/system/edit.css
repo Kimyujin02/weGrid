@@ -55,6 +55,44 @@
     margin-left: 60px;
 }
 
+#employeeInfo{
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+#employeeSub{
+    width: 80%;
+    height: 35px;
+    margin-bottom: 15px;
+    padding: 5px;
+    border: 1px solid #C0C0C0;
+    border-radius: 5px;
+    box-sizing: border-box;
+
+}
+
+#department-name{
+    height: 35px;
+    margin-bottom: 15px;
+    padding: 5px;
+    border: 1px solid #C0C0C0;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+
+#deptName{
+    width: 80%;
+    height: 35px;
+    margin-bottom: 15px;
+    padding: 5px;
+    border: 1px solid #C0C0C0;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
 form label {
     display: block;
     margin-bottom: 5px;

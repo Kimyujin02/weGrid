@@ -32,28 +32,54 @@
             <div class="top-area">
                 <button type="button" class="btn btn-primary" id="create-btn" onclick="location.href='/system/create'">등록하기</button>
                 
-                <div class="filter-controls">
+                <form action="/system/account/list"  method="get">
+                <div class="filter-controls" >
                     <!-- 부서명 필터링 값 -->
-                    <select id="deptName" name="deptNo">
+                    <select id="deptName" name="deptNo" onchange="updateJobOptions()" >
+                        <option value="">전체</option>
                         <c:forEach var="departMentVo" items="${departMentVoList}">
-                            <option value="${departMentVo.code}">${departMentVo.name}</option>
+                            <c:if test="${deptNo == departMentVo.code}">
+                                <option value="${departMentVo.code}" selected>
+                                    ${departMentVo.name}
+                                </option>
+                            </c:if>
+
+                            <c:if test="${deptNo != departMentVo.code}">
+                                <option value="${departMentVo.code}">
+                                    ${departMentVo.name}
+                                </option>
+                            </c:if>
                         </c:forEach>
                     </select>
                      
-                    <!-- 직급명 필터링 값 -->
-                    <select id="job" name="jobNo">
+                    <!-- 직급명 필터링 -->
+                    <select id="job" name="jobNo" onchange="applyFilters()">
+                        <option value="">전체</option>
                         <c:forEach var="JobInfoVo" items="${jobInfoVoList}">
-                            <option value="${JobInfoVo.no}">${JobInfoVo.name}</option>
+
+                                <c:if test="${jobNo == JobInfoVo.no}">
+                                <option value="${JobInfoVo.no}" selected>
+                                    ${JobInfoVo.name}
+                                </option>
+                                </c:if>
+
+                                <c:if test="${jobNo != JobInfoVo.no}">
+                                    <option value="${JobInfoVo.no}">
+                                        ${JobInfoVo.name}
+                                    </option>
+                                    </c:if>
+                         
                         </c:forEach>
                     </select>
+                    <div class="search-box">
+                        <input type="text" name="searchValue" placeholder="사원 이름 검색" value="${searchValue}">
+                        <i class="fas fa-search"></i>
+                    </div>
                 </div>
 
-                <form class="search-box" method="get">
-                    <input type="text" name="searchValue" placeholder="사원 이름 검색" value="${searchValue}">
-                    <i class="fas fa-search"></i>
                 </form>
     
-                    <button type="button" class="btn btn-primary" id="delete-btn" onclick="deleteNotice()">일괄삭제</button>
+                    <button type="button" class="btn btn-primary" id="delete-btn" onclick="delete(this)">일괄삭제</button>
             </div>
             
 
@@ -92,7 +118,9 @@
                                 </td>
                                 <td><button type="button" class="btn btn-primary" id="edit-btn" onclick="location.href='/system/edit?no=${vo.no}'">정보수정</button></td>
                                 <td>${vo.delYn}</td>
-                                <td class="checkbox-td"><input type="checkbox" name="del"></td>
+                                <td class="checkbox-td">
+                                    <input type="checkbox" name="del" class="exclude-click">
+                                </td>
                         </tr>
                         </c:forEach>
                        
@@ -106,13 +134,13 @@
             </div>
             <div class="page">
                 <c:if test="${pvo.startPage != 1}">
-                    <a href="/system/account/list?pno=${pvo.startPage-1}&searchValue=${searchValue}">이전</a>
+                    <a href="/system/account/list?pno=${pvo.startPage-1}&searchValue=${searchValue}"><i class="fas fa-caret-left fa-lg" style="color: #174880;"></i></a>
                 </c:if>
                 <c:forEach begin="${pvo.startPage}" end="${pvo.endPage}" var="i" step="1">
                     <a href="/system/account/list?pno=${i}&searchValue=${searchValue}">${i}</a>
                 </c:forEach>
                 <c:if test="${pvo.endPage != pvo.maxPage}">
-                    <a href="/system/account/list?pno=${pvo.endPage+1}&searchValue=${searchValue}">다음</a>
+                    <a href="/system/account/list?pno=${pvo.endPage+1}&searchValue=${searchValue}"><i class="fas fa-caret-right fa-lg" style="color: #174880;"></i></a>
                 </c:if>
         </div>
         

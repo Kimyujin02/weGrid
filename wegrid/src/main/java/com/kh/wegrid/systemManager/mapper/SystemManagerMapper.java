@@ -52,7 +52,7 @@ public interface SystemManagerMapper {
     @Select("""
         SELECT *
         FROM JOB_INFO
-           """)
+        """)
     List<JobInfoVo> getJobInfoVoList();
 
     @Select("""
@@ -87,39 +87,10 @@ public interface SystemManagerMapper {
             """)
     List<EmployeeVo> getEmployeeVoList(PageVo pvo, String str);
 
-    @Select("""
-            SELECT COUNT(*)
-            FROM EMPLOYEE
-            WHERE DEL_YN = 'N'
-            AND NAME LIKE '%' || #{searchValue} || '%'
-            """)
-    int getSystemCnt(String searchValue);
+    int getSystemCnt(String searchValue, String jobNo, String value);
 
-    @Select("""
-             SELECT
-                E.NO,
-                E.NAME,
-                E.ID,
-                E.EMAIL,
-                E.PHONE,
-                E.POST_ADDRESS,
-                E.ROAD_ADDRESS,
-                E.DETAIL_ADDRESS,
-                E.EMP_NUM,
-                D.NAME AS DEPT_NAME,  -- 부서 이름
-                J.NAME AS JOB_NAME,        -- 직급 이름
-                E.IS_MANAGER,
-                TO_CHAR(E.ENROLL_DATE, 'YYYY-MM-DD')  AS ENROLL_DATE,
-                E.DEL_YN
-            FROM EMPLOYEE E
-            LEFT JOIN DEPARTMENT D
-                ON E.DEPT_NO = D.CODE  -- 부서 번호 조인
-            LEFT JOIN JOB_INFO J
-                ON E.JOB_NO = J.NO    -- 직급 번호 조인
-            ORDER BY E.DEL_YN ASC
-            OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
-            """)
-    List<MemberVo> getMemberVoList(PageVo pvo, String str);
+
+    List<MemberVo> getMemberVoList(PageVo pvo, String deptNo, String jobNo, String searchValue);
 
 
     @Select("""
@@ -163,17 +134,12 @@ public interface SystemManagerMapper {
 
     @Update("""
             UPDATE EMPLOYEE
-            SET DEL_YN = 'N'
+            SET DEL_YN = 'Y'
             WHERE NO = #{NO}
             """)
     int accountDelete(String no);
 
-//    @Update("""
-//            UPDATE EMPLOYEE
-//                SET
-//                    DEL_YN = 'Y'
-//                WHERE NO IN (${x})
-//            """)
+
     int delete(@Param("accountArr") List<String> accountArr);
 }
 

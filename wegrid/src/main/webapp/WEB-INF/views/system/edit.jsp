@@ -153,13 +153,16 @@
                 <!-- 사원 정보 -->
                 <div class="right-panel">
                     <h3 class="sub-title">사원 정보</h3>
-                        <label for="employee-no">사번</label>
-                        <input type="text" id="employee-no" name="empNum" value="${vo.empNum}"><br>
+                        <label for="employee-no" id="employeeInfo">사번</label>
+                        <input type="text" id="employeeSub" name="empNum" value="${vo.empNum}"
+                        style=" background-color: #F4F4F4;
+                        box-shadow:inset 3px 3px 5px 1px rgba(98, 97, 97, 0.3);"><br>
 
-                        <label for="department">부서명</label>
-                       
+                        <label for="department" id="employeeInfo">부서명</label>
                         <div class="department-row">
-                            <input type="text" id="department-name" value="${vo.deptName}"> 
+                            <input type="text" id="department-name" value="${vo.deptName}" 
+                            style=" background-color: #F4F4F4;
+                                box-shadow:inset 3px 3px 5px 1px rgba(98, 97, 97, 0.3);"> 
                             <div class="filter-controls">
                                 <select id="deptName" name="deptName" onchange="updateDepartmentName()">
                                     <c:forEach var="departMentVo" items="${departMentVoList}">
@@ -171,18 +174,18 @@
                             </div>
                         </div>
                        
-                        <label for="position">직급</label>
+                        <label for="position" id="employeeInfo">직급</label>
                         <div class="filter-controls">
-                            <select id="job" name="jobNo">
+                            <select name="jobNo" id="employeeSub">
                                 <c:forEach var="JobInfoVo" items="${jobInfoVoList}">
                                     <option value="${JobInfoVo.no}">${JobInfoVo.name}</option>
                                 </c:forEach>
                             </select>
                         <br>
                     </div>
-                        <label for="authority">권한</label>
+                        <label for="authority" id="employeeInfo">권한</label>
                         <div class="filter-controls">
-                        <select id="authority" name="isManager">
+                        <select id="employeeSub" name="isManager">
                             <option value="Y">관리자</option>
                             <option value="N">일반 사원</option>
                         </select>

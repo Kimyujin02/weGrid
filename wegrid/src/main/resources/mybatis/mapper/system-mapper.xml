@@ -112,4 +112,56 @@
             #{item}
         </foreach>
     </update>
+
+    <!-- 총 데이터 개수 조회 -->
+    <select id="getSystemCnt">
+        SELECT COUNT(*)
+        FROM EMPLOYEE E
+        LEFT JOIN DEPARTMENT D ON E.DEPT_NO = D.CODE
+        LEFT JOIN JOB_INFO J ON E.JOB_NO = J.NO
+        WHERE
+        (E.NAME LIKE '%' || #{searchValue} || '%' OR #{searchValue} IS NULL)
+        AND (E.JOB_NO = #{jobNo} OR #{jobNo} IS NULL)
+        AND (E.DEPT_NO = #{value} OR #{value} IS NULL)
+    </select>
+
+    <!-- 회원 목록 조회 -->
+    <select id="getMemberVoList">
+        SELECT
+        E.NO,
+        E.NAME,
+        E.ID,
+        E.EMAIL,
+        E.PHONE,
+        E.POST_ADDRESS,
+        E.ROAD_ADDRESS,
+        E.DETAIL_ADDRESS,
+        E.EMP_NUM,
+        D.NAME AS DEPT_NAME,  -- 부서 이름
+        J.NAME AS JOB_NAME,        -- 직급 이름
+        E.IS_MANAGER,
+        TO_CHAR(E.ENROLL_DATE, 'YYYY-MM-DD')  AS ENROLL_DATE,
+        E.DEL_YN
+        FROM EMPLOYEE E
+        LEFT JOIN DEPARTMENT D ON E.DEPT_NO = D.CODE  -- 부서 번호 조인
+        LEFT JOIN JOB_INFO J ON E.JOB_NO = J.NO    -- 직급 번호 조인
+        <where>
+            <if test="deptNo != null and deptNo != '' ">
+                AND (E.DEPT_NO = #{deptNo} OR #{deptNo} IS NULL)
+            </if>
+
+            <if test="jobNo != null and jobNo != ''">
+                AND (E.JOB_NO = #{jobNo} OR #{jobNo} IS NULL)
+            </if>
+
+            <if test="searchValue != null and searchValue != '' ">
+                AND E.NAME LIKE '%' || #{searchValue} || '%'
+            </if>
+
+        </where>
+<!--        AND E.DEL_YN = 'N'  &lt;!&ndash; 삭제된 항목 제외 &ndash;&gt;-->
+        ORDER BY E.DEL_YN ASC
+        OFFSET #{pvo.offset} ROWS FETCH NEXT #{pvo.boardLimit} ROWS ONLY
+    </select>
+
 </mapper>

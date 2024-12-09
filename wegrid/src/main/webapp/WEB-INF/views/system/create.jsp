@@ -161,11 +161,12 @@
                         <input 
                             type="text" 
                             id="department-name" 
-                            value="${departMentVoList[0].name}" 
-                        />
-
+                          
+                            />
+                            
+                            <!-- value="${departMentVoList[0].name}"  -->
                         <!-- departMentVoList를 순회하여 옵션 생성 -->
-                        <select id="deptName" name="deptNo" onchange="updateDepartmentName()">
+                        <select id="deptName" name="deptNo" onchange="updateDepartmentName(this)">
                             <c:forEach var="departMentVo" items="${departMentVoList}">
                                 <option value="${departMentVo.code}">${departMentVo.name}</option>
                             </c:forEach>

@@ -1,7 +1,6 @@
 package com.kh.wegrid.systemManager.service;
 
 import com.kh.wegrid.member.vo.MemberVo;
-import com.kh.wegrid.project.vo.EmployeeVo;
 import com.kh.wegrid.systemManager.mapper.SystemManagerMapper;
 import com.kh.wegrid.systemManager.vo.DepartMentVo;
 import com.kh.wegrid.systemManager.vo.JobInfoVo;
@@ -43,12 +42,11 @@ public class SystemManagerService {
 //        return mapper.getEmployeeVoList(pvo, str);
 //    }
 
-    public int getSystemCnt(String searchValue) {
-        return mapper.getSystemCnt(searchValue);
+    public int getSystemCnt(String searchValue, String jobNo, String value) {
+        return mapper.getSystemCnt(searchValue, jobNo, value);
     }
-
-    public List<MemberVo> getMemberVoList(PageVo pvo, String searchValue) {
-        return mapper.getMemberVoList(pvo, searchValue);
+    public List<MemberVo> getMemberVoList(PageVo pvo, String deptNo,  String jobNo, String searchValue) {
+        return mapper.getMemberVoList(pvo, deptNo, jobNo, searchValue);
     }
 
 
