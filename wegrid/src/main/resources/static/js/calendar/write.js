@@ -41,7 +41,7 @@ function loadTypeInfo(){
     const selectTag = document.querySelector("#calendar-type");
     const colorTag = document.querySelector("#writeModal input[name=color]");
 
-    for (let i = 1; i < typeInfo.length; i++) {
+    for (let i = 1; i < typeInfo.length-1; i++) {
         const optionTag = document.createElement("option");
         optionTag.value = typeInfo[i].no;
         optionTag.innerText = typeInfo[i].name;
@@ -107,7 +107,14 @@ function insertToDB(){
     // 저장할 월 정보 수집
     const date = document.querySelector("#calendar-start-date").value;
     const calcDate = calculateDate(new Date(date.replace("T"," ")));
+    const startDate = new Date(date.replace("T"," "));
+    const endDate = new Date((document.querySelector("#calendar-end-date").value).replace("T"," "));
     
+    if(endDate-startDate < 0){
+        alert("종료일이 시작일보다 빠릅니다. 날짜를 다시 확인해주세요.");
+        return false;
+    }
+
     // 저장할 캘린더 항목 정보 수집
     const typeNo = document.querySelector("#calendar-type").value;
 
@@ -117,7 +124,7 @@ function insertToDB(){
         method: "POST",
         data: formData,
         success: function(result){
-            if(result == 1){
+            if(result == "success"){
                 alert("신규 일정 등록 완료!!");
                 console.log("로컬 비우기",typeNo,calcDate);  
                 deleteLocalStorage(typeNo,calcDate);
