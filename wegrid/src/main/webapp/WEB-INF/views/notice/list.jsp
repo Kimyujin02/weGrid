@@ -29,9 +29,11 @@
                 </div>
                 <div class="head-bottom">
                     <div class="head-bottom-align">
-                        <form action="/notice/insert" method="get">
-                            <button class="register-btn">작성하기</button>
-                        </form>
+                        <c:if test="${loginMemberVo.isManager == 'Y'}">
+                            <form action="/notice/insert" method="get">
+                                <button class="register-btn">작성하기</button>
+                            </form>
+                        </c:if>
                         <div class="history-controls">
                             <form action="/notice/list?pno=1" onsubmit="return submitSearchForm();">
                                 <div class="filter-controls">
