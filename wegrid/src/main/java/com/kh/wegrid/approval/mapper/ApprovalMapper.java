@@ -78,6 +78,7 @@ public interface ApprovalMapper {
          L.PROFILE         AS L_LINE_PROFILE,
          LD.NAME           AS L_LINE_DEPT,
          A.M_LINE,
+         A.M_STATUS,
          COALESCE(M.NAME, '미지정') AS M_LINE_NAME,
          COALESCE(MD.NAME, '미지정') AS M_LINE_DEPT,
          COALESCE(M.PROFILE, '미지정') AS M_LINE_PROFILE,

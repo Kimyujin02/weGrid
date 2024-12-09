@@ -64,14 +64,14 @@
                                 <div id="approvalLine-area">
                                     <div>기안자</div>
                                     <div>
-                                        <span>${avo.writerProfile}</span>
-                                        <span class="dept-areaa">${avo.mlineDept}</span>
-                                        <span class="name-areaa">${avo.mlineName}</span>
+                                        <span><img src="${avo.writerProfile}" alt="" class="profileImgTag"></span>
+                                        <span class="dept-areaa">${avo.writerDept}</span>
+                                        <span class="name-areaa">${avo.writerName}</span>
                                     </div>
                                     <c:if test="${avo.mline != null && avo.mline != ''}">
                                         <div>중간 결재자</div>
                                         <div>
-                                            <span>${avo.mlineProfile}</span>
+                                            <span><img src="${avo.mlineProfile}" alt="" class="profileImgTag"></span>
                                             <span class="dept-areaa">${avo.mlineDept}</span>
                                             <span class="name-areaa">${avo.mlineName}</span>
                                         </div>
@@ -82,7 +82,7 @@
                                     </c:if>
                                     <div>최종 결재자</div>
                                         <div>
-                                            <span>${avo.llineProfile}</span>
+                                            <span><img src="${avo.llineProfile}" alt="" class="profileImgTag"></span>
                                             <span class="dept-areaa">${avo.llineDept}</span>
                                             <span class="name-areaa">${avo.llineName}</span>
                                         </div>
@@ -109,7 +109,7 @@
                         </div>
                         <div id="button-area">
                             <div></div>
-                            <c:if test="${loginMemberVo.no == avo.mline && avo.statusNo != '4' && avo.mstatus != '1'}">
+                            <c:if test="${loginMemberVo.no == avo.mline && avo.statusNo != '4' && avo.mstatus != '2'}">
                                 <form action="/approval/mline/allow" method="post">
                                     <input type="hidden" name="no" value="${avo.no}">
                                     <input type="hidden" name="mline" value="${avo.mline}">
