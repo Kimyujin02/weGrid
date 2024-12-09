@@ -68,22 +68,22 @@
             <div id="table-area">
                 
                 <table id="table">
-                    <colgroup>
-                        <col style="width: 150px;"> <!-- 첫 번째 열의 너비 -->
-                        <col style="width: 596px;"> <!-- 두 번째 열의 너비 -->
-                        <col style="width: 150px;"> <!-- 세 번째 열의 너비 -->
-                        <col style="width: 150px;"> <!-- 세 번째 열의 너비 -->
-                        <col style="width: 150px;"> <!-- 세 번째 열의 너비 -->
-                        <col style="width: 150px;"> <!-- 세 번째 열의 너비 -->
-                    </colgroup>
+                    <!-- <colgroup>
+                        <col style="width: 150px;"> 
+                        <col style="width: 596px;">
+                        <col style="width: 150px;">
+                        <col style="width: 150px;">
+                        <col style="width: 150px;">
+                        <col style="width: 150px;">
+                    </colgroup> -->
                     <thead>
                         <tr>
-                            <th class="list-top">번호</th>
-                            <th class="list-top">제목</th>
-                            <th class="list-top">시작일</th>
-                            <th class="list-top">종료일</th>
+                            <th class="list-top">분류</th>
+                            <th class="list-top">내용</th>
+                            <th class="list-top">위치</th>
+                            <th class="list-top">부서</th>
                             <th class="list-top">작성자</th>
-                            <th class="list-top">출장항목</th>
+                            <th class="list-top">날짜</th>
                         </tr>
                     </thead>
                 

@@ -3,58 +3,14 @@ function openFamilyEventNotion(){
     window.open('https://www.notion.so/154d5a279fee80c88482d6f734abfa6a?v=ca476901e4e744428dc0d858217d12ca', '_blank');
 }
 
-
-
-function paintPageArea(pvo){
-    const pageArea = document.querySelector(".page");
-    pageArea.innerHTML = "";
-    //이전버튼
-    if(pvo.startPage != 1){
-        const aTag = document.createElement("a");
-        const iTag = document.createElement("i");
-        const spanTag = document.createElement("span");
-        iTag.setAttribute("class" , "fas fa-caret-left fa-lg");
-        iTag.setAttribute("id" , "leftPageBtn")
-        aTag.setAttribute("href" , `/trip/list?pno=${pvo.startPage-1}`);
-        aTag.appendChild(iTag);
-        spanTag.appendChild(aTag);
-        pageArea.appendChild(spanTag);
-    }
-    
-    for( let i = pvo.startPage ; i <= pvo.endPage ; i++ ){
-        const aTag = document.createElement("a");
-        const spanTag = document.createElement("span");
-        aTag.setAttribute("href" , `/trip/list?pno=${i}`);
-        aTag.innerText = i;
-        spanTag.appendChild(aTag);
-        pageArea.appendChild(spanTag);
-    }
-    
-    //다음버튼
-    if(pvo.endPage != pvo.maxPage){
-        const aTag = document.createElement("a");
-        const iTag = document.createElement("i");
-        const spanTag = document.createElement("span");
-        iTag.setAttribute("class" , "fas fa-caret-right fa-lg");
-        iTag.setAttribute("id" , "rightPageBtn");
-        aTag.setAttribute("href" , `/trip/list?pno=${pvo.endPage+1}`);
-        aTag.appendChild(iTag);
-        spanTag.appendChild(aTag);
-        pageArea.appendChild(spanTag);
-    }
-
-}
-
-
-
-function loadTripList(searchType , searchValue){
+function loadFamilyEventList(){
     const tbodyTag = document.querySelector("#table>tbody");
 
-    const url = new URL(location);
-    let pno = url.searchParams.get("pno");
-    if(pno == null){
-        pno = 1;
-    }
+    // const url = new URL(location);
+    // let pno = url.searchParams.get("pno");
+    // if(pno == null){
+    //     pno = 1;
+    // }
     $.ajax({
         
         // url : `/trip/list/data?pno=${pno}` ,
@@ -70,56 +26,82 @@ function loadTripList(searchType , searchValue){
             // const pvo = m.b;
             // paintPageArea(pvo);
             
-            const data = JSON.parse(m);
-           
-            // 필요한 정보만 추출
-            
-            const extractedData = data.results.map(result => {
-            const title = result.properties.title.title[0].text.content;
+        // JSON 문자열을 객체로 변환
+        const data = JSON.parse(m);
+
+        // 필요한 정보만 추출
+        const extractedData = [];
+
+        // `results` 배열 순회
+        for (let i = 0; i < data.results.length; i++) {
+            const result = data.results[i];
+
+            const type = result.properties.type.title[0].text.content;
             const writer = result.properties.writer.rich_text[0]?.text.content || '';
             const content = result.properties.content.rich_text[0]?.text.content || '';
             const location = result.properties.location.rich_text[0]?.text.content || '';
-            const url = result.url;
+            const dept = result.properties.dept.rich_text[0]?.text.content || '';
+            const date = result.properties.date.rich_text[0]?.text.content || '';
+           
 
-            return { title, writer, content, location, url };
-            });
+            // 추출한 데이터를 배열에 추가
+            extractedData.push({ type, writer, content, location , dept , date });
+        }
+
+        // 결과 출력
+        console.log(extractedData);
+
+        // localStorage.setItem("extractedDataList" , JSON.stringify(extractedData));
+        
+        // const pvo = {};
+        // pvo.currnetPage = 1;
+        // pvo.currnetPage = 1;
+        // pvo.currnetPage = 1;
+        // pvo.currnetPage = 1;
+        // pvo.boardLimit = 10;
+        // pvo.offset = 0;
+
+        // const extractedDataList = JSON.parse(localStorage.getItem("extractedDataList"));
+        // const boardVoList = [];
+        // for(let i = offset ; i < offset+boardLimit; ++i){
+        //     const vo = extractedDataList[i];
+        //     boardVoList.push(vo);
+        // }
+
+
+            tbodyTag.innerHTML="";
             
-            // 3. 결과 출력
-            console.log(extractedData);
+            for(let vo of extractedData){
+                const trTag = document.createElement("tr");
+                trTag.setAttribute("class" , "list-middle")
+                const tdTag01 = document.createElement("td");
+                tdTag01.innerText = vo.type;
+                trTag.appendChild(tdTag01)
+    
+                const tdTag02 = document.createElement("td");
+                tdTag02.innerText = vo.content;
+                trTag.appendChild(tdTag02)
+    
+                const tdTag03 = document.createElement("td");
+                tdTag03.innerText = vo.location;
+                trTag.appendChild(tdTag03)
+                
+                const tdTag04 = document.createElement("td");
+                tdTag04.innerText = vo.dept;
+                trTag.appendChild(tdTag04)
+                
+                const tdTag05 = document.createElement("td");
+                tdTag05.innerText = vo.writer;
+                trTag.appendChild(tdTag05)
+                
+                const tdTag06 = document.createElement("td");
+                tdTag06.innerText = vo.date;
+                trTag.appendChild(tdTag06)
+    
+                
+                tbodyTag.appendChild(trTag);
 
-            // tbodyTag.innerHTML="";
-            
-            // for(let vo of tripVoList){
-            //     const trTag = document.createElement("tr");
-            //     trTag.setAttribute("class" , "list-middle")
-            //     const tdTag01 = document.createElement("td");
-            //     tdTag01.innerText = vo.no;
-            //     trTag.appendChild(tdTag01)
-    
-            //     const tdTag02 = document.createElement("td");
-            //     tdTag02.innerText = vo.title;
-            //     trTag.appendChild(tdTag02)
-    
-            //     const tdTag03 = document.createElement("td");
-            //     tdTag03.innerText = vo.startDate;
-            //     trTag.appendChild(tdTag03)
-    
-            //     const tdTag04 = document.createElement("td");
-            //     tdTag04.innerText = vo.endDate;
-            //     trTag.appendChild(tdTag04)
-    
-            //     const tdTag05 = document.createElement("td");
-            //     tdTag05.innerText = vo.writerName;
-            //     trTag.appendChild(tdTag05)
-                
-            //     const tdTag06 = document.createElement("td");
-            //     tdTag06.innerText = vo.typeName;
-            //     trTag.appendChild(tdTag06)
-                
-                
-            //     tbodyTag.appendChild(trTag);
-
-            // }
+            }
             
             
         },
@@ -133,53 +115,22 @@ function loadTripList(searchType , searchValue){
 
 }
 
-loadTripList();
+loadFamilyEventList()
 
-const tbodyTag = document.querySelector("#table>tbody");
+// const tbodyTag = document.querySelector("#table>tbody");
 
-tbodyTag.addEventListener("click" , function(evt){
-    if(evt.target.tagName != "TD"){return;}
-    const no = evt.target.parentNode.children[0].innerText;
-    location.href=`/trip/detail?tno=${no}`;
-});
-
-
-
-function submitSearchForm(){
-    
-    const searchType = document.querySelector("#trip-filter").value;
-    const searchValue = document.querySelector("#searchTag").value;
-
-    loadTripList(searchType , searchValue);
-
-    return false; // 기본 이벤트 막을 수 있음
-};
-
-document.addEventListener("DOMContentLoaded", function(){
-    const today = new Date().toISOString().split("T")[0]; // 현재 날짜
-    const startDateInput = document.querySelector("input[name=startDate]");
-    const endDateInput = document.querySelector("input[name=endDate]");
-
-    
-    startDateInput.min = today;
-
-    
-    startDateInput.addEventListener("change", function(){
-        endDateInput.min = startDateInput.value; // 종료 날짜 최소값 = 시작 날짜
-    });
-});
-
-
-//     window.confirm("출장등록 하시겠습니까?");
+// tbodyTag.addEventListener("click" , function(evt){
+//     if(evt.target.tagName != "TD"){return;}
+//     const no = evt.target.parentNode.children[0].innerText;
+//     location.href=`/trip/detail?tno=${no}`;
 // });
-const radioValue = document.querySelectorAll("input[type=radio]");
 
-function fqes(){
-    for(const vo of radioValue){
-        if(vo.value == "1"){
-            vo.checked=true;
-            console.log(vo);
-        }
-    }
-}
+
+
+
+
+
+
+
+
 

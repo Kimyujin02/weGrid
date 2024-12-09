@@ -102,6 +102,8 @@ function submitApprovalList(statusFilter){
 
 }
 
+
+
 submitApprovalList();
 
 const tbodyTag = document.querySelector("#table>tbody");

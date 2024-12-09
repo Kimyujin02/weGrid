@@ -59,25 +59,35 @@
 
     <select id="getReceiveApprovalVoList">
         SELECT
-            A.NO,
-            A.EMP_NO          AS WRITER_NO,
-            E.NAME            AS WRITER_NAME,
-            A.L_LINE,
-            L.NAME            AS L_LINE_NAME,
-            A.M_LINE,
-            COALESCE(M.NAME, '미지정') AS M_LINE_NAME,
-            A.STATUS_NO,
-            S.NAME            AS STATUS_NAME,
-            A.TITLE,
-            TO_CHAR(A.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE
+        A.NO,
+        A.EMP_NO          AS WRITER_NO,
+        E.NAME            AS WRITER_NAME,
+        A.L_LINE,
+        L.NAME            AS L_LINE_NAME,
+        A.M_LINE,
+        COALESCE(M.NAME, '미지정') AS M_LINE_NAME,
+        A.STATUS_NO,
+        S.NAME            AS STATUS_NAME,
+        A.TITLE,
+        TO_CHAR(A.ENROLL_DATE, 'YYYY-MM-DD') AS ENROLL_DATE
         FROM APPROVAL A
-        JOIN EMPLOYEE E ON ( E.NO = A.EMP_NO )
-        JOIN APPROVAL_STATUS S ON ( S.NO = A.STATUS_NO )
-        JOIN EMPLOYEE L ON ( L.NO = A.L_LINE )
-        JOIN EMPLOYEE M ON ( M.NO = COALESCE(A.M_LINE, -1) )
-        WHERE (A.M_LINE = #{no} )
-        OR ( A.M_STATUS = '2' AND A.L_LINE = #{no} )
-        OR ( A.M_STATUS = '0' AND A.L_LINE = #{no} )
+        JOIN EMPLOYEE E ON (E.NO = A.EMP_NO)
+        JOIN APPROVAL_STATUS S ON (S.NO = A.STATUS_NO)
+        JOIN EMPLOYEE L ON (L.NO = A.L_LINE)
+        LEFT JOIN EMPLOYEE M ON (M.NO = A.M_LINE)
+        WHERE
+        (
+        A.M_LINE = #{no}
+        )
+        OR
+        (
+        A.L_LINE = #{no}
+        AND (
+        A.M_LINE IS NULL
+        OR A.M_STATUS = '2'
+        )
+        )
+        AND (A.M_STATUS != '3' OR A.M_STATUS IS NULL)
         <if test="statusFilter != null and statusFilter != ''">
             AND A.STATUS_NO = #{statusFilter}
         </if>

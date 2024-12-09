@@ -54,4 +54,12 @@ public class TripService {
     public int delete(String no) {
         return mapper.delete(no);
     }
+
+    public List<TripVo> getEndTripVoList(PageVo pvo, String searchType, String searchValue) {
+        return mapper.getEndTripVoList(pvo , searchType , searchValue);
+    }
+
+    public int getEndTripCnt(String searchType, String searchValue) {
+        return mapper.getEndTripCnt(searchType , searchValue);
+    }
 }
