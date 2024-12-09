@@ -114,7 +114,7 @@ function loadProjectList(){
               const tdTag02 = document.createElement('td');
               tdTag02.className = "linked-name";
               tdTag02.innerText = vo.projectName;
-              tdTag02.innerHTML = `<a href='/project/?cno=${cno}'>${vo.projectName}</a>`;
+              tdTag02.innerHTML = `<a href='/project/card'>${vo.projectName}</a>`;
               trTag.appendChild(tdTag02);
               
               const tdTag03 = document.createElement('td');
