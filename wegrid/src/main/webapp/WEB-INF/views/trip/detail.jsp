@@ -85,7 +85,7 @@
                                     <button  
                                     class="btn btn-primary" 
                                     id="deleteBtn"
-                                    onclick="return deletee();" 
+                                    onclick="window.confirm('삭제 하시겠습니까?')" 
                                     >삭제하기
                                 </button>
                             </form>
@@ -184,7 +184,7 @@
                   </div>
               </div>
               <div class="tripModal-footer">
-                  <button class="submit-btn" type="submit" onclick="return updatee();">수정</button>
+                  <button class="submit-btn" type="submit" onclick="window.confirm('수정하시겠습니까?')">수정</button>
               </div>
           </div>
       </form>

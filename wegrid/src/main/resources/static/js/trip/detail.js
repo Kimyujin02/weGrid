@@ -114,16 +114,3 @@ function fqes(){
         }
     }
 }
-
-function deletee(){
-    if(!window.confirm('삭제 하시겠습니까?')){
-        return false;
-    }
-    return;
-}
-function updatee(){
-    if(!window.confirm('수정하시겠습니까?')){
-        return false;
-    }
-    return;
-}
