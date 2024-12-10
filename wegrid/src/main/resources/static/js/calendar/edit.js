@@ -89,7 +89,7 @@ function loadKindInfoEdit(vo){
 // 일정 종류 다시 숨기기
 const editModal = document.querySelector("#editModal");
 editModal.addEventListener("hide.bs.modal", function(){
-    document.querySelector("#calendar-type").innerHTML = null;
+    document.querySelector("#calendar-type-edit").innerHTML = null;
     document.querySelector("#editModal .kind-area").innerHTML = null;
 });
 
