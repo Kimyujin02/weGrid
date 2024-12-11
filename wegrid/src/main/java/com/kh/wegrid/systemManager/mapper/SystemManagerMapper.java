@@ -126,7 +126,10 @@ public interface SystemManagerMapper {
     // 비밀번호 초기화
     @Update("""
     UPDATE EMPLOYEE
-    SET PWD = #{newPassword}
+    SET 
+        PWD = #{newPassword}
+        , FAILED_ATTEMPTS = 0
+        , IS_LOCKED = 'N'  
     WHERE NO = #{no}
     """)
     int updatePassword(@Param("no") String no, @Param("newPassword") String newPassword);
