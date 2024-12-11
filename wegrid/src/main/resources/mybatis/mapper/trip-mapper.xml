@@ -26,7 +26,7 @@
 
         <where>
         B.DEL_YN = 'N'
-        AND B.START_DATE >= CURRENT_DATE
+        AND B.END_DATE >= CURRENT_DATE
         <if test="searchType == 'title'">
             AND B.TITLE LIKE '%${searchValue}%'
         </if>
@@ -81,7 +81,7 @@
 
         <where>
             B.DEL_YN = 'N'
-            AND CURRENT_DATE > B.START_DATE
+            AND CURRENT_DATE > B.END_DATE
             <if test="searchType == 'title'">
                 AND B.TITLE LIKE '%${searchValue}%'
             </if>
