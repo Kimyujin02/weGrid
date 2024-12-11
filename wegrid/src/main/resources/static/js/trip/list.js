@@ -365,3 +365,10 @@ buttons.forEach(button => {
         button.classList.add('active');
     });
 });
+
+function sub(){
+    if(!window.confirm('출장등록을 하시겠습니까?')){
+        return false;
+    }
+    return;
+}
